@@ -15,7 +15,7 @@
 
 
 //主色调
-#define APP_MAIN_COLOR              RGB(32.0,159.0,97.0)
+#define APP_MAIN_COLOR              RGB(33.0,159.0,98.0)
 
 //界面背景颜色
 #define BASIC_VIEW_BG_COLOR         RGB(229.0,229.0,229.0)
@@ -37,5 +37,12 @@
 
 //验证码按钮选中颜色
 #define CHECK_CODE_HIGH_COLOR       RGB(205.0,68.0,31.0)
+
+//首页列表title颜色
+#define HOME_LIST_TITLE_COLOR       RGB(38.0,38.0,38.0)
+
+//首页列表detail颜色
+#define HOME_LIST_DETAIL_COLOR      RGB(188.0,188.0,188.0)
+
 
 #endif

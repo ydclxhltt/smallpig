@@ -19,6 +19,8 @@
 #define LEFT_SIDE_WIDTH     220.0
 //导航条高度
 #define NAV_HEIGHT          64.0
+//首页icon列表高度
+#define HOME_ICON_ROWHEIGHT 80.0
 //登录
 #define LOGIN_TITLE         @"登录"
 //注册
