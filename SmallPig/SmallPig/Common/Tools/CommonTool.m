@@ -124,6 +124,24 @@
     return theHeigth;
 }
 
+//设置图层相关
++ (void)setViewLayer:(UIView *)view withLayerColor:(UIColor *)color bordWidth:(float)width
+{
+    if (!view)
+        return;
+    if (color)
+        view.layer.borderColor = [color CGColor];
+    view.layer.borderWidth = width;
+}
+
+//圆角实现
++ (void)clipView:(UIView *)view withCornerRadius:(float)radius
+{
+    if (!view)
+        return;
+    view.layer.cornerRadius = radius;
+    view.layer.masksToBounds = YES;
+}
 
 
 @end
