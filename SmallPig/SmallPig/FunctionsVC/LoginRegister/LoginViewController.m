@@ -35,13 +35,13 @@
 - (void)createUI
 {
     //添加表
-    [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
+    [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self]; 
     self.table .backgroundColor = [UIColor whiteColor];
     self.table.scrollEnabled = NO;
     
     //添加登录按钮
-    UIButton *loginButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"登录" titleColor:WIHTE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:nil selectorName:@"loginButtonPressed:" tagDelegate:self];
-    loginButton.showsTouchWhenHighlighted = YES;
+    UIButton *loginButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"登录" titleColor:WIHTE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"loginButtonPressed:" tagDelegate:self];
+    [CommonTool clipView:loginButton withCornerRadius:5.0];
     [self.view addSubview:loginButton];
     
     //找回密码 手机注册

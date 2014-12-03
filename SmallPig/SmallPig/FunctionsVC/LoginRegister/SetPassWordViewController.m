@@ -50,9 +50,9 @@
     self.table.scrollEnabled = NO;
     
     //添加完成按钮
-    UIButton *loginButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"完成" titleColor:WIHTE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:nil selectorName:@"commitButtonPressed:" tagDelegate:self];
-    loginButton.showsTouchWhenHighlighted = YES;
-    [self.view addSubview:loginButton];
+    UIButton *commitButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"完成" titleColor:WIHTE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"commitButtonPressed:" tagDelegate:self];
+    [CommonTool clipView:commitButton withCornerRadius:5.0];
+    [self.view addSubview:commitButton];
     
 }
 

@@ -52,8 +52,8 @@
     self.table.scrollEnabled = NO;
     
     //添加下一步按钮
-    UIButton *nextButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"下一步" titleColor:WIHTE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:nil selectorName:@"nextButtonPressed:" tagDelegate:self];
-    nextButton.showsTouchWhenHighlighted = YES;
+    UIButton *nextButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"下一步" titleColor:WIHTE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"nextButtonPressed:" tagDelegate:self];
+    [CommonTool clipView:nextButton withCornerRadius:5.0];
     [self.view addSubview:nextButton];
     
 }
@@ -121,11 +121,9 @@
     }
     else
     {
-        UIButton *button = [CreateViewTool createButtonWithFrame:CGRectMake(textField.frame.origin.x + textField.frame.size.width, 4.5, 60, 35) buttonTitle:@"获取验证码" titleColor:WIHTE_COLOR normalBackgroundColor:CHECK_CODE_BG_COLOR highlightedBackgroundColor:nil selectorName:@"checkCodeButtonPressed:" tagDelegate:self];
+        UIButton *button = [CreateViewTool createButtonWithFrame:CGRectMake(textField.frame.origin.x + textField.frame.size.width + 10, 4.5, 60, 35) buttonTitle:@"获取验证码" titleColor:WIHTE_COLOR normalBackgroundColor:CHECK_CODE_BG_COLOR highlightedBackgroundColor:CHECK_CODE_HIGH_COLOR selectorName:@"checkCodeButtonPressed:" tagDelegate:self];
         button.titleLabel.font = FONT(11.0);
-        button.layer.cornerRadius = 5.0;
-        button.layer.masksToBounds = YES;
-        button.showsTouchWhenHighlighted = YES;
+        [CommonTool clipView:button withCornerRadius:5.0];
         [cell.contentView addSubview:button];
         textField.placeholder = @"请输入验证码";
         label.text = @"验证码:";
