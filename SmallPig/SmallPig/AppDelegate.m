@@ -48,9 +48,9 @@
      *  NSForegroundColorAttributeName
      *
      */
-    
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],NSForegroundColorAttributeName : RGB(190.0, 190.0, 190.0)} forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],NSForegroundColorAttributeName : APP_MAIN_COLOR} forState:UIControlStateSelected];
+    //修改架构后屏蔽
+    //[[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],NSForegroundColorAttributeName : RGB(190.0, 190.0, 190.0)} forState:UIControlStateNormal];
+    //[[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],NSForegroundColorAttributeName : APP_MAIN_COLOR} forState:UIControlStateSelected];
     
     
     //主界面
@@ -77,14 +77,13 @@
 //中间主界面
 - (void)setRootView
 {
-    UITabBarController *mainTabbarViewController =[[UITabBarController alloc]init];
-    
     /*
      *  去掉tabbar上方黑线
      *  1⃣️ [mianTabbarViewController.tabBar setClipsToBounds:YES];
      *  2⃣️ [mainTabbarViewController.tabBar setShadowImage:[[UIImage alloc]init]];
      */
-    
+    /* 修改架构后屏蔽
+    UITabBarController *mainTabbarViewController =[[UITabBarController alloc]init];
     //[mainTabbarViewController.tabBar setClipsToBounds:YES];
     mainTabbarViewController.delegate = self;
     MineViewController *mineViewController = [[MineViewController alloc]init];
@@ -102,8 +101,14 @@
     [mineNavViewController setTabBarItem:mineTabBarItem];
     mainTabbarViewController.viewControllers = [NSArray arrayWithObjects:homeNavViewController,wechatNavViewController,mineNavViewController,nil];
     _sideViewController.rootViewController = mainTabbarViewController;
+     */
+    
+    HomeViewController *homeViewController = [[HomeViewController alloc]init];
+    UINavigationController *homeNavViewController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
+    _sideViewController.rootViewController = homeNavViewController;
 }
 
+/*
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     if (tabBarController.selectedIndex == 0)
@@ -115,7 +120,7 @@
         [_sideViewController setNeedSwipeShowMenu:NO];
     }
 }
-
+*/
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
