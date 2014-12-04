@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "PeasonalViewController.h"
+#import "LeftSidelViewController.h"
 #import "HomeViewController.h"
 #import "WeChatMainViewController.h"
 #import "MineViewController.h"
@@ -56,10 +56,6 @@
     //主界面
     _sideViewController = [[MainSideViewController alloc]initWithNibName:nil bundle:nil];
     _sideViewController.leftViewShowWidth = LEFT_SIDE_WIDTH;
-    [_sideViewController setRootViewMoveBlock:^(UIView *rootView, CGRect orginFrame, CGFloat xoffset) {
-        //使用简单的平移动画
-        rootView.frame=CGRectMake(xoffset, orginFrame.origin.y, orginFrame.size.width, orginFrame.size.height);
-    }];
     [self setLeftView];
     [self setRootView];
     self.window.rootViewController=_sideViewController;
@@ -70,7 +66,7 @@
 //左侧界面（个人）
 - (void)setLeftView
 {
-    PeasonalViewController *peasonalViewController = [[PeasonalViewController alloc]init];
+    LeftSidelViewController *peasonalViewController = [[LeftSidelViewController alloc]init];
     _sideViewController.leftViewController = peasonalViewController;
 }
 
