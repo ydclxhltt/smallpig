@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BasicViewController.h"
 
-@interface PeasonalViewController : BasicViewController
+@interface LeftSidelViewController : BasicViewController
 
 @end

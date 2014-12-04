@@ -52,7 +52,7 @@
     self.table.scrollEnabled = NO;
     
     //添加下一步按钮
-    UIButton *nextButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"下一步" titleColor:WIHTE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"nextButtonPressed:" tagDelegate:self];
+    UIButton *nextButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"下一步" titleColor:WHITE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"nextButtonPressed:" tagDelegate:self];
     [CommonTool clipView:nextButton withCornerRadius:5.0];
     [self.view addSubview:nextButton];
     
@@ -121,7 +121,7 @@
     }
     else
     {
-        UIButton *button = [CreateViewTool createButtonWithFrame:CGRectMake(textField.frame.origin.x + textField.frame.size.width + 10, 4.5, 60, 35) buttonTitle:@"获取验证码" titleColor:WIHTE_COLOR normalBackgroundColor:CHECK_CODE_BG_COLOR highlightedBackgroundColor:CHECK_CODE_HIGH_COLOR selectorName:@"checkCodeButtonPressed:" tagDelegate:self];
+        UIButton *button = [CreateViewTool createButtonWithFrame:CGRectMake(textField.frame.origin.x + textField.frame.size.width + 10, 4.5, 60, 35) buttonTitle:@"获取验证码" titleColor:WHITE_COLOR normalBackgroundColor:CHECK_CODE_BG_COLOR highlightedBackgroundColor:CHECK_CODE_HIGH_COLOR selectorName:@"checkCodeButtonPressed:" tagDelegate:self];
         button.titleLabel.font = FONT(11.0);
         [CommonTool clipView:button withCornerRadius:5.0];
         [cell.contentView addSubview:button];

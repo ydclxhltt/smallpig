@@ -7,10 +7,12 @@
 //
 
 #import "HomeViewController.h"
-#import "LoginViewController.h"
+#import "DropDownView.h"
+
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
     UIView *greenView;
+    DropDownView *dropDownView;
 }
 @end
 
@@ -40,9 +42,6 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     
-    LoginViewController *loginVC = [[LoginViewController alloc]init];
-    UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
-    [self presentViewController:nav animated:YES completion:Nil];
     // Do any additional setup after loading the view.
 }
 
@@ -54,29 +53,36 @@
 
 - (void)addGreenView
 {
+    //添加绿色背景视图
     greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 220 - NAV_HEIGHT)];
     greenView.backgroundColor = APP_MAIN_COLOR;
     [self.view addSubview:greenView];
     
-    float city_w = 50.0;
+    //添加logo视图
+    float city_w = 55.0;
+    float space_w = 5.0;
     UIImage *homeLogoImage = [UIImage imageNamed:@"home_logo.png"];
-    UIImageView *logoImageView = [CreateViewTool createImageViewWithFrame:CGRectMake((SCREEN_WIDTH - homeLogoImage.size.width/2 - city_w)/2, 40, homeLogoImage.size.width/2, homeLogoImage.size.height/2) placeholderImage:homeLogoImage];
+    UIImageView *logoImageView = [CreateViewTool createImageViewWithFrame:CGRectMake((SCREEN_WIDTH - homeLogoImage.size.width/2 - city_w - space_w)/2, 40, homeLogoImage.size.width/2, homeLogoImage.size.height/2) placeholderImage:homeLogoImage];
     [greenView addSubview:logoImageView];
     
+    //添加城市显示视图
+    dropDownView = [[DropDownView alloc] initWithFrame:CGRectMake(space_w + logoImageView.frame.origin.x + logoImageView.frame.size.width, logoImageView.frame.origin.y, city_w, logoImageView.frame.size.height)];
+    [dropDownView createViewWithTitle:@"深圳" clickedBlock:^{}];
+    [greenView addSubview:dropDownView];
+    
+    //添加搜索视图
     UIImage *searchBgImage = [UIImage imageNamed:@"search_input.png"];
     UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - searchBgImage.size.width/2)/2, greenView.frame.size.height - searchBgImage.size.height/2 - 15, searchBgImage.size.width/2, searchBgImage.size.height/2)];
     searchBar.delegate = self;
     searchBar.barStyle = UISearchBarStyleDefault;
-    searchBar.translucent = YES;
-    searchBar.tintColor = [UIColor clearColor];
-    //RGB(27, 133, 82);
-    //[searchBar setBackgroundImage:[[UIImage alloc] init]];
     searchBar.placeholder = @"搜索";
-    //searchBar.backgroundColor = [UIColor clearColor];
     [greenView addSubview:searchBar];
     [self resetSearchBar:searchBar];
-    //[[searchBar.subviews objectAtIndex:0] removeFromSuperview];
     
+    UIButton *button = [CreateViewTool createButtonWithFrame:searchBar.frame buttonTitle:@"" titleColor:[UIColor clearColor] normalBackgroundColor:[UIColor clearColor] highlightedBackgroundColor:nil selectorName:@"showSearchView:" tagDelegate:self];
+    [greenView addSubview:button];
+    
+    //添加表视图
     float y = greenView.frame.origin.y + greenView.frame.size.height + 7;
     [self addTableViewWithFrame:CGRectMake(10, y, SCREEN_WIDTH - 10*2, SCREEN_HEIGHT - y - NAV_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
     self.table.separatorInset = UIEdgeInsetsZero;
@@ -105,42 +111,21 @@
         }
         if ([view isKindOfClass:NSClassFromString(@"UISearchBarTextField")])
         {
-            [view setBackgroundColor:RGB(27, 132, 81)];
+            [view setBackgroundColor:HOME_SEARCHBAR_BG_COLOR];
         }
         if ([view isKindOfClass:[UIButton class]])
         {
             UIButton* cancelbutton = (UIButton* )view;
-            [cancelbutton setTitleColor:WIHTE_COLOR forState:UIControlStateNormal];
+            [cancelbutton setTitleColor:WHITE_COLOR forState:UIControlStateNormal];
             [cancelbutton setTitle:@"取消" forState:UIControlStateNormal];
             break;
         }
     }
 }
 
-#pragma mark UISearchBar and UISearchDisplayController Delegate Methods
-
-//searchBar开始编辑时改变取消按钮的文字
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+- (void)showSearchView:(UIButton *)sender
 {
-    searchBar.showsCancelButton = YES;
-    [self resetSearchBar:searchBar];
-}
-
--(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-{
-    return YES;
-}
-
--(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
-{
-  
-    return YES;
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    searchBar.showsCancelButton = NO;
-    [searchBar resignFirstResponder];
+    
 }
 
 #pragma mark - tableView代理
@@ -179,7 +164,7 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:homeCellID];
-        cell.backgroundColor = WIHTE_COLOR;
+        cell.backgroundColor = WHITE_COLOR;
         cell.imageView.transform = CGAffineTransformScale(cell.imageView.transform, 0.5, 0.5);
     }
     NSArray *array = self.dataArray[indexPath.section];
