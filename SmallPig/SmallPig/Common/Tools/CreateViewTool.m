@@ -46,6 +46,7 @@
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:frame];
     imageView.backgroundColor = [UIColor clearColor];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.userInteractionEnabled = YES;
     imageView.image = image;
     return imageView;
 }
@@ -132,7 +133,7 @@
             [button addTarget:delegate action:NSSelectorFromString(selName) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-    return nil;
+    return button;
 }
 
 //以frame创建按钮 用颜色设置图片
