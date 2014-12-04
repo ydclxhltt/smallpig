@@ -21,7 +21,9 @@
 #define BASIC_VIEW_BG_COLOR         RGB(229.0,229.0,229.0)
 
 //白色
-#define  WIHTE_COLOR                RGB(255.0,255.0,255.0)
+#define  WHITE_COLOR                RGB(255.0,255.0,255.0)
+
+#pragma mark 登录相关
 
 //登录／注册／下一步 高亮颜色
 #define LOGIN_BUTTON_PRESSED_COLOR  RGB(26.0,135.0,81.0)
@@ -38,11 +40,21 @@
 //验证码按钮选中颜色
 #define CHECK_CODE_HIGH_COLOR       RGB(205.0,68.0,31.0)
 
+#pragma mark 首页相关
+
 //首页列表title颜色
 #define HOME_LIST_TITLE_COLOR       RGB(38.0,38.0,38.0)
 
 //首页列表detail颜色
 #define HOME_LIST_DETAIL_COLOR      RGB(188.0,188.0,188.0)
 
+//首页搜索条背景颜色
+#define HOME_SEARCHBAR_BG_COLOR     RGB(27, 132, 81)
 
+#pragma mark 左边栏
+
+//左侧滑背景颜色
+#define LEFT_SIDE_BG_COLOR          RGB(38.0, 38.0, 38.0)
+//左侧滑列表分割线颜色
+#define LIFT_SIDE_SEPLINE_COLOR     RGB(47.0, 47.0, 47.0)
 #endif
