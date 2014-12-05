@@ -33,7 +33,7 @@
     UIImageView *arrowImageView = [CreateViewTool createImageViewWithFrame:CGRectMake(self.frame.size.width - arrowImage.size.width/2, self.frame.size.height - arrowImage.size.height/2 - 5, arrowImage.size.width/2, arrowImage.size.height/2) placeholderImage:arrowImage];
     [self addSubview: arrowImageView];
     
-    _titleLabel = [CreateViewTool  createLabelWithFrame:CGRectMake(0,self.frame.size.height - TITLE_LABEL_HEIGHT, self.frame.size.width - arrowImage.size.width/2 - 3, TITLE_LABEL_HEIGHT) textColor:[UIColor whiteColor] textFont:[UIFont systemFontOfSize:16.0]];
+    _titleLabel = [CreateViewTool  createLabelWithFrame:CGRectMake(0,self.frame.size.height - TITLE_LABEL_HEIGHT, self.frame.size.width - arrowImage.size.width/2 - 3, TITLE_LABEL_HEIGHT) textString:@"" textColor:[UIColor whiteColor] textFont:[UIFont systemFontOfSize:16.0]];
     _titleLabel.adjustsFontSizeToFitWidth = YES;
     _titleLabel.text = title;
     _titleLabel.textAlignment = NSTextAlignmentCenter;
