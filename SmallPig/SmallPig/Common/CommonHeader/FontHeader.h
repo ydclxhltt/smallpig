@@ -21,7 +21,10 @@
 //登录注册
 #define LOGIN_REG_FONT          FONT(16.0)
 
-//找回密码/手机注册
+//找回密码/手机注册按钮文字
 #define REGISTER_TITLE_FONT     FONT(14.0)
+
+//新房建设中提示语字体
+#define NEW_HOUSE_TIP_FONT      FONT(18.0)
 
 #endif

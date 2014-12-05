@@ -23,20 +23,23 @@
 //白色
 #define  WHITE_COLOR                RGB(255.0,255.0,255.0)
 
+#pragma mark 左边栏
+
+//左侧滑背景颜色
+#define LEFT_SIDE_BG_COLOR          RGB(38.0, 38.0, 38.0)
+//左侧滑列表分割线颜色
+#define LIFT_SIDE_SEPLINE_COLOR     RGB(47.0, 47.0, 47.0)
+
 #pragma mark 登录相关
 
 //登录／注册／下一步 高亮颜色
 #define LOGIN_BUTTON_PRESSED_COLOR  RGB(26.0,135.0,81.0)
-
 //登录 用户名Lable等颜色
 #define LOGIN_LABEL_COLOR           RGB(100.0,100.0,100.0)
-
 //找回密码/手机注册
 #define REGISTER_TITLE_COLOR        RGB(108.0,108.0,108.0)
-
 //验证码背景颜色
 #define CHECK_CODE_BG_COLOR         RGB(229.0,77.0,35.0)
-
 //验证码按钮选中颜色
 #define CHECK_CODE_HIGH_COLOR       RGB(205.0,68.0,31.0)
 
@@ -44,17 +47,24 @@
 
 //首页列表title颜色
 #define HOME_LIST_TITLE_COLOR       RGB(38.0,38.0,38.0)
-
 //首页列表detail颜色
 #define HOME_LIST_DETAIL_COLOR      RGB(188.0,188.0,188.0)
-
 //首页搜索条背景颜色
 #define HOME_SEARCHBAR_BG_COLOR     RGB(27, 132, 81)
 
-#pragma mark 左边栏
 
-//左侧滑背景颜色
-#define LEFT_SIDE_BG_COLOR          RGB(38.0, 38.0, 38.0)
-//左侧滑列表分割线颜色
-#define LIFT_SIDE_SEPLINE_COLOR     RGB(47.0, 47.0, 47.0)
+#pragma mark 新房相关颜色
+
+//背景颜色
+#define NEW_HOUSE_BG_COLOR          RGB(25.0,25.0,25.0)
+//建设中提示文字颜色
+#define NEW_HOUSE_TIP_TEXT_COLOR    RGB(65.0,65.0,65.0)
+
+
+#pragma mark 租房/二手房相关颜色
+
+//二手房/租房列表分割线
+#define HOUSE_LIST_SEPLINE_COLOR    RGB(188.0,188.0,188.0)
+//列表title颜色
+#define HOUSE_LIST_TITLE_COLOR      HOME_LIST_TITLE_COLOR
 #endif
