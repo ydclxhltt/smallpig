@@ -8,6 +8,8 @@
 
 #import "HomeViewController.h"
 #import "DropDownView.h"
+#import "NewHouseListViewController.h"
+#import "HouseListViewController.h"
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
@@ -24,7 +26,7 @@
     if(self) {
         // Custom initialization
         //self.title=@"首页";
-        self.dataArray = (NSMutableArray *)@[@[@"新房",@"第一时间获取新房资讯"],@[@"租房",@"真实小区物业资讯"],@[@"二手房",@"二手房买卖真实房源"],@[@"经纪人",@"每周评出积分最高的经纪人"]];
+        self.dataArray = (NSMutableArray *)@[@[@"租房",@"真实小区物业资讯"],@[@"二手房",@"二手房买卖真实房源"],@[@"新房",@"第一时间获取新房资讯"],@[@"经纪人",@"每周评出积分最高的经纪人"]];
     }
     return self;
 }
@@ -32,29 +34,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self addPersonItem];
-    
+    //初始化UI
     [self createUI];
-    
-    //去掉阴影和导航条下方黑线
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    
+    //添加侧滑item
+    [self addPersonItem];
     // Do any additional setup after loading the view.
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self setMainSideCanSwipe:YES];
+}
+
+#pragma mark 添加UI
+//初始化视图
 - (void)createUI
 {
     [self addGreenView];
+    [self addTableView];
 }
 
+//添加上半部分绿色视图
 - (void)addGreenView
 {
     //添加绿色背景视图
-    greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 220 - NAV_HEIGHT)];
+    greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 220)];
     greenView.backgroundColor = APP_MAIN_COLOR;
     [self.view addSubview:greenView];
     
@@ -62,7 +68,7 @@
     float city_w = 55.0;
     float space_w = 5.0;
     UIImage *homeLogoImage = [UIImage imageNamed:@"home_logo.png"];
-    UIImageView *logoImageView = [CreateViewTool createImageViewWithFrame:CGRectMake((SCREEN_WIDTH - homeLogoImage.size.width/2 - city_w - space_w)/2, 40, homeLogoImage.size.width/2, homeLogoImage.size.height/2) placeholderImage:homeLogoImage];
+    UIImageView *logoImageView = [CreateViewTool createImageViewWithFrame:CGRectMake((SCREEN_WIDTH - homeLogoImage.size.width/2 - city_w - space_w)/2, 40 + NAV_HEIGHT, homeLogoImage.size.width/2, homeLogoImage.size.height/2) placeholderImage:homeLogoImage];
     [greenView addSubview:logoImageView];
     
     //添加城市显示视图
@@ -81,14 +87,9 @@
     
     UIButton *button = [CreateViewTool createButtonWithFrame:searchBar.frame buttonTitle:@"" titleColor:[UIColor clearColor] normalBackgroundColor:[UIColor clearColor] highlightedBackgroundColor:nil selectorName:@"showSearchView:" tagDelegate:self];
     [greenView addSubview:button];
-    
-    //添加表视图
-    float y = greenView.frame.origin.y + greenView.frame.size.height + 7;
-    [self addTableViewWithFrame:CGRectMake(10, y, SCREEN_WIDTH - 10*2, SCREEN_HEIGHT - y - NAV_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
-    self.table.separatorInset = UIEdgeInsetsZero;
-    self.table.backgroundColor = [UIColor clearColor];
 }
 
+//修改SearchBar
 - (void)resetSearchBar:(UISearchBar *)searchBar
 {
     NSArray *subViews;
@@ -123,6 +124,17 @@
     }
 }
 
+//添加表视图
+- (void)addTableView
+{
+    float y = greenView.frame.origin.y + greenView.frame.size.height + 7;
+    [self addTableViewWithFrame:CGRectMake(10, y, SCREEN_WIDTH - 10*2, SCREEN_HEIGHT - y) tableType:UITableViewStylePlain tableDelegate:self];
+    self.table.separatorInset = UIEdgeInsetsZero;
+    self.table.backgroundColor = [UIColor clearColor];
+}
+
+
+#pragma mark 点击搜索响应事件
 - (void)showSearchView:(UIButton *)sender
 {
     
@@ -181,7 +193,34 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    [self pushViewControllerWithIndex:(int)indexPath.section];
+}
+
+#pragma mark 点击行视图跳转方法
+- (void)pushViewControllerWithIndex:(int)index
+{
+    UIViewController *viewController = nil;
+    switch (index)
+    {
+        case 0:
+            viewController = [[HouseListViewController alloc]init];
+            ((HouseListViewController *)viewController).houseSouce = HouseScouceFromRental;
+            break;
+        case 1:
+            viewController = [[HouseListViewController alloc]init];
+            ((HouseListViewController *)viewController).houseSouce = HouseScouceFromSecondHand;
+            break;
+        case 2:
+            viewController = [[NewHouseListViewController alloc]init];
+            break;
+        case 3:
+            viewController = [[NewHouseListViewController alloc]init];
+            break;
+        default:
+            break;
+    }
+    [self.navigationController pushViewController:viewController animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
