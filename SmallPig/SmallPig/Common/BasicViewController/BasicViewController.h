@@ -6,7 +6,8 @@
 //  Copyright (c) 2014年 chenlei. All rights reserved.
 //
 
-typedef enum : NSUInteger{
+typedef enum : NSUInteger
+{
     LeftItem,
     rightItem,
 } NavItemType;
@@ -17,9 +18,16 @@ typedef enum : NSUInteger
     PushTypeFindPassWord = 1 << 1,
 } PushType;
 
+typedef enum : NSUInteger
+{
+    HouseScouceFromRental,
+    HouseScouceFromSecondHand,
+} HouseScouce;
+
 #import <UIKit/UIKit.h>
 #import "CommonHeader.h"
 #import "CreateViewTool.h"
+#import "AppDelegate.h"
 
 @interface BasicViewController : UIViewController
 {
@@ -62,4 +70,8 @@ typedef enum : NSUInteger
  */
 - (void)addTableViewWithFrame:(CGRect)frame tableType:(UITableViewStyle)type tableDelegate:(id)delegate;
 
+/*
+ *  是否可侧滑
+ */
+- (void)setMainSideCanSwipe:(BOOL)canSwipe;
 @end

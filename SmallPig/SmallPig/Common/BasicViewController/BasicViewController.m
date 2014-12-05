@@ -7,9 +7,8 @@
 //
 
 #import "BasicViewController.h"
-#import "AppDelegate.h"
 
-@interface BasicViewController ()
+@interface BasicViewController ()<UIGestureRecognizerDelegate>
 {
 
 }
@@ -24,8 +23,16 @@
     //设置页面背景
     self.view.backgroundColor = BASIC_VIEW_BG_COLOR;
     
+    //设置导航条
+    [self.navigationController.navigationBar setBackgroundImage:[CommonTool imageWithColor:APP_MAIN_COLOR] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:WHITE_COLOR,NSForegroundColorAttributeName,nil];
+    [self.navigationController.navigationBar setTitleTextAttributes:dic];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.automaticallyAdjustsScrollViewInsets = YES;
     self.navigationController.navigationBar.translucent = YES;
-
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
     /*
      *  效果等同IOS7 automaticallyAdjustsScrollViewInsets
      *
@@ -34,7 +41,7 @@
      *  inset.top = 64.0;
      *  scrollView.contentInset = inset;
      */
-    self.automaticallyAdjustsScrollViewInsets = YES;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -56,14 +63,14 @@
     [button setBackgroundImage:image_up forState:UIControlStateNormal];
     [button setBackgroundImage:image_down forState:UIControlStateHighlighted];
     [button setBackgroundImage:image_down forState:UIControlStateSelected];
-    if (selName && ![selName isEqualToString:@""])
+    if (selName && ![@"" isEqualToString:selName])
     {
         [button addTarget:self action:NSSelectorFromString(selName) forControlEvents:UIControlEventTouchUpInside];
     }
     UIBarButtonItem  *barItem = [[UIBarButtonItem alloc]initWithCustomView:button];
-    if(type == LeftItem)
+    if(LeftItem == type)
     self.navigationItem.leftBarButtonItem = barItem;
-    else if (type == rightItem)
+    else if (rightItem == type)
     self.navigationItem.rightBarButtonItem = barItem;
 }
 
@@ -114,6 +121,13 @@
     _table.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_table];
 
+}
+
+
+- (void)setMainSideCanSwipe:(BOOL)canSwipe
+{
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.sideViewController.needSwipeShowMenu = canSwipe;
 }
 
 - (void)didReceiveMemoryWarning
