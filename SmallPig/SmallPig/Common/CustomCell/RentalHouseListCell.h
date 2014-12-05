@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HouseListCell : UITableViewCell
+@interface RentalHouseListCell : UITableViewCell
 
 @end
