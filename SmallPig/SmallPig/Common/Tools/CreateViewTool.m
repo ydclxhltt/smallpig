@@ -7,20 +7,25 @@
 //
 
 #import "CreateViewTool.h"
-#import "UIImageView+WebCache.h"
-#import "UIImageView+LK.h"
+
 
 @implementation CreateViewTool
 
 #pragma mark UILabel
+
 //创建Label
-+ (UILabel *)createLabelWithFrame:(CGRect)frame  textColor:(UIColor *)color textFont:(UIFont *)font
++ (UILabel *)createLabelWithFrame:(CGRect)frame  textString:(NSString *)text textColor:(UIColor *)color textFont:(UIFont *)font
 {
     UILabel *lable = [[UILabel alloc] initWithFrame:frame];
     lable.backgroundColor = [UIColor clearColor];
     lable.textColor = color;
     lable.font = font;
     lable.textAlignment = NSTextAlignmentLeft;
+    if (text && ![@"" isEqualToString:text])
+    {
+        lable.text = text;
+    }
+    
     return lable;
 }
 

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonTool.h"  
+#import "UIImageView+WebCache.h"
+#import "UIImageView+LK.h"
 
 @interface CreateViewTool : NSObject
 
@@ -16,11 +18,12 @@
  *
  *  @pram   frame   Label尺寸
  *  @pram   color   文字颜色
+ *  @pram   text    文字内容
  *  @pram   font    文字字体
  *
  *  @return UILabel对象
  */
-+ (UILabel *)createLabelWithFrame:(CGRect)frame  textColor:(UIColor *)color textFont:(UIFont *)font;
++ (UILabel *)createLabelWithFrame:(CGRect)frame  textString:(NSString *)text textColor:(UIColor *)color textFont:(UIFont *)font;
 
 /*
  *  创建UIImageView 获取网络图片
