@@ -31,30 +31,42 @@
 #pragma mark 设置title
 - (void)setCurrentTitle
 {
-    if (self.pushType == PushTypeRegister)
+    if (PushTypeRegister == self.pushType)
     {
         self.title = REGISTER_TITLE;
     }
-    else if (self.pushType == PushTypeFindPassWord)
+    else if (PushTypeFindPassWord == self.pushType)
     {
         self.title = FIND_PSW_TITLE;
     }
 }
 
+#pragma mark 创建UI
 //初始化视图
 - (void)createUI
 {
-    //添加表
+    [self addTableView];
+    [self addButtons];
+}
+
+//添加表
+- (void)addTableView
+{
     [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
     self.table .backgroundColor = [UIColor whiteColor];
     self.table.scrollEnabled = NO;
-    
+}
+
+//添加完成按钮
+- (void)addButtons
+{
     //添加完成按钮
     UIButton *commitButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"完成" titleColor:WHITE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"commitButtonPressed:" tagDelegate:self];
     [CommonTool clipView:commitButton withCornerRadius:5.0];
     [self.view addSubview:commitButton];
-    
 }
+
+
 
 #pragma mark 返回按钮事件
 //返回按钮事件
@@ -63,7 +75,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+//提交按钮响应事件
 - (void)commitButtonPressed:(UIButton *)sender
 {
     
@@ -71,11 +83,6 @@
 
 
 #pragma mark  tableView委托方法
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -99,7 +106,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(10, 0, 70, cell.frame.size.height) textColor:LOGIN_LABEL_COLOR textFont:LOGIN_REG_FONT];
+    UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(10, 0, 70, cell.frame.size.height)  textString:@"" textColor:LOGIN_LABEL_COLOR textFont:LOGIN_REG_FONT];
     [cell.contentView addSubview:label];
     
     UITextField *textField = [CreateViewTool createTextFieldWithFrame:CGRectMake(85, 0, self.table.frame.size.width - 85 - 10, cell.frame.size.height) textColor:[UIColor blackColor] textFont:LOGIN_REG_FONT placeholderText:@"请输入密码"];
@@ -110,7 +117,7 @@
     if (indexPath.row == 0)
     {
         label.text = @"密码:";
-        if (self.pushType == PushTypeFindPassWord)
+        if (PushTypeFindPassWord == self.pushType)
         {
             label.text = @"新密码:";
         }

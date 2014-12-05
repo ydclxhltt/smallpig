@@ -32,30 +32,38 @@
 #pragma mark 设置title
 - (void)setCurrentTitle
 {
-    if (self.pushType == PushTypeRegister)
+    if (PushTypeRegister == self.pushType)
     {
         self.title = REGISTER_TITLE;
     }
-    else if (self.pushType == PushTypeFindPassWord)
+    else if (PushTypeFindPassWord == self.pushType)
     {
         self.title = FIND_PSW_TITLE;
     }
 }
 
-
+#pragma mark 添加UI
 //初始化视图
 - (void)createUI
 {
-    //添加表
+    [self addTableView];
+    [self addButtons];
+}
+
+//添加表
+- (void)addTableView
+{
     [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
     self.table.backgroundColor = [UIColor whiteColor];
     self.table.scrollEnabled = NO;
-    
-    //添加下一步按钮
+}
+
+//添加下一步按钮
+- (void)addButtons
+{
     UIButton *nextButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"下一步" titleColor:WHITE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"nextButtonPressed:" tagDelegate:self];
     [CommonTool clipView:nextButton withCornerRadius:5.0];
     [self.view addSubview:nextButton];
-    
 }
 
 #pragma mark 返回按钮事件
@@ -65,7 +73,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+//下一步按钮响应事件
 - (void)nextButtonPressed:(UIButton *)button
 {
     SetPassWordViewController *setPassWordVC = [[SetPassWordViewController alloc]init];
@@ -73,17 +81,13 @@
     [self.navigationController pushViewController:setPassWordVC animated:YES];
 }
 
+//验证码按钮事件
 - (void)checkCodeButtonPressed:(UIButton *)button
 {
     
 }
 
 #pragma mark  tableView委托方法
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -107,7 +111,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(10, 0, 60, cell.frame.size.height) textColor:LOGIN_LABEL_COLOR textFont:LOGIN_REG_FONT];
+    UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(10, 0, 60, cell.frame.size.height) textString:@"" textColor:LOGIN_LABEL_COLOR textFont:LOGIN_REG_FONT];
     [cell.contentView addSubview:label];
     
     UITextField *textField = [CreateViewTool createTextFieldWithFrame:CGRectMake(70, 0, self.table.frame.size.width - 70 - 80, cell.frame.size.height) textColor:[UIColor blackColor] textFont:LOGIN_REG_FONT placeholderText:@"请输入手机号"];

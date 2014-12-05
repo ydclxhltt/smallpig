@@ -25,20 +25,32 @@
     //初始化UI视图
     [self createUI];
     //关闭ScrollView默认偏移量
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    NSLog(@"====%f====%f",self.navigationController.navigationBar.frame.size.height,[[UIApplication sharedApplication]statusBarFrame].size.height);
-    NSLog(@"=====%@",NSStringFromCGRect([[UIScreen mainScreen] bounds]));
+    //self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBar.translucent = NO;
+
     // Do any additional setup after loading the view.
 }
 
+#pragma mark 创建UI
 //初始化视图
 - (void)createUI
 {
+    [self addTableView];
+    [self addButtons];
+}
+
+//添加表
+- (void)addTableView
+{
     //添加表
-    [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self]; 
+    [self addTableViewWithFrame:CGRectMake(15, 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
     self.table .backgroundColor = [UIColor whiteColor];
     self.table.scrollEnabled = NO;
-    
+}
+
+//添加按钮
+- (void)addButtons
+{
     //添加登录按钮
     UIButton *loginButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"登录" titleColor:WHITE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"loginButtonPressed:" tagDelegate:self];
     [CommonTool clipView:loginButton withCornerRadius:5.0];
@@ -65,22 +77,25 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:Nil];
 }
 
-
+//登录按钮事件
 - (void)loginButtonPressed:(UIButton *)button
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+//注册按钮事件
 - (void)registerButtonPressed:(UIButton *)button
 {
    [self pushRegisterWithType:PushTypeRegister];
 }
 
+//找回密码事件
 - (void)findPassWordButtonPressed:(UIButton *)button
 {
     [self pushRegisterWithType:PushTypeFindPassWord];
 }
 
+#pragma mark 注册和找回密码界面跳转
 - (void)pushRegisterWithType:(PushType)type
 {
     RegisterViewController *registerVC = [[RegisterViewController alloc]init];
@@ -92,10 +107,6 @@
 
 #pragma mark  tableView委托方法
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -119,7 +130,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(10, 0, 60, cell.frame.size.height) textColor:LOGIN_LABEL_COLOR textFont:LOGIN_REG_FONT];
+    UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(10, 0, 60, cell.frame.size.height) textString:@"" textColor:LOGIN_LABEL_COLOR textFont:LOGIN_REG_FONT];
     [cell.contentView addSubview:label];
     
     UITextField *textField = [CreateViewTool createTextFieldWithFrame:CGRectMake(70, 0, self.table.frame.size.width - 70 - 10, cell.frame.size.height) textColor:[UIColor blackColor] textFont:LOGIN_REG_FONT placeholderText:@"请输入手机号"];
@@ -140,6 +151,8 @@
     
     return cell;
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
