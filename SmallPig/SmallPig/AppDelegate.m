@@ -29,12 +29,7 @@
     [self.window makeKeyAndVisible];
     
     
-    //设置导航条
-    [[UINavigationBar appearance] setBarTintColor:APP_MAIN_COLOR];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    //[[UINavigationBar appearance] setTranslucent:YES];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:RGB(255.0, 255.0, 255.0),NSForegroundColorAttributeName,nil];
-    [[UINavigationBar appearance] setTitleTextAttributes:dic];
+
    
     /*
      *  设置tabbar选中和默认字体颜色
@@ -56,6 +51,7 @@
     //主界面
     _sideViewController = [[MainSideViewController alloc]initWithNibName:nil bundle:nil];
     _sideViewController.leftViewShowWidth = LEFT_SIDE_WIDTH;
+    [_sideViewController setNeedSwipeShowMenu:NO];
     [self setLeftView];
     [self setRootView];
     self.window.rootViewController=_sideViewController;
@@ -102,6 +98,7 @@
     HomeViewController *homeViewController = [[HomeViewController alloc]init];
     UINavigationController *homeNavViewController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
     _sideViewController.rootViewController = homeNavViewController;
+    
 }
 
 /*
