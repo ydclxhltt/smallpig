@@ -8,7 +8,6 @@
 
 #import "LeftSidelViewController.h"
 #import "LoginViewController.h"
-#import "AppDelegate.h"
 
 @interface LeftSidelViewController ()
 {
@@ -52,7 +51,7 @@
     startHeight += height + 10;
     
     //个人名字
-    personNameLabel = [CreateViewTool createLabelWithFrame:CGRectMake(0, startHeight, LEFT_SIDE_WIDTH, 20) textColor:WHITE_COLOR textFont:PERSON_NAME_FONT];
+    personNameLabel = [CreateViewTool createLabelWithFrame:CGRectMake(0, startHeight, LEFT_SIDE_WIDTH, 20) textString:@"" textColor:WHITE_COLOR textFont:PERSON_NAME_FONT];
     personNameLabel.textAlignment = NSTextAlignmentCenter;
     personNameLabel.text = @"未登录";
     [self.view addSubview:personNameLabel];
@@ -109,11 +108,11 @@
     int index = 0;
     if (indexPath.section == 0)
     {
-        index = indexPath.row;
+        index = (int)indexPath.row;
     }
     else if(indexPath.section == 1)
     {
-        index = [[self.titleArray objectAtIndex:0] count] + indexPath.row;
+        index = (int)([[self.titleArray objectAtIndex:0] count] + indexPath.row);
     }
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"menu_icon%d",index + 1]];
     cell.textLabel.text = [[self.titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -136,7 +135,7 @@
     }
     else
     {
-        [self pushToViewControllerWithIndex:indexPath.row];
+        [self pushToViewControllerWithIndex:(int)indexPath.row];
     }
 }
 
