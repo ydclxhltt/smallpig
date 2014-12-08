@@ -27,4 +27,13 @@
 //新房建设中提示语字体
 #define NEW_HOUSE_TIP_FONT      FONT(18.0)
 
+//租房.二手房列表Title文字
+#define HOUSE_LIST_TITLE_FONT   FONT(14.0)
+
+//租房.二手房描述文字（非价格）
+#define HOUSE_LIST_DETAIL_FONT  FONT(12.0)
+
+//租房.二手房价格
+#define HOUSE_LIST_PRICE_FONT  FONT(14.0)
+
 #endif

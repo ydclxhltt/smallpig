@@ -67,4 +67,8 @@
 #define HOUSE_LIST_SEPLINE_COLOR    RGB(188.0,188.0,188.0)
 //列表title颜色
 #define HOUSE_LIST_TITLE_COLOR      HOME_LIST_TITLE_COLOR
+//列表非价钱和title颜色
+#define HOUSE_LIST_DETAIL_COLOR     HOME_LIST_DETAIL_COLOR
+//列表价格颜色
+#define HOUSE_LIST_PRICE_COLOR      RGB(220.0,53.0,8.0)
 #endif
