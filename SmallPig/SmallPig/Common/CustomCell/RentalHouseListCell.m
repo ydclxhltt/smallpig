@@ -10,21 +10,23 @@
 
 #import "RentalHouseListCell.h"
 #import "CreateViewTool.h"
+#import "CommonHeader.h"
 
 @interface RentalHouseListCell()
 {
     float start_x;
     float start_y;
+    NSArray *labelsArray;
 }
 
 @property(nonatomic, retain) UIImageView *houseImageView;
 @property(nonatomic, retain) UILabel *titleLabel;
-@property(nonatomic, retain) UILabel *localLabel;
-@property(nonatomic, retain) UILabel *parkLabel;
-@property(nonatomic, retain) UILabel *typeLabel;
-@property(nonatomic, retain) UILabel *sizeLabel;
-@property(nonatomic, retain) UILabel *timeLabel;
-@property(nonatomic, retain) UILabel *priceLabel;
+//@property(nonatomic, retain) UILabel *localLabel;
+//@property(nonatomic, retain) UILabel *parkLabel;
+//@property(nonatomic, retain) UILabel *typeLabel;
+//@property(nonatomic, retain) UILabel *sizeLabel;
+//@property(nonatomic, retain) UILabel *timeLabel;
+//@property(nonatomic, retain) UILabel *priceLabel;
 
 @end
 
@@ -40,10 +42,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-
+        //初始化视图
+        [self createUI];
     }
     return self;
 }
+
 
 #pragma mark 添加UI
 //添加UI
@@ -51,6 +55,7 @@
 {
     start_x = 15.0;
     [self addHouseImageView];
+    [self addLabels];
 }
 
 //添加图片控件
@@ -60,22 +65,54 @@
     _houseImageView = [CreateViewTool createImageViewWithFrame:CGRectMake(start_x, (ROW_HEIGHT - defaultImage.size.height/2)/2, defaultImage.size.width/2, defaultImage.size.height/2) placeholderImage:defaultImage];
     [CommonTool clipView:self.houseImageView withCornerRadius:5.0];
     [self.contentView addSubview:_houseImageView];
-    start_y = (self.frame.size.height - defaultImage.size.height/2)/2;
-    start_x += _houseImageView.frame.size.width/2 +15.0;
+    start_y = (HOUSE_LIST_HEIGHT - defaultImage.size.height/2)/2;
+    start_x += _houseImageView.frame.size.width +15.0;
 }
 
 //添加各种标签
 - (void)addLabels
 {
-    //_titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, self.frame.size.width - start_x - 20.0, <#CGFloat height#>) textString:@"" textColor:HOUSE_LIST_TITLE_COLOR textFont:<#(UIFont *)#>];
+    _titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, self.frame.size.width - start_x - 20.0, 35) textString:@"" textColor:HOUSE_LIST_TITLE_COLOR textFont:HOUSE_LIST_TITLE_FONT];
+    _titleLabel.numberOfLines = 2;
+    [self.contentView addSubview:_titleLabel];
+    
+    start_y += _titleLabel.frame.size.height;
+    
+    for (int j = 0; j < 2; j++)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(start_x + (55 + 5) * i, start_y + j * (15 + 5), 60, 15) textString:@"" textColor:HOUSE_LIST_DETAIL_COLOR textFont:HOUSE_LIST_DETAIL_FONT];
+            label.tag = i + 3 * j + 1;
+            if (label.tag == 6)
+            {
+                label.textColor = HOUSE_LIST_PRICE_COLOR;
+                label.font = HOUSE_LIST_PRICE_FONT;
+            }
+            [self.contentView addSubview:label];
+        }
+    }
 }
 
-
-- (void)drawRect:(CGRect)rect
+- (void)setCellImageWithUrl:(NSString *)imageUrl titleText:(NSString *)title localText:(NSString *)local parkText:(NSString *)park timeText:(NSString *)time typeText:(NSString *)type sizeText:(NSString *)size priceText:(NSString *)price
 {
-    //初始化视图
-    [self createUI];
+    
+    self.titleLabel.text = title;
+    
+    if(imageUrl && ![@"" isEqualToString:imageUrl])
+    {
+        [self.houseImageView  setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"house_image_default.png"]];
+    }
+    
+    NSArray *array = @[local,park,time,type,size,price];
+
+    for (int i = 0; i < [array count];i++)
+    {
+        UILabel *label = (UILabel *)[self.contentView viewWithTag:i + 1];
+        label.text = [array objectAtIndex:i];
+    }
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
