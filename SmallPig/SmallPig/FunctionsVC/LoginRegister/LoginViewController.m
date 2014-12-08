@@ -25,8 +25,7 @@
     //初始化UI视图
     [self createUI];
     //关闭ScrollView默认偏移量
-    //self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationController.navigationBar.translucent = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     // Do any additional setup after loading the view.
 }
@@ -43,7 +42,7 @@
 - (void)addTableView
 {
     //添加表
-    [self addTableViewWithFrame:CGRectMake(15, 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
+    [self addTableViewWithFrame:CGRectMake(15,NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
     self.table .backgroundColor = [UIColor whiteColor];
     self.table.scrollEnabled = NO;
 }
