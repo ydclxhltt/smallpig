@@ -184,7 +184,7 @@
     cell.detailTextLabel.text = array[1];
     cell.textLabel.textColor = HOME_LIST_TITLE_COLOR;
     cell.detailTextLabel.textColor = HOME_LIST_DETAIL_COLOR;
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"home_icon%d.png",indexPath.section + 1]];
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"home_icon%d.png",(int)indexPath.section + 1]];
     
     return cell;
 }

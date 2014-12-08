@@ -18,6 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     //设置title
     [self setCurrentTitle];
     //添加返回item
@@ -38,6 +39,13 @@
     [self setMainSideCanSwipe:NO];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [self setNavBarAndStatusHidden:NO];
+}
+
+
 #pragma mark 设置title
 - (void)setCurrentTitle
 {
@@ -56,6 +64,7 @@
 - (void)createUI
 {
     [self addTableView];
+    [self addrefresh];
 }
 
 //添加表
@@ -63,8 +72,46 @@
 {
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
     self.table.separatorColor = HOUSE_LIST_SEPLINE_COLOR;
-    self.table .backgroundColor = [UIColor whiteColor];
+    self.table .backgroundColor = [UIColor clearColor];
     
+}
+
+//添加刷新控件
+- (void)addrefresh
+{
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor whiteColor];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [refreshControl addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
+    self.table.tableHeaderView = refreshControl;
+}
+
+
+-(void)refreshView:(UIRefreshControl *)refresh
+{
+    if (refresh.refreshing)
+    {
+        refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"正在刷新..."];
+        [self performSelector:@selector(handleData:) withObject:refresh afterDelay:2];
+    }
+}
+
+-(void)handleData:(UIRefreshControl *)refresh
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm:ss a"];
+    NSString *lastUpdated = [NSString stringWithFormat:@"最近刷新时间 %@", [formatter stringFromDate:[NSDate date]]];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdated];
+    [refresh endRefreshing];
+    
+}
+
+
+#pragma mark  设置状态栏，导航条是否隐藏
+- (void)setNavBarAndStatusHidden:(BOOL)isHidden
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:isHidden withAnimation:UIStatusBarAnimationSlide];
+    [self.navigationController setNavigationBarHidden:isHidden animated:YES];
 }
 
 #pragma marl ScrollViewDeleagte
@@ -74,13 +121,11 @@
     float offset_y = scrollView.contentOffset.y;
     if (offset_y >= 64)
     {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        [self setNavBarAndStatusHidden:YES];
     }
     else if(offset_y <= 20)
     {
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        [self setNavBarAndStatusHidden:NO];
     }
 }
 
@@ -106,8 +151,13 @@
         cell = [[RentalHouseListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.backgroundColor = [UIColor whiteColor];
         cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        if (SCREEN_WIDTH > 320.0)
+        {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
     }
-    
+    //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
+    [cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
     
     return cell;
 }
