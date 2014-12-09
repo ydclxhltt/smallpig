@@ -25,6 +25,8 @@
 #define LEFT_SIDE_LIST_HEIGHT   60.0
 //租房，二手房列表高度
 #define HOUSE_LIST_HEIGHT       100.0
+//经纪人排行列表高度
+#define AGENT_LIST_HEIGHT       90.0
 
 #pragma mark 登录注册
 
@@ -35,6 +37,14 @@
 //找回密码
 #define FIND_PSW_TITLE          @"找回密码"
 
+
+#pragma mark 首页
+
+//城市列表title
+#define CITY_LIST_TITLE         @"选择默认城市"
+//经纪人排名title
+#define AGENT_LIST_TITLE        @"本周经纪人"
+
 #pragma mark 房源
 
 //新房
@@ -42,8 +52,9 @@
 //新房建设中提示语
 #define NEW_HOUSE_TIP           @"功能还在建设中...\n敬请期待"
 //二手房
-#define SECOND_HAND_TITLE      @"二手房"
+#define SECOND_HAND_TITLE       @"二手房"
 //租房
 #define RENTAL_HOUSE_TITLE      @"租房"
+
 
 #endif

@@ -36,4 +36,13 @@
 //租房.二手房价格
 #define HOUSE_LIST_PRICE_FONT  FONT(14.0)
 
+//经纪人排名字体
+#define AGENT_RANK_FONT        FONT(16.0)
+
+//经纪人名字字体
+#define AGENT_NAME_FONT        AGENT_RANK_FONT
+
+//经纪人积分字体
+#define AGENT_SCORE_FONT       FONT(14.0)
+
 #endif

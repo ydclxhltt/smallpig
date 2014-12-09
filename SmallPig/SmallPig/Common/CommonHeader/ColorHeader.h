@@ -50,7 +50,7 @@
 //首页列表detail颜色
 #define HOME_LIST_DETAIL_COLOR      RGB(188.0,188.0,188.0)
 //首页搜索条背景颜色
-#define HOME_SEARCHBAR_BG_COLOR     RGB(27, 132, 81)
+#define HOME_SEARCHBAR_BG_COLOR     RGB(27.0, 132.0, 81.0)
 
 
 #pragma mark 新房相关颜色
@@ -71,4 +71,13 @@
 #define HOUSE_LIST_DETAIL_COLOR     HOME_LIST_DETAIL_COLOR
 //列表价格颜色
 #define HOUSE_LIST_PRICE_COLOR      RGB(220.0,53.0,8.0)
+
+#pragma mark 经纪人排行
+
+//经纪人排行排名Label颜色
+#define AGENT_RANK_COLOR            REGISTER_TITLE_COLOR
+//经纪人排名名字颜色
+#define AGENT_NAME_COLOR            RGB(4.0,4.0,4.0)
+//经纪人积分颜色
+#define AGENT_SCORE_COLOR           RGB(88.0,88.0,88.0)
 #endif
