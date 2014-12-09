@@ -26,7 +26,6 @@
     [self createUI];
     //关闭ScrollView默认偏移量
     self.automaticallyAdjustsScrollViewInsets = NO;
-
     // Do any additional setup after loading the view.
 }
 
