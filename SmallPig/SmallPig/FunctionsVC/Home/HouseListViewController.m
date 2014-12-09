@@ -18,7 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     //设置title
     [self setCurrentTitle];
     //添加返回item
@@ -64,7 +63,6 @@
 - (void)createUI
 {
     [self addTableView];
-    [self addrefresh];
 }
 
 //添加表
@@ -76,35 +74,6 @@
     
 }
 
-//添加刷新控件
-- (void)addrefresh
-{
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = [UIColor whiteColor];
-    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
-    [refreshControl addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
-    self.table.tableHeaderView = refreshControl;
-}
-
-
--(void)refreshView:(UIRefreshControl *)refresh
-{
-    if (refresh.refreshing)
-    {
-        refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"正在刷新..."];
-        [self performSelector:@selector(handleData:) withObject:refresh afterDelay:2];
-    }
-}
-
--(void)handleData:(UIRefreshControl *)refresh
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM d, h:mm:ss a"];
-    NSString *lastUpdated = [NSString stringWithFormat:@"最近刷新时间 %@", [formatter stringFromDate:[NSDate date]]];
-    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdated];
-    [refresh endRefreshing];
-    
-}
 
 
 #pragma mark  设置状态栏，导航条是否隐藏
