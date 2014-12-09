@@ -45,6 +45,11 @@
 		7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEEF1A3182D70012E775 /* newhouse_logo.png */; };
 		7767CEF31A318B140012E775 /* HouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767CEF21A318B140012E775 /* HouseListViewController.m */; };
 		7767CEF51A31AB700012E775 /* house_image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEF41A31AB700012E775 /* house_image_default.png */; };
+		777E02981A36F3E1008B9E38 /* AgentRankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */; };
+		777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E029A1A36F54D008B9E38 /* AgentRankListCell.m */; };
+		777E029D1A3702F1008B9E38 /* agent_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 777E029C1A3702F1008B9E38 /* agent_icon_default.png */; };
+		777E02A41A3707CE008B9E38 /* CityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E02A01A3707CE008B9E38 /* CityListViewController.m */; };
+		777E02A51A3707CE008B9E38 /* SearchHouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E02A31A3707CE008B9E38 /* SearchHouseViewController.m */; };
 		778202C11A0B094F000BC548 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778202C01A0B094F000BC548 /* HomeViewController.m */; };
 		778202C41A0B0973000BC548 /* WeChatMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778202C31A0B0973000BC548 /* WeChatMainViewController.m */; };
 		778202C71A0B0A08000BC548 /* CommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 778202C61A0B0A08000BC548 /* CommonTool.m */; };
@@ -192,6 +197,15 @@
 		7767CEF11A318B140012E775 /* HouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseListViewController.h; sourceTree = "<group>"; };
 		7767CEF21A318B140012E775 /* HouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListViewController.m; sourceTree = "<group>"; };
 		7767CEF41A31AB700012E775 /* house_image_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = house_image_default.png; sourceTree = "<group>"; };
+		777E02961A36F3E1008B9E38 /* AgentRankListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentRankListViewController.h; sourceTree = "<group>"; };
+		777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentRankListViewController.m; sourceTree = "<group>"; };
+		777E02991A36F54D008B9E38 /* AgentRankListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentRankListCell.h; sourceTree = "<group>"; };
+		777E029A1A36F54D008B9E38 /* AgentRankListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentRankListCell.m; sourceTree = "<group>"; };
+		777E029C1A3702F1008B9E38 /* agent_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon_default.png; sourceTree = "<group>"; };
+		777E029F1A3707CE008B9E38 /* CityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityListViewController.h; sourceTree = "<group>"; };
+		777E02A01A3707CE008B9E38 /* CityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityListViewController.m; sourceTree = "<group>"; };
+		777E02A21A3707CE008B9E38 /* SearchHouseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHouseViewController.h; sourceTree = "<group>"; };
+		777E02A31A3707CE008B9E38 /* SearchHouseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHouseViewController.m; sourceTree = "<group>"; };
 		778202BF1A0B094F000BC548 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		778202C01A0B094F000BC548 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		778202C21A0B0973000BC548 /* WeChatMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatMainViewController.h; sourceTree = "<group>"; };
@@ -293,6 +307,9 @@
 		771A29351A0A178C00F99B1D /* FunctionsVC */ = {
 			isa = PBXGroup;
 			children = (
+				777E02951A36F3B6008B9E38 /* Agent */,
+				777E029E1A3707CE008B9E38 /* City */,
+				777E02A11A3707CE008B9E38 /* Search */,
 				771A293A1A0A299000F99B1D /* Home */,
 				771A293B1A0A299000F99B1D /* LoginRegister */,
 				771A293C1A0A299000F99B1D /* Mine */,
@@ -536,6 +553,33 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		777E02951A36F3B6008B9E38 /* Agent */ = {
+			isa = PBXGroup;
+			children = (
+				777E02961A36F3E1008B9E38 /* AgentRankListViewController.h */,
+				777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */,
+			);
+			path = Agent;
+			sourceTree = "<group>";
+		};
+		777E029E1A3707CE008B9E38 /* City */ = {
+			isa = PBXGroup;
+			children = (
+				777E029F1A3707CE008B9E38 /* CityListViewController.h */,
+				777E02A01A3707CE008B9E38 /* CityListViewController.m */,
+			);
+			path = City;
+			sourceTree = "<group>";
+		};
+		777E02A11A3707CE008B9E38 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				777E02A21A3707CE008B9E38 /* SearchHouseViewController.h */,
+				777E02A31A3707CE008B9E38 /* SearchHouseViewController.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		7785CBAA1A303F790053FD09 /* DropDownList */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,6 +736,7 @@
 		CE936BD31A2F43DC003F2268 /* home_images */ = {
 			isa = PBXGroup;
 			children = (
+				777E029C1A3702F1008B9E38 /* agent_icon_default.png */,
 				7767CEF41A31AB700012E775 /* house_image_default.png */,
 				7767CEEF1A3182D70012E775 /* newhouse_logo.png */,
 				77E12FDB1A3044DF00D4B0AF /* home_arrow.png */,
@@ -710,6 +755,8 @@
 			children = (
 				CEDF46B71A25C87700246531 /* RentalHouseListCell.h */,
 				CEDF46B81A25C87700246531 /* RentalHouseListCell.m */,
+				777E02991A36F54D008B9E38 /* AgentRankListCell.h */,
+				777E029A1A36F54D008B9E38 /* AgentRankListCell.m */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -816,6 +863,7 @@
 				77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */,
 				CEDE25AA1A2CB94E00C331D4 /* btm_home2@2x.png in Resources */,
 				7767CEF51A31AB700012E775 /* house_image_default.png in Resources */,
+				777E029D1A3702F1008B9E38 /* agent_icon_default.png in Resources */,
 				CEDE25AC1A2CB94E00C331D4 /* btm_save2@2x.png in Resources */,
 				CEDE25A21A2CB94400C331D4 /* nav_search_down.png in Resources */,
 				CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */,
@@ -839,17 +887,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				777E02981A36F3E1008B9E38 /* AgentRankListViewController.m in Sources */,
 				771A299C1A0A2A4600F99B1D /* NSData+ImageContentType.m in Sources */,
 				771A29A21A0A2A4600F99B1D /* SDWebImageManager.m in Sources */,
 				771A29B01A0A2A4600F99B1D /* AFSecurityPolicy.m in Sources */,
 				778202C71A0B0A08000BC548 /* CommonTool.m in Sources */,
 				771A29AD1A0A2A4600F99B1D /* AFHTTPRequestOperationManager.m in Sources */,
+				777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */,
 				771A29AC1A0A2A4600F99B1D /* AFHTTPRequestOperation.m in Sources */,
 				771A29A01A0A2A4600F99B1D /* SDWebImageDownloader.m in Sources */,
 				CEDF46BF1A25C98600246531 /* RegisterViewController.m in Sources */,
 				771A29AA1A0A2A4600F99B1D /* THProgressView.m in Sources */,
 				771A299D1A0A2A4600F99B1D /* SDImageCache.m in Sources */,
 				77C265D019F4DB5E0087BF76 /* AppDelegate.m in Sources */,
+				777E02A41A3707CE008B9E38 /* CityListViewController.m in Sources */,
 				771A29B81A0A2A4600F99B1D /* UIButton+AFNetworking.m in Sources */,
 				771A29C01A0A2AC400F99B1D /* CreateViewTool.m in Sources */,
 				77C265CC19F4DB5E0087BF76 /* main.m in Sources */,
@@ -875,6 +926,7 @@
 				771A29B31A0A2A4600F99B1D /* AFURLResponseSerialization.m in Sources */,
 				771A29BB1A0A2A4600F99B1D /* UIRefreshControl+AFNetworking.m in Sources */,
 				771A29A71A0A2A4600F99B1D /* UIImageView+WebCache.m in Sources */,
+				777E02A51A3707CE008B9E38 /* SearchHouseViewController.m in Sources */,
 				7785CBB11A303FA30053FD09 /* DropDownView.m in Sources */,
 				771A29B61A0A2A4600F99B1D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				771A29A41A0A2A4600F99B1D /* UIButton+WebCache.m in Sources */,
