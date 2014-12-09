@@ -10,6 +10,9 @@
 #import "DropDownView.h"
 #import "NewHouseListViewController.h"
 #import "HouseListViewController.h"
+#import "SearchHouseViewController.h"
+#import "CityListViewController.h"
+#import "AgentRankListViewController.h"
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
@@ -73,14 +76,14 @@
     
     //添加城市显示视图
     dropDownView = [[DropDownView alloc] initWithFrame:CGRectMake(space_w + logoImageView.frame.origin.x + logoImageView.frame.size.width, logoImageView.frame.origin.y, city_w, logoImageView.frame.size.height)];
-    [dropDownView createViewWithTitle:@"深圳" clickedBlock:^{}];
+    [dropDownView createViewWithTitle:@"深圳" clickedBlock:^{[self showCityList];}];
     [greenView addSubview:dropDownView];
     
     //添加搜索视图
     UIImage *searchBgImage = [UIImage imageNamed:@"search_input.png"];
     UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - searchBgImage.size.width/2)/2, greenView.frame.size.height - searchBgImage.size.height/2 - 15, searchBgImage.size.width/2, searchBgImage.size.height/2)];
-    searchBar.delegate = self;
     searchBar.barStyle = UISearchBarStyleDefault;
+    //searchBar.tintColor = WHITE_COLOR;
     searchBar.placeholder = @"搜索";
     [greenView addSubview:searchBar];
     [self resetSearchBar:searchBar];
@@ -110,9 +113,13 @@
         {
             [view removeFromSuperview];
         }
-        if ([view isKindOfClass:NSClassFromString(@"UISearchBarTextField")])
+        if ([view isKindOfClass:[UITextField class]])
         {
-            [view setBackgroundColor:HOME_SEARCHBAR_BG_COLOR];
+            UITextField *textField = (UITextField *)view;
+            textField.borderStyle = UITextBorderStyleNone;
+            //textField.backgroundColor = [UIColor whiteColor];
+            textField.background = [UIImage imageNamed:@"search_input.png"];
+            //[view setBackgroundColor:HOME_SEARCHBAR_BG_COLOR];
         }
         if ([view isKindOfClass:[UIButton class]])
         {
@@ -137,7 +144,16 @@
 #pragma mark 点击搜索响应事件
 - (void)showSearchView:(UIButton *)sender
 {
-    
+//    SearchHouseViewController *searchHouseViewController = [[SearchHouseViewController alloc]init];
+//    UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:searchHouseViewController];
+//    [self presentViewController:searchNav animated:NO completion:Nil];
+}
+
+- (void)showCityList
+{
+    CityListViewController *cityListViewController = [[CityListViewController alloc]init];
+    UINavigationController *cityListNav = [[UINavigationController alloc]initWithRootViewController:cityListViewController];
+    [self presentViewController:cityListNav animated:YES completion:Nil];
 }
 
 #pragma mark - tableView代理
@@ -214,7 +230,7 @@
             viewController = [[NewHouseListViewController alloc]init];
             break;
         case 3:
-            viewController = [[NewHouseListViewController alloc]init];
+            viewController = [[AgentRankListViewController alloc]init];
             break;
         default:
             break;
