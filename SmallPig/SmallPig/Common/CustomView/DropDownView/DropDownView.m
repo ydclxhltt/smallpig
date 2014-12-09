@@ -11,7 +11,7 @@
 #import "DropDownView.h"
 
 @interface DropDownView()
-@property(nonatomic, weak) void (^dropDownViewClicked)();
+@property(nonatomic, copy) void (^dropDownViewClicked)();
 @end
 
 @implementation DropDownView
