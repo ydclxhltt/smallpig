@@ -8,6 +8,9 @@
 
 #import "LeftSidelViewController.h"
 #import "LoginViewController.h"
+#import "MineViewController.h"
+#import "SettingViewController.h"
+#import "MineSaveListViewController.h"
 
 @interface LeftSidelViewController ()
 {
@@ -15,6 +18,8 @@
     UIImageView *personIconImageView;
     //个人名称
     UILabel *personNameLabel;
+    //纪录上次选中行
+    int selectdeIndex;
 }
 //列表title数组
 @property(nonatomic, retain)NSArray *titleArray;
@@ -27,7 +32,24 @@
     [super viewDidLoad];
     //背景颜色
     self.view.backgroundColor = LEFT_SIDE_BG_COLOR;
-    
+    //初始化
+    selectdeIndex = 0;
+    //初始化UI
+    [self createUI];
+    //初始化数据
+    self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
+    // Do any additional setup after loading the view.
+}
+
+#pragma mark 创建UI
+- (void)createUI
+{
+    [self addPersonalView];
+    [self addTableView];
+}
+
+- (void)addPersonalView
+{
     //初始化视图起始坐标
     startHeight = 65.0;
     
@@ -56,18 +78,17 @@
     personNameLabel.text = @"未登录";
     [self.view addSubview:personNameLabel];
     
-     startHeight += personNameLabel.frame.size.height + 10;
+    startHeight += personNameLabel.frame.size.height + 10;
+}
 
+- (void)addTableView
+{
     //添加表
     [self addTableViewWithFrame:CGRectMake(20, startHeight, LEFT_SIDE_WIDTH - 20, SCREEN_HEIGHT - startHeight) tableType:UITableViewStyleGrouped tableDelegate:self];
     self.table.separatorColor = LIFT_SIDE_SEPLINE_COLOR;
-    
-    
-    self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
-    // Do any additional setup after loading the view.
 }
 
-
+#pragma mark 头像点击
 - (void)isNeedLogin
 {
     LoginViewController *loginVC = [[LoginViewController alloc]init];
@@ -129,21 +150,53 @@
     if (indexPath.row == 0)
     {
         if (indexPath.section == 0)
-            [nav popToRootViewControllerAnimated:YES];
+            [self pushToViewControllerWithIndex:0 forNav:nav];
         else if (indexPath.section == 1)
-            [self pushToViewControllerWithIndex:4];
+            [self pushToViewControllerWithIndex:4 forNav:nav];
     }
     else
     {
-        [self pushToViewControllerWithIndex:(int)indexPath.row];
+        [self pushToViewControllerWithIndex:(int)indexPath.row  forNav:nav];
     }
 }
 
 #pragma mark 跳转相关界面
 //跳转相关界面
-- (void)pushToViewControllerWithIndex:(int)index
+- (void)pushToViewControllerWithIndex:(int)index forNav:(UINavigationController *)nav
 {
-    
+    if ( index != selectdeIndex)
+    {
+        UIViewController *view = nil;
+        [nav popToRootViewControllerAnimated:NO];
+        switch (index)
+        {
+            case 1:
+                view = [[MineViewController alloc] init];
+                break;
+            case 2:
+                view = [[MineSaveListViewController alloc]init];
+                break;
+            case 3:
+                view = [[SettingViewController alloc]init];
+                break;
+            default:
+                break;
+        }
+        [nav pushViewController:view animated:NO];
+    }
+    //恢复正常位置
+    [self resetMainView];
+    //保存上次点击行数
+    selectdeIndex = index;
+}
+
+
+#pragma mark 主框架回复正常位置
+- (void)resetMainView
+{
+    //恢复正常位置
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.sideViewController hideSideViewController:YES];
 }
 
 - (void)didReceiveMemoryWarning {
