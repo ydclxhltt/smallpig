@@ -67,6 +67,12 @@
 		77C265DB19F4DB5E0087BF76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C319F4DB5E0087BF76 /* UIKit.framework */; };
 		77C265E319F4DB5E0087BF76 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77C265E119F4DB5E0087BF76 /* InfoPlist.strings */; };
 		77C265E519F4DB5E0087BF76 /* SmallPigTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C265E419F4DB5E0087BF76 /* SmallPigTests.m */; };
+		77C401D61A37DE5600A9D883 /* AgentCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401D51A37DE5600A9D883 /* AgentCenterViewController.m */; };
+		77C401DA1A37EB1F00A9D883 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401D91A37EB1F00A9D883 /* SettingViewController.m */; };
+		77C401DD1A37EBA400A9D883 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401DC1A37EBA400A9D883 /* FeedbackViewController.m */; };
+		77C401E01A37EBB700A9D883 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401DF1A37EBB700A9D883 /* AboutUsViewController.m */; };
+		77C401E51A3838C000A9D883 /* user_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C401E41A3838C000A9D883 /* user_default.png */; };
+		77C401E81A38521200A9D883 /* MineSaveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401E71A38521200A9D883 /* MineSaveListViewController.m */; };
 		77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDB1A3044DF00D4B0AF /* home_arrow.png */; };
 		77E12FE51A3056CA00D4B0AF /* person_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDE1A3056CA00D4B0AF /* person_icon_default.png */; };
 		77E12FE61A3056CA00D4B0AF /* menu_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDF1A3056CA00D4B0AF /* menu_icon1.png */; };
@@ -233,6 +239,17 @@
 		77C265E019F4DB5E0087BF76 /* SmallPigTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmallPigTests-Info.plist"; sourceTree = "<group>"; };
 		77C265E219F4DB5E0087BF76 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77C265E419F4DB5E0087BF76 /* SmallPigTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmallPigTests.m; sourceTree = "<group>"; };
+		77C401D41A37DE5600A9D883 /* AgentCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCenterViewController.h; sourceTree = "<group>"; };
+		77C401D51A37DE5600A9D883 /* AgentCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCenterViewController.m; sourceTree = "<group>"; };
+		77C401D81A37EB1F00A9D883 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		77C401D91A37EB1F00A9D883 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		77C401DB1A37EBA400A9D883 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		77C401DC1A37EBA400A9D883 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		77C401DE1A37EBB700A9D883 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		77C401DF1A37EBB700A9D883 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		77C401E41A3838C000A9D883 /* user_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_default.png; sourceTree = "<group>"; };
+		77C401E61A38521200A9D883 /* MineSaveListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSaveListViewController.h; sourceTree = "<group>"; };
+		77C401E71A38521200A9D883 /* MineSaveListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSaveListViewController.m; sourceTree = "<group>"; };
 		77E12FDB1A3044DF00D4B0AF /* home_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_arrow.png; sourceTree = "<group>"; };
 		77E12FDE1A3056CA00D4B0AF /* person_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_icon_default.png; sourceTree = "<group>"; };
 		77E12FDF1A3056CA00D4B0AF /* menu_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon1.png; sourceTree = "<group>"; };
@@ -307,6 +324,7 @@
 		771A29351A0A178C00F99B1D /* FunctionsVC */ = {
 			isa = PBXGroup;
 			children = (
+				77C401D71A37EB0900A9D883 /* Setting */,
 				777E02951A36F3B6008B9E38 /* Agent */,
 				777E029E1A3707CE008B9E38 /* City */,
 				777E02A11A3707CE008B9E38 /* Search */,
@@ -350,6 +368,8 @@
 			children = (
 				778202C81A0B4974000BC548 /* MineViewController.h */,
 				778202C91A0B4974000BC548 /* MineViewController.m */,
+				77C401E61A38521200A9D883 /* MineSaveListViewController.h */,
+				77C401E71A38521200A9D883 /* MineSaveListViewController.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -558,6 +578,8 @@
 			children = (
 				777E02961A36F3E1008B9E38 /* AgentRankListViewController.h */,
 				777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */,
+				77C401D41A37DE5600A9D883 /* AgentCenterViewController.h */,
+				77C401D51A37DE5600A9D883 /* AgentCenterViewController.m */,
 			);
 			path = Agent;
 			sourceTree = "<group>";
@@ -674,6 +696,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		77C401D71A37EB0900A9D883 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				77C401D81A37EB1F00A9D883 /* SettingViewController.h */,
+				77C401D91A37EB1F00A9D883 /* SettingViewController.m */,
+				77C401DB1A37EBA400A9D883 /* FeedbackViewController.h */,
+				77C401DC1A37EBA400A9D883 /* FeedbackViewController.m */,
+				77C401DE1A37EBB700A9D883 /* AboutUsViewController.h */,
+				77C401DF1A37EBB700A9D883 /* AboutUsViewController.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		77C401E11A38389C00A9D883 /* mine_images */ = {
+			isa = PBXGroup;
+			children = (
+				77C401E41A3838C000A9D883 /* user_default.png */,
+			);
+			path = mine_images;
+			sourceTree = "<group>";
+		};
 		CE128CEE1A0E69B600DE07E5 /* tabbar_images */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,6 +768,7 @@
 		CE8D0E551A0E17270067AE64 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				77C401E11A38389C00A9D883 /* mine_images */,
 				CE936BD31A2F43DC003F2268 /* home_images */,
 				CE128D0F1A0E708700DE07E5 /* leftside_images */,
 				CE128CFB1A0E69CD00DE07E5 /* navbar_images */,
@@ -860,6 +904,7 @@
 				77E12FEA1A3056CA00D4B0AF /* menu_icon5.png in Resources */,
 				CE936BDE1A2F6FA2003F2268 /* home_icon3.png in Resources */,
 				CEDE25B01A2CB9BF00C331D4 /* back_down.png in Resources */,
+				77C401E51A3838C000A9D883 /* user_default.png in Resources */,
 				77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */,
 				CEDE25AA1A2CB94E00C331D4 /* btm_home2@2x.png in Resources */,
 				7767CEF51A31AB700012E775 /* house_image_default.png in Resources */,
@@ -891,10 +936,12 @@
 				771A299C1A0A2A4600F99B1D /* NSData+ImageContentType.m in Sources */,
 				771A29A21A0A2A4600F99B1D /* SDWebImageManager.m in Sources */,
 				771A29B01A0A2A4600F99B1D /* AFSecurityPolicy.m in Sources */,
+				77C401E01A37EBB700A9D883 /* AboutUsViewController.m in Sources */,
 				778202C71A0B0A08000BC548 /* CommonTool.m in Sources */,
 				771A29AD1A0A2A4600F99B1D /* AFHTTPRequestOperationManager.m in Sources */,
 				777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */,
 				771A29AC1A0A2A4600F99B1D /* AFHTTPRequestOperation.m in Sources */,
+				77C401DA1A37EB1F00A9D883 /* SettingViewController.m in Sources */,
 				771A29A01A0A2A4600F99B1D /* SDWebImageDownloader.m in Sources */,
 				CEDF46BF1A25C98600246531 /* RegisterViewController.m in Sources */,
 				771A29AA1A0A2A4600F99B1D /* THProgressView.m in Sources */,
@@ -903,6 +950,7 @@
 				777E02A41A3707CE008B9E38 /* CityListViewController.m in Sources */,
 				771A29B81A0A2A4600F99B1D /* UIButton+AFNetworking.m in Sources */,
 				771A29C01A0A2AC400F99B1D /* CreateViewTool.m in Sources */,
+				77C401E81A38521200A9D883 /* MineSaveListViewController.m in Sources */,
 				77C265CC19F4DB5E0087BF76 /* main.m in Sources */,
 				771A29B91A0A2A4600F99B1D /* UIImageView+AFNetworking.m in Sources */,
 				771A299F1A0A2A4600F99B1D /* SDWebImageDecoder.m in Sources */,
@@ -913,6 +961,7 @@
 				771A29B51A0A2A4600F99B1D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				771A29A11A0A2A4600F99B1D /* SDWebImageDownloaderOperation.m in Sources */,
 				771A29BC1A0A2A4600F99B1D /* UIWebView+AFNetworking.m in Sources */,
+				77C401DD1A37EBA400A9D883 /* FeedbackViewController.m in Sources */,
 				CEDF46C21A25C9A600246531 /* SetPassWordViewController.m in Sources */,
 				771A29AE1A0A2A4600F99B1D /* AFHTTPSessionManager.m in Sources */,
 				CEDF46B91A25C87700246531 /* RentalHouseListCell.m in Sources */,
@@ -924,6 +973,7 @@
 				771A29B21A0A2A4600F99B1D /* AFURLRequestSerialization.m in Sources */,
 				771A29B41A0A2A4600F99B1D /* AFURLSessionManager.m in Sources */,
 				771A29B31A0A2A4600F99B1D /* AFURLResponseSerialization.m in Sources */,
+				77C401D61A37DE5600A9D883 /* AgentCenterViewController.m in Sources */,
 				771A29BB1A0A2A4600F99B1D /* UIRefreshControl+AFNetworking.m in Sources */,
 				771A29A71A0A2A4600F99B1D /* UIImageView+WebCache.m in Sources */,
 				777E02A51A3707CE008B9E38 /* SearchHouseViewController.m in Sources */,
