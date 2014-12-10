@@ -80,4 +80,6 @@
 #define AGENT_NAME_COLOR            RGB(4.0,4.0,4.0)
 //经纪人积分颜色
 #define AGENT_SCORE_COLOR           RGB(88.0,88.0,88.0)
+//经纪人积分分数颜色
+#define AGENT_NUMBER_COLOR          APP_MAIN_COLOR
 #endif

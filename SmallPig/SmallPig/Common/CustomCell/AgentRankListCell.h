@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AgentRankListCell : UITableViewCell
-- (void)setCellDataWithRank:(int)rank;
+- (void)setCellDataWithRank:(int)rank agentImageUrl:(NSString *)imageUrl agentName:(NSString *)name agentScore:(NSString *)score;
 @end

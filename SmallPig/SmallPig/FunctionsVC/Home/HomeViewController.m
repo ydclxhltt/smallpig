@@ -165,7 +165,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIImageView *imageView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 2.0) placeholderImage:nil];
+    UIImageView *imageView = [CreateViewTool c  reateImageViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 2.0) placeholderImage:nil];
     imageView.backgroundColor = [UIColor clearColor];
     return imageView;
 }

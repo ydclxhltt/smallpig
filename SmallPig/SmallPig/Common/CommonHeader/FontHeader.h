@@ -43,6 +43,9 @@
 #define AGENT_NAME_FONT        AGENT_RANK_FONT
 
 //经纪人积分字体
-#define AGENT_SCORE_FONT       FONT(14.0)
+#define AGENT_SCORE_FONT       FONT(13.0)
+
+//经纪人积分分数字体
+#define AGENT_NUMBER_FONT      FONT(15.0)
 
 #endif

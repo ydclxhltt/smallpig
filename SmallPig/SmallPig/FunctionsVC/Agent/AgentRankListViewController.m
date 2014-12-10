@@ -53,14 +53,13 @@
 {
     static NSString *homeCellID = @"agentRankCellID";
     AgentRankListCell *cell = (AgentRankListCell *)[tableView dequeueReusableCellWithIdentifier:homeCellID];
-    
     if (cell == nil)
     {
         cell = [[AgentRankListCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:homeCellID];
         cell.backgroundColor = WHITE_COLOR;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    [cell setCellDataWithRank:indexPath.row + 1];
+    [cell setCellDataWithRank:indexPath.row + 1 agentImageUrl:@"" agentName:@"你妹你大爷" agentScore:@"1111"];
     return cell;
 }
 
