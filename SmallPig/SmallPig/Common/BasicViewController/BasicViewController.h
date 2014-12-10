@@ -39,6 +39,15 @@ typedef enum : NSUInteger
 /*
  *  设置导航条Item
  *
+ *  @pram title     按钮title
+ *  @pram type      NavItemType 设置左或右item的标识
+ *  @pram selName   item按钮响应方法名
+ */
+- (void)setNavBarItemWithTitle:(NSString *)title navItemType:(NavItemType)type selectorName:(NSString *)selName;
+
+/*
+ *  设置导航条Item
+ *
  *  @pram imageName 图片名字
  *  @pram type      NavItemType 设置左或右item的标识
  *  @pram selName   item按钮响应方法名

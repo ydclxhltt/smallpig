@@ -28,10 +28,10 @@
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:WHITE_COLOR,NSForegroundColorAttributeName,nil];
     [self.navigationController.navigationBar setTitleTextAttributes:dic];
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    //self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    //self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     /*
      *  效果等同IOS7 automaticallyAdjustsScrollViewInsets
@@ -53,7 +53,30 @@
 
 
 #pragma mark 设置导航条Item
-// 设置导航条Item
+
+// 1.设置导航条Item
+- (void)setNavBarItemWithTitle:(NSString *)title navItemType:(NavItemType)type selectorName:(NSString *)selName
+{
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 60, 30);
+    button.showsTouchWhenHighlighted = YES;
+    button.titleLabel.font = FONT(17.0);
+    [button setTitleColor:WHITE_COLOR forState:UIControlStateNormal];
+    [button setTitle:title forState:UIControlStateNormal];
+    if (selName && ![@"" isEqualToString:selName])
+    {
+        [button addTarget:self action:NSSelectorFromString(selName) forControlEvents:UIControlEventTouchUpInside];
+    }
+    UIBarButtonItem  *barItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    if(LeftItem == type)
+        self.navigationItem.leftBarButtonItem = barItem;
+    else if (rightItem == type)
+        self.navigationItem.rightBarButtonItem = barItem;
+}
+
+
+// 2.设置导航条Item
 - (void)setNavBarItemWithImageName:(NSString *)imageName navItemType:(NavItemType)type selectorName:(NSString *)selName
 {
     UIImage *image_up = [UIImage imageNamed:[imageName stringByAppendingString:@"_up.png"]];
@@ -83,7 +106,7 @@
 
 - (void)backButtonPressed:(UIButton *)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark 添加个人item
