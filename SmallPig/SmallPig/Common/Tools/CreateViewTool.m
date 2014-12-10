@@ -60,10 +60,10 @@
 + (UIImageView *)createRoundImageViewWithFrame:(CGRect)frame placeholderImage:(UIImage *)image  borderColor:(UIColor*)color  imageUrl:(NSString *)urlString
 {
     UIImageView *imageView = [self createImageViewWithFrame:frame placeholderImage:image];
-    imageView.layer.borderWidth = 1.0;
     if (!color)
     {
-        color = [UIColor grayColor];
+        imageView.layer.borderWidth = 0.0;
+        color = [UIColor clearColor];
     }
     imageView.layer.borderColor = [color CGColor];
     imageView.layer.cornerRadius = CGRectGetWidth(frame)/2;
