@@ -27,6 +27,10 @@
 #define HOUSE_LIST_HEIGHT       100.0
 //经纪人排行列表高度
 #define AGENT_LIST_HEIGHT       90.0
+//个人中心头像行高
+#define MINE_CENTER_ICON_HEIGHT 85.0
+//设置列表行高
+#define SETTING_LIST_HEIGHT     50.0
 
 #pragma mark 登录注册
 
@@ -56,5 +60,22 @@
 //租房
 #define RENTAL_HOUSE_TITLE      @"租房"
 
+#pragma mark 个人中心
+
+//个人中心
+#define MINE_CENTER_TITLE       @"个人中心"
+
+#pragma mark 收藏
+
+//收藏
+#define MINE_SAVE_TITLE         @"我的收藏"
+
+#pragma mark 设置
+//设置title
+#define SETTING_TITLE           @"设置"
+//意见反馈
+#define FEEDBACK_TITLE          @"意见反馈"
+//关于我们
+#define ABOUT_US_TITLE          @"关于我们"
 
 #endif

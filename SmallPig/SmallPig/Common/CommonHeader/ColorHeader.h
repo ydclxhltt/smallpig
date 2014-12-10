@@ -82,4 +82,11 @@
 #define AGENT_SCORE_COLOR           RGB(88.0,88.0,88.0)
 //经纪人积分分数颜色
 #define AGENT_NUMBER_COLOR          APP_MAIN_COLOR
+
+#pragma mark 个人中心
+//个人中心列表右边字体颜色
+#define MINE_CENTER_LIST_COLOR      RGB(132.0,132.0,132.0)
+//个人中心审核中提示字体颜色
+#define MINE_CENTER_LIST_TIP_COLOR  RGB(222.0,61.0,27.0)
+
 #endif
