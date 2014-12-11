@@ -33,7 +33,6 @@
 #define SETTING_LIST_HEIGHT     50.0
 
 #pragma mark 登录注册
-
 //登录
 #define LOGIN_TITLE             @"登录"
 //注册
@@ -43,14 +42,12 @@
 
 
 #pragma mark 首页
-
 //城市列表title
 #define CITY_LIST_TITLE         @"选择默认城市"
 //经纪人排名title
 #define AGENT_LIST_TITLE        @"本周经纪人"
 
 #pragma mark 房源
-
 //新房
 #define NEW_HOUSE_TITLE         @"新房"
 //新房建设中提示语
@@ -61,12 +58,10 @@
 #define RENTAL_HOUSE_TITLE      @"租房"
 
 #pragma mark 个人中心
-
 //个人中心
 #define MINE_CENTER_TITLE       @"个人中心"
 
 #pragma mark 收藏
-
 //收藏
 #define MINE_SAVE_TITLE         @"我的收藏"
 
@@ -77,5 +72,11 @@
 #define FEEDBACK_TITLE          @"意见反馈"
 //关于我们
 #define ABOUT_US_TITLE          @"关于我们"
+
+#pragma mark 经纪人
+//经纪人详情title
+#define AGENT_DETAIL_TITLE      @"经纪人详情"
+//经纪人平台title
+#define AGENT_CENTER_TITLE      @"经纪人平台"
 
 #endif

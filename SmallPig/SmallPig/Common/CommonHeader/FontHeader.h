@@ -48,6 +48,9 @@
 //经纪人积分分数字体
 #define AGENT_NUMBER_FONT           FONT(15.0)
 
+//经纪人详情列表字体（电话评价）
+#define AGENT_DETAIL_FONT           FONT(16.0)
+
 //个人中心列表右边文字字体大小
 #define MINE_CENTER_LIST_FONT       BOLD_FONT(14.0)
 
