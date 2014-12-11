@@ -220,11 +220,11 @@
     {
         case 0:
             viewController = [[HouseListViewController alloc]init];
-            ((HouseListViewController *)viewController).houseSouce = HouseScouceFromRental;
+            ((HouseListViewController *)viewController).houseSource = HouseScourceFromRental;
             break;
         case 1:
             viewController = [[HouseListViewController alloc]init];
-            ((HouseListViewController *)viewController).houseSouce = HouseScouceFromSecondHand;
+            ((HouseListViewController *)viewController).houseSource = HouseScourceFromSecondHand;
             break;
         case 2:
             viewController = [[NewHouseListViewController alloc]init];
