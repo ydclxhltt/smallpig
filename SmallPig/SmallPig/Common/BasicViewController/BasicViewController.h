@@ -20,9 +20,9 @@ typedef enum : NSUInteger
 
 typedef enum : NSUInteger
 {
-    HouseScouceFromRental,
-    HouseScouceFromSecondHand,
-} HouseScouce;
+    HouseScourceFromRental,
+    HouseScourceFromSecondHand,
+} HouseScource;
 
 #import <UIKit/UIKit.h>
 #import "CommonHeader.h"
