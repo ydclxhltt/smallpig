@@ -14,8 +14,13 @@
 
 @implementation AgentCenterViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    //设置title
+    self.title = AGENT_CENTER_TITLE;
+    //添加侧滑item
+    [self addPersonItem];
     // Do any additional setup after loading the view.
 }
 

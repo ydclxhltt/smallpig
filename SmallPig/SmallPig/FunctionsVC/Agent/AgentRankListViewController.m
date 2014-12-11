@@ -8,6 +8,7 @@
 
 #import "AgentRankListViewController.h"
 #import "AgentRankListCell.h"
+#import "AgentDetailViewController.h"
 
 @interface AgentRankListViewController ()
 
@@ -60,7 +61,7 @@
         cell.backgroundColor = WHITE_COLOR;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    [cell setCellDataWithRank:indexPath.row + 1 agentImageUrl:@"" agentName:@"你妹你大爷" agentScore:@"1111"];
+    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:@"" agentName:@"你妹你大爷" agentScore:@"1111"];
     return cell;
 }
 
@@ -68,6 +69,8 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    AgentDetailViewController *agentDetailViewController = [[AgentDetailViewController alloc] init];
+    [self.navigationController pushViewController:agentDetailViewController animated:YES];
 }
 
 
