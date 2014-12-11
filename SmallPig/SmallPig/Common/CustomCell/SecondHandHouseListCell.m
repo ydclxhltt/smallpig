@@ -1,34 +1,29 @@
 //
-//  HouseListCell.m
+//  SecondHandHouseListCell.m
 //  SmallPig
 //
-//  Created by chenlei on 14/11/26.
+//  Created by clei on 14/12/11.
 //  Copyright (c) 2014年 chenlei. All rights reserved.
 //
 
-
-#import "RentalHouseListCell.h"
+#import "SecondHandHouseListCell.h"
 #import "CreateViewTool.h"
 #import "CommonHeader.h"
 
-@interface RentalHouseListCell()
+@interface SecondHandHouseListCell()
 {
     float start_x;
     float start_y;
 }
-
 @property(nonatomic, retain) UIImageView *houseImageView;
 @property(nonatomic, retain) UILabel *titleLabel;
-
 @end
 
-@implementation RentalHouseListCell
+@implementation SecondHandHouseListCell
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     // Initialization code
 }
-
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -41,9 +36,7 @@
     return self;
 }
 
-
-#pragma mark 添加UI
-//添加UI
+#pragma mark 创建UI
 - (void)createUI
 {
     start_x = 15.0;
@@ -65,30 +58,47 @@
 //添加各种标签
 - (void)addLabels
 {
-    _titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, self.frame.size.width - start_x - 20.0, 35) textString:@"" textColor:HOUSE_LIST_TITLE_COLOR textFont:HOUSE_LIST_TITLE_FONT];
-    _titleLabel.numberOfLines = 2;
+    _titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, self.frame.size.width - start_x - 20.0, 20.0) textString:@"" textColor:HOUSE_LIST_TITLE_COLOR textFont:HOUSE_LIST_TITLE_FONT];
     [self.contentView addSubview:_titleLabel];
     
     start_y += _titleLabel.frame.size.height;
     
-    for (int j = 0; j < 2; j++)
+    for (int j = 0; j < 3; j++)
     {
         for (int i = 0; i < 3; i++)
         {
+            if (i == 2 && j == 1)
+            {
+                break;
+            }
             UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(start_x + (55 + 5) * i, start_y + j * (15 + 5), 55, 15) textString:@"" textColor:HOUSE_LIST_DETAIL_COLOR textFont:HOUSE_LIST_DETAIL_FONT];
             label.tag = i + 3 * j + 1;
-            if (label.tag == 6)
+            
+            if (i == 2 && j == 0)
             {
+                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, 15 * 2);
+                label.textAlignment = NSTextAlignmentRight;
                 label.textColor = HOUSE_LIST_PRICE_COLOR;
                 label.font = HOUSE_LIST_PRICE_FONT;
             }
+            
+            if (j == 2)
+            {
+                label.tag = i + 3 * j;
+                label.textAlignment = NSTextAlignmentCenter;
+                [CommonTool clipView:label withCornerRadius:5.0];
+                label.backgroundColor = APP_MAIN_COLOR;
+                label.textColor = WHITE_COLOR;
+            }
+            
             [self.contentView addSubview:label];
         }
     }
 }
 
+
 #pragma mark 设置数据
-- (void)setCellImageWithUrl:(NSString *)imageUrl titleText:(NSString *)title localText:(NSString *)local parkText:(NSString *)park timeText:(NSString *)time typeText:(NSString *)type sizeText:(NSString *)size priceText:(NSString *)price
+- (void)setCellImageWithUrl:(NSString *)imageUrl titleText:(NSString *)title localText:(NSString *)local parkText:(NSString *)park priceText:(NSString *)price typeText:(NSString *)type sizeText:(NSString *)size advantage1Text:(NSString *)advantage1 advantage2Text:(NSString *)advantage2 advantage3Text:(NSString *)advantage3
 {
     
     self.titleLabel.text = title;
@@ -98,8 +108,8 @@
         [self.houseImageView  setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"house_image_default.png"]];
     }
     
-    NSArray *array = @[local,park,time,type,size,price];
-
+    NSArray *array = @[local,park,price,type,size,advantage1,advantage2,advantage3];
+    
     for (int i = 0; i < [array count];i++)
     {
         UILabel *label = (UILabel *)[self.contentView viewWithTag:i + 1];
@@ -108,8 +118,8 @@
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
