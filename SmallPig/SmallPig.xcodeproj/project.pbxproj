@@ -42,12 +42,16 @@
 		771A29BC1A0A2A4600F99B1D /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 771A29951A0A2A4600F99B1D /* UIWebView+AFNetworking.m */; };
 		771A29BD1A0A2A4600F99B1D /* MainSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771A29981A0A2A4600F99B1D /* MainSideViewController.m */; };
 		771A29C01A0A2AC400F99B1D /* CreateViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 771A29BF1A0A2AC400F99B1D /* CreateViewTool.m */; };
+		7729C0081A392D1400FA8398 /* SecondHandHouseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7729C0071A392D1400FA8398 /* SecondHandHouseListCell.m */; };
+		7729C00B1A39479800FA8398 /* AgentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7729C00A1A39479800FA8398 /* AgentDetailViewController.m */; };
+		7729C00E1A39775900FA8398 /* agent_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7729C00D1A39775900FA8398 /* agent_icon_default.png */; };
+		7729C0111A397C0800FA8398 /* message_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7729C00F1A397C0800FA8398 /* message_icon.png */; };
+		7729C0121A397C0800FA8398 /* telephone_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7729C0101A397C0800FA8398 /* telephone_icon.png */; };
 		7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEEF1A3182D70012E775 /* newhouse_logo.png */; };
 		7767CEF31A318B140012E775 /* HouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767CEF21A318B140012E775 /* HouseListViewController.m */; };
 		7767CEF51A31AB700012E775 /* house_image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEF41A31AB700012E775 /* house_image_default.png */; };
 		777E02981A36F3E1008B9E38 /* AgentRankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */; };
 		777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E029A1A36F54D008B9E38 /* AgentRankListCell.m */; };
-		777E029D1A3702F1008B9E38 /* agent_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 777E029C1A3702F1008B9E38 /* agent_icon_default.png */; };
 		777E02A41A3707CE008B9E38 /* CityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E02A01A3707CE008B9E38 /* CityListViewController.m */; };
 		777E02A51A3707CE008B9E38 /* SearchHouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777E02A31A3707CE008B9E38 /* SearchHouseViewController.m */; };
 		778202C11A0B094F000BC548 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778202C01A0B094F000BC548 /* HomeViewController.m */; };
@@ -65,8 +69,6 @@
 		77C265D919F4DB5E0087BF76 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265D819F4DB5E0087BF76 /* XCTest.framework */; };
 		77C265DA19F4DB5E0087BF76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265BF19F4DB5E0087BF76 /* Foundation.framework */; };
 		77C265DB19F4DB5E0087BF76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C319F4DB5E0087BF76 /* UIKit.framework */; };
-		77C265E319F4DB5E0087BF76 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77C265E119F4DB5E0087BF76 /* InfoPlist.strings */; };
-		77C265E519F4DB5E0087BF76 /* SmallPigTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C265E419F4DB5E0087BF76 /* SmallPigTests.m */; };
 		77C401D61A37DE5600A9D883 /* AgentCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401D51A37DE5600A9D883 /* AgentCenterViewController.m */; };
 		77C401DA1A37EB1F00A9D883 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401D91A37EB1F00A9D883 /* SettingViewController.m */; };
 		77C401DD1A37EBA400A9D883 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401DC1A37EBA400A9D883 /* FeedbackViewController.m */; };
@@ -199,6 +201,13 @@
 		771A29981A0A2A4600F99B1D /* MainSideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSideViewController.m; sourceTree = "<group>"; };
 		771A29BE1A0A2AC400F99B1D /* CreateViewTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewTool.h; sourceTree = "<group>"; };
 		771A29BF1A0A2AC400F99B1D /* CreateViewTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewTool.m; sourceTree = "<group>"; };
+		7729C0061A392D1400FA8398 /* SecondHandHouseListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondHandHouseListCell.h; sourceTree = "<group>"; };
+		7729C0071A392D1400FA8398 /* SecondHandHouseListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondHandHouseListCell.m; sourceTree = "<group>"; };
+		7729C0091A39479800FA8398 /* AgentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDetailViewController.h; sourceTree = "<group>"; };
+		7729C00A1A39479800FA8398 /* AgentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentDetailViewController.m; sourceTree = "<group>"; };
+		7729C00D1A39775900FA8398 /* agent_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon_default.png; sourceTree = "<group>"; };
+		7729C00F1A397C0800FA8398 /* message_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_icon.png; sourceTree = "<group>"; };
+		7729C0101A397C0800FA8398 /* telephone_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = telephone_icon.png; sourceTree = "<group>"; };
 		7767CEEF1A3182D70012E775 /* newhouse_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newhouse_logo.png; sourceTree = "<group>"; };
 		7767CEF11A318B140012E775 /* HouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseListViewController.h; sourceTree = "<group>"; };
 		7767CEF21A318B140012E775 /* HouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListViewController.m; sourceTree = "<group>"; };
@@ -207,7 +216,6 @@
 		777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentRankListViewController.m; sourceTree = "<group>"; };
 		777E02991A36F54D008B9E38 /* AgentRankListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentRankListCell.h; sourceTree = "<group>"; };
 		777E029A1A36F54D008B9E38 /* AgentRankListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentRankListCell.m; sourceTree = "<group>"; };
-		777E029C1A3702F1008B9E38 /* agent_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon_default.png; sourceTree = "<group>"; };
 		777E029F1A3707CE008B9E38 /* CityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityListViewController.h; sourceTree = "<group>"; };
 		777E02A01A3707CE008B9E38 /* CityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityListViewController.m; sourceTree = "<group>"; };
 		777E02A21A3707CE008B9E38 /* SearchHouseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHouseViewController.h; sourceTree = "<group>"; };
@@ -236,9 +244,6 @@
 		77C265CF19F4DB5E0087BF76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		77C265D719F4DB5E0087BF76 /* SmallPigTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmallPigTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C265D819F4DB5E0087BF76 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		77C265E019F4DB5E0087BF76 /* SmallPigTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmallPigTests-Info.plist"; sourceTree = "<group>"; };
-		77C265E219F4DB5E0087BF76 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		77C265E419F4DB5E0087BF76 /* SmallPigTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmallPigTests.m; sourceTree = "<group>"; };
 		77C401D41A37DE5600A9D883 /* AgentCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCenterViewController.h; sourceTree = "<group>"; };
 		77C401D51A37DE5600A9D883 /* AgentCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentCenterViewController.m; sourceTree = "<group>"; };
 		77C401D81A37EB1F00A9D883 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -573,6 +578,16 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		7729C00C1A39775900FA8398 /* agent_images */ = {
+			isa = PBXGroup;
+			children = (
+				7729C00F1A397C0800FA8398 /* message_icon.png */,
+				7729C0101A397C0800FA8398 /* telephone_icon.png */,
+				7729C00D1A39775900FA8398 /* agent_icon_default.png */,
+			);
+			path = agent_images;
+			sourceTree = "<group>";
+		};
 		777E02951A36F3B6008B9E38 /* Agent */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +595,8 @@
 				777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */,
 				77C401D41A37DE5600A9D883 /* AgentCenterViewController.h */,
 				77C401D51A37DE5600A9D883 /* AgentCenterViewController.m */,
+				7729C0091A39479800FA8398 /* AgentDetailViewController.h */,
+				7729C00A1A39479800FA8398 /* AgentDetailViewController.m */,
 			);
 			path = Agent;
 			sourceTree = "<group>";
@@ -624,7 +641,6 @@
 			isa = PBXGroup;
 			children = (
 				77C265C519F4DB5E0087BF76 /* SmallPig */,
-				77C265DE19F4DB5E0087BF76 /* SmallPigTests */,
 				77C265BE19F4DB5E0087BF76 /* Frameworks */,
 				77C265BD19F4DB5E0087BF76 /* Products */,
 			);
@@ -674,24 +690,6 @@
 				77C265C819F4DB5E0087BF76 /* InfoPlist.strings */,
 				77C265CB19F4DB5E0087BF76 /* main.m */,
 				77C265CD19F4DB5E0087BF76 /* SmallPig-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		77C265DE19F4DB5E0087BF76 /* SmallPigTests */ = {
-			isa = PBXGroup;
-			children = (
-				77C265E419F4DB5E0087BF76 /* SmallPigTests.m */,
-				77C265DF19F4DB5E0087BF76 /* Supporting Files */,
-			);
-			path = SmallPigTests;
-			sourceTree = "<group>";
-		};
-		77C265DF19F4DB5E0087BF76 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				77C265E019F4DB5E0087BF76 /* SmallPigTests-Info.plist */,
-				77C265E119F4DB5E0087BF76 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -768,6 +766,7 @@
 		CE8D0E551A0E17270067AE64 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7729C00C1A39775900FA8398 /* agent_images */,
 				77C401E11A38389C00A9D883 /* mine_images */,
 				CE936BD31A2F43DC003F2268 /* home_images */,
 				CE128D0F1A0E708700DE07E5 /* leftside_images */,
@@ -780,7 +779,6 @@
 		CE936BD31A2F43DC003F2268 /* home_images */ = {
 			isa = PBXGroup;
 			children = (
-				777E029C1A3702F1008B9E38 /* agent_icon_default.png */,
 				7767CEF41A31AB700012E775 /* house_image_default.png */,
 				7767CEEF1A3182D70012E775 /* newhouse_logo.png */,
 				77E12FDB1A3044DF00D4B0AF /* home_arrow.png */,
@@ -801,6 +799,8 @@
 				CEDF46B81A25C87700246531 /* RentalHouseListCell.m */,
 				777E02991A36F54D008B9E38 /* AgentRankListCell.h */,
 				777E029A1A36F54D008B9E38 /* AgentRankListCell.m */,
+				7729C0061A392D1400FA8398 /* SecondHandHouseListCell.h */,
+				7729C0071A392D1400FA8398 /* SecondHandHouseListCell.m */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -883,6 +883,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7729C0121A397C0800FA8398 /* telephone_icon.png in Resources */,
 				CEDE25A11A2CB94400C331D4 /* nav_person_up.png in Resources */,
 				77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */,
 				CE936BD51A2F43DC003F2268 /* home_logo.png in Resources */,
@@ -899,6 +900,7 @@
 				CE936BD71A2F46AC003F2268 /* search_input.png in Resources */,
 				CEDE25A01A2CB94400C331D4 /* nav_person_down.png in Resources */,
 				CE936BDC1A2F6FA2003F2268 /* home_icon1.png in Resources */,
+				7729C0111A397C0800FA8398 /* message_icon.png in Resources */,
 				CEDE25B31A2CCFFE00C331D4 /* Images.xcassets in Resources */,
 				CEDE25B11A2CB9BF00C331D4 /* back_up.png in Resources */,
 				77E12FEA1A3056CA00D4B0AF /* menu_icon5.png in Resources */,
@@ -908,12 +910,12 @@
 				77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */,
 				CEDE25AA1A2CB94E00C331D4 /* btm_home2@2x.png in Resources */,
 				7767CEF51A31AB700012E775 /* house_image_default.png in Resources */,
-				777E029D1A3702F1008B9E38 /* agent_icon_default.png in Resources */,
 				CEDE25AC1A2CB94E00C331D4 /* btm_save2@2x.png in Resources */,
 				CEDE25A21A2CB94400C331D4 /* nav_search_down.png in Resources */,
 				CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */,
 				7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */,
 				77E12FE81A3056CA00D4B0AF /* menu_icon3.png in Resources */,
+				7729C00E1A39775900FA8398 /* agent_icon_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,7 +923,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77C265E319F4DB5E0087BF76 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,6 +942,7 @@
 				771A29AD1A0A2A4600F99B1D /* AFHTTPRequestOperationManager.m in Sources */,
 				777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */,
 				771A29AC1A0A2A4600F99B1D /* AFHTTPRequestOperation.m in Sources */,
+				7729C00B1A39479800FA8398 /* AgentDetailViewController.m in Sources */,
 				77C401DA1A37EB1F00A9D883 /* SettingViewController.m in Sources */,
 				771A29A01A0A2A4600F99B1D /* SDWebImageDownloader.m in Sources */,
 				CEDF46BF1A25C98600246531 /* RegisterViewController.m in Sources */,
@@ -981,6 +983,7 @@
 				771A29B61A0A2A4600F99B1D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				771A29A41A0A2A4600F99B1D /* UIButton+WebCache.m in Sources */,
 				771A29B71A0A2A4600F99B1D /* UIAlertView+AFNetworking.m in Sources */,
+				7729C0081A392D1400FA8398 /* SecondHandHouseListCell.m in Sources */,
 				CEA900B61A0A517C00C41507 /* LeftSidelViewController.m in Sources */,
 				771A29A31A0A2A4600F99B1D /* SDWebImagePrefetcher.m in Sources */,
 				771A299E1A0A2A4600F99B1D /* SDWebImageCompat.m in Sources */,
@@ -999,7 +1002,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77C265E519F4DB5E0087BF76 /* SmallPigTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1018,14 +1020,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				77C265C919F4DB5E0087BF76 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		77C265E119F4DB5E0087BF76 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				77C265E219F4DB5E0087BF76 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
