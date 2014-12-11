@@ -11,6 +11,7 @@
 #import "MineViewController.h"
 #import "SettingViewController.h"
 #import "MineSaveListViewController.h"
+#import "AgentCenterViewController.h"
 
 @interface LeftSidelViewController ()
 {
@@ -166,23 +167,25 @@
 {
     if ( index != selectdeIndex)
     {
-        UIViewController *view = nil;
+        UIViewController *viewController = nil;
         [nav popToRootViewControllerAnimated:NO];
         switch (index)
         {
             case 1:
-                view = [[MineViewController alloc] init];
+                viewController = [[MineViewController alloc] init];
                 break;
             case 2:
-                view = [[MineSaveListViewController alloc]init];
+                viewController = [[MineSaveListViewController alloc]init];
                 break;
             case 3:
-                view = [[SettingViewController alloc]init];
+                viewController = [[SettingViewController alloc]init];
                 break;
+            case 4:
+                viewController = [[AgentCenterViewController alloc]init];
             default:
                 break;
         }
-        [nav pushViewController:view animated:NO];
+        [nav pushViewController:viewController animated:NO];
     }
     //恢复正常位置
     [self resetMainView];
