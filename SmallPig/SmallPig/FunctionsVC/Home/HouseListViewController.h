@@ -9,5 +9,5 @@
 #import "BasicViewController.h"
 
 @interface HouseListViewController : BasicViewController
-@property(nonatomic, assign) HouseScouce houseSouce;
+@property(nonatomic, assign) HouseScource houseSource;
 @end

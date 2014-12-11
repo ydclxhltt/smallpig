@@ -8,6 +8,7 @@
 
 #import "HouseListViewController.h"
 #import "RentalHouseListCell.h"
+#import "SecondHandHouseListCell.h"
 
 @interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -48,11 +49,11 @@
 #pragma mark 设置title
 - (void)setCurrentTitle
 {
-    if (HouseScouceFromRental == self.houseSouce)
+    if (HouseScourceFromRental == self.houseSource)
     {
         self.title = RENTAL_HOUSE_TITLE;
     }
-    else if (HouseScouceFromSecondHand == self.houseSouce)
+    else if (HouseScourceFromSecondHand == self.houseSource)
     {
         self.title = SECOND_HAND_TITLE;
     }
@@ -114,21 +115,51 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"HouseListCellID";
-    RentalHouseListCell *cell = (RentalHouseListCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell)
+    static NSString *cellID1 = @"SecondHandListCellID";
+    
+    UITableViewCell *cell;
+    
+    if (HouseScourceFromSecondHand == self.houseSource)
     {
-        cell = [[RentalHouseListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        if (SCREEN_WIDTH > 320.0)
+        cell = (SecondHandHouseListCell *)[tableView dequeueReusableCellWithIdentifier:cellID1];
+        if (!cell)
         {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell = [[SecondHandHouseListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID1];
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            if (SCREEN_WIDTH > 320.0)
+            {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
         }
+        //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
+        [(SecondHandHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"白金假日" priceText:@"125万" typeText:@"两房一厅" sizeText:@"43平米" advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
+
     }
-    //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
-    [cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
+    else if (HouseScourceFromRental == self.houseSource)
+    {
+        cell = (RentalHouseListCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell)
+        {
+            cell = [[RentalHouseListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            if (SCREEN_WIDTH > 320.0)
+            {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+        }
+        //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
+        [(RentalHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
+    }
+    
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
