@@ -10,7 +10,7 @@
 
 @interface BasicViewController ()<UIGestureRecognizerDelegate>
 {
-
+    
 }
 @end
 
@@ -20,6 +20,7 @@
 {
     [super viewDidLoad];
     startHeight = 0.0;
+    scale = SCREEN_WIDTH/320.0;
     //设置页面背景
     self.view.backgroundColor = BASIC_VIEW_BG_COLOR;
     

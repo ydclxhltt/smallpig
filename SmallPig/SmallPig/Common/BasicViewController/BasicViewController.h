@@ -25,13 +25,12 @@ typedef enum : NSUInteger
 } HouseScource;
 
 #import <UIKit/UIKit.h>
-#import "CommonHeader.h"
-#import "CreateViewTool.h"
-#import "AppDelegate.h"
+ #import "AppDelegate.h"
 
 @interface BasicViewController : UIViewController
 {
     float startHeight;
+    float scale;
 }
 @property(nonatomic,retain) NSMutableArray *dataArray;
 @property(nonatomic,retain) UITableView *table;

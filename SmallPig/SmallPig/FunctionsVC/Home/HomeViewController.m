@@ -63,15 +63,15 @@
 - (void)addGreenView
 {
     //添加绿色背景视图
-    greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 220)];
+    greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 220 * scale)];
     greenView.backgroundColor = APP_MAIN_COLOR;
     [self.view addSubview:greenView];
     
     //添加logo视图
-    float city_w = 55.0;
-    float space_w = 5.0;
+    float city_w = 55.0 * scale;
+    float space_w = 5.0 * scale;
     UIImage *homeLogoImage = [UIImage imageNamed:@"home_logo.png"];
-    UIImageView *logoImageView = [CreateViewTool createImageViewWithFrame:CGRectMake((SCREEN_WIDTH - homeLogoImage.size.width/2 - city_w - space_w)/2, 40 + NAV_HEIGHT, homeLogoImage.size.width/2, homeLogoImage.size.height/2) placeholderImage:homeLogoImage];
+    UIImageView *logoImageView = [CreateViewTool createImageViewWithFrame:CGRectMake((SCREEN_WIDTH - homeLogoImage.size.width/2  * scale - city_w - space_w)/2, 40 + NAV_HEIGHT, homeLogoImage.size.width/2 * scale, homeLogoImage.size.height/2 * scale) placeholderImage:homeLogoImage];
     [greenView addSubview:logoImageView];
     
     //添加城市显示视图
@@ -81,7 +81,7 @@
     
     //添加搜索视图
     UIImage *searchBgImage = [UIImage imageNamed:@"search_input.png"];
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - searchBgImage.size.width/2)/2, greenView.frame.size.height - searchBgImage.size.height/2 - 15, searchBgImage.size.width/2, searchBgImage.size.height/2)];
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - searchBgImage.size.width/2  * scale)/2, greenView.frame.size.height - searchBgImage.size.height/2 * scale - 15 * scale, searchBgImage.size.width/2 * scale, searchBgImage.size.height/2 * scale)];
     searchBar.barStyle = UISearchBarStyleDefault;
     //searchBar.tintColor = WHITE_COLOR;
     searchBar.placeholder = @"搜索";
@@ -119,7 +119,7 @@
             textField.borderStyle = UITextBorderStyleNone;
             //textField.backgroundColor = [UIColor whiteColor];
             textField.background = [UIImage imageNamed:@"search_input.png"];
-            //[view setBackgroundColor:HOME_SEARCHBAR_BG_COLOR];
+            //[view setBackgroundColor:;];
         }
         if ([view isKindOfClass:[UIButton class]])
         {
@@ -182,7 +182,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return HOME_ICON_ROWHEIGHT;
+    return HOME_ICON_ROWHEIGHT  * scale;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

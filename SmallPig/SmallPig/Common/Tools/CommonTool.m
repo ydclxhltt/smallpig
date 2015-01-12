@@ -7,6 +7,7 @@
 //
 
 #import "CommonTool.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @implementation CommonTool
 
@@ -94,6 +95,7 @@
     else
     {
         theHeigth = number*titleBrandSizeForHeight.height;
+        textLabel.numberOfLines = number + 1;
     }
     return theHeigth;
 }
@@ -141,6 +143,62 @@
         return;
     view.layer.cornerRadius = radius;
     view.layer.masksToBounds = YES;
+}
+
+
++ (NSString *)md5:(NSString *)str
+{
+    const char *cStr = [str UTF8String];
+    unsigned char result[16];
+    CC_MD5(cStr, (CC_LONG)strlen(cStr), result); // This is the md5 call
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];
+}
+
+
+//创建提示alert
++ (void)addAlertTipWithMessage:(NSString *)message
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
+//時間轉換成字符串
++ (NSString *)getStringFromDate:(NSDate *)date formatterString:(NSString *)fmtString;
+{
+    NSDateFormatter *formatter = [[NSDateFormatter  alloc]init];
+    [formatter setDateFormat:fmtString];
+    return [formatter stringFromDate:date];
+}
+
+//URL编码
++ (NSString *)encodeToPercentEscapeString: (NSString *) input
+{
+    NSString *outputStr = (NSString *)
+    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                              (CFStringRef)input,
+                                                              NULL,
+                                                              (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                              kCFStringEncodingUTF8));
+    //自定义需要编码的特殊字符
+    return outputStr;
+}
+
+//URL解码
++ (NSString *)decodeFromPercentEscapeString: (NSString *) input
+{
+    NSMutableString *outputStr = [NSMutableString stringWithString:input];
+    [outputStr replaceOccurrencesOfString:@"+"
+                               withString:@" "
+                                  options:NSLiteralSearch
+                                    range:NSMakeRange(0, [outputStr length])];
+    
+    return [outputStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 

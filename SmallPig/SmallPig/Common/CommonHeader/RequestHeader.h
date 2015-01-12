@@ -21,4 +21,10 @@
 //登录请求
 #define LOGIN_URL               MAKE_REQUEST_URL(@"member_login_check")
 
+//分类列表
+#define SORT_LIST_URL           MAKE_REQUEST_URL(@"param/list.action")
+
+//二手房
+#define SECOND_LIST_URL         MAKE_REQUEST_URL(@"yjk/secondhandroom/list.action")
+
 #endif

@@ -74,4 +74,40 @@
  *  @pram radius 圆角大小
  */
 + (void)clipView:(UIView *)view withCornerRadius:(float)radius;
+
+
+/*
+ *  MD5
+ *
+ *  @pram   str    需要加密的字符串
+ *
+ *  @return        加密后的字符串
+ */
++ (NSString *)md5:(NSString *)str;
+
+/*
+ *  创建提示alert
+ *
+ *  @pram   message 提示文字
+ */
++ (void)addAlertTipWithMessage:(NSString *)message;
+
+/*
+ *  時間轉換為字符串
+ *
+ *  @pram   date   時間
+ *
+ *  @return        時間字符串
+ */
++ (NSString *)getStringFromDate:(NSDate *)date formatterString:(NSString *)fmtString;
+
+/*
+ *  URL编码
+ *
+ *  @pram   input  需要编码的字符串
+ *
+ *  @return        编码后的字符串
+ */
++ (NSString *)encodeToPercentEscapeString: (NSString *) input;
+
 @end

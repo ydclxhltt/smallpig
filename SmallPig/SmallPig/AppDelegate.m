@@ -69,16 +69,18 @@
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];
     //NSDictionary *dic = @{@"member.mobile":[@"12345678926" dataUsingEncoding:NSUTF8StringEncoding],@"member.password":[@"123456" dataUsingEncoding:NSUTF8StringEncoding]};
     //NSDictionary *dic = @{@"member.mobile":@"12345679926",@"member.password":@"123456"};
     //NSDictionary *dic = @{@"username":[@"15820790320" dataUsingEncoding:NSUTF8StringEncoding],@"password":[@"123456" dataUsingEncoding:NSUTF8StringEncoding],@"redirectURL":[@"/mobile/login/success.action" dataUsingEncoding:NSUTF8StringEncoding],@"failureURL":[@"/mobile/login/failure.action" dataUsingEncoding:NSUTF8StringEncoding]};
     NSLog(@"LOGIN_URL===%@",LOGIN_URL);
-    NSDictionary *dic = @{@"username":@"12345679926",@"password":@"123456"};
-    [manager POST:LOGIN_URL parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    NSString *redirextUrl = @"/mobile/login/failure.action";
+    NSString *failureUrl = @"/mobile/login/success.action";
+    //NSDictionary *dic = @{@"username":@"12345679926",@"password":@"123456",@"redirectURL":failureUrl,@"failureURL":redirextUrl};
+    //NSDictionary *dic = @{@"paramCategory":@"5"};
+    NSDictionary *dic = @{@"pageSize":@"2"};
+    [manager POST:SORT_LIST_URL parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
-        [formData appendPartWithFormData:[@"/mobile/login/success.action" dataUsingEncoding:NSUTF8StringEncoding] name:@"redirectURL"];
-        [formData appendPartWithFormData:[@"/mobile/login/failure.action" dataUsingEncoding:NSUTF8StringEncoding] name:@"failureURL"];
     }
     success:^(AFHTTPRequestOperation *operation, id responseDic)
     {
