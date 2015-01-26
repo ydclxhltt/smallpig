@@ -60,6 +60,12 @@
 		778202CA1A0B4974000BC548 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778202C91A0B4974000BC548 /* MineViewController.m */; };
 		7785CBAE1A303F790053FD09 /* DorpDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7785CBAC1A303F790053FD09 /* DorpDownListView.m */; };
 		7785CBB11A303FA30053FD09 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7785CBB01A303FA30053FD09 /* DropDownView.m */; };
+		77A4CD511A76166D00D26A25 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4A1A76166D00D26A25 /* error.png */; };
+		77A4CD521A76166D00D26A25 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4B1A76166D00D26A25 /* error@2x.png */; };
+		77A4CD531A76166D00D26A25 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4C1A76166D00D26A25 /* success.png */; };
+		77A4CD541A76166D00D26A25 /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4D1A76166D00D26A25 /* success@2x.png */; };
+		77A4CD551A76166D00D26A25 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4E1A76166D00D26A25 /* SVProgressHUD.bundle */; };
+		77A4CD561A76166D00D26A25 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A4CD501A76166D00D26A25 /* SVProgressHUD.m */; };
 		77C265C019F4DB5E0087BF76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265BF19F4DB5E0087BF76 /* Foundation.framework */; };
 		77C265C219F4DB5E0087BF76 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C119F4DB5E0087BF76 /* CoreGraphics.framework */; };
 		77C265C419F4DB5E0087BF76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C319F4DB5E0087BF76 /* UIKit.framework */; };
@@ -83,6 +89,7 @@
 		77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FE21A3056CA00D4B0AF /* menu_icon4.png */; };
 		77E12FEA1A3056CA00D4B0AF /* menu_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FE31A3056CA00D4B0AF /* menu_icon5.png */; };
 		77E12FED1A30663500D4B0AF /* NewHouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */; };
+		77F2BEDD1A761FA40030D162 /* SmallPigApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */; };
 		CE128CED1A0E5F8400DE07E5 /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */; };
 		CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE128CF41A0E69B600DE07E5 /* btm_wechat2@2x.png */; };
 		CE78DFE21A2467DB0093069A /* RequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78DFE11A2467DB0093069A /* RequestTool.m */; };
@@ -107,7 +114,7 @@
 		CEDE25B31A2CCFFE00C331D4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDE25B21A2CCFFE00C331D4 /* Images.xcassets */; };
 		CEDF46B91A25C87700246531 /* RentalHouseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46B81A25C87700246531 /* RentalHouseListCell.m */; };
 		CEDF46BC1A25C97200246531 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46BB1A25C97200246531 /* LoginViewController.m */; };
-		CEDF46BF1A25C98600246531 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46BE1A25C98600246531 /* RegisterViewController.m */; };
+		CEDF46BF1A25C98600246531 /* CheckCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46BE1A25C98600246531 /* CheckCodeViewController.m */; };
 		CEDF46C21A25C9A600246531 /* SetPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46C11A25C9A600246531 /* SetPassWordViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -232,6 +239,13 @@
 		7785CBAC1A303F790053FD09 /* DorpDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DorpDownListView.m; sourceTree = "<group>"; };
 		7785CBAF1A303FA30053FD09 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
 		7785CBB01A303FA30053FD09 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
+		77A4CD4A1A76166D00D26A25 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
+		77A4CD4B1A76166D00D26A25 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
+		77A4CD4C1A76166D00D26A25 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
+		77A4CD4D1A76166D00D26A25 /* success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@2x.png"; sourceTree = "<group>"; };
+		77A4CD4E1A76166D00D26A25 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		77A4CD4F1A76166D00D26A25 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		77A4CD501A76166D00D26A25 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		77C265BC19F4DB5E0087BF76 /* SmallPig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmallPig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C265BF19F4DB5E0087BF76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77C265C119F4DB5E0087BF76 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -264,6 +278,8 @@
 		77E12FE31A3056CA00D4B0AF /* menu_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon5.png; sourceTree = "<group>"; };
 		77E12FEB1A30663500D4B0AF /* NewHouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHouseListViewController.h; sourceTree = "<group>"; };
 		77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHouseListViewController.m; sourceTree = "<group>"; };
+		77F2BEDB1A761FA40030D162 /* SmallPigApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallPigApplication.h; sourceTree = "<group>"; };
+		77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallPigApplication.m; sourceTree = "<group>"; };
 		CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
 		CE128CF41A0E69B600DE07E5 /* btm_wechat2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btm_wechat2@2x.png"; sourceTree = "<group>"; };
 		CE2125A21A24285C000C9900 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -295,8 +311,8 @@
 		CEDF46B81A25C87700246531 /* RentalHouseListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RentalHouseListCell.m; sourceTree = "<group>"; };
 		CEDF46BA1A25C97200246531 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CEDF46BB1A25C97200246531 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		CEDF46BD1A25C98600246531 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		CEDF46BE1A25C98600246531 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		CEDF46BD1A25C98600246531 /* CheckCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCodeViewController.h; sourceTree = "<group>"; };
+		CEDF46BE1A25C98600246531 /* CheckCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCodeViewController.m; sourceTree = "<group>"; };
 		CEDF46C01A25C9A600246531 /* SetPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPassWordViewController.h; sourceTree = "<group>"; };
 		CEDF46C11A25C9A600246531 /* SetPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPassWordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -360,8 +376,8 @@
 			children = (
 				CEDF46BA1A25C97200246531 /* LoginViewController.h */,
 				CEDF46BB1A25C97200246531 /* LoginViewController.m */,
-				CEDF46BD1A25C98600246531 /* RegisterViewController.h */,
-				CEDF46BE1A25C98600246531 /* RegisterViewController.m */,
+				CEDF46BD1A25C98600246531 /* CheckCodeViewController.h */,
+				CEDF46BE1A25C98600246531 /* CheckCodeViewController.m */,
 				CEDF46C01A25C9A600246531 /* SetPassWordViewController.h */,
 				CEDF46C11A25C9A600246531 /* SetPassWordViewController.m */,
 			);
@@ -568,6 +584,8 @@
 		771A29991A0A2A4600F99B1D /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				77F2BEDB1A761FA40030D162 /* SmallPigApplication.h */,
+				77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */,
 				771A29BE1A0A2AC400F99B1D /* CreateViewTool.h */,
 				771A29BF1A0A2AC400F99B1D /* CreateViewTool.m */,
 				778202C51A0B0A08000BC548 /* CommonTool.h */,
@@ -635,6 +653,20 @@
 				7785CBB01A303FA30053FD09 /* DropDownView.m */,
 			);
 			path = DropDownView;
+			sourceTree = "<group>";
+		};
+		77A4CD491A76166D00D26A25 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				77A4CD4A1A76166D00D26A25 /* error.png */,
+				77A4CD4B1A76166D00D26A25 /* error@2x.png */,
+				77A4CD4C1A76166D00D26A25 /* success.png */,
+				77A4CD4D1A76166D00D26A25 /* success@2x.png */,
+				77A4CD4E1A76166D00D26A25 /* SVProgressHUD.bundle */,
+				77A4CD4F1A76166D00D26A25 /* SVProgressHUD.h */,
+				77A4CD501A76166D00D26A25 /* SVProgressHUD.m */,
+			);
+			path = LoadingView;
 			sourceTree = "<group>";
 		};
 		77C265B319F4DB5E0087BF76 = {
@@ -757,6 +789,7 @@
 		CE6FADFA1A257B1700BC75B4 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				77A4CD491A76166D00D26A25 /* LoadingView */,
 				7785CBAA1A303F790053FD09 /* DropDownList */,
 				7785CBAD1A303F790053FD09 /* DropDownView */,
 			);
@@ -883,11 +916,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77A4CD511A76166D00D26A25 /* error.png in Resources */,
 				7729C0121A397C0800FA8398 /* telephone_icon.png in Resources */,
+				77A4CD541A76166D00D26A25 /* success@2x.png in Resources */,
 				CEDE25A11A2CB94400C331D4 /* nav_person_up.png in Resources */,
 				77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */,
 				CE936BD51A2F43DC003F2268 /* home_logo.png in Resources */,
 				CEDE25A91A2CB94E00C331D4 /* btm_home1@2x.png in Resources */,
+				77A4CD521A76166D00D26A25 /* error@2x.png in Resources */,
 				77E12FE71A3056CA00D4B0AF /* menu_icon2.png in Resources */,
 				CE936BDD1A2F6FA2003F2268 /* home_icon2.png in Resources */,
 				CEDE25AB1A2CB94E00C331D4 /* btm_save1@2x.png in Resources */,
@@ -900,6 +936,7 @@
 				CE936BD71A2F46AC003F2268 /* search_input.png in Resources */,
 				CEDE25A01A2CB94400C331D4 /* nav_person_down.png in Resources */,
 				CE936BDC1A2F6FA2003F2268 /* home_icon1.png in Resources */,
+				77A4CD531A76166D00D26A25 /* success.png in Resources */,
 				7729C0111A397C0800FA8398 /* message_icon.png in Resources */,
 				CEDE25B31A2CCFFE00C331D4 /* Images.xcassets in Resources */,
 				CEDE25B11A2CB9BF00C331D4 /* back_up.png in Resources */,
@@ -908,6 +945,7 @@
 				CEDE25B01A2CB9BF00C331D4 /* back_down.png in Resources */,
 				77C401E51A3838C000A9D883 /* user_default.png in Resources */,
 				77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */,
+				77A4CD551A76166D00D26A25 /* SVProgressHUD.bundle in Resources */,
 				CEDE25AA1A2CB94E00C331D4 /* btm_home2@2x.png in Resources */,
 				7767CEF51A31AB700012E775 /* house_image_default.png in Resources */,
 				CEDE25AC1A2CB94E00C331D4 /* btm_save2@2x.png in Resources */,
@@ -945,7 +983,7 @@
 				7729C00B1A39479800FA8398 /* AgentDetailViewController.m in Sources */,
 				77C401DA1A37EB1F00A9D883 /* SettingViewController.m in Sources */,
 				771A29A01A0A2A4600F99B1D /* SDWebImageDownloader.m in Sources */,
-				CEDF46BF1A25C98600246531 /* RegisterViewController.m in Sources */,
+				CEDF46BF1A25C98600246531 /* CheckCodeViewController.m in Sources */,
 				771A29AA1A0A2A4600F99B1D /* THProgressView.m in Sources */,
 				771A299D1A0A2A4600F99B1D /* SDImageCache.m in Sources */,
 				77C265D019F4DB5E0087BF76 /* AppDelegate.m in Sources */,
@@ -992,9 +1030,11 @@
 				771A29AF1A0A2A4600F99B1D /* AFNetworkReachabilityManager.m in Sources */,
 				778202C41A0B0973000BC548 /* WeChatMainViewController.m in Sources */,
 				771A299B1A0A2A4600F99B1D /* NSData+GIF.m in Sources */,
+				77A4CD561A76166D00D26A25 /* SVProgressHUD.m in Sources */,
 				CEDF46BC1A25C97200246531 /* LoginViewController.m in Sources */,
 				778202C11A0B094F000BC548 /* HomeViewController.m in Sources */,
 				77E12FED1A30663500D4B0AF /* NewHouseListViewController.m in Sources */,
+				77F2BEDD1A761FA40030D162 /* SmallPigApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
