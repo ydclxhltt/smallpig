@@ -18,6 +18,9 @@
     #import "UIImageView+LK.h"
     #import "CommonHeader.h"
     #import "CreateViewTool.h"
+    #import "RequestTool.h"
+    #import "SVProgressHUD.h"
+    #import "SmallPigApplication.h"
 #endif
 
 //#define NSLog(...) {}

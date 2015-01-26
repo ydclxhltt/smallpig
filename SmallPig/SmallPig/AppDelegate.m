@@ -66,22 +66,43 @@
 
 - (void)test
 {
+    
+//    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:@"http://120.24.63.175:8080/horse-web/member_login_check"]];
+//    NSString *failureUrl= @"/mobile/login/failure.action";
+//    NSString *redirextUrl = @"/mobile/login/success.action";
+//    [request addPostValue:@"13590444724" forKey:@"username"];
+//    [request addPostValue:@"111111" forKey:@"password"];
+//    [request addPostValue:redirextUrl forKey:@"redirectURL"];
+//    [request addPostValue:failureUrl forKey:@"failureURL"];
+//    [request startSynchronous];
+//    
+//    NSLog(@"request====%@",request.responseString);
+    
+    
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];
-    //NSDictionary *dic = @{@"member.mobile":[@"12345678926" dataUsingEncoding:NSUTF8StringEncoding],@"member.password":[@"123456" dataUsingEncoding:NSUTF8StringEncoding]};
-    //NSDictionary *dic = @{@"member.mobile":@"12345679926",@"member.password":@"123456"};
-    //NSDictionary *dic = @{@"username":[@"15820790320" dataUsingEncoding:NSUTF8StringEncoding],@"password":[@"123456" dataUsingEncoding:NSUTF8StringEncoding],@"redirectURL":[@"/mobile/login/success.action" dataUsingEncoding:NSUTF8StringEncoding],@"failureURL":[@"/mobile/login/failure.action" dataUsingEncoding:NSUTF8StringEncoding]};
-    NSLog(@"LOGIN_URL===%@",LOGIN_URL);
-    NSString *redirextUrl = @"/mobile/login/failure.action";
-    NSString *failureUrl = @"/mobile/login/success.action";
-    //NSDictionary *dic = @{@"username":@"12345679926",@"password":@"123456",@"redirectURL":failureUrl,@"failureURL":redirextUrl};
+    NSString *failureUrl= @"/mobile/login/failure.action";
+    NSString *redirextUrl = @"/mobile/login/success.action";
+    NSDictionary *dic = @{@"username":@"18625353675",@"password":@"123456",@"redirectURL":redirextUrl,@"failureURL":failureUrl};
+    //NSString *string = @"username=18625353675&password=123456&redirectURL=/mobile/login/success.action&redirextUrl=/mobile/login/success.action";
+    NSLog(@"LOGIN_URL===%@===%@",LOGIN_URL,dic);
+    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:LOGIN_URL]];
+//    request.HTTPMethod = @"POST";
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    //[request setHTTPBody:[string dataUsingEncoding:NSUTF8StringEncoding]];
+//    [request setValue:@"18625353675" forKey:@"username"];
+//    [request setValue:@"123456" forKey:@"password"];
+//    [request setValue:redirextUrl forKey:@"redirectURL"];
+//    [request setValue:failureUrl forKey:@"failureURL"];
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseDic){NSLog(@"responseDic===%@",operation.responseString);} failure:^(AFHTTPRequestOperation *operation, NSError *error){ NSLog(@"error===%@",error);}];
+//    [operation start];
     //NSDictionary *dic = @{@"paramCategory":@"5"};
-    NSDictionary *dic = @{@"pageSize":@"2"};
-    [manager POST:SORT_LIST_URL parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
-    {
-    }
+    //NSDictionary *dic = @{@"pageSize":@"2"};
+    [manager POST:LOGIN_URL parameters:dic
     success:^(AFHTTPRequestOperation *operation, id responseDic)
     {
         NSLog(@"responseDic===%@",responseDic);
