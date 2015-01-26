@@ -11,7 +11,10 @@
 #import "SecondHandHouseListCell.h"
 
 @interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
-
+{
+    int currentPage;
+}
+@property (nonatomic, strong) NSString *urlString;
 @end
 
 @implementation HouseListViewController
@@ -27,8 +30,11 @@
     [self addSearchItem];
     //初始化视图
     [self createUI];
-    //test数据
+    //初始化数据
+    currentPage = 1;
     self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    //获取房屋数据
+    [self getData];
     // Do any additional setup after loading the view.
 }
 
@@ -72,16 +78,33 @@
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
     self.table.separatorColor = HOUSE_LIST_SEPLINE_COLOR;
     self.table .backgroundColor = [UIColor clearColor];
-    
 }
 
 
-
-#pragma mark  设置状态栏，导航条是否隐藏
-- (void)setNavBarAndStatusHidden:(BOOL)isHidden
+#pragma mark 获取数据
+- (void)getData
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:isHidden withAnimation:UIStatusBarAnimationSlide];
-    [self.navigationController setNavigationBarHidden:isHidden animated:YES];
+    if (HouseScourceFromSecondHand == self.houseSource)
+    {
+        self.urlString = SECOND_LIST_URL;
+    }
+    else if (HouseScourceFromRental == self.houseSource)
+    {
+        
+    }
+    __weak typeof(self) weakSelf = self;
+    NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:self.urlString requestParamas:requestDic requestType:RequestTypeAsynchronous
+    requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
+    {
+        NSLog(@"responseObj====%@",responseObj);
+        //weakSelf.dataArray = [];
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        NSLog(@"error====%@",error);
+    }];
 }
 
 #pragma marl ScrollViewDeleagte
@@ -89,7 +112,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     float offset_y = scrollView.contentOffset.y;
-    if (offset_y >= 64)
+    if (offset_y >= NAV_HEIGHT)
     {
         [self setNavBarAndStatusHidden:YES];
     }
@@ -99,6 +122,12 @@
     }
 }
 
+#pragma mark  设置状态栏，导航条是否隐藏
+- (void)setNavBarAndStatusHidden:(BOOL)isHidden
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:isHidden withAnimation:UIStatusBarAnimationSlide];
+    [self.navigationController setNavigationBarHidden:isHidden animated:YES];
+}
 
 #pragma mark  tableView委托方法
 

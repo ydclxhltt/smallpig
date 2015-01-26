@@ -9,7 +9,7 @@
 #import "SetPassWordViewController.h"
 
 @interface SetPassWordViewController ()
-
+@property(nonatomic, strong) NSString *password;
 @end
 
 @implementation SetPassWordViewController
@@ -75,10 +75,75 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark 提交按钮
 //提交按钮响应事件
 - (void)commitButtonPressed:(UIButton *)sender
 {
+    if ([self isCanCommit])
+    {
+        [self commitRequest];
+    }
+}
+
+- (void)dismissKeyBoard
+{
+    for (int i = 0; i < 2; i++)
+    {
+        UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        UITextField *textField = (UITextField *)[cell.contentView viewWithTag:i + 1];
+        [textField resignFirstResponder];
+    }
+}
+
+
+- (BOOL)isCanCommit
+{
+    NSString *newPassword = @"";
+    NSString *surePassword = @"";
+    for (int i = 0; i < 2; i++)
+    {
+        UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        UITextField *textField = (UITextField *)[cell.contentView viewWithTag:i + 1];
+        NSString *text = (textField.text) ? textField.text : @"";
+        if (i == 0)
+        {
+            newPassword = text;
+        }
+        else if (i == 1)
+        {
+            surePassword = text;
+        }
+    }
+    NSString *message = @"";
+    if (newPassword.length == 0 || surePassword.length == 0)
+    {
+        message = @"密码不能为空不能为空";
+    }
+
+    else if (newPassword.length < 6 || surePassword.length < 6)
+    {
+        message = @"密码不能小于6位";
+    }
+    else if (![newPassword isEqualToString:surePassword])
+    {
+        message = @"密码不一致";
+    }
     
+    if ([@"" isEqualToString:message])
+    {
+        return YES;
+    }
+    [CommonTool addAlertTipWithMessage:message];
+    return NO;
+}
+
+- (void)commitRequest
+{
+    NSString *urlString = @"";
+    if (self.pushType == PushTypeRegister)
+    {
+        u
+    }
 }
 
 
@@ -111,6 +176,7 @@
     
     UITextField *textField = [CreateViewTool createTextFieldWithFrame:CGRectMake(85, 0, self.table.frame.size.width - 85 - 10, cell.frame.size.height) textColor:[UIColor blackColor] textFont:LOGIN_REG_FONT placeholderText:@"请输入密码"];
     textField.tag = indexPath.row + 1;
+    textField.secureTextEntry = YES;
     textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [cell.contentView addSubview:textField];
     

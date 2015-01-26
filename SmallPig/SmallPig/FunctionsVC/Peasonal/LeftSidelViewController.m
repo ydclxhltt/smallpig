@@ -42,6 +42,24 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSDictionary *userInfoDic = [[SmallPigApplication shareInstance] userInfoDic];
+    if (userInfoDic)
+    {
+        NSString *imageUrl = @"http://112.95.225.12:8068/epg30/selfadaimg.do?path=/posticon/20140930/2846407/173142.jpg";
+        [personIconImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+        
+        NSString *nickName = userInfoDic[@"nickName"];
+        NSString *name = userInfoDic[@"name"];
+        name = (name) ? name : @"";
+        nickName = (nickName) ? nickName : @"";
+        NSString *userName = (nickName && ![@"" isEqualToString:nickName]) ? nickName : name;
+        personNameLabel.text = userName;
+    }
+}
+
+
 #pragma mark 创建UI
 - (void)createUI
 {
@@ -61,6 +79,7 @@
     personIconImageView = [[UIImageView alloc]initWithFrame:CGRectMake((LEFT_SIDE_WIDTH - width)/2, startHeight, width, height)];
     personIconImageView.userInteractionEnabled = YES;
     personIconImageView.image = personIconDefaultImage;
+    [CommonTool clipView:personIconImageView withCornerRadius:width/2];
     [self.view addSubview:personIconImageView];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(isNeedLogin)];

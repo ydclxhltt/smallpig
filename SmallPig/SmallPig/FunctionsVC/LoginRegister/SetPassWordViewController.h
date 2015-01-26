@@ -10,4 +10,6 @@
 
 @interface SetPassWordViewController : BasicViewController
 @property(nonatomic,assign) PushType pushType;
+@property(nonatomic,strong) NSString *phoneNumber;
+@property(nonatomic,strong) NSString *signText;
 @end

@@ -7,10 +7,11 @@
 //
 
 #import "LoginViewController.h"
-#import "RegisterViewController.h"
+#import "CheckCodeViewController.h"
 
 @interface LoginViewController ()
-
+@property (nonatomic, strong) NSString *userName;
+@property (nonatomic, strong) NSString *password;
 @end
 
 @implementation LoginViewController
@@ -27,6 +28,12 @@
     //关闭ScrollView默认偏移量
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self dismissKeyBoard];
 }
 
 #pragma mark 创建UI
@@ -75,11 +82,109 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:Nil];
 }
 
+#pragma mark 登录按钮
 //登录按钮事件
 - (void)loginButtonPressed:(UIButton *)button
 {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    for (int i = 0; i < 2; i++)
+    {
+        UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        UITextField *textField = (UITextField *)[cell.contentView viewWithTag:i + 1];
+        NSString *text = (textField.text) ? textField.text : @"";
+        if (i == 0)
+        {
+            self.userName = text;
+        }
+        else if (i == 1)
+        {
+            self.password = text;
+        }
+    }
+    
+    if ([self isCanCommit])
+    {
+        [self dismissKeyBoard];
+        [self loginRequest];
+    }
 }
+
+
+- (void)dismissKeyBoard
+{
+    for (int i = 0; i < 2; i++)
+    {
+        UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        UITextField *textField = (UITextField *)[cell.contentView viewWithTag:i + 1];
+        [textField resignFirstResponder];
+    }
+}
+
+
+- (BOOL)isCanCommit
+{
+    NSString *message = @"";
+    if ([@"" isEqualToString:self.userName])
+    {
+        message = @"用户名不能为空";
+    }
+    else if ([@"" isEqualToString:self.password])
+    {
+        message = @"密码不能为空";
+    }
+    else if (![CommonTool isEmailOrPhoneNumber:self.userName])
+    {
+        message = @"请输入正确的手机号";
+    }
+    else if (self.password.length < 6)
+    {
+        message = @"密码不能小于6位";
+    }
+    
+    if ([@"" isEqualToString:message])
+    {
+        return YES;
+    }
+    
+    [CommonTool addAlertTipWithMessage:message];
+    return NO;
+}
+
+
+- (void)loginRequest
+{
+    [SVProgressHUD showErrorWithStatus:@"正在登录..."];
+    RequestTool *request = [[RequestTool alloc] init];
+    NSString *failureUrl= @"/mobile/login/failure.action";
+    NSString *redirextUrl = @"/mobile/login/success.action";
+    NSDictionary *requestDic = @{@"username":self.userName,@"password":self.password,@"redirectURL":redirextUrl,@"failureURL":failureUrl};
+    [request requestWithUrl:LOGIN_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+    {
+        NSLog(@"login_responseDic===%@",responseDic);
+        
+        NSDictionary *dic = (NSDictionary *)responseDic;
+        if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+        {
+            [SmallPigApplication shareInstance].userInfoDic = dic[@"member"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+        }
+        else
+        {
+            NSString *message = dic[@"responseMessage"][@"message"];
+            message = (message) ? message : @"登录失败";
+            [SVProgressHUD showErrorWithStatus:message];
+        }
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        [SVProgressHUD showErrorWithStatus:@"登录失败"];
+        NSLog(@"login_error===%@",error);
+    }];
+    
+    
+}
+
 
 //注册按钮事件
 - (void)registerButtonPressed:(UIButton *)button
@@ -96,7 +201,7 @@
 #pragma mark 注册和找回密码界面跳转
 - (void)pushRegisterWithType:(PushType)type
 {
-    RegisterViewController *registerVC = [[RegisterViewController alloc]init];
+    CheckCodeViewController *registerVC = [[CheckCodeViewController alloc]init];
     registerVC.pushType = type;
     [self.navigationController pushViewController:registerVC animated:YES];
 }
@@ -139,10 +244,13 @@
     
     if (indexPath.row == 0)
     {
+        textField.keyboardType = UIKeyboardTypeNumberPad;
         label.text = @"用户名:";
     }
     else
     {
+        textField.secureTextEntry = YES;
+        textField.keyboardType = UIKeyboardTypeNamePhonePad;
         textField.placeholder = @"请输入密码";
         label.text = @"密码:";
     }

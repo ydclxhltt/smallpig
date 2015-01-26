@@ -8,6 +8,6 @@
 
 #import "BasicViewController.h"
 
-@interface RegisterViewController : BasicViewController
+@interface CheckCodeViewController : BasicViewController
 @property(nonatomic,assign) PushType pushType;
 @end
