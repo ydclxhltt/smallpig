@@ -19,6 +19,8 @@
 #define LEFT_SIDE_WIDTH         220.0
 //导航条高度
 #define NAV_HEIGHT              64.0
+//状态栏高度
+#define STATUS_HEIGHT           20.0
 //首页icon列表高度
 #define HOME_ICON_ROWHEIGHT     80.0
 //左侧列表高度
@@ -39,7 +41,10 @@
 #define REGISTER_TITLE          @"注册"
 //找回密码
 #define FIND_PSW_TITLE          @"找回密码"
-
+//修改密码
+#define CHANGE_PSW_TITLE        @"修改密码"
+//修改手机号
+#define CHANGE_MOBILE_TITLE     @"修改手机号"
 
 #pragma mark 首页
 //城市列表title

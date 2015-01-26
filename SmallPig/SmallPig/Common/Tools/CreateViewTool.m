@@ -79,6 +79,7 @@
     UITextField *textField = [[UITextField alloc]initWithFrame:frame];
     textField.backgroundColor = [UIColor clearColor];
     textField.textColor = color;
+    textField.text = @"";
     textField.font = font;
     textField.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;

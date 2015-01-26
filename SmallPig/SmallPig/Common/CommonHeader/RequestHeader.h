@@ -21,6 +21,12 @@
 //登录请求
 #define LOGIN_URL               MAKE_REQUEST_URL(@"member_login_check")
 
+//获取验证码
+#define GET_CHECK_URL           MAKE_REQUEST_URL(@"code/send.action")
+
+//校验验证码
+#define CHECK_CODE_URL          MAKE_REQUEST_URL(@"code/check.action")
+
 //分类列表
 #define SORT_LIST_URL           MAKE_REQUEST_URL(@"param/list.action")
 

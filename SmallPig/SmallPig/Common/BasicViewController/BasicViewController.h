@@ -16,6 +16,8 @@ typedef enum : NSUInteger
 {
     PushTypeRegister = 0 << 0,
     PushTypeFindPassWord = 1 << 1,
+    PushTypeChangeMobile = 2 << 1,
+    PushTypeChangePassword = 3 << 1,
 } PushType;
 
 typedef enum : NSUInteger
