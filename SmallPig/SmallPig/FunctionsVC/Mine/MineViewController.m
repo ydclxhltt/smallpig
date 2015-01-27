@@ -9,6 +9,7 @@
 #import "MineViewController.h"
 #import "CheckCodeViewController.h"
 #import "ChangePasswordViewController.h"
+#import "InformAgainstViewController.h"
 
 @interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>
 {
@@ -239,6 +240,20 @@
             CheckCodeViewController *checkCodeViewController = [[CheckCodeViewController alloc] init];
             checkCodeViewController.pushType = PushTypeChangeMobile;
             [self.navigationController pushViewController:checkCodeViewController animated:YES];
+        }
+    }
+    else if (indexPath.section == 2)
+    {
+        if (row == 0)
+        {
+            //举报管理
+            InformAgainstViewController *informAgainstViewController = [[InformAgainstViewController alloc] init];
+            [self.navigationController pushViewController:informAgainstViewController animated:YES];
+        }
+        else if (row == 1)
+        {
+            //升级经纪人
+            
         }
     }
 }
