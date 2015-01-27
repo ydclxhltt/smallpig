@@ -81,6 +81,7 @@
 		77C401E01A37EBB700A9D883 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401DF1A37EBB700A9D883 /* AboutUsViewController.m */; };
 		77C401E51A3838C000A9D883 /* user_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C401E41A3838C000A9D883 /* user_default.png */; };
 		77C401E81A38521200A9D883 /* MineSaveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401E71A38521200A9D883 /* MineSaveListViewController.m */; };
+		77DEA34A1A7798C0005E5348 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DEA3491A7798C0005E5348 /* ChangePasswordViewController.m */; };
 		77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDB1A3044DF00D4B0AF /* home_arrow.png */; };
 		77E12FE51A3056CA00D4B0AF /* person_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDE1A3056CA00D4B0AF /* person_icon_default.png */; };
 		77E12FE61A3056CA00D4B0AF /* menu_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDF1A3056CA00D4B0AF /* menu_icon1.png */; };
@@ -269,6 +270,8 @@
 		77C401E41A3838C000A9D883 /* user_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_default.png; sourceTree = "<group>"; };
 		77C401E61A38521200A9D883 /* MineSaveListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSaveListViewController.h; sourceTree = "<group>"; };
 		77C401E71A38521200A9D883 /* MineSaveListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSaveListViewController.m; sourceTree = "<group>"; };
+		77DEA3481A7798C0005E5348 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		77DEA3491A7798C0005E5348 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		77E12FDB1A3044DF00D4B0AF /* home_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_arrow.png; sourceTree = "<group>"; };
 		77E12FDE1A3056CA00D4B0AF /* person_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_icon_default.png; sourceTree = "<group>"; };
 		77E12FDF1A3056CA00D4B0AF /* menu_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon1.png; sourceTree = "<group>"; };
@@ -380,6 +383,8 @@
 				CEDF46BE1A25C98600246531 /* CheckCodeViewController.m */,
 				CEDF46C01A25C9A600246531 /* SetPassWordViewController.h */,
 				CEDF46C11A25C9A600246531 /* SetPassWordViewController.m */,
+				77DEA3481A7798C0005E5348 /* ChangePasswordViewController.h */,
+				77DEA3491A7798C0005E5348 /* ChangePasswordViewController.m */,
 			);
 			path = LoginRegister;
 			sourceTree = "<group>";
@@ -1034,6 +1039,7 @@
 				CEDF46BC1A25C97200246531 /* LoginViewController.m in Sources */,
 				778202C11A0B094F000BC548 /* HomeViewController.m in Sources */,
 				77E12FED1A30663500D4B0AF /* NewHouseListViewController.m in Sources */,
+				77DEA34A1A7798C0005E5348 /* ChangePasswordViewController.m in Sources */,
 				77F2BEDD1A761FA40030D162 /* SmallPigApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
