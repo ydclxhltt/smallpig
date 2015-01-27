@@ -24,4 +24,4 @@
     #import "AppDelegate.h"
 #endif
 
-//#define NSLog(...) {}
+#define NSLog(...) {}
