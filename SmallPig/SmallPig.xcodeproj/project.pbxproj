@@ -117,6 +117,7 @@
 		CEDF46BC1A25C97200246531 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46BB1A25C97200246531 /* LoginViewController.m */; };
 		CEDF46BF1A25C98600246531 /* CheckCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46BE1A25C98600246531 /* CheckCodeViewController.m */; };
 		CEDF46C21A25C9A600246531 /* SetPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDF46C11A25C9A600246531 /* SetPassWordViewController.m */; };
+		CEECB17B1A77D5F900BE406B /* InformAgainstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECB17A1A77D5F900BE406B /* InformAgainstViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -318,6 +319,8 @@
 		CEDF46BE1A25C98600246531 /* CheckCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCodeViewController.m; sourceTree = "<group>"; };
 		CEDF46C01A25C9A600246531 /* SetPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPassWordViewController.h; sourceTree = "<group>"; };
 		CEDF46C11A25C9A600246531 /* SetPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPassWordViewController.m; sourceTree = "<group>"; };
+		CEECB1791A77D5F900BE406B /* InformAgainstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformAgainstViewController.h; sourceTree = "<group>"; };
+		CEECB17A1A77D5F900BE406B /* InformAgainstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformAgainstViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +399,8 @@
 				778202C91A0B4974000BC548 /* MineViewController.m */,
 				77C401E61A38521200A9D883 /* MineSaveListViewController.h */,
 				77C401E71A38521200A9D883 /* MineSaveListViewController.m */,
+				CEECB1791A77D5F900BE406B /* InformAgainstViewController.h */,
+				CEECB17A1A77D5F900BE406B /* InformAgainstViewController.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1009,6 +1014,7 @@
 				77C401DD1A37EBA400A9D883 /* FeedbackViewController.m in Sources */,
 				CEDF46C21A25C9A600246531 /* SetPassWordViewController.m in Sources */,
 				771A29AE1A0A2A4600F99B1D /* AFHTTPSessionManager.m in Sources */,
+				CEECB17B1A77D5F900BE406B /* InformAgainstViewController.m in Sources */,
 				CEDF46B91A25C87700246531 /* RentalHouseListCell.m in Sources */,
 				CE78DFE21A2467DB0093069A /* RequestTool.m in Sources */,
 				7767CEF31A318B140012E775 /* HouseListViewController.m in Sources */,
