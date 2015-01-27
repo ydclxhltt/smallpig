@@ -21,6 +21,7 @@
     #import "RequestTool.h"
     #import "SVProgressHUD.h"
     #import "SmallPigApplication.h"
+    #import "AppDelegate.h"
 #endif
 
 //#define NSLog(...) {}
