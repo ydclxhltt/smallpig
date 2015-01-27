@@ -109,11 +109,16 @@
 }
 
 #pragma mark 头像点击
-- (void)isNeedLogin
+- (BOOL)isNeedLogin
 {
-    LoginViewController *loginVC = [[LoginViewController alloc]init];
-    UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
-    [self presentViewController:nav animated:YES completion:Nil];
+    if (![SmallPigApplication shareInstance].userInfoDic)
+    {
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:Nil];
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark  tableView委托方法
@@ -191,15 +196,21 @@
         switch (index)
         {
             case 1:
+                if ([self isNeedLogin])
+                    return;
                 viewController = [[MineViewController alloc] init];
                 break;
             case 2:
+                if ([self isNeedLogin])
+                    return;
                 viewController = [[MineSaveListViewController alloc]init];
                 break;
             case 3:
                 viewController = [[SettingViewController alloc]init];
                 break;
             case 4:
+                if ([self isNeedLogin])
+                    return;
                 viewController = [[AgentCenterViewController alloc]init];
             default:
                 break;

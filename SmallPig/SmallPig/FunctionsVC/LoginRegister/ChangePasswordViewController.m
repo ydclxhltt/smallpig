@@ -1,24 +1,25 @@
 //
-//  CheckCodeViewController.m
+//  ChangePasswordViewController.m
 //  SmallPig
 //
-//  Created by chenlei on 14/11/26.
-//  Copyright (c) 2014年 chenlei. All rights reserved.
+//  Created by clei on 15/1/27.
+//  Copyright (c) 2015年 chenlei. All rights reserved.
 //
 
-#import "SetPassWordViewController.h"
+#import "ChangePasswordViewController.h"
 
-@interface SetPassWordViewController ()
+@interface ChangePasswordViewController ()
+@property(nonatomic, strong) NSString *oldPassword;
 @property(nonatomic, strong) NSString *password;
 @end
 
-@implementation SetPassWordViewController
+@implementation ChangePasswordViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //设置title
-    [self setCurrentTitle];
+    self.title = @"修改密码";
     //增加back按钮
     [self addBackItem];
     //初始化UI视图
@@ -28,21 +29,7 @@
     // Do any additional setup after loading the view.
 }
 
-#pragma mark 设置title
-- (void)setCurrentTitle
-{
-    if (PushTypeRegister == self.pushType)
-    {
-        self.title = REGISTER_TITLE;
-    }
-    else if (PushTypeFindPassWord == self.pushType)
-    {
-        self.title = FIND_PSW_TITLE;
-    }
-}
-
-#pragma mark 创建UI
-//初始化视图
+#pragma mark 初始化UI
 - (void)createUI
 {
     [self addTableView];
@@ -52,7 +39,7 @@
 //添加表
 - (void)addTableView
 {
-    [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
+    [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 132) tableType:UITableViewStylePlain tableDelegate:self];
     self.table .backgroundColor = [UIColor whiteColor];
     self.table.scrollEnabled = NO;
 }
@@ -79,6 +66,7 @@
 //提交按钮响应事件
 - (void)commitButtonPressed:(UIButton *)sender
 {
+    [self dismissKeyBoard];
     if ([self isCanCommit])
     {
         [self commitRequest];
@@ -87,7 +75,7 @@
 
 - (void)dismissKeyBoard
 {
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
         UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         UITextField *textField = (UITextField *)[cell.contentView viewWithTag:i + 1];
@@ -98,29 +86,35 @@
 
 - (BOOL)isCanCommit
 {
+    NSString *oldPassword = @"";
     NSString *newPassword = @"";
     NSString *surePassword = @"";
-    for (int i = 0; i < 2; i++)
+   
+    for (int i = 0; i < 3; i++)
     {
         UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         UITextField *textField = (UITextField *)[cell.contentView viewWithTag:i + 1];
         NSString *text = (textField.text) ? textField.text : @"";
         if (i == 0)
         {
-            newPassword = text;
+            oldPassword = text;
         }
         else if (i == 1)
+        {
+            newPassword = text;
+        }
+        else if (i == 2)
         {
             surePassword = text;
         }
     }
     NSString *message = @"";
-    if (newPassword.length == 0 || surePassword.length == 0)
+    if (oldPassword.length == 0 || newPassword.length == 0 || surePassword.length == 0)
     {
         message = @"密码不能为空";
     }
-
-    else if (newPassword.length < 6 || surePassword.length < 6)
+    
+    else if (newPassword.length < 6 || surePassword.length < 6 || oldPassword.length < 6)
     {
         message = @"密码不能小于6位";
     }
@@ -131,6 +125,7 @@
     
     if ([@"" isEqualToString:message])
     {
+        self.oldPassword = oldPassword;
         self.password = newPassword;
         return YES;
     }
@@ -140,73 +135,32 @@
 
 - (void)commitRequest
 {
-    NSString *urlString = @"";
-    NSString *passwordKey = @"";
-    if (self.pushType == PushTypeRegister)
-    {
-        urlString = REGISTER_URL;
-        passwordKey = @"password";
-    }
-    else if (self.pushType == PushTypeFindPassWord)
-    {
-        urlString = FIND_PWD_URL;
-        passwordKey = @"newPassword";
-    }
-    
     [SVProgressHUD showWithStatus:@"正在保存..."];
-    __weak typeof(self) weakSelf = self;
-    NSDictionary *requestDic = @{@"mobile":self.phoneNumber,@"signText":self.signText,passwordKey:self.password};
+    NSDictionary *requestDic = @{@"id":[SmallPigApplication shareInstance].userInfoDic[@"id"],@"password":self.oldPassword,@"newPassword":self.password};
     RequestTool *request = [[RequestTool alloc] init];
-    [request requestWithUrl:urlString requestParamas:requestDic requestType:RequestTypeAsynchronous
+    [request requestWithUrl:CHANGE_PWD_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
-    {
-        NSLog(@"operation.request.HTTPBody===%@",[[NSString alloc] initWithData:operation.request.HTTPBody encoding:NSUTF8StringEncoding]);
-        NSLog(@"setpwd_responseDic===%@",responseDic);
-        NSDictionary *dic = (NSDictionary *)responseDic;
-        NSString *message = @"";
-        if ([dic[@"responseMessage"][@"success"] intValue] == 1)
-        {
-            if (weakSelf.pushType == PushTypeRegister)
-            {
-                message = @"注册成功";
-                [SmallPigApplication  shareInstance].userInfoDic = dic[@"model"];
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-            else if (weakSelf.pushType == PushTypeFindPassWord)
-            {
-                message = @"设置成功";
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            }
-            [SVProgressHUD showSuccessWithStatus:message];
-            
-        }
-        else
-        {
-            [weakSelf failTip];
-        }
-        
-    }
+     {
+         NSLog(@"changepwd_responseDic===%@",responseDic);
+         NSDictionary *dic = (NSDictionary *)responseDic;
+         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+         {
+            [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+         }
+         else
+         {
+             [SVProgressHUD showSuccessWithStatus:@"修改失败"];
+         }
+         
+     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
-        NSLog(@"error====%@",error);
-        [weakSelf failTip];
+        [SVProgressHUD showSuccessWithStatus:@"修改失败"];
+         NSLog(@"error====%@",error);
     }];
 }
 
-
-- (void)failTip
-{
-    NSString *message = @"";
-    if (self.pushType == PushTypeRegister)
-    {
-        message = @"注册失败";
-    }
-    else if (self.pushType == PushTypeFindPassWord)
-    {
-        message = @"设置失败";
-    }
-    [SVProgressHUD showErrorWithStatus:message];
-}
 
 
 #pragma mark  tableView委托方法
@@ -218,7 +172,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -245,11 +199,11 @@
     
     if (indexPath.row == 0)
     {
-        label.text = @"密码:";
-        if (PushTypeFindPassWord == self.pushType)
-        {
-            label.text = @"新密码:";
-        }
+        label.text = @"原始密码:";
+    }
+    else if (indexPath.row == 1)
+    {
+         label.text = @"新密码:";
     }
     else
     {
@@ -260,8 +214,8 @@
 }
 
 
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

@@ -81,6 +81,10 @@
 - (void)addButtons
 {
     UIButton *nextButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.table.frame.origin.x, self.table.frame.origin.y + self.table.frame.size.height + 25, self.table.frame.size.width, 40) buttonTitle:@"下一步" titleColor:WHITE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"nextButtonPressed:" tagDelegate:self];
+    if (self.pushType == PushTypeChangeMobile)
+    {
+        [nextButton setTitle:@"完成" forState:UIControlStateNormal];
+    }
     [CommonTool clipView:nextButton withCornerRadius:5.0];
     [self.view addSubview:nextButton];
 }
@@ -289,7 +293,41 @@
     else if (self.pushType == PushTypeChangeMobile)
     {
         //直接发起修改手机号接口
+        [self changeMobileRequest];
     }
+}
+
+#pragma mark 修改手机号接口
+- (void)changeMobileRequest
+{
+    [SVProgressHUD showWithStatus:@"正在保存..."];
+    NSDictionary *requestDic = @{@"id":[SmallPigApplication shareInstance].userInfoDic[@"id"],@"newMobile":self.phoneNumber,@"signText":self.signText};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:CHANGE_MOBILE_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+    requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+    {
+         NSLog(@"changePersonalResponse===%@",responseDic);
+         NSDictionary *dic = (NSDictionary *)responseDic;
+         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+         {
+             [SmallPigApplication shareInstance].userInfoDic = dic[@"model"];
+             [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+             [self.navigationController popViewControllerAnimated:YES];
+         }
+         else
+         {
+             NSString *message = dic[@"responseMessage"][@"message"];
+             message = (message) ? message : @"修改失败";
+             [SVProgressHUD showErrorWithStatus:message];
+         }
+         
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+         NSLog(@"error===%@",error);
+         [SVProgressHUD showErrorWithStatus:@"修改失败"];
+    }];
+
 }
 
 

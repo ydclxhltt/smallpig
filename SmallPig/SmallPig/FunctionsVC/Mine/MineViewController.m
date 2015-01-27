@@ -7,9 +7,14 @@
 //
 
 #import "MineViewController.h"
+#import "CheckCodeViewController.h"
+#import "ChangePasswordViewController.h"
 
-@interface MineViewController ()
-
+@interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>
+{
+    NSDictionary *userDic;
+}
+@property(nonatomic,strong) NSString *userName;
 @end
 
 @implementation MineViewController
@@ -33,12 +38,20 @@
     self.title = MINE_CENTER_TITLE;
     //添加侧滑item
     [self addPersonItem];
+    //初始化数据
+    userDic = [SmallPigApplication shareInstance].userInfoDic;
+    self.dataArray = (NSMutableArray *)@[@[@"头像",@"昵称",@"性别"],@[@"密码修改",@"绑定手机"],@[@"举报管理",@"升级为经纪人"],@[@"我的订单"],@[@"举报管理"]];
     //初始化UI
     [self createUI];
-    //初始化数据
-    self.dataArray = (NSMutableArray *)@[@[@"头像",@"昵称",@"性别"],@[@"密码修改",@"绑定手机"],@[@"举报管理",@"升级为经纪人"],@[@"我的订单"],@[@"举报管理"]];
     // Do any additional setup after loading the view.
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    userDic = [SmallPigApplication shareInstance].userInfoDic;
+    [self.table reloadData];
+}
+
 
 #pragma mark
 - (void)createUI
@@ -105,16 +118,48 @@
         {
             UIImage *defaultImage = [UIImage imageNamed:@"user_default.png"];
             UIImageView *userIconImageView = [CreateViewTool createRoundImageViewWithFrame:CGRectMake(SCREEN_WIDTH - defaultImage.size.width/2 - right_width, (MINE_CENTER_ICON_HEIGHT - defaultImage.size.height/2)/2, defaultImage.size.width/2, defaultImage.size.height/2) placeholderImage:defaultImage borderColor:nil imageUrl:@""];
+            //userDic.url
+            NSString *imageUrl = @"http://112.95.225.12:8068/epg30/selfadaimg.do?path=/posticon/20140930/2846407/173142.jpg";
+            [userIconImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
             [cell.contentView addSubview:userIconImageView];
         }
         else
         {
-            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 120 - right_width, 0 , 120, cell.frame.size.height) textString:@"你大爷" textColor:MINE_CENTER_LIST_COLOR textFont:MINE_CENTER_LIST_FONT];
+            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 120 - right_width, 0 , 120, cell.frame.size.height) textString:@"" textColor:MINE_CENTER_LIST_COLOR textFont:MINE_CENTER_LIST_FONT];
             label.textAlignment = NSTextAlignmentRight;
+            
+            NSString *nickName = userDic[@"nickName"];
+            NSString *name = userDic[@"name"];
+            name = (name) ? name : @"";
+            nickName = (nickName) ? nickName : @"";
+            self.userName = (nickName && ![@"" isEqualToString:nickName]) ? nickName : name;
+            label.text = self.userName;
             
             if (indexPath.row == 2)
             {
-                label.text = @"不男不女";
+                NSString *sexString = userDic[@"sex"];
+                NSLog(@"userDic[@\"sex\"]====%@",userDic[@"sex"]);
+                if (![sexString isKindOfClass:[NSNull class]])
+                {
+                    int sex = [sexString intValue];
+                    label.text = (sex == 1) ? @"男" : @"女";
+                    if (sex == 2)
+                    {
+                        label.text = @"女";
+                    }
+                    else if (sex == 1)
+                    {
+                        label.text = @"男";
+                    }
+                    else
+                    {
+                        label.text = @"不男不女";
+                    }
+                }
+                else
+                {
+                    label.text = @"不男不女";
+                }
             }
             [cell.contentView addSubview:label];
         }
@@ -124,9 +169,17 @@
     {
         if (indexPath.row == 1)
         {
-            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 120 - right_width, 0 , 120, cell.frame.size.height) textString:@"158****8888" textColor:MINE_CENTER_LIST_COLOR textFont:MINE_CENTER_LIST_FONT];
+            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 120 - right_width, 0 , 120, cell.frame.size.height) textString:@"" textColor:MINE_CENTER_LIST_COLOR textFont:MINE_CENTER_LIST_FONT];
             label.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:label];
+            
+            NSString *phoneNumber = userDic[@"mobile"];
+            phoneNumber = (phoneNumber) ? phoneNumber : @"";
+            if (phoneNumber.length == 11)
+            {
+                phoneNumber = [phoneNumber stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+            }
+            label.text = phoneNumber;
         }
     }
     
@@ -141,7 +194,7 @@
     }
     if (indexPath.section == 3)
     {
-        
+
     }
     
     NSArray *array = [self.dataArray objectAtIndex:indexPath.section];
@@ -154,6 +207,138 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    int row  = (int)indexPath.row;
+    if (indexPath.section == 0)
+    {
+        if (row == 0)
+        {
+            //头像
+        }
+        else if (row == 1)
+        {
+            //昵称
+            [self addChangeNickNameView];
+        }
+        else if (row == 2)
+        {
+            //性别
+            [self addChangeSexView];
+        }
+    }
+    else if (indexPath.section == 1)
+    {
+        if (row == 0)
+        {
+            //修改密码
+            ChangePasswordViewController *changePasswordViewController = [[ChangePasswordViewController alloc] init];
+            [self.navigationController pushViewController:changePasswordViewController animated:YES];
+        }
+        else if (row ==1)
+        {
+            //修改手机号
+            CheckCodeViewController *checkCodeViewController = [[CheckCodeViewController alloc] init];
+            checkCodeViewController.pushType = PushTypeChangeMobile;
+            [self.navigationController pushViewController:checkCodeViewController animated:YES];
+        }
+    }
+}
+
+
+#pragma mark 修改昵称
+- (void)addChangeNickNameView
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"修改昵称" message:nil delegate:self cancelButtonTitle:@"修改" otherButtonTitles:@"取消", nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alertView show];
+    
+    UITextField *textField = [alertView textFieldAtIndex:0];
+    textField.text = self.userName;
+    textField.placeholder = @"昵称不能为空";
+    [textField becomeFirstResponder];
+}
+
+#pragma mark 修改性别
+- (void)addChangeSexView
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"修改性别" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女", nil];
+    [actionSheet showInView:APP_DELEGATE.window];
+}
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([@"修改" isEqualToString:title])
+    {
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        if ([@"" isEqualToString:textField.text])
+        {
+            [self addChangeNickNameView];
+            return;
+        }
+        else
+        {
+            if ([self.userName isEqualToString:textField.text])
+            {
+                return;
+            }
+            else
+            {
+                [self changePersonalRequestWithNickname:textField.text userSex:@"-1"];
+            }
+        }
+    }
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != 2)
+    {
+        [self changePersonalRequestWithNickname:@"" userSex:[NSString stringWithFormat:@"%d",buttonIndex + 1]];
+    }
+}
+
+
+- (void)changePersonalRequestWithNickname:(NSString *)nickName userSex:(NSString *)sex
+{
+    NSDictionary *requestDic;
+    if ([sex intValue] == -1)
+    {
+        requestDic = @{@"nickName":nickName,@"id":userDic[@"id"]};
+    }
+    else
+    {
+        requestDic = @{@"sex":sex,@"id":userDic[@"id"]};
+    }
+    __weak typeof(self) weakSelf = self;
+    [SVProgressHUD showWithStatus:@"正在保存..."];
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:CHANGE_PERSONAL_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+    requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+    {
+        NSLog(@"changePersonalResponse===%@",responseDic);
+        NSDictionary *dic = (NSDictionary *)responseDic;
+        if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+        {
+            [SmallPigApplication shareInstance].userInfoDic = dic[@"model"];
+            userDic = [SmallPigApplication shareInstance].userInfoDic;
+            [weakSelf.table reloadData];
+            [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+        }
+        else
+        {
+            NSString *message = dic[@"responseMessage"][@"message"];
+            message = (message) ? message : @"修改失败";
+            [SVProgressHUD showErrorWithStatus:message];
+        }
+
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        NSLog(@"error===%@",error);
+        [SVProgressHUD showErrorWithStatus:@"修改失败"];
+    }];
 }
 
 
