@@ -24,5 +24,7 @@
 //系统版本
 #define DEVICE_SYSTEM_VERSION  [[[UIDevice currentDevice] systemVersion] floatValue]
 
+//scale
+#define CURRENT_SCALE SCREEN_WIDTH/320.0
 
 #endif

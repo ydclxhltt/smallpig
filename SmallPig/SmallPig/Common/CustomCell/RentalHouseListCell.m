@@ -60,22 +60,24 @@
     [self.contentView addSubview:_houseImageView];
     start_y = (HOUSE_LIST_HEIGHT - defaultImage.size.height/2)/2;
     start_x += _houseImageView.frame.size.width +15.0;
+    if(CURRENT_SCALE > 1)
+        start_y = (HOUSE_LIST_HEIGHT - defaultImage.size.height/2)/2 + 5;
 }
 
 //添加各种标签
 - (void)addLabels
 {
-    _titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, self.frame.size.width - start_x - 20.0, 35) textString:@"" textColor:HOUSE_LIST_TITLE_COLOR textFont:HOUSE_LIST_TITLE_FONT];
+    _titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, (self.frame.size.width - start_x - 20.0) * CURRENT_SCALE, 35) textString:@"" textColor:HOUSE_LIST_TITLE_COLOR textFont:HOUSE_LIST_TITLE_FONT];
     _titleLabel.numberOfLines = 2;
     [self.contentView addSubview:_titleLabel];
     
     start_y += _titleLabel.frame.size.height;
-    
+    float width = 55 * CURRENT_SCALE;
     for (int j = 0; j < 2; j++)
     {
         for (int i = 0; i < 3; i++)
         {
-            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(start_x + (55 + 5) * i, start_y + j * (15 + 5), 55, 15) textString:@"" textColor:HOUSE_LIST_DETAIL_COLOR textFont:HOUSE_LIST_DETAIL_FONT];
+            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(start_x + (width + 5) * i, start_y + j * (15 + 5), width, 15) textString:@"" textColor:HOUSE_LIST_DETAIL_COLOR textFont:HOUSE_LIST_DETAIL_FONT];
             label.tag = i + 3 * j + 1;
             if (label.tag == 6)
             {

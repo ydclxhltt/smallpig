@@ -125,7 +125,7 @@
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = frame;
-    if (imageName && [@"" isEqualToString:imageName])
+    if (imageName && ![@"" isEqualToString:imageName])
     {
         UIImage *image_up = [UIImage imageNamed:[imageName stringByAppendingString:@"_up.png"]];
         UIImage *image_down = [UIImage imageNamed:[imageName stringByAppendingString:@"_down.png"]];
