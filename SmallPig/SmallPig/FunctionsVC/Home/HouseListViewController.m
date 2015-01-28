@@ -9,6 +9,7 @@
 #import "HouseListViewController.h"
 #import "RentalHouseListCell.h"
 #import "SecondHandHouseListCell.h"
+#import "HouseDetailViewController.h"
 
 @interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
@@ -45,10 +46,10 @@
     [self setMainSideCanSwipe:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:YES];
-    [self setNavBarAndStatusHidden:NO];
+    [super viewDidDisappear:YES];
+    //[self setNavBarAndStatusHidden:NO];
 }
 
 
@@ -90,9 +91,9 @@
     }
     else if (HouseScourceFromRental == self.houseSource)
     {
-        
+        return;
     }
-    __weak typeof(self) weakSelf = self;
+    //__weak typeof(self) weakSelf = self;
     NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:self.urlString requestParamas:requestDic requestType:RequestTypeAsynchronous
@@ -109,18 +110,18 @@
 
 #pragma marl ScrollViewDeleagte
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    float offset_y = scrollView.contentOffset.y;
-    if (offset_y >= NAV_HEIGHT)
-    {
-        [self setNavBarAndStatusHidden:YES];
-    }
-    else if(offset_y <= 20)
-    {
-        [self setNavBarAndStatusHidden:NO];
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    float offset_y = scrollView.contentOffset.y;
+//    if (offset_y >= NAV_HEIGHT)
+//    {
+//        [self setNavBarAndStatusHidden:YES];
+//    }
+//    else if(offset_y <= 20)
+//    {
+//        [self setNavBarAndStatusHidden:NO];
+//    }
+//}
 
 #pragma mark  设置状态栏，导航条是否隐藏
 - (void)setNavBarAndStatusHidden:(BOOL)isHidden
@@ -162,7 +163,7 @@
             }
         }
         //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
-        [(SecondHandHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"白金假日" priceText:@"125万" typeText:@"两房一厅" sizeText:@"43平米" advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
+        [(SecondHandHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租业主直租急租" localText:@"宝安西乡" parkText:@"白金假日" priceText:@"125万" typeText:@"两房一厅" sizeText:@"43平米" advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
 
     }
     else if (HouseScourceFromRental == self.houseSource)
@@ -179,7 +180,7 @@
             }
         }
         //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
-        [(RentalHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
+        [(RentalHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
     }
     
     
@@ -189,6 +190,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    HouseDetailViewController *houseDetailViewController = [[HouseDetailViewController alloc] init];
+    houseDetailViewController.houseSource = self.houseSource;
+    [self.navigationController pushViewController:houseDetailViewController animated:YES];
 }
 
 
