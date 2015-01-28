@@ -22,6 +22,7 @@
     #import "SVProgressHUD.h"
     #import "SmallPigApplication.h"
     #import "AppDelegate.h"
+    #import "BasicViewController.h"
 #endif
 
 #define NSLog(...) {}

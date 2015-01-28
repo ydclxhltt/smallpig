@@ -60,6 +60,15 @@
 		778202CA1A0B4974000BC548 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778202C91A0B4974000BC548 /* MineViewController.m */; };
 		7785CBAE1A303F790053FD09 /* DorpDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7785CBAC1A303F790053FD09 /* DorpDownListView.m */; };
 		7785CBB11A303FA30053FD09 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7785CBB01A303FA30053FD09 /* DropDownView.m */; };
+		7792FF811A78C357007DFBF5 /* HouseDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792FF801A78C357007DFBF5 /* HouseDetailHeader.m */; };
+		7792FF891A78C9D3007DFBF5 /* detail_back_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF831A78C9D3007DFBF5 /* detail_back_down.png */; };
+		7792FF8A1A78C9D3007DFBF5 /* detail_back_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF841A78C9D3007DFBF5 /* detail_back_up.png */; };
+		7792FF8B1A78C9D3007DFBF5 /* detail_save_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF851A78C9D3007DFBF5 /* detail_save_down.png */; };
+		7792FF8C1A78C9D3007DFBF5 /* detail_save_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF861A78C9D3007DFBF5 /* detail_save_up.png */; };
+		7792FF8D1A78C9D3007DFBF5 /* detail_share_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF871A78C9D3007DFBF5 /* detail_share_down.png */; };
+		7792FF8E1A78C9D3007DFBF5 /* detail_share_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF881A78C9D3007DFBF5 /* detail_share_up.png */; };
+		7792FF951A78E245007DFBF5 /* HouseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792FF941A78E245007DFBF5 /* HouseDetailViewController.m */; };
+		7792FF981A78E317007DFBF5 /* HouseDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792FF971A78E317007DFBF5 /* HouseDetailInfoView.m */; };
 		77A4CD511A76166D00D26A25 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4A1A76166D00D26A25 /* error.png */; };
 		77A4CD521A76166D00D26A25 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4B1A76166D00D26A25 /* error@2x.png */; };
 		77A4CD531A76166D00D26A25 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4C1A76166D00D26A25 /* success.png */; };
@@ -241,6 +250,18 @@
 		7785CBAC1A303F790053FD09 /* DorpDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DorpDownListView.m; sourceTree = "<group>"; };
 		7785CBAF1A303FA30053FD09 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
 		7785CBB01A303FA30053FD09 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
+		7792FF7F1A78C357007DFBF5 /* HouseDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseDetailHeader.h; sourceTree = "<group>"; };
+		7792FF801A78C357007DFBF5 /* HouseDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDetailHeader.m; sourceTree = "<group>"; };
+		7792FF831A78C9D3007DFBF5 /* detail_back_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_back_down.png; sourceTree = "<group>"; };
+		7792FF841A78C9D3007DFBF5 /* detail_back_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_back_up.png; sourceTree = "<group>"; };
+		7792FF851A78C9D3007DFBF5 /* detail_save_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_save_down.png; sourceTree = "<group>"; };
+		7792FF861A78C9D3007DFBF5 /* detail_save_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_save_up.png; sourceTree = "<group>"; };
+		7792FF871A78C9D3007DFBF5 /* detail_share_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_share_down.png; sourceTree = "<group>"; };
+		7792FF881A78C9D3007DFBF5 /* detail_share_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_share_up.png; sourceTree = "<group>"; };
+		7792FF931A78E245007DFBF5 /* HouseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseDetailViewController.h; sourceTree = "<group>"; };
+		7792FF941A78E245007DFBF5 /* HouseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDetailViewController.m; sourceTree = "<group>"; };
+		7792FF961A78E317007DFBF5 /* HouseDetailInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseDetailInfoView.h; sourceTree = "<group>"; };
+		7792FF971A78E317007DFBF5 /* HouseDetailInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDetailInfoView.m; sourceTree = "<group>"; };
 		77A4CD4A1A76166D00D26A25 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
 		77A4CD4B1A76166D00D26A25 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
 		77A4CD4C1A76166D00D26A25 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
@@ -373,6 +394,8 @@
 				77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */,
 				7767CEF11A318B140012E775 /* HouseListViewController.h */,
 				7767CEF21A318B140012E775 /* HouseListViewController.m */,
+				7792FF931A78E245007DFBF5 /* HouseDetailViewController.h */,
+				7792FF941A78E245007DFBF5 /* HouseDetailViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -665,6 +688,30 @@
 			path = DropDownView;
 			sourceTree = "<group>";
 		};
+		7792FF7E1A78C306007DFBF5 /* House_Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7792FF7F1A78C357007DFBF5 /* HouseDetailHeader.h */,
+				7792FF801A78C357007DFBF5 /* HouseDetailHeader.m */,
+				7792FF961A78E317007DFBF5 /* HouseDetailInfoView.h */,
+				7792FF971A78E317007DFBF5 /* HouseDetailInfoView.m */,
+			);
+			path = House_Detail;
+			sourceTree = "<group>";
+		};
+		7792FF821A78C9D3007DFBF5 /* house_images */ = {
+			isa = PBXGroup;
+			children = (
+				7792FF831A78C9D3007DFBF5 /* detail_back_down.png */,
+				7792FF841A78C9D3007DFBF5 /* detail_back_up.png */,
+				7792FF851A78C9D3007DFBF5 /* detail_save_down.png */,
+				7792FF861A78C9D3007DFBF5 /* detail_save_up.png */,
+				7792FF871A78C9D3007DFBF5 /* detail_share_down.png */,
+				7792FF881A78C9D3007DFBF5 /* detail_share_up.png */,
+			);
+			path = house_images;
+			sourceTree = "<group>";
+		};
 		77A4CD491A76166D00D26A25 /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,6 +846,7 @@
 		CE6FADFA1A257B1700BC75B4 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				7792FF7E1A78C306007DFBF5 /* House_Detail */,
 				77A4CD491A76166D00D26A25 /* LoadingView */,
 				7785CBAA1A303F790053FD09 /* DropDownList */,
 				7785CBAD1A303F790053FD09 /* DropDownView */,
@@ -809,6 +857,7 @@
 		CE8D0E551A0E17270067AE64 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7792FF821A78C9D3007DFBF5 /* house_images */,
 				7729C00C1A39775900FA8398 /* agent_images */,
 				77C401E11A38389C00A9D883 /* mine_images */,
 				CE936BD31A2F43DC003F2268 /* home_images */,
@@ -926,8 +975,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7792FF891A78C9D3007DFBF5 /* detail_back_down.png in Resources */,
 				77A4CD511A76166D00D26A25 /* error.png in Resources */,
+				7792FF8C1A78C9D3007DFBF5 /* detail_save_up.png in Resources */,
 				7729C0121A397C0800FA8398 /* telephone_icon.png in Resources */,
+				7792FF8D1A78C9D3007DFBF5 /* detail_share_down.png in Resources */,
 				77A4CD541A76166D00D26A25 /* success@2x.png in Resources */,
 				CEDE25A11A2CB94400C331D4 /* nav_person_up.png in Resources */,
 				77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */,
@@ -953,14 +1005,17 @@
 				77E12FEA1A3056CA00D4B0AF /* menu_icon5.png in Resources */,
 				CE936BDE1A2F6FA2003F2268 /* home_icon3.png in Resources */,
 				CEDE25B01A2CB9BF00C331D4 /* back_down.png in Resources */,
+				7792FF8A1A78C9D3007DFBF5 /* detail_back_up.png in Resources */,
 				77C401E51A3838C000A9D883 /* user_default.png in Resources */,
 				77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */,
 				77A4CD551A76166D00D26A25 /* SVProgressHUD.bundle in Resources */,
 				CEDE25AA1A2CB94E00C331D4 /* btm_home2@2x.png in Resources */,
+				7792FF8E1A78C9D3007DFBF5 /* detail_share_up.png in Resources */,
 				7767CEF51A31AB700012E775 /* house_image_default.png in Resources */,
 				CEDE25AC1A2CB94E00C331D4 /* btm_save2@2x.png in Resources */,
 				CEDE25A21A2CB94400C331D4 /* nav_search_down.png in Resources */,
 				CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */,
+				7792FF8B1A78C9D3007DFBF5 /* detail_save_down.png in Resources */,
 				7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */,
 				77E12FE81A3056CA00D4B0AF /* menu_icon3.png in Resources */,
 				7729C00E1A39775900FA8398 /* agent_icon_default.png in Resources */,
@@ -981,6 +1036,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7792FF951A78E245007DFBF5 /* HouseDetailViewController.m in Sources */,
 				777E02981A36F3E1008B9E38 /* AgentRankListViewController.m in Sources */,
 				771A299C1A0A2A4600F99B1D /* NSData+ImageContentType.m in Sources */,
 				771A29A21A0A2A4600F99B1D /* SDWebImageManager.m in Sources */,
@@ -988,11 +1044,13 @@
 				77C401E01A37EBB700A9D883 /* AboutUsViewController.m in Sources */,
 				778202C71A0B0A08000BC548 /* CommonTool.m in Sources */,
 				771A29AD1A0A2A4600F99B1D /* AFHTTPRequestOperationManager.m in Sources */,
+				7792FF811A78C357007DFBF5 /* HouseDetailHeader.m in Sources */,
 				777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */,
 				771A29AC1A0A2A4600F99B1D /* AFHTTPRequestOperation.m in Sources */,
 				7729C00B1A39479800FA8398 /* AgentDetailViewController.m in Sources */,
 				77C401DA1A37EB1F00A9D883 /* SettingViewController.m in Sources */,
 				771A29A01A0A2A4600F99B1D /* SDWebImageDownloader.m in Sources */,
+				7792FF981A78E317007DFBF5 /* HouseDetailInfoView.m in Sources */,
 				CEDF46BF1A25C98600246531 /* CheckCodeViewController.m in Sources */,
 				771A29AA1A0A2A4600F99B1D /* THProgressView.m in Sources */,
 				771A299D1A0A2A4600F99B1D /* SDImageCache.m in Sources */,
