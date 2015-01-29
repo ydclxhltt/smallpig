@@ -66,6 +66,10 @@
 #define HOUSE_LIST_DETAIL_COLOR     HOME_LIST_DETAIL_COLOR
 //列表价格颜色
 #define HOUSE_LIST_PRICE_COLOR      RGB(220.0,53.0,8.0)
+//详情title
+#define HOUSE_DETAIL_TITLE_COLOR    RGB(191.0,192.0,191.0)
+//详情Text
+#define HOUSE_DETAIL_TEXT_COLOR    RGB(93.0,93.0,93.0)
 
 #pragma mark 经纪人排行
 //经纪人排行排名Label颜色
