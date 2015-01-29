@@ -201,5 +201,14 @@
     return [outputStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
++ (void)makeString:(NSString *)textString toAttributeString:(NSMutableAttributedString *)attributedString  withString:(NSString *)string withTextColor:(UIColor *)textColor withTextFont:(UIFont *)textFont
+{
+    [attributedString addAttribute:NSFontAttributeName
+                             value:textFont
+                             range:[textString rangeOfString:string]];
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:textColor
+                             range:[textString rangeOfString:string]];
+}
 
 @end

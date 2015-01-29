@@ -110,4 +110,7 @@
  */
 + (NSString *)encodeToPercentEscapeString: (NSString *) input;
 
+
++ (void)makeString:(NSString *)textString toAttributeString:(NSMutableAttributedString *)attributedString  withString:(NSString *)string withTextColor:(UIColor *)textColor withTextFont:(UIFont *)textFont;
+
 @end
