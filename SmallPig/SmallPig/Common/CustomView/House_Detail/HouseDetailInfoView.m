@@ -83,13 +83,13 @@
         for (int j = 0; j < m; j++)
         {
             float x = j * width + space_x;
-            float y = i * height + space_y;
+            float y = i * (height + space_y) + space_y;
             int index = j + i * m + 1;
             if(self.houseType == HouseScourceFromRental && i > 0)
             {
                 index = j + i * m;
             }
-            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(x, y, width, height) textString:self.titleArray[index - 1] textColor:HOUSE_LIST_DETAIL_COLOR textFont:FONT(14.0)];
+            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(x, y, width, height) textString:self.titleArray[index - 1] textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(14.0)];
             label.tag = index;
             [self addSubview:label];
         }
@@ -112,9 +112,22 @@
     for (int i = 0; i < [self.dataArray count]; i++)
     {
         UILabel *label = (UILabel *)[self viewWithTag:i + 1];
-        label.text = [self.titleArray[i] stringByAppendingString:self.dataArray[i]];
+        NSString *textString = [self.titleArray[i] stringByAppendingString:self.dataArray[i]];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:textString];
+        if (i == 0)
+        {
+            [CommonTool makeString:textString toAttributeString:attributedString withString:housePrice withTextColor:HOUSE_LIST_PRICE_COLOR withTextFont:FONT(15.0)];
+            [CommonTool makeString:textString toAttributeString:attributedString withString:priceInfo withTextColor:HOUSE_DETAIL_TITLE_COLOR withTextFont:FONT(14.0)];
+        }
+        else
+        {
+            [CommonTool makeString:textString toAttributeString:attributedString withString:self.dataArray[i] withTextColor:HOUSE_DETAIL_TEXT_COLOR withTextFont:FONT(14.0)];
+        }
+        label.attributedText = attributedString;
     }
 }
+
+
 
 
 @end
