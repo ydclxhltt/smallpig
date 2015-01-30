@@ -23,6 +23,7 @@
     #import "SmallPigApplication.h"
     #import "AppDelegate.h"
     #import "BasicViewController.h"
+    #import "CookiesTool.h"
 #endif
 
-#define NSLog(...) {}
+//#define NSLog(...) {}

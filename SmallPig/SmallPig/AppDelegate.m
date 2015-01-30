@@ -47,6 +47,8 @@
     //[[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],NSForegroundColorAttributeName : RGB(190.0, 190.0, 190.0)} forState:UIControlStateNormal];
     //[[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12],NSForegroundColorAttributeName : APP_MAIN_COLOR} forState:UIControlStateSelected];
     
+
+    
     
     //注册远程通知
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
