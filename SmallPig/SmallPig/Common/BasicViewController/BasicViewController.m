@@ -10,7 +10,7 @@
 
 @interface BasicViewController ()<UIGestureRecognizerDelegate>
 {
-    
+    UIImageView *titleView;
 }
 @end
 
@@ -133,6 +133,45 @@
 - (void)searchButtonPressed:(UIButton *)sender
 {
     
+}
+
+
+#pragma mark 设置titleView
+- (void)setTitleViewWithArray:(NSArray *)array
+{
+    if (!array || [array count] == 0)
+        return;
+    
+    float width = 150.0 * scale;
+    float height = 30.0;
+    titleView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, width, height) placeholderImage:nil];
+    titleView.clipsToBounds = YES;
+    titleView.userInteractionEnabled = YES;
+    [CommonTool setViewLayer:titleView withLayerColor:[UIColor whiteColor] bordWidth:1.0];
+    [CommonTool clipView:titleView withCornerRadius:5.0];
+    self.navigationItem.titleView = titleView;
+    
+    
+    for (int i = 0; i<[array count]; i++)
+    {
+        UIButton *button = [CreateViewTool  createButtonWithFrame:CGRectMake(i * width/2, 0, width/2, titleView.frame.size.height) buttonTitle:array[i] titleColor:[UIColor whiteColor] normalBackgroundColor:[UIColor clearColor] highlightedBackgroundColor:[UIColor clearColor] selectorName:@"buttonPressed:" tagDelegate:self];
+        button.tag = i + 1;
+        button.titleLabel.font = FONT(15.0);
+        [button setBackgroundImage:[CommonTool imageWithColor:[UIColor whiteColor]] forState:UIControlStateSelected];
+        [button setTitleColor:APP_MAIN_COLOR forState:UIControlStateSelected];
+        button.selected = (i == 0) ? YES : NO;
+        [titleView addSubview:button];
+    }
+    
+}
+
+- (void)buttonPressed:(UIButton *)sender
+{
+    sender.selected = YES;
+    for (UIButton *button in titleView.subviews)
+    {
+        button.selected = (button.tag == sender.tag) ? YES : NO;
+    }
 }
 
 #pragma mark 添加表

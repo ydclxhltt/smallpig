@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 chenlei. All rights reserved.
 //
 
-#import "BasicViewController.h"
+#import "HouseListViewController.h"
 
-@interface MineSaveListViewController : BasicViewController
+@interface MineSaveListViewController : HouseListViewController
 
 @end

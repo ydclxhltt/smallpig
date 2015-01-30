@@ -161,7 +161,7 @@
     [request requestWithUrl:LOGIN_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
     {
         NSLog(@"login_responseDic===%@",responseDic);
-        
+        NSLog(@"allHeaderFields===%@",operation.response.allHeaderFields);
         NSDictionary *dic = (NSDictionary *)responseDic;
         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
         {
@@ -175,6 +175,7 @@
             message = (message) ? message : @"登录失败";
             [SVProgressHUD showErrorWithStatus:message];
         }
+        [CookiesTool setCookiesWithUrl:LOGIN_URL];
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
@@ -245,12 +246,14 @@
     if (indexPath.row == 0)
     {
         textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.text = @"15820790320";
         label.text = @"用户名:";
     }
     else
     {
         textField.secureTextEntry = YES;
         textField.keyboardType = UIKeyboardTypeNamePhonePad;
+        textField.text = @"12344321";
         textField.placeholder = @"请输入密码";
         label.text = @"密码:";
     }

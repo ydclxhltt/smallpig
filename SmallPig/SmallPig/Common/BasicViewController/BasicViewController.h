@@ -71,6 +71,17 @@ typedef enum : NSUInteger
 - (void)addSearchItem;
 
 /*
+ *  设置titleView
+ *  @pram array 选项卡title数组
+ */
+- (void)setTitleViewWithArray:(NSArray *)array;
+
+/*
+ *  选项卡相应事件
+ */
+- (void)buttonPressed:(UIButton *)sender;
+
+/*
  *  添加表视图，如：tableView
  *
  *  @pram frame     tableView的frame

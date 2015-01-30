@@ -45,4 +45,7 @@
 //二手房
 #define SECOND_LIST_URL         MAKE_REQUEST_URL(@"yjk/secondhandroom/list.action")
 
+//备忘录列表
+#define MEMO_LIST_URL           MAKE_REQUEST_URL(@"yjk/remind/list.action")
+
 #endif

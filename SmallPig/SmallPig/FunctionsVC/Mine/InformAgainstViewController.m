@@ -9,9 +9,7 @@
 #import "InformAgainstViewController.h"
 
 @interface InformAgainstViewController()<UITableViewDataSource,UITableViewDelegate>
-{
-    UIImageView *titleView;
-}
+
 @property (nonatomic, strong) NSArray *titleArray;
 @end
 
@@ -21,7 +19,7 @@
 {
     [super viewDidLoad];
     //设置title
-    [self setTitleView];
+    [self setTitleViewWithArray:@[@"我的举报",@"举报我的"]];
     //添加返回item
     [self addBackItem];
     //初始化数据
@@ -32,33 +30,6 @@
 
 }
 
-#pragma mark 设置titleView
-- (void)setTitleView
-{
-    
-    float width = 150.0 * scale;
-    float height = 30.0;
-    titleView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, width, height) placeholderImage:nil];
-    titleView.clipsToBounds = YES;
-    titleView.userInteractionEnabled = YES;
-    [CommonTool setViewLayer:titleView withLayerColor:[UIColor whiteColor] bordWidth:1.0];
-    [CommonTool clipView:titleView withCornerRadius:5.0];
-    self.navigationItem.titleView = titleView;
-    
-    NSArray *array = @[@"我的举报",@"举报我的"];
-    
-    for (int i = 0; i<[array count]; i++)
-    {
-        UIButton *button = [CreateViewTool  createButtonWithFrame:CGRectMake(i * width/2, 0, width/2, titleView.frame.size.height) buttonTitle:array[i] titleColor:[UIColor whiteColor] normalBackgroundColor:[UIColor clearColor] highlightedBackgroundColor:[UIColor clearColor] selectorName:@"buttonPressed:" tagDelegate:self];
-        button.tag = i + 1;
-        button.titleLabel.font = FONT(15.0);
-        [button setBackgroundImage:[CommonTool imageWithColor:[UIColor whiteColor]] forState:UIControlStateSelected];
-        [button setTitleColor:APP_MAIN_COLOR forState:UIControlStateSelected];
-        button.selected = (i == 0) ? YES : NO;
-        [titleView addSubview:button];
-    }
-    
-}
 
 #pragma mark 初始化UI
 - (void)createUI
@@ -75,13 +46,8 @@
 #pragma mark 按钮事件
 - (void)buttonPressed:(UIButton *)sender
 {
-    sender.selected = YES;
-    for (UIButton *button in titleView.subviews)
-    {
-        button.selected = (button.tag == sender.tag) ? YES : NO;
-    }
-    [self.table reloadData
-     ];
+    [super buttonPressed:sender];
+    [self.table reloadData];
 }
 
 #pragma mark tableViewDelegate

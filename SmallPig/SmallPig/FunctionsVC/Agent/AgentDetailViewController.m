@@ -12,6 +12,7 @@
 #import "RentalHouseListCell.h"
 #import "SecondHandHouseListCell.h"
 
+
 @interface AgentDetailViewController ()
 {
     UIImageView *headerImageView;
@@ -248,6 +249,7 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 

@@ -34,6 +34,15 @@
 //设置列表行高
 #define SETTING_LIST_HEIGHT     50.0
 
+
+#pragma mark loading
+//成功
+#define LOADING_SUCESS          @"加载成功"
+//失败
+#define LOADING_FAILURE         @"加载失败"
+//加载中
+#define LOADING_DEFAULT         @"加载失败"
+
 #pragma mark 登录注册
 //登录
 #define LOGIN_TITLE             @"登录"

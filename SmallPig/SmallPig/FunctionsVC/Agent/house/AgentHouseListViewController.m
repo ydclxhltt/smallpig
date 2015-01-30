@@ -1,32 +1,27 @@
 //
-//  MineSaveListViewController.m
+//  AgentHouseListViewController.m
 //  SmallPig
 //
-//  Created by clei on 14/12/10.
-//  Copyright (c) 2014年 chenlei. All rights reserved.
+//  Created by clei on 15/1/30.
+//  Copyright (c) 2015年 chenlei. All rights reserved.
 //
 
-#import "MineSaveListViewController.h"
+#import "AgentHouseListViewController.h"
 
-@interface MineSaveListViewController ()
+@interface AgentHouseListViewController ()
 
 @end
 
-@implementation MineSaveListViewController
+@implementation AgentHouseListViewController
 
 - (void)viewDidLoad
 {
     self.houseSource = HouseScourceFromSecondHand;
     [super viewDidLoad];
-    //设置title
-    //self.title = MINE_SAVE_TITLE;
-    //设置item为nil
-    self.navigationItem.rightBarButtonItem = nil;
-    //设置titleView
     [self setTitleViewWithArray:@[@"售房",@"租房"]];
+    [self setNavBarItemWithTitle:@"  发布" navItemType:rightItem selectorName:@"publicHouseButtonPressed:"];
     // Do any additional setup after loading the view.
 }
-
 
 #pragma  mark 选项卡按钮事件
 - (void)buttonPressed:(UIButton *)sender
@@ -36,19 +31,23 @@
     [self.table reloadData];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+#pragma mark 发布房源
+- (void)publicHouseButtonPressed:(UIButton *)sender
 {
-    [super viewDidAppear:YES];
-    [self setMainSideCanSwipe:NO];
+    
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+
+#pragma mark 点击行
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super viewDidDisappear:YES];
-    [self setMainSideCanSwipe:YES];
+    [tableView  deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
