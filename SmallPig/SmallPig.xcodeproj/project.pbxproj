@@ -47,6 +47,16 @@
 		7729C00E1A39775900FA8398 /* agent_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7729C00D1A39775900FA8398 /* agent_icon_default.png */; };
 		7729C0111A397C0800FA8398 /* message_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7729C00F1A397C0800FA8398 /* message_icon.png */; };
 		7729C0121A397C0800FA8398 /* telephone_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7729C0101A397C0800FA8398 /* telephone_icon.png */; };
+		77371BBC1A7B1EC6006D4253 /* agent_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77371BB71A7B1EC6006D4253 /* agent_icon1.png */; };
+		77371BBD1A7B1EC6006D4253 /* agent_icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 77371BB81A7B1EC6006D4253 /* agent_icon2.png */; };
+		77371BBE1A7B1EC6006D4253 /* agent_icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 77371BB91A7B1EC6006D4253 /* agent_icon3.png */; };
+		77371BBF1A7B1EC6006D4253 /* agent_icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 77371BBA1A7B1EC6006D4253 /* agent_icon4.png */; };
+		77371BC01A7B1EC6006D4253 /* agent_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = 77371BBB1A7B1EC6006D4253 /* agent_icon5.png */; };
+		77371BC91A7B62AA006D4253 /* LeftRightLableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BC81A7B62AA006D4253 /* LeftRightLableCell.m */; };
+		77371BD01A7B6779006D4253 /* AgentHouseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BCC1A7B6779006D4253 /* AgentHouseInfoViewController.m */; };
+		77371BD11A7B6779006D4253 /* AgentHouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BCE1A7B6779006D4253 /* AgentHouseListViewController.m */; };
+		77371BD41A7B67A3006D4253 /* AgentMemoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BD31A7B67A3006D4253 /* AgentMemoListViewController.m */; };
+		77371BD71A7B8765006D4253 /* CookiesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BD61A7B8765006D4253 /* CookiesTool.m */; };
 		7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEEF1A3182D70012E775 /* newhouse_logo.png */; };
 		7767CEF31A318B140012E775 /* HouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767CEF21A318B140012E775 /* HouseListViewController.m */; };
 		7767CEF51A31AB700012E775 /* house_image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEF41A31AB700012E775 /* house_image_default.png */; };
@@ -233,6 +243,21 @@
 		7729C00D1A39775900FA8398 /* agent_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon_default.png; sourceTree = "<group>"; };
 		7729C00F1A397C0800FA8398 /* message_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_icon.png; sourceTree = "<group>"; };
 		7729C0101A397C0800FA8398 /* telephone_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = telephone_icon.png; sourceTree = "<group>"; };
+		77371BB71A7B1EC6006D4253 /* agent_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon1.png; sourceTree = "<group>"; };
+		77371BB81A7B1EC6006D4253 /* agent_icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon2.png; sourceTree = "<group>"; };
+		77371BB91A7B1EC6006D4253 /* agent_icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon3.png; sourceTree = "<group>"; };
+		77371BBA1A7B1EC6006D4253 /* agent_icon4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon4.png; sourceTree = "<group>"; };
+		77371BBB1A7B1EC6006D4253 /* agent_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent_icon5.png; sourceTree = "<group>"; };
+		77371BC71A7B62AA006D4253 /* LeftRightLableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftRightLableCell.h; sourceTree = "<group>"; };
+		77371BC81A7B62AA006D4253 /* LeftRightLableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftRightLableCell.m; sourceTree = "<group>"; };
+		77371BCB1A7B6779006D4253 /* AgentHouseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentHouseInfoViewController.h; sourceTree = "<group>"; };
+		77371BCC1A7B6779006D4253 /* AgentHouseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentHouseInfoViewController.m; sourceTree = "<group>"; };
+		77371BCD1A7B6779006D4253 /* AgentHouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentHouseListViewController.h; sourceTree = "<group>"; };
+		77371BCE1A7B6779006D4253 /* AgentHouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentHouseListViewController.m; sourceTree = "<group>"; };
+		77371BD21A7B67A3006D4253 /* AgentMemoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentMemoListViewController.h; sourceTree = "<group>"; };
+		77371BD31A7B67A3006D4253 /* AgentMemoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentMemoListViewController.m; sourceTree = "<group>"; };
+		77371BD51A7B8765006D4253 /* CookiesTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookiesTool.h; sourceTree = "<group>"; };
+		77371BD61A7B8765006D4253 /* CookiesTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookiesTool.m; sourceTree = "<group>"; };
 		7767CEEF1A3182D70012E775 /* newhouse_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newhouse_logo.png; sourceTree = "<group>"; };
 		7767CEF11A318B140012E775 /* HouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseListViewController.h; sourceTree = "<group>"; };
 		7767CEF21A318B140012E775 /* HouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListViewController.m; sourceTree = "<group>"; };
@@ -705,6 +730,8 @@
 				778202C61A0B0A08000BC548 /* CommonTool.m */,
 				CE78DFE01A2467DB0093069A /* RequestTool.h */,
 				CE78DFE11A2467DB0093069A /* RequestTool.m */,
+				77371BD51A7B8765006D4253 /* CookiesTool.h */,
+				77371BD61A7B8765006D4253 /* CookiesTool.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -712,11 +739,36 @@
 		7729C00C1A39775900FA8398 /* agent_images */ = {
 			isa = PBXGroup;
 			children = (
+				77371BB71A7B1EC6006D4253 /* agent_icon1.png */,
+				77371BB81A7B1EC6006D4253 /* agent_icon2.png */,
+				77371BB91A7B1EC6006D4253 /* agent_icon3.png */,
+				77371BBA1A7B1EC6006D4253 /* agent_icon4.png */,
+				77371BBB1A7B1EC6006D4253 /* agent_icon5.png */,
 				7729C00F1A397C0800FA8398 /* message_icon.png */,
 				7729C0101A397C0800FA8398 /* telephone_icon.png */,
 				7729C00D1A39775900FA8398 /* agent_icon_default.png */,
 			);
 			path = agent_images;
+			sourceTree = "<group>";
+		};
+		77371BCA1A7B6779006D4253 /* house */ = {
+			isa = PBXGroup;
+			children = (
+				77371BCB1A7B6779006D4253 /* AgentHouseInfoViewController.h */,
+				77371BCC1A7B6779006D4253 /* AgentHouseInfoViewController.m */,
+				77371BCD1A7B6779006D4253 /* AgentHouseListViewController.h */,
+				77371BCE1A7B6779006D4253 /* AgentHouseListViewController.m */,
+			);
+			path = house;
+			sourceTree = "<group>";
+		};
+		77371BCF1A7B6779006D4253 /* memo */ = {
+			isa = PBXGroup;
+			children = (
+				77371BD21A7B67A3006D4253 /* AgentMemoListViewController.h */,
+				77371BD31A7B67A3006D4253 /* AgentMemoListViewController.m */,
+			);
+			path = memo;
 			sourceTree = "<group>";
 		};
 		776859641A7A081D00F0C1F5 /* BaiDuMap */ = {
@@ -800,6 +852,8 @@
 		777E02951A36F3B6008B9E38 /* Agent */ = {
 			isa = PBXGroup;
 			children = (
+				77371BCA1A7B6779006D4253 /* house */,
+				77371BCF1A7B6779006D4253 /* memo */,
 				777E02961A36F3E1008B9E38 /* AgentRankListViewController.h */,
 				777E02971A36F3E1008B9E38 /* AgentRankListViewController.m */,
 				77C401D41A37DE5600A9D883 /* AgentCenterViewController.h */,
@@ -1059,6 +1113,8 @@
 				777E029A1A36F54D008B9E38 /* AgentRankListCell.m */,
 				7729C0061A392D1400FA8398 /* SecondHandHouseListCell.h */,
 				7729C0071A392D1400FA8398 /* SecondHandHouseListCell.m */,
+				77371BC71A7B62AA006D4253 /* LeftRightLableCell.h */,
+				77371BC81A7B62AA006D4253 /* LeftRightLableCell.m */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -1144,6 +1200,7 @@
 				7792FF891A78C9D3007DFBF5 /* detail_back_down.png in Resources */,
 				77A4CD511A76166D00D26A25 /* error.png in Resources */,
 				7792FF8C1A78C9D3007DFBF5 /* detail_save_up.png in Resources */,
+				77371BBD1A7B1EC6006D4253 /* agent_icon2.png in Resources */,
 				7729C0121A397C0800FA8398 /* telephone_icon.png in Resources */,
 				7792FF8D1A78C9D3007DFBF5 /* detail_share_down.png in Resources */,
 				776859A81A7A0F0700F0C1F5 /* pin.png in Resources */,
@@ -1157,6 +1214,7 @@
 				CE936BDD1A2F6FA2003F2268 /* home_icon2.png in Resources */,
 				CEDE25AB1A2CB94E00C331D4 /* btm_save1@2x.png in Resources */,
 				77E12FE51A3056CA00D4B0AF /* person_icon_default.png in Resources */,
+				77371BBF1A7B1EC6006D4253 /* agent_icon4.png in Resources */,
 				77E12FE61A3056CA00D4B0AF /* menu_icon1.png in Resources */,
 				CEDE25AD1A2CB94E00C331D4 /* btm_wechat1@2x.png in Resources */,
 				CE936BDF1A2F6FA2003F2268 /* home_icon4.png in Resources */,
@@ -1167,6 +1225,7 @@
 				CEDE25A01A2CB94400C331D4 /* nav_person_down.png in Resources */,
 				CE936BDC1A2F6FA2003F2268 /* home_icon1.png in Resources */,
 				77A4CD531A76166D00D26A25 /* success.png in Resources */,
+				77371BBC1A7B1EC6006D4253 /* agent_icon1.png in Resources */,
 				7729C0111A397C0800FA8398 /* message_icon.png in Resources */,
 				CEDE25B31A2CCFFE00C331D4 /* Images.xcassets in Resources */,
 				CEDE25B11A2CB9BF00C331D4 /* back_up.png in Resources */,
@@ -1187,6 +1246,8 @@
 				7792FF8B1A78C9D3007DFBF5 /* detail_save_down.png in Resources */,
 				7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */,
 				77E12FE81A3056CA00D4B0AF /* menu_icon3.png in Resources */,
+				77371BBE1A7B1EC6006D4253 /* agent_icon3.png in Resources */,
+				77371BC01A7B1EC6006D4253 /* agent_icon5.png in Resources */,
 				7729C00E1A39775900FA8398 /* agent_icon_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1205,9 +1266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77371BD41A7B67A3006D4253 /* AgentMemoListViewController.m in Sources */,
 				7792FF951A78E245007DFBF5 /* HouseDetailViewController.m in Sources */,
 				777E02981A36F3E1008B9E38 /* AgentRankListViewController.m in Sources */,
 				771A299C1A0A2A4600F99B1D /* NSData+ImageContentType.m in Sources */,
+				77371BD11A7B6779006D4253 /* AgentHouseListViewController.m in Sources */,
 				771A29A21A0A2A4600F99B1D /* SDWebImageManager.m in Sources */,
 				771A29B01A0A2A4600F99B1D /* AFSecurityPolicy.m in Sources */,
 				77C401E01A37EBB700A9D883 /* AboutUsViewController.m in Sources */,
@@ -1251,9 +1314,11 @@
 				771A29B21A0A2A4600F99B1D /* AFURLRequestSerialization.m in Sources */,
 				771A29B41A0A2A4600F99B1D /* AFURLSessionManager.m in Sources */,
 				771A29B31A0A2A4600F99B1D /* AFURLResponseSerialization.m in Sources */,
+				77371BD71A7B8765006D4253 /* CookiesTool.m in Sources */,
 				77C401D61A37DE5600A9D883 /* AgentCenterViewController.m in Sources */,
 				771A29BB1A0A2A4600F99B1D /* UIRefreshControl+AFNetworking.m in Sources */,
 				776859631A7A04F600F0C1F5 /* HouseDetailOneInfoView.m in Sources */,
+				77371BD01A7B6779006D4253 /* AgentHouseInfoViewController.m in Sources */,
 				776859601A79C7BB00F0C1F5 /* HouseDetailAgentView.m in Sources */,
 				771A29A71A0A2A4600F99B1D /* UIImageView+WebCache.m in Sources */,
 				777E02A51A3707CE008B9E38 /* SearchHouseViewController.m in Sources */,
@@ -1272,6 +1337,7 @@
 				771A299B1A0A2A4600F99B1D /* NSData+GIF.m in Sources */,
 				77A4CD561A76166D00D26A25 /* SVProgressHUD.m in Sources */,
 				CEDF46BC1A25C97200246531 /* LoginViewController.m in Sources */,
+				77371BC91A7B62AA006D4253 /* LeftRightLableCell.m in Sources */,
 				778202C11A0B094F000BC548 /* HomeViewController.m in Sources */,
 				77E12FED1A30663500D4B0AF /* NewHouseListViewController.m in Sources */,
 				77DEA34A1A7798C0005E5348 /* ChangePasswordViewController.m in Sources */,
