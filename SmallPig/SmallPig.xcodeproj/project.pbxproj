@@ -116,6 +116,7 @@
 		77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FE21A3056CA00D4B0AF /* menu_icon4.png */; };
 		77E12FEA1A3056CA00D4B0AF /* menu_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FE31A3056CA00D4B0AF /* menu_icon5.png */; };
 		77E12FED1A30663500D4B0AF /* NewHouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */; };
+		77E318FA1A7F437D0003A557 /* AgentScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E318F91A7F437D0003A557 /* AgentScoreViewController.m */; };
 		77F2BEDD1A761FA40030D162 /* SmallPigApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */; };
 		CE128CED1A0E5F8400DE07E5 /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */; };
 		CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE128CF41A0E69B600DE07E5 /* btm_wechat2@2x.png */; };
@@ -406,6 +407,8 @@
 		77E12FE31A3056CA00D4B0AF /* menu_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon5.png; sourceTree = "<group>"; };
 		77E12FEB1A30663500D4B0AF /* NewHouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHouseListViewController.h; sourceTree = "<group>"; };
 		77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHouseListViewController.m; sourceTree = "<group>"; };
+		77E318F81A7F437D0003A557 /* AgentScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentScoreViewController.h; sourceTree = "<group>"; };
+		77E318F91A7F437D0003A557 /* AgentScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentScoreViewController.m; sourceTree = "<group>"; };
 		77F2BEDB1A761FA40030D162 /* SmallPigApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallPigApplication.h; sourceTree = "<group>"; };
 		77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallPigApplication.m; sourceTree = "<group>"; };
 		CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
@@ -860,6 +863,8 @@
 				77C401D51A37DE5600A9D883 /* AgentCenterViewController.m */,
 				7729C0091A39479800FA8398 /* AgentDetailViewController.h */,
 				7729C00A1A39479800FA8398 /* AgentDetailViewController.m */,
+				77E318F81A7F437D0003A557 /* AgentScoreViewController.h */,
+				77E318F91A7F437D0003A557 /* AgentScoreViewController.m */,
 			);
 			path = Agent;
 			sourceTree = "<group>";
@@ -1333,6 +1338,7 @@
 				771A29BD1A0A2A4600F99B1D /* MainSideViewController.m in Sources */,
 				771A29A51A0A2A4600F99B1D /* UIImage+GIF.m in Sources */,
 				771A29AF1A0A2A4600F99B1D /* AFNetworkReachabilityManager.m in Sources */,
+				77E318FA1A7F437D0003A557 /* AgentScoreViewController.m in Sources */,
 				778202C41A0B0973000BC548 /* WeChatMainViewController.m in Sources */,
 				771A299B1A0A2A4600F99B1D /* NSData+GIF.m in Sources */,
 				77A4CD561A76166D00D26A25 /* SVProgressHUD.m in Sources */,
