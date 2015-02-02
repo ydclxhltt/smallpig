@@ -92,5 +92,6 @@
 #define AGENT_DETAIL_TITLE      @"经纪人详情"
 //经纪人平台title
 #define AGENT_CENTER_TITLE      @"经纪人平台"
-
+//经纪人积分
+#define AGENT_SCORE_TITLE       @"我的积分"
 #endif

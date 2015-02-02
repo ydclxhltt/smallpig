@@ -61,6 +61,13 @@
     rightLabel.text = (right) ? right : @"";
 }
 
+- (void)setLeftColor:(UIColor *)l_color rightColor:(UIColor *)r_color
+{
+    if (l_color)
+        leftLabel.textColor = l_color;
+    if (r_color)
+        rightLabel.textColor = r_color;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

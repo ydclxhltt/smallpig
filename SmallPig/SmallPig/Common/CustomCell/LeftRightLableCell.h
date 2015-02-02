@@ -10,6 +10,10 @@
 
 @interface LeftRightLableCell : UITableViewCell
 
+//设置数据
 - (void)setDataWithLeftText:(NSString *)left rightText:(NSString *)right;
+
+//设置颜色
+- (void)setLeftColor:(UIColor *)l_color rightColor:(UIColor *)r_color;
 
 @end
