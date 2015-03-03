@@ -41,6 +41,8 @@
     [self createUI];
     //添加侧滑item
     [self addPersonItem];
+    //添加通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedCity:) name:@"SelectedCity" object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -156,6 +158,13 @@
     [self presentViewController:cityListNav animated:YES completion:Nil];
 }
 
+
+- (void)selectedCity:(NSNotification *)notification
+{
+    NSString *city = (NSString *)notification.object;
+    [dropDownView setTitleLabelText:city];
+}
+
 #pragma mark - tableView代理
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -219,18 +228,18 @@
     switch (index)
     {
         case 0:
-            viewController = [[HouseListViewController alloc]init];
+            viewController = [[HouseListViewController alloc] init];
             ((HouseListViewController *)viewController).houseSource = HouseScourceFromRental;
             break;
         case 1:
-            viewController = [[HouseListViewController alloc]init];
+            viewController = [[HouseListViewController alloc] init];
             ((HouseListViewController *)viewController).houseSource = HouseScourceFromSecondHand;
             break;
         case 2:
-            viewController = [[NewHouseListViewController alloc]init];
+            viewController = [[NewHouseListViewController alloc] init];
             break;
         case 3:
-            viewController = [[AgentRankListViewController alloc]init];
+            viewController = [[AgentRankListViewController alloc] init];
             break;
         default:
             break;
@@ -242,6 +251,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /*

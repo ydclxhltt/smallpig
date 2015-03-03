@@ -8,6 +8,7 @@
 
 #import "CheckCodeViewController.h"
 #import "SetPassWordViewController.h"
+#import "ChangePasswordViewController.h"
 
 @interface CheckCodeViewController ()
 {
@@ -243,7 +244,8 @@
     [self getInfo];
     if ([self isCanCommitWithType:2])
     {
-        [self checkCodeRequest];
+        //[self checkCodeRequest];
+        [self goToNextStep];
     }
 }
 
@@ -283,12 +285,14 @@
         SetPassWordViewController *setPassWordVC = [[SetPassWordViewController alloc]init];
         setPassWordVC.pushType = self.pushType;
         setPassWordVC.phoneNumber = self.phoneNumber;
-        setPassWordVC.signText = self.signText;
+        setPassWordVC.signText = self.checkCode;
         [self.navigationController pushViewController:setPassWordVC animated:YES];
     }
     else if (self.pushType == PushTypeChangePassword)
     {
         //修改密码
+        ChangePasswordViewController *changePasswordViewController = [[ChangePasswordViewController alloc] init];
+        [self.navigationController pushViewController:changePasswordViewController animated:YES];
     }
     else if (self.pushType == PushTypeChangeMobile)
     {
@@ -301,7 +305,7 @@
 - (void)changeMobileRequest
 {
     [SVProgressHUD showWithStatus:@"正在保存..."];
-    NSDictionary *requestDic = @{@"id":[SmallPigApplication shareInstance].userInfoDic[@"id"],@"newMobile":self.phoneNumber,@"signText":self.signText};
+    NSDictionary *requestDic = @{@"id":[SmallPigApplication shareInstance].userInfoDic[@"id"],@"newMobile":self.phoneNumber,@"signText":self.checkCode};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:CHANGE_MOBILE_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)

@@ -182,29 +182,30 @@
         }
         else
         {
-            [weakSelf failTip];
+            [weakSelf failTipWithError:dic[@"responseMessage"][@"message"]];
         }
         
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         NSLog(@"error====%@",error);
-        [weakSelf failTip];
+        [weakSelf failTipWithError:@""];
     }];
 }
 
 
-- (void)failTip
+- (void)failTipWithError:(NSString *)error
 {
     NSString *message = @"";
     if (self.pushType == PushTypeRegister)
     {
-        message = @"注册失败";
+        message = @"注册失败 ";
     }
     else if (self.pushType == PushTypeFindPassWord)
     {
-        message = @"设置失败";
+        message = @"设置失败 ";
     }
+    message = [message stringByAppendingString:error];
     [SVProgressHUD showErrorWithStatus:message];
 }
 

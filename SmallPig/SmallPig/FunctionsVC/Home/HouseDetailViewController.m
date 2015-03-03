@@ -55,6 +55,8 @@
     lastPoint = 0.0;
     //初始化UI
     [self createUI];
+    //获取房屋详情
+    [self getHouseDetail];
     // Do any additional setup after loading the view.
 }
 
@@ -119,6 +121,28 @@
     [mobileView addSubview:mobileButton];
     
 }
+
+
+#pragma mark 获取详情
+- (void)getHouseDetail
+{
+    //HOUSE_DETAIL_URL
+    NSDictionary *requestDic = @{@"Id":@"1111"};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:HOUSE_DETAIL_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+    requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+    {
+        NSLog(@"responseDic===%@",responseDic);
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        
+    }];
+}
+
+
+
+
 
 #pragma mark mobile
 - (void)mobileButtonPressed:(UIButton *)sender
