@@ -10,7 +10,7 @@
 #define SmallPig_ColorHeader_h
 
 //设置RGB
-#define RBGA(R,G,B,AL)              [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:AL]
+#define RGBA(R,G,B,AL)              [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:AL]
 #define RGB(R,G,B)                  [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0]
 
 
@@ -69,7 +69,7 @@
 //详情title
 #define HOUSE_DETAIL_TITLE_COLOR    RGB(191.0,192.0,191.0)
 //详情Text
-#define HOUSE_DETAIL_TEXT_COLOR    RGB(93.0,93.0,93.0)
+#define HOUSE_DETAIL_TEXT_COLOR     RGB(93.0,93.0,93.0)
 
 #pragma mark 经纪人排行
 //经纪人排行排名Label颜色

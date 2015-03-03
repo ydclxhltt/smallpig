@@ -15,6 +15,7 @@
 @interface SmallPigApplication : NSObject
 
 @property (nonatomic, strong) NSDictionary *userInfoDic;
+@property (nonatomic, strong) NSArray *cityList;
 
 /*
  *  构建单例

@@ -59,6 +59,12 @@
 }
 
 
+- (void)setTitleLabelText:(NSString *)text
+{
+    _titleLabel.text =text;
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

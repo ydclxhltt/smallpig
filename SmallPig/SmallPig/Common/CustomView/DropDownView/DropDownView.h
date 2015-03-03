@@ -20,4 +20,6 @@
  */
 - (void)createViewWithTitle:(NSString *)title clickedBlock:(void (^)())click;
 
+- (void)setTitleLabelText:(NSString *)text;
+
 @end
