@@ -114,7 +114,7 @@
 - (void)getCityList
 {
     __weak typeof(self) weakSelf = self;
-    NSDictionary  *requestDic = @{@"paramCategory":@"AREA>COMMUNITY>BUILDING>ROOM",@"versionNo":@"-1"};
+    NSDictionary  *requestDic = @{@"paramCategory":@"AREA>COMMUNITY>BUILDING>ROOM"};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:SORT_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
@@ -189,7 +189,11 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectedCity" object:self.dataArray[indexPath.section][indexPath.row]];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([@"正在定位" isEqualToString:cell.textLabel.text])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectedCity" object:cell.textLabel.text];
+    }
     [self dismissViewControllerAnimated:YES completion:Nil];
 }
 

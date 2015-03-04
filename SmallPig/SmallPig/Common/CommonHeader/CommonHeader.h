@@ -41,7 +41,7 @@
 //失败
 #define LOADING_FAILURE         @"加载失败"
 //加载中
-#define LOADING_DEFAULT         @"加载失败"
+#define LOADING_DEFAULT         @"加载中..."
 
 #pragma mark 登录注册
 //登录

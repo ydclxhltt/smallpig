@@ -127,7 +127,7 @@
 - (void)getHouseDetail
 {
     //HOUSE_DETAIL_URL
-    NSDictionary *requestDic = @{@"Id":@"1111"};
+    NSDictionary *requestDic = @{@"Id":@"1"};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:HOUSE_DETAIL_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
@@ -165,7 +165,22 @@
 #pragma mark save
 - (void)saveButtonPressed:(UIButton *)sender
 {
-    
+    //ADD_SAVE_URL
+    sender.enabled = NO;
+    NSDictionary *requestDic = (sender.selected) ? @{@"id":@"1"} : @{@"publishRoom.id":@"1"};
+    NSString *url = (sender.selected) ? DELETE_SAVE_URL : ADD_SAVE_URL;
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:url requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:
+    ^(AFHTTPRequestOperation *operation, id responseDic)
+    {
+        sender.selected = !sender.selected;
+        sender.enabled = YES;
+        NSLog(@"saveresponseDic===%@",operation.responseString);
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        sender.enabled = YES;
+    }];
 }
 
 #pragma mark report

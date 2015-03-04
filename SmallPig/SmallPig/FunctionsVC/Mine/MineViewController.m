@@ -10,8 +10,9 @@
 #import "CheckCodeViewController.h"
 #import "ChangePasswordViewController.h"
 #import "InformAgainstViewController.h"
+#import "UpLoadPhotoTool.h"
 
-@interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>
+@interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>
 {
     NSDictionary *userDic;
 }
@@ -214,6 +215,8 @@
         if (row == 0)
         {
             //头像
+            [self setUserIcon];
+            
         }
         else if (row == 1)
         {
@@ -258,6 +261,23 @@
     }
 }
 
+#pragma mark 修改头像
+- (void)setUserIcon
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择",@"拍照",nil];
+        actionSheet.tag = 100;
+        [actionSheet showInView:self.view];
+    }
+    else
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择",nil];
+        actionSheet.tag = 101;
+        [actionSheet showInView:self.view];
+    }
+    
+}
 
 #pragma mark 修改昵称
 - (void)addChangeNickNameView
@@ -276,6 +296,7 @@
 - (void)addChangeSexView
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"修改性别" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男",@"女", nil];
+    actionSheet.tag = 102;
     [actionSheet showInView:APP_DELEGATE.window];
 }
 
@@ -308,13 +329,35 @@
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex != 2)
+    if (actionSheet.tag == 102 && buttonIndex != 2)
     {
         [self changePersonalRequestWithNickname:@"" userSex:[NSString stringWithFormat:@"%d",buttonIndex + 1]];
     }
+    else
+    {
+        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.allowsEditing = YES;
+        picker.delegate = self;
+        if (![title isEqualToString:@"取消"])
+        {
+            picker.sourceType = (buttonIndex == 0) ? UIImagePickerControllerSourceTypePhotoLibrary : UIImagePickerControllerSourceTypeCamera;
+        }
+        [self presentViewController:picker animated:YES completion:Nil];
+    }
 }
 
+#pragma mark UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissViewControllerAnimated:YES completion:Nil];
+    
+    UpLoadPhotoTool *upLoadTool = [[UpLoadPhotoTool alloc] initWithPhotoArray:@[image] upLoadUrl:UPLOAD_ICON_URL upLoadType:3];
+    NSLog(@"upLoadTool===%@",upLoadTool);
+}
 
+#pragma mark 修改个人信息请求
 - (void)changePersonalRequestWithNickname:(NSString *)nickName userSex:(NSString *)sex
 {
     NSDictionary *requestDic;

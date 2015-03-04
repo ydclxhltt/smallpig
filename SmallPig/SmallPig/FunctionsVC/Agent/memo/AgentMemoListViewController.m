@@ -8,6 +8,7 @@
 
 #import "AgentMemoListViewController.h"
 #import "LeftRightLableCell.h"
+#import "AgentRemindViewController.h"
 
 #define PAGE_COUNT 10.0
 
@@ -26,9 +27,10 @@
     self.title = @"备忘录";
     //初始化数据
     currentPage = 1;
-    self.dataArray = (NSMutableArray *)@[@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"}];
+    //self.dataArray = (NSMutableArray *)@[@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"}];
     //初始化UI
     [self addBackItem];
+    [self setNavBarItemWithTitle:@"新建" navItemType:rightItem selectorName:@"addNewRemind"];
     [self createUI];
     //获取数据
     [self getData];
@@ -61,7 +63,6 @@
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
     {
         NSLog(@"memoResponseDic===%@",responseDic);
-        NSLog(@"memoRequestHeader===%@",operation.request.allHTTPHeaderFields);
         NSDictionary *dic = (NSDictionary *)responseDic;
         weakSelf.dataArray = dic[@"pageBean"][@"data"];
         if (!weakSelf.dataArray || [weakSelf.dataArray count] == 0)
@@ -85,7 +86,13 @@
     }];
 }
 
-
+#pragma mark 新建备忘
+- (void)addNewRemind
+{
+    AgentRemindViewController *remindViewController = [[AgentRemindViewController alloc] init];
+    remindViewController.type = 1;
+    [self.navigationController pushViewController:remindViewController animated:YES];
+}
 
 #pragma mark tableViewDelegate
 

@@ -39,6 +39,9 @@
 //修改手机号
 #define CHANGE_MOBILE_URL       MAKE_REQUEST_URL(@"yjk/member/mobile.action")
 
+//上传图片
+#define UPLOAD_ICON_URL         MAKE_REQUEST_URL(@"yjk/member/uploadPhoto.action")
+
 //分类列表
 #define SORT_LIST_URL           MAKE_REQUEST_URL(@"param/list.action")
 
@@ -50,5 +53,22 @@
 
 //备忘录列表
 #define MEMO_LIST_URL           MAKE_REQUEST_URL(@"yjk/remind/list.action")
+
+//备忘录添加
+#define MEMO_ADD_URL            MAKE_REQUEST_URL(@"yjk/remind/add.action")
+
+//备忘录详情
+#define MEMO_FIND_URL           MAKE_REQUEST_URL(@"yjk/remind/find.action")
+
+//更新备忘录
+#define MEMO_UPDATE_URL         MAKE_REQUEST_URL(@"yjk/remind/update.action")
+
+//添加收藏
+#define ADD_SAVE_URL            MAKE_REQUEST_URL(@"yjk/favorites/add.action")
+
+//删除收藏
+#define DELETE_SAVE_URL         MAKE_REQUEST_URL(@"yjk/favorites/delete.action")
+
+//#define UPLOAD_ICON_URL         MAKE_REQUEST_URL(@"yjk/publishroom/uploadPhoto.action")
 
 #endif
