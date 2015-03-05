@@ -12,5 +12,5 @@
 
 //1:新建 2:详情
 @property (nonatomic, assign) int type;
-
+@property (nonatomic, strong) NSString *ID;
 @end

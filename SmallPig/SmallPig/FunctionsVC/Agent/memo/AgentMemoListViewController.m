@@ -27,15 +27,20 @@
     self.title = @"备忘录";
     //初始化数据
     currentPage = 1;
-    //self.dataArray = (NSMutableArray *)@[@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"},@{@"title":@"XXXX20分钟后看房",@"createDate":@"2015-01-30",@"id":@"1"}];
     //初始化UI
     [self addBackItem];
     [self setNavBarItemWithTitle:@"新建" navItemType:rightItem selectorName:@"addNewRemind"];
     [self createUI];
-    //获取数据
-    [self getData];
     // Do any additional setup after loading the view.
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    //获取数据
+    [self getData];
+}
+
 
 #pragma mark 初始化UI
 - (void)createUI
@@ -115,11 +120,23 @@
     NSDictionary *rowDic = self.dataArray[indexPath.row];
     if (rowDic)
     {
-        [cell setDataWithLeftText:rowDic[@"title"] rightText:rowDic[@"createDate"]];
+        [cell setDataWithLeftText:rowDic[@"content"] rightText:rowDic[@"createDate"]];
     }
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *rowDic = self.dataArray[indexPath.row];
+    AgentRemindViewController *remindViewController = [[AgentRemindViewController alloc] init];
+    remindViewController.type = 2;
+    remindViewController.ID = rowDic[@"id"];
+    [self.navigationController pushViewController:remindViewController animated:YES];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning

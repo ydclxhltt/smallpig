@@ -46,6 +46,10 @@
 {
     textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     textView.text = @"";
+    if (self.type == 1)
+    {
+        [textView becomeFirstResponder];
+    }
     [self.view addSubview:textView];
 }
 
@@ -53,15 +57,29 @@
 #pragma mark 获取详情
 - (void)getRemindDetail
 {
-    NSDictionary *requestDic = @{@"id":@"15"};
+    self.ID = (self.ID) ? self.ID : @"";
+    NSDictionary *requestDic = @{@"id":self.ID};
+    UITextView *tempTextView = textView;
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:MEMO_FIND_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:
      ^(AFHTTPRequestOperation *operation, id responseDic)
      {
          NSLog(@"remindresponseDic===%@",responseDic);
+         NSDictionary *dic = (NSDictionary *)responseDic;
+         int sucess = [dic[@"responseMessage"][@"success"] intValue];
+         if (sucess == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+             tempTextView.text = dic[@"model"][@"content"];
+         }
+         else
+         {
+             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+         }
      }
     requestFail:^(AFHTTPRequestOperation *operation,NSError *error)
      {
+         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
          NSLog(@"error===%@",error);
      }];
 }
@@ -73,18 +91,36 @@
     {
         return;
     }
+    __weak typeof(self) weakSelf = self;
     NSString *url = (self.type == 1) ? MEMO_ADD_URL : MEMO_UPDATE_URL;
-    NSDictionary *requestDic;
-    requestDic = @{@"id":@"15",@"title":@"",@"content":textView.text};
-    requestDic = @{@"title":@"",@"content":textView.text};
+    NSString *tipStr = @"正在保存...";
+    [SVProgressHUD showWithStatus:tipStr];
+    NSDictionary *requestDic = @{@"title":@"",@"content":textView.text};;
+    if(self.type == 2)
+    {
+        requestDic = @{@"id":self.ID,@"title":@"",@"content":textView.text};
+    }
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:url requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:
      ^(AFHTTPRequestOperation *operation, id responseDic)
     {
+        NSDictionary *dic = (NSDictionary *)responseDic;
+        int sucess = [dic[@"responseMessage"][@"success"] intValue];
+        if (sucess == 1)
+        {
+            self.type = 2;
+            [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+            weakSelf.ID = dic[@"modle"][@"id"];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"保存失败"];
+        }
         NSLog(@"remindresponseDic===%@",responseDic);
     }
     requestFail:^(AFHTTPRequestOperation *operation,NSError *error)
     {
+        [SVProgressHUD showErrorWithStatus:@"保存失败"];
         NSLog(@"error===%@",error);
     }];
 }
