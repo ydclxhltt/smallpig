@@ -15,5 +15,5 @@ typedef enum : NSUInteger
 } HouseInfoType;
 
 @interface AgentHouseInfoViewController : BasicViewController
-@property (nonatomic, assign) HouseInfoType *houseInfoType;
+@property (nonatomic, assign) HouseInfoType houseInfoType;
 @end

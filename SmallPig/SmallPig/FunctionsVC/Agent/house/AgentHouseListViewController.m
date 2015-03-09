@@ -7,6 +7,7 @@
 //
 
 #import "AgentHouseListViewController.h"
+#import "AgentHouseInfoViewController.h"
 
 @interface AgentHouseListViewController ()
 
@@ -34,7 +35,7 @@
 #pragma mark 发布房源
 - (void)publicHouseButtonPressed:(UIButton *)sender
 {
-    
+    [self pushHouseInfoViewWithType:HouseInfoTypePublic];
 }
 
 
@@ -42,7 +43,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView  deselectRowAtIndexPath:indexPath animated:YES];
-    
+    [self pushHouseInfoViewWithType:HouseInfoTypeDetail];
+}
+
+
+- (void)pushHouseInfoViewWithType:(HouseInfoType)type
+{
+    AgentHouseInfoViewController  *houseInfoViewController = [[AgentHouseInfoViewController alloc] init];
+    houseInfoViewController.houseInfoType = type;
+    [self.navigationController pushViewController:houseInfoViewController animated:YES];
 }
 
 

@@ -34,8 +34,8 @@ typedef enum : NSUInteger
     float startHeight;
     float scale;
 }
-@property(nonatomic,retain) NSMutableArray *dataArray;
-@property(nonatomic,retain) UITableView *table;
+@property(nonatomic,strong) NSMutableArray *dataArray;
+@property(nonatomic,strong) UITableView *table;
 
 /*
  *  设置导航条Item

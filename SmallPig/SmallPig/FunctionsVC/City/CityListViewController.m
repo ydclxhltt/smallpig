@@ -113,6 +113,7 @@
 #pragma mark 获取城市列表
 - (void)getCityList
 {
+    [SVProgressHUD showWithStatus:@"正在获取..."];
     __weak typeof(self) weakSelf = self;
     NSDictionary  *requestDic = @{@"paramCategory":@"AREA>COMMUNITY>BUILDING>ROOM"};
     RequestTool *request = [[RequestTool alloc] init];
@@ -120,6 +121,7 @@
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
     {
         NSLog(@"responseDic====%@",responseDic);
+        [SVProgressHUD showSuccessWithStatus:@"获取成功"];
         int sucessCode = [responseDic[@"responseMessage"][@"success"] intValue];
         if (sucessCode == 1)
         {
@@ -134,7 +136,7 @@
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
-        
+        [SVProgressHUD showErrorWithStatus:@"获取失败"];
     }];
 }
 
@@ -190,11 +192,12 @@
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([@"正在定位" isEqualToString:cell.textLabel.text])
+    if (![@"正在定位" isEqualToString:cell.textLabel.text])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectedCity" object:cell.textLabel.text];
+        [self dismissViewControllerAnimated:YES completion:Nil];
     }
-    [self dismissViewControllerAnimated:YES completion:Nil];
+    
 }
 
 
