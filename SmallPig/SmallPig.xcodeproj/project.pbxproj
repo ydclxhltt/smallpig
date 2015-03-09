@@ -79,6 +79,7 @@
 		778202CA1A0B4974000BC548 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778202C91A0B4974000BC548 /* MineViewController.m */; };
 		7785CBAE1A303F790053FD09 /* DorpDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7785CBAC1A303F790053FD09 /* DorpDownListView.m */; };
 		7785CBB11A303FA30053FD09 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7785CBB01A303FA30053FD09 /* DropDownView.m */; };
+		77875F201AAD74FD00A87EF2 /* AgentFormInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77875F1F1AAD74FD00A87EF2 /* AgentFormInfoViewController.m */; };
 		7792FF811A78C357007DFBF5 /* HouseDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792FF801A78C357007DFBF5 /* HouseDetailHeader.m */; };
 		7792FF891A78C9D3007DFBF5 /* detail_back_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF831A78C9D3007DFBF5 /* detail_back_down.png */; };
 		7792FF8A1A78C9D3007DFBF5 /* detail_back_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF841A78C9D3007DFBF5 /* detail_back_up.png */; };
@@ -360,6 +361,8 @@
 		7785CBAC1A303F790053FD09 /* DorpDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DorpDownListView.m; sourceTree = "<group>"; };
 		7785CBAF1A303FA30053FD09 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
 		7785CBB01A303FA30053FD09 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
+		77875F1E1AAD74FD00A87EF2 /* AgentFormInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentFormInfoViewController.h; sourceTree = "<group>"; };
+		77875F1F1AAD74FD00A87EF2 /* AgentFormInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentFormInfoViewController.m; sourceTree = "<group>"; };
 		7792FF7F1A78C357007DFBF5 /* HouseDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseDetailHeader.h; sourceTree = "<group>"; };
 		7792FF801A78C357007DFBF5 /* HouseDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDetailHeader.m; sourceTree = "<group>"; };
 		7792FF831A78C9D3007DFBF5 /* detail_back_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_back_down.png; sourceTree = "<group>"; };
@@ -769,6 +772,8 @@
 				77371BCC1A7B6779006D4253 /* AgentHouseInfoViewController.m */,
 				77371BCD1A7B6779006D4253 /* AgentHouseListViewController.h */,
 				77371BCE1A7B6779006D4253 /* AgentHouseListViewController.m */,
+				77875F1E1AAD74FD00A87EF2 /* AgentFormInfoViewController.h */,
+				77875F1F1AAD74FD00A87EF2 /* AgentFormInfoViewController.m */,
 			);
 			path = house;
 			sourceTree = "<group>";
@@ -1340,6 +1345,7 @@
 				771A29A71A0A2A4600F99B1D /* UIImageView+WebCache.m in Sources */,
 				777E02A51A3707CE008B9E38 /* SearchHouseViewController.m in Sources */,
 				7785CBB11A303FA30053FD09 /* DropDownView.m in Sources */,
+				77875F201AAD74FD00A87EF2 /* AgentFormInfoViewController.m in Sources */,
 				771A29B61A0A2A4600F99B1D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				771A29A41A0A2A4600F99B1D /* UIButton+WebCache.m in Sources */,
 				771A29B71A0A2A4600F99B1D /* UIAlertView+AFNetworking.m in Sources */,
