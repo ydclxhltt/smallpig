@@ -13,10 +13,10 @@
 /*
  *  设置图片地址和各个字段的值
  *
- *  @pram imageUrl  图片地址
- *  @pram rank      排名
- *  @pram name      经纪人姓名
- *  @pram score     积分
+ *  @param imageUrl  图片地址
+ *  @param rank      排名
+ *  @param name      经纪人姓名
+ *  @param score     积分
  */
 - (void)setCellDataWithRank:(int)rank agentImageUrl:(NSString *)imageUrl agentName:(NSString *)name agentScore:(NSString *)score;
 

@@ -71,4 +71,7 @@
 
 //#define UPLOAD_ICON_URL         MAKE_REQUEST_URL(@"yjk/publishroom/uploadPhoto.action")
 
+//查询房间是否发布过
+#define IS_CAN_PUBLIC_URL       MAKE_REQUEST_URL(@"yjk/publishroom/find.action")
+
 #endif

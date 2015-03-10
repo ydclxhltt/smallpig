@@ -17,9 +17,9 @@
 /*
  *  设置数据
  *
- *  @pram title  描述文字
- *  @pram time   发布时间
- *  @pram count  浏览次数
+ *  @param title  描述文字
+ *  @param time   发布时间
+ *  @param count  浏览次数
  */
 - (void)setDataWithTitle:(NSString *)title publicTime:(NSString *)time seeCount:(NSString *)count;
 @end

@@ -40,18 +40,18 @@ typedef enum : NSUInteger
 /*
  *  设置导航条Item
  *
- *  @pram title     按钮title
- *  @pram type      NavItemType 设置左或右item的标识
- *  @pram selName   item按钮响应方法名
+ *  @param title     按钮title
+ *  @param type      NavItemType 设置左或右item的标识
+ *  @param selName   item按钮响应方法名
  */
 - (void)setNavBarItemWithTitle:(NSString *)title navItemType:(NavItemType)type selectorName:(NSString *)selName;
 
 /*
  *  设置导航条Item
  *
- *  @pram imageName 图片名字
- *  @pram type      NavItemType 设置左或右item的标识
- *  @pram selName   item按钮响应方法名
+ *  @param imageName 图片名字
+ *  @param type      NavItemType 设置左或右item的标识
+ *  @param selName   item按钮响应方法名
  */
 - (void)setNavBarItemWithImageName:(NSString *)imageName navItemType:(NavItemType)type selectorName:(NSString *)selName;
 
@@ -72,7 +72,7 @@ typedef enum : NSUInteger
 
 /*
  *  设置titleView
- *  @pram array 选项卡title数组
+ *  @param array 选项卡title数组
  */
 - (void)setTitleViewWithArray:(NSArray *)array;
 
@@ -84,9 +84,9 @@ typedef enum : NSUInteger
 /*
  *  添加表视图，如：tableView
  *
- *  @pram frame     tableView的frame
- *  @pram type      UITableViewStyle
- *  @pram delegate  tableView的委托对象
+ *  @param frame     tableView的frame
+ *  @param type      UITableViewStyle
+ *  @param delegate  tableView的委托对象
  *
  */
 - (void)addTableViewWithFrame:(CGRect)frame tableType:(UITableViewStyle)type tableDelegate:(id)delegate;

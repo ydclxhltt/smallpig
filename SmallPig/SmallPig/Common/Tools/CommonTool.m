@@ -145,7 +145,7 @@
     view.layer.masksToBounds = YES;
 }
 
-
+//MD5
 + (NSString *)md5:(NSString *)str
 {
     const char *cStr = [str UTF8String];
@@ -201,6 +201,7 @@
     return [outputStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
+//多属性字符串
 + (void)makeString:(NSString *)textString toAttributeString:(NSMutableAttributedString *)attributedString  withString:(NSString *)string withTextColor:(UIColor *)textColor withTextFont:(UIFont *)textFont
 {
     [attributedString addAttribute:NSFontAttributeName
@@ -210,5 +211,6 @@
                              value:textColor
                              range:[textString rangeOfString:string]];
 }
+
 
 @end

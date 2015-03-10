@@ -25,24 +25,24 @@ typedef enum : NSUInteger
 /*
  * 初始化
  *
- * @pram frame  frame
- * @pram type   视图类型
- * @pram title  视图title
+ * @param frame  frame
+ * @param type   视图类型
+ * @param title  视图title
  */
 - (instancetype)initWithFrame:(CGRect)frame viewType:(InfoViewType)type viewTitle:(NSString *)title;
 
 /*
  * 设置描述信息
  *
- * @pram detailText  描述文字
+ * @param detailText  描述文字
  */
 - (void)setDataWithDetailText:(NSString *)detailText;
 
 /*
  * 初始化
  *
- * @pram coordinate  位置
- * @pram location    地址
+ * @param coordinate  位置
+ * @param location    地址
  */
 - (void)setLocationCoordinate:(CLLocationCoordinate2D)coordinate  locationText:(NSString *)location;
 @end

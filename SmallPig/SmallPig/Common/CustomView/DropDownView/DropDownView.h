@@ -15,8 +15,8 @@
 /*
  *  初始化视图方法
  *
- *  @pram   title   默认初始title
- *  @pram   click   按钮的点击相应的block
+ *  @param   title   默认初始title
+ *  @param   click   按钮的点击相应的block
  */
 - (void)createViewWithTitle:(NSString *)title clickedBlock:(void (^)())click;
 

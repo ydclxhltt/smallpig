@@ -16,10 +16,10 @@
 /*
  *  创建Label
  *
- *  @pram   frame   Label尺寸
- *  @pram   color   文字颜色
- *  @pram   text    文字内容
- *  @pram   font    文字字体
+ *  @param   frame   Label尺寸
+ *  @param   color   文字颜色
+ *  @param   text    文字内容
+ *  @param   font    文字字体
  *
  *  @return UILabel对象
  */
@@ -28,10 +28,10 @@
 /*
  *  创建UIImageView 获取网络图片
  *
- *  @pram   frame       Label尺寸
- *  @pram   image       默认图片
- *  @pram   urlString   图片地址
- *  @pram   showProcess 是否显示进度条
+ *  @param   frame       Label尺寸
+ *  @param   image       默认图片
+ *  @param   urlString   图片地址
+ *  @param   showProcess 是否显示进度条
  *
  *  @return UIImageView对象
  */
@@ -40,8 +40,8 @@
 /*
  *  创建普通的UIImageView
  *
- *  @pram   frame   Label尺寸
- *  @pram   image   默认图片
+ *  @param   frame   Label尺寸
+ *  @param   image   默认图片
  *
  *  @return UIImageView对象
  */
@@ -50,10 +50,10 @@
 /*
  *  圆形头像UIImageView视图
  *
- *  @pram   frame     Label尺寸
- *  @pram   image     默认图片
- *  @pram   urlString 图片地址
- *  @pram   color     layer颜色
+ *  @param   frame     Label尺寸
+ *  @param   image     默认图片
+ *  @param   urlString 图片地址
+ *  @param   color     layer颜色
  *
  *  @return UIImageView对象
  */
@@ -62,10 +62,10 @@
 /*
  *  创建UITextField
  *
- *  @pram   frame   Label尺寸
- *  @pram   color   文字颜色
- *  @pram   font    文字大小
- *  @pram   text    默认文字
+ *  @param   frame   Label尺寸
+ *  @param   color   文字颜色
+ *  @param   font    文字大小
+ *  @param   text    默认文字
  *
  *  @return UITextField对象
  */
@@ -74,9 +74,9 @@
 /*
  *  以图片创建按钮
  *
- *  @pram   imageName  图片名称(如：back_up back_down 传back)
- *  @pram   selName    方法名
- *  @pram   delegate   按钮响应方法类
+ *  @param   imageName  图片名称(如：back_up back_down 传back)
+ *  @param   selName    方法名
+ *  @param   delegate   按钮响应方法类
  *
  *  @return UIButton对象
  */
@@ -85,10 +85,10 @@
 /*
  *  以frame创建按钮
  *
- *  @pram   frame      button尺寸
- *  @pram   imageName  图片名称
- *  @pram   selName    方法名
- *  @pram   delegate   按钮响应方法类
+ *  @param   frame      button尺寸
+ *  @param   imageName  图片名称
+ *  @param   selName    方法名
+ *  @param   delegate   按钮响应方法类
  *
  *  @return UIButton对象
  */
@@ -98,13 +98,13 @@
 /*
  *  以frame创建按钮 用颜色设置图片
  *
- *  @pram   nor_Title       button正常状态title
- *  @pram   color           button正常状态titlecolor
- *  @pram   frame           button尺寸
- *  @pram   normalColor     默认颜色
- *  @pram   selectedColor   选中颜色
- *  @pram   selName         方法名
- *  @pram   delegate        按钮响应方法类
+ *  @param   nor_Title       button正常状态title
+ *  @param   color           button正常状态titlecolor
+ *  @param   frame           button尺寸
+ *  @param   normalColor     默认颜色
+ *  @param   selectedColor   选中颜色
+ *  @param   selName         方法名
+ *  @param   delegate        按钮响应方法类
  *
  *  @return UIButton对象
  */
