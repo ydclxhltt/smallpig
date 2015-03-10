@@ -120,6 +120,8 @@
 		77E12FEA1A3056CA00D4B0AF /* menu_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FE31A3056CA00D4B0AF /* menu_icon5.png */; };
 		77E12FED1A30663500D4B0AF /* NewHouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */; };
 		77E318FA1A7F437D0003A557 /* AgentScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E318F91A7F437D0003A557 /* AgentScoreViewController.m */; };
+		77EE093D1AAECA6C00988934 /* AgentLabelsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EE093C1AAECA6C00988934 /* AgentLabelsListViewController.m */; };
+		77EE09401AAEEAA500988934 /* SmallPigTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EE093F1AAEEAA500988934 /* SmallPigTool.m */; };
 		77F2BEDD1A761FA40030D162 /* SmallPigApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */; };
 		CE128CED1A0E5F8400DE07E5 /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */; };
 		CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE128CF41A0E69B600DE07E5 /* btm_wechat2@2x.png */; };
@@ -418,6 +420,10 @@
 		77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHouseListViewController.m; sourceTree = "<group>"; };
 		77E318F81A7F437D0003A557 /* AgentScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentScoreViewController.h; sourceTree = "<group>"; };
 		77E318F91A7F437D0003A557 /* AgentScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentScoreViewController.m; sourceTree = "<group>"; };
+		77EE093B1AAECA6C00988934 /* AgentLabelsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentLabelsListViewController.h; sourceTree = "<group>"; };
+		77EE093C1AAECA6C00988934 /* AgentLabelsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentLabelsListViewController.m; sourceTree = "<group>"; };
+		77EE093E1AAEEAA500988934 /* SmallPigTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallPigTool.h; sourceTree = "<group>"; };
+		77EE093F1AAEEAA500988934 /* SmallPigTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallPigTool.m; sourceTree = "<group>"; };
 		77F2BEDB1A761FA40030D162 /* SmallPigApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallPigApplication.h; sourceTree = "<group>"; };
 		77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallPigApplication.m; sourceTree = "<group>"; };
 		CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
@@ -746,6 +752,8 @@
 				77371BD61A7B8765006D4253 /* CookiesTool.m */,
 				773AA81A1AA69E850031A6F7 /* UpLoadPhotoTool.h */,
 				773AA81B1AA69E850031A6F7 /* UpLoadPhotoTool.m */,
+				77EE093E1AAEEAA500988934 /* SmallPigTool.h */,
+				77EE093F1AAEEAA500988934 /* SmallPigTool.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -774,6 +782,8 @@
 				77371BCE1A7B6779006D4253 /* AgentHouseListViewController.m */,
 				77875F1E1AAD74FD00A87EF2 /* AgentFormInfoViewController.h */,
 				77875F1F1AAD74FD00A87EF2 /* AgentFormInfoViewController.m */,
+				77EE093B1AAECA6C00988934 /* AgentLabelsListViewController.h */,
+				77EE093C1AAECA6C00988934 /* AgentLabelsListViewController.m */,
 			);
 			path = house;
 			sourceTree = "<group>";
@@ -1323,6 +1333,7 @@
 				771A29A11A0A2A4600F99B1D /* SDWebImageDownloaderOperation.m in Sources */,
 				771A29BC1A0A2A4600F99B1D /* UIWebView+AFNetworking.m in Sources */,
 				77C401DD1A37EBA400A9D883 /* FeedbackViewController.m in Sources */,
+				77EE09401AAEEAA500988934 /* SmallPigTool.m in Sources */,
 				CEDF46C21A25C9A600246531 /* SetPassWordViewController.m in Sources */,
 				771A29AE1A0A2A4600F99B1D /* AFHTTPSessionManager.m in Sources */,
 				CEECB17B1A77D5F900BE406B /* InformAgainstViewController.m in Sources */,
@@ -1335,6 +1346,7 @@
 				771A29B21A0A2A4600F99B1D /* AFURLRequestSerialization.m in Sources */,
 				773AA81C1AA69E850031A6F7 /* UpLoadPhotoTool.m in Sources */,
 				771A29B41A0A2A4600F99B1D /* AFURLSessionManager.m in Sources */,
+				77EE093D1AAECA6C00988934 /* AgentLabelsListViewController.m in Sources */,
 				771A29B31A0A2A4600F99B1D /* AFURLResponseSerialization.m in Sources */,
 				77371BD71A7B8765006D4253 /* CookiesTool.m in Sources */,
 				77C401D61A37DE5600A9D883 /* AgentCenterViewController.m in Sources */,
