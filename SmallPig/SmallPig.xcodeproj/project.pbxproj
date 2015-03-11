@@ -111,6 +111,12 @@
 		77C401E51A3838C000A9D883 /* user_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C401E41A3838C000A9D883 /* user_default.png */; };
 		77C401E81A38521200A9D883 /* MineSaveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401E71A38521200A9D883 /* MineSaveListViewController.m */; };
 		77DEA34A1A7798C0005E5348 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DEA3491A7798C0005E5348 /* ChangePasswordViewController.m */; };
+		77E0B11F1AB01879002F8429 /* Detail_add_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E0B11E1AB01879002F8429 /* Detail_add_pic.png */; };
+		77E0B12A1AB0388D002F8429 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0B1291AB0388D002F8429 /* OrderListViewController.m */; };
+		77E0B12D1AB0389F002F8429 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0B12C1AB0389F002F8429 /* OrderDetailViewController.m */; };
+		77E0B1301AB038B3002F8429 /* SendOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0B12F1AB038B3002F8429 /* SendOrderViewController.m */; };
+		77E0B1341AB03A95002F8429 /* AddPicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0B1331AB03A95002F8429 /* AddPicView.m */; };
+		77E0B1381AB03B64002F8429 /* HouseLabelsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0B1371AB03B64002F8429 /* HouseLabelsView.m */; };
 		77E12FDC1A3044DF00D4B0AF /* home_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDB1A3044DF00D4B0AF /* home_arrow.png */; };
 		77E12FE51A3056CA00D4B0AF /* person_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDE1A3056CA00D4B0AF /* person_icon_default.png */; };
 		77E12FE61A3056CA00D4B0AF /* menu_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FDF1A3056CA00D4B0AF /* menu_icon1.png */; };
@@ -409,6 +415,17 @@
 		77C401E71A38521200A9D883 /* MineSaveListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSaveListViewController.m; sourceTree = "<group>"; };
 		77DEA3481A7798C0005E5348 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		77DEA3491A7798C0005E5348 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		77E0B11E1AB01879002F8429 /* Detail_add_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Detail_add_pic.png; sourceTree = "<group>"; };
+		77E0B1281AB0388D002F8429 /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
+		77E0B1291AB0388D002F8429 /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
+		77E0B12B1AB0389F002F8429 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		77E0B12C1AB0389F002F8429 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		77E0B12E1AB038B3002F8429 /* SendOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendOrderViewController.h; sourceTree = "<group>"; };
+		77E0B12F1AB038B3002F8429 /* SendOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendOrderViewController.m; sourceTree = "<group>"; };
+		77E0B1321AB03A95002F8429 /* AddPicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPicView.h; sourceTree = "<group>"; };
+		77E0B1331AB03A95002F8429 /* AddPicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPicView.m; sourceTree = "<group>"; };
+		77E0B1361AB03B64002F8429 /* HouseLabelsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseLabelsView.h; sourceTree = "<group>"; };
+		77E0B1371AB03B64002F8429 /* HouseLabelsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseLabelsView.m; sourceTree = "<group>"; };
 		77E12FDB1A3044DF00D4B0AF /* home_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_arrow.png; sourceTree = "<group>"; };
 		77E12FDE1A3056CA00D4B0AF /* person_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person_icon_default.png; sourceTree = "<group>"; };
 		77E12FDF1A3056CA00D4B0AF /* menu_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon1.png; sourceTree = "<group>"; };
@@ -761,6 +778,7 @@
 		7729C00C1A39775900FA8398 /* agent_images */ = {
 			isa = PBXGroup;
 			children = (
+				77E0B11E1AB01879002F8429 /* Detail_add_pic.png */,
 				77371BB71A7B1EC6006D4253 /* agent_icon1.png */,
 				77371BB81A7B1EC6006D4253 /* agent_icon2.png */,
 				77371BB91A7B1EC6006D4253 /* agent_icon3.png */,
@@ -880,6 +898,7 @@
 		777E02951A36F3B6008B9E38 /* Agent */ = {
 			isa = PBXGroup;
 			children = (
+				77E0B1271AB03739002F8429 /* Order */,
 				77371BCA1A7B6779006D4253 /* house */,
 				77371BCF1A7B6779006D4253 /* memo */,
 				777E02961A36F3E1008B9E38 /* AgentRankListViewController.h */,
@@ -1054,6 +1073,37 @@
 			path = mine_images;
 			sourceTree = "<group>";
 		};
+		77E0B1271AB03739002F8429 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				77E0B1281AB0388D002F8429 /* OrderListViewController.h */,
+				77E0B1291AB0388D002F8429 /* OrderListViewController.m */,
+				77E0B12B1AB0389F002F8429 /* OrderDetailViewController.h */,
+				77E0B12C1AB0389F002F8429 /* OrderDetailViewController.m */,
+				77E0B12E1AB038B3002F8429 /* SendOrderViewController.h */,
+				77E0B12F1AB038B3002F8429 /* SendOrderViewController.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		77E0B1311AB03A95002F8429 /* AgentAddPicView */ = {
+			isa = PBXGroup;
+			children = (
+				77E0B1321AB03A95002F8429 /* AddPicView.h */,
+				77E0B1331AB03A95002F8429 /* AddPicView.m */,
+			);
+			path = AgentAddPicView;
+			sourceTree = "<group>";
+		};
+		77E0B1351AB03B42002F8429 /* AgentHouseLabelsView */ = {
+			isa = PBXGroup;
+			children = (
+				77E0B1361AB03B64002F8429 /* HouseLabelsView.h */,
+				77E0B1371AB03B64002F8429 /* HouseLabelsView.m */,
+			);
+			path = AgentHouseLabelsView;
+			sourceTree = "<group>";
+		};
 		CE128CEE1A0E69B600DE07E5 /* tabbar_images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1146,8 @@
 		CE6FADFA1A257B1700BC75B4 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				77E0B1351AB03B42002F8429 /* AgentHouseLabelsView */,
+				77E0B1311AB03A95002F8429 /* AgentAddPicView */,
 				7792FF7E1A78C306007DFBF5 /* House_Detail */,
 				77A4CD491A76166D00D26A25 /* LoadingView */,
 				7785CBAA1A303F790053FD09 /* DropDownList */,
@@ -1236,6 +1288,7 @@
 				776859A81A7A0F0700F0C1F5 /* pin.png in Resources */,
 				77A4CD541A76166D00D26A25 /* success@2x.png in Resources */,
 				CEDE25A11A2CB94400C331D4 /* nav_person_up.png in Resources */,
+				77E0B11F1AB01879002F8429 /* Detail_add_pic.png in Resources */,
 				77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */,
 				CE936BD51A2F43DC003F2268 /* home_logo.png in Resources */,
 				CEDE25A91A2CB94E00C331D4 /* btm_home1@2x.png in Resources */,
@@ -1308,6 +1361,7 @@
 				778202C71A0B0A08000BC548 /* CommonTool.m in Sources */,
 				771A29AD1A0A2A4600F99B1D /* AFHTTPRequestOperationManager.m in Sources */,
 				7792FF811A78C357007DFBF5 /* HouseDetailHeader.m in Sources */,
+				77E0B12A1AB0388D002F8429 /* OrderListViewController.m in Sources */,
 				777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */,
 				771A29AC1A0A2A4600F99B1D /* AFHTTPRequestOperation.m in Sources */,
 				7729C00B1A39479800FA8398 /* AgentDetailViewController.m in Sources */,
@@ -1317,6 +1371,7 @@
 				CEDF46BF1A25C98600246531 /* CheckCodeViewController.m in Sources */,
 				771A29AA1A0A2A4600F99B1D /* THProgressView.m in Sources */,
 				771A299D1A0A2A4600F99B1D /* SDImageCache.m in Sources */,
+				77E0B1381AB03B64002F8429 /* HouseLabelsView.m in Sources */,
 				77C265D019F4DB5E0087BF76 /* AppDelegate.m in Sources */,
 				777E02A41A3707CE008B9E38 /* CityListViewController.m in Sources */,
 				771A29B81A0A2A4600F99B1D /* UIButton+AFNetworking.m in Sources */,
@@ -1331,13 +1386,16 @@
 				771A29A61A0A2A4600F99B1D /* UIImage+MultiFormat.m in Sources */,
 				771A29B51A0A2A4600F99B1D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				771A29A11A0A2A4600F99B1D /* SDWebImageDownloaderOperation.m in Sources */,
+				77E0B1301AB038B3002F8429 /* SendOrderViewController.m in Sources */,
 				771A29BC1A0A2A4600F99B1D /* UIWebView+AFNetworking.m in Sources */,
 				77C401DD1A37EBA400A9D883 /* FeedbackViewController.m in Sources */,
 				77EE09401AAEEAA500988934 /* SmallPigTool.m in Sources */,
+				77E0B1341AB03A95002F8429 /* AddPicView.m in Sources */,
 				CEDF46C21A25C9A600246531 /* SetPassWordViewController.m in Sources */,
 				771A29AE1A0A2A4600F99B1D /* AFHTTPSessionManager.m in Sources */,
 				CEECB17B1A77D5F900BE406B /* InformAgainstViewController.m in Sources */,
 				CEDF46B91A25C87700246531 /* RentalHouseListCell.m in Sources */,
+				77E0B12D1AB0389F002F8429 /* OrderDetailViewController.m in Sources */,
 				CE78DFE21A2467DB0093069A /* RequestTool.m in Sources */,
 				7767CEF31A318B140012E775 /* HouseListViewController.m in Sources */,
 				771A299A1A0A2A4600F99B1D /* BasicViewController.m in Sources */,
