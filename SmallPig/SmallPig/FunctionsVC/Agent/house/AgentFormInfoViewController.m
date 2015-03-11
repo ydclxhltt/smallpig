@@ -9,7 +9,7 @@
 #import "AgentFormInfoViewController.h"
 #import "LeftRightLableCell.h"
 
-#define AGENT_FORM_INFO_HEIGHT   50.0
+#define AGENT_FORM_INFO_HEIGHT   44.0
 
 @interface AgentFormInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *headerArray;
@@ -79,7 +79,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return AGENT_FORM_INFO_HEIGHT * scale;
+    return AGENT_FORM_INFO_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

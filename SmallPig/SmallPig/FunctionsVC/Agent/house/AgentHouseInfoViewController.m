@@ -10,13 +10,16 @@
 #import "AgentFormInfoViewController.h"
 #import "LeftRightLableCell.h"
 #import "AgentLabelsListViewController.h"
+#import "AddPicView.h"
 
-#define ROW_NORMAL_HEIGHT  50.0
+#define ROW_NORMAL_HEIGHT  44.0
 #define ROW_OTHER_HEIGHT   85.0
 
 @interface AgentHouseInfoViewController ()<UIActionSheetDelegate>
 {
     float sectionCount;
+    AddPicView *addPicView;
+    UIImageView *houseLabelsView;
 }
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) NSArray *titleArray;
@@ -42,7 +45,7 @@
     [self addBackItem];
     //初始化数据
     sectionCount = 3;
-    self.titleArray = @[@[@"方式"],@[@"城市",@"区",@"片区",@"小区",@"楼",@"房"],@[@"租金",@"面积",@"搂层",@"户型",@"装修",@"朝向"],@[@"房源图片"],@[@"房源亮点"],@[@"标题",@"描述"]];
+    self.titleArray = @[@[@" 方式"],@[@" 城市",@" 分区",@" 片区",@" 小区",@" 楼栋",@" 房间"],@[@" 价格",@" 面积",@" 搂层",@" 户型",@" 装修",@" 朝向"],@[@""],@[@" 房源亮点"],@[@" 标题",@" 描述"]];
     _labelDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"showName",@"",@"paramId",@"",@"paramCode",nil];
     _paramArray = [[NSMutableArray alloc] init];
     //初始化UI
@@ -97,7 +100,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return SETTING_LIST_HEIGHT  * scale;
+    if (indexPath.section == 3)
+    {
+        return ROW_OTHER_HEIGHT;
+    }
+    return ROW_NORMAL_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,7 +139,28 @@
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
-        cell.textLabel.text = @"111";
+        
+        if (indexPath.section == 3)
+        {
+            if (!addPicView)
+            {
+                addPicView = [[AddPicView alloc] initWithFrame:CGRectMake(15.0, 10.0, 290.0, 65.0)];
+            }
+            [cell.contentView addSubview:addPicView];
+        }
+        else if (indexPath.section == 4)
+        {
+            if (!houseLabelsView)
+            {
+                houseLabelsView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, cell.frame.size.width, ROW_OTHER_HEIGHT) placeholderImage:nil];
+                houseLabelsView.backgroundColor = [UIColor clearColor];
+                [cell.contentView addSubview:houseLabelsView];
+                
+                
+            }
+        }
+        else
+            cell.textLabel.text = self.titleArray[indexPath.section][indexPath.row];
     }
     return cell;
 }
@@ -151,7 +179,7 @@
         }
         else
         {
-            if (section == 2)
+            if (section >= 2)
             {
                 return;
             }

@@ -11,7 +11,7 @@
 #define SPACE_X          10.0
 #define ADD_SPACE_X      20.0
 #define ARROW_WIDTH      30.0
-#define SELF_HEIGHT      50.0
+#define SELF_HEIGHT      44.0
 #define TIME_LABEL_WIDTH 120.0
 
 
@@ -47,7 +47,8 @@
 
 - (void)addLabels
 {
-    rightLabel = [CreateViewTool createLabelWithFrame:CGRectMake(self.frame.size.width - ARROW_WIDTH - TIME_LABEL_WIDTH, 0, TIME_LABEL_WIDTH, SELF_HEIGHT) textString:@"" textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(14.0)];
+    rightLabel = [CreateViewTool createLabelWithFrame:CGRectMake(self.frame.size.width - ARROW_WIDTH - TIME_LABEL_WIDTH * CURRENT_SCALE, 0, TIME_LABEL_WIDTH * CURRENT_SCALE, SELF_HEIGHT) textString:@"" textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(14.0)];
+    //rightLabel.backgroundColor = [UIColor redColor];
     rightLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:rightLabel];
     
