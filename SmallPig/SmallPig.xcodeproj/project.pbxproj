@@ -95,6 +95,7 @@
 		77A4CD541A76166D00D26A25 /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4D1A76166D00D26A25 /* success@2x.png */; };
 		77A4CD551A76166D00D26A25 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4E1A76166D00D26A25 /* SVProgressHUD.bundle */; };
 		77A4CD561A76166D00D26A25 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A4CD501A76166D00D26A25 /* SVProgressHUD.m */; };
+		77B2E6511AB17892006E465A /* OrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B2E6501AB17892006E465A /* OrderListCell.m */; };
 		77C265C019F4DB5E0087BF76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265BF19F4DB5E0087BF76 /* Foundation.framework */; };
 		77C265C219F4DB5E0087BF76 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C119F4DB5E0087BF76 /* CoreGraphics.framework */; };
 		77C265C419F4DB5E0087BF76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C319F4DB5E0087BF76 /* UIKit.framework */; };
@@ -390,6 +391,8 @@
 		77A4CD4E1A76166D00D26A25 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		77A4CD4F1A76166D00D26A25 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		77A4CD501A76166D00D26A25 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		77B2E64F1AB17892006E465A /* OrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCell.h; sourceTree = "<group>"; };
+		77B2E6501AB17892006E465A /* OrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCell.m; sourceTree = "<group>"; };
 		77C265BC19F4DB5E0087BF76 /* SmallPig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmallPig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C265BF19F4DB5E0087BF76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77C265C119F4DB5E0087BF76 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1197,6 +1200,8 @@
 				7729C0071A392D1400FA8398 /* SecondHandHouseListCell.m */,
 				77371BC71A7B62AA006D4253 /* LeftRightLableCell.h */,
 				77371BC81A7B62AA006D4253 /* LeftRightLableCell.m */,
+				77B2E64F1AB17892006E465A /* OrderListCell.h */,
+				77B2E6501AB17892006E465A /* OrderListCell.m */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -1405,6 +1410,7 @@
 				773AA81C1AA69E850031A6F7 /* UpLoadPhotoTool.m in Sources */,
 				771A29B41A0A2A4600F99B1D /* AFURLSessionManager.m in Sources */,
 				77EE093D1AAECA6C00988934 /* AgentLabelsListViewController.m in Sources */,
+				77B2E6511AB17892006E465A /* OrderListCell.m in Sources */,
 				771A29B31A0A2A4600F99B1D /* AFURLResponseSerialization.m in Sources */,
 				77371BD71A7B8765006D4253 /* CookiesTool.m in Sources */,
 				77C401D61A37DE5600A9D883 /* AgentCenterViewController.m in Sources */,
