@@ -99,4 +99,10 @@
 //个人中心审核中提示字体颜色
 #define MINE_CENTER_LIST_TIP_COLOR  RGB(222.0,61.0,27.0)
 
+#pragma mark 房源发布
+//标签默认背景颜色
+#define LABEL_BG_COLOR              RGB(230.0,230.0,230.0)
+#define LABEL_NORMAL_TITLE_COLOR    RGB(143.0,143.0,143.0)
+#define LABEL_SELECTED_BG_COLOR     RGB(199.0,233.0,218.0)
+#define LABEL_SELECTED_TITLE_COLOR  APP_MAIN_COLOR
 #endif

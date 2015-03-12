@@ -47,7 +47,7 @@
 
 - (void)addLabels
 {
-    rightLabel = [CreateViewTool createLabelWithFrame:CGRectMake(self.frame.size.width - ARROW_WIDTH - TIME_LABEL_WIDTH * CURRENT_SCALE, 0, TIME_LABEL_WIDTH * CURRENT_SCALE, SELF_HEIGHT) textString:@"" textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(14.0)];
+    rightLabel = [CreateViewTool createLabelWithFrame:CGRectMake(self.frame.size.width - ARROW_WIDTH - TIME_LABEL_WIDTH * CURRENT_SCALE, 0, TIME_LABEL_WIDTH * CURRENT_SCALE, SELF_HEIGHT) textString:@"" textColor:RGB(138.0, 138.0, 138.0) textFont:FONT(14.0)];
     //rightLabel.backgroundColor = [UIColor redColor];
     rightLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:rightLabel];

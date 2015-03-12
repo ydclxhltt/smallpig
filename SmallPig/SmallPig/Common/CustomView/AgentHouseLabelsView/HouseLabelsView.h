@@ -10,4 +10,10 @@
 
 @interface HouseLabelsView : UIView
 
+/*
+ *  设置数据
+ *
+ *  @param  array  标签数组
+ */
+- (void)setLabelsWithArray:(NSArray *)array;
 @end

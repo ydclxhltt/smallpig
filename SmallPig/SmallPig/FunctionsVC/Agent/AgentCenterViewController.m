@@ -10,6 +10,7 @@
 #import "AgentHouseListViewController.h"
 #import "AgentMemoListViewController.h"
 #import "AgentScoreViewController.h"
+#import "OrderListViewController.h"
 
 #define SPACE_Y                   80.0
 #define ICON_WH                   75.0
@@ -155,6 +156,9 @@
     {
         case 0:
             viewController = [[AgentHouseListViewController alloc] init];
+            break;
+        case 1:
+            viewController = [[OrderListViewController alloc] init];
             break;
         case 3:
             viewController = [[AgentScoreViewController alloc] init];

@@ -11,15 +11,19 @@
 #import "LeftRightLableCell.h"
 #import "AgentLabelsListViewController.h"
 #import "AddPicView.h"
+#import "HouseLabelsView.h"
 
-#define ROW_NORMAL_HEIGHT  44.0
-#define ROW_OTHER_HEIGHT   85.0
-
+#define ROW_NORMAL_HEIGHT   44.0
+#define ROW_PIC_HEIGHT      85.0
+#define ROW_LABEL_HEIGHT    95.0
+#define ROW_TEXTVIEW_HEIGHT 60.0
 @interface AgentHouseInfoViewController ()<UIActionSheetDelegate>
 {
     float sectionCount;
     AddPicView *addPicView;
-    UIImageView *houseLabelsView;
+    HouseLabelsView *houseLabelsView;
+    UITextField *titleTextField;
+    UITextView *contentTextView;
 }
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) NSArray *titleArray;
@@ -44,8 +48,8 @@
     }
     [self addBackItem];
     //初始化数据
-    sectionCount = 3;
-    self.titleArray = @[@[@" 方式"],@[@" 城市",@" 分区",@" 片区",@" 小区",@" 楼栋",@" 房间"],@[@" 价格",@" 面积",@" 搂层",@" 户型",@" 装修",@" 朝向"],@[@""],@[@" 房源亮点"],@[@" 标题",@" 描述"]];
+    sectionCount = 6;
+    self.titleArray = @[@[@" 方式"],@[@" 城市",@" 分区",@" 片区",@" 小区",@" 楼栋",@" 房间"],@[@" 价格",@" 面积",@" 搂层",@" 户型",@" 装修",@" 朝向"],@[@""],@[@" 房源亮点"],@[@" 标题:",@" 描述:"]];
     _labelDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"showName",@"",@"paramId",@"",@"paramCode",nil];
     _paramArray = [[NSMutableArray alloc] init];
     //初始化UI
@@ -102,7 +106,18 @@
 {
     if (indexPath.section == 3)
     {
-        return ROW_OTHER_HEIGHT;
+        return ROW_PIC_HEIGHT;
+    }
+    if (indexPath.section == 4)
+    {
+        return ROW_LABEL_HEIGHT;
+    }
+    else if (indexPath.section == 5)
+    {
+        if (indexPath.row == 1)
+        {
+            return ROW_TEXTVIEW_HEIGHT;
+        }
     }
     return ROW_NORMAL_HEIGHT;
 }
@@ -140,6 +155,11 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
         
+        for (UIView *view in cell.contentView.subviews)
+        {
+            [view removeFromSuperview];
+        }
+        
         if (indexPath.section == 3)
         {
             if (!addPicView)
@@ -152,15 +172,37 @@
         {
             if (!houseLabelsView)
             {
-                houseLabelsView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, cell.frame.size.width, ROW_OTHER_HEIGHT) placeholderImage:nil];
+                houseLabelsView = [[HouseLabelsView alloc] initWithFrame:CGRectMake(10,0,300,95)];
                 houseLabelsView.backgroundColor = [UIColor clearColor];
-                [cell.contentView addSubview:houseLabelsView];
-                
-                
             }
+            [cell.contentView addSubview:houseLabelsView];
+            [houseLabelsView setLabelsWithArray:@[@""]];
         }
-        else
-            cell.textLabel.text = self.titleArray[indexPath.section][indexPath.row];
+        else if (indexPath.section == 5)
+        {
+            if (indexPath.row == 0)
+            {
+                cell.textLabel.text = self.titleArray[indexPath.section][indexPath.row];
+                cell.textLabel.font = FONT(15.0);
+                if (!titleTextField)
+                {
+                    titleTextField = [CreateViewTool createTextFieldWithFrame:CGRectMake(60.0, 0, cell.frame.size.width - 65.0 - 10.0, cell.frame.size.height) textColor:HOUSE_LIST_TITLE_COLOR textFont:FONT(15.0) placeholderText:@"5-30个字,不能填写电话"];
+                }
+                [cell.contentView addSubview:titleTextField];
+            }
+            else if (indexPath.row == 1)
+            {
+                UILabel *titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(15.0, 5, 60.0, 20.0) textString:@" 描述:" textColor:[UIColor blackColor] textFont:FONT(15.0)];
+                [cell.contentView  addSubview:titleLabel];
+                if (!contentTextView)
+                {
+                    contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(60.0, 0, cell.frame.size.width - 65.0 - 10.0, cell.frame.size.height)];
+                }
+                [cell.contentView addSubview:contentTextView];
+            }
+
+        }
+        
     }
     return cell;
 }
