@@ -8,6 +8,7 @@
 
 #import "OrderListViewController.h"
 #import "OrderListCell.h"
+#import "OrderDetailViewController.h"
 
 
 @interface OrderListViewController ()
@@ -52,12 +53,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20.0;
+    return 15.0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIImageView *imageView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20.0) placeholderImage:nil];
+    UIImageView *imageView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 15.0) placeholderImage:nil];
     imageView.backgroundColor = [UIColor clearColor];
     return imageView;
 }
@@ -91,7 +92,15 @@
     return cell;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    OrderDetailViewController *orderDetailViewController = [[OrderDetailViewController alloc] init];
+    [self.navigationController pushViewController:orderDetailViewController animated:YES];
+}
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

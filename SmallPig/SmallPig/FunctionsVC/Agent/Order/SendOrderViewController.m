@@ -14,9 +14,22 @@
 
 @implementation SendOrderViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    //设置title
+    self.title = @"创建订单";
+    //添加item
+    [self addBackItem];
+    [self setNavBarItemWithTitle:@"发送" navItemType:rightItem selectorName:@"sendButtonPressed:"];
     // Do any additional setup after loading the view.
+}
+
+
+#pragma mark 发送
+- (void)sendButtonPressed:(UIButton *)sender
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {
