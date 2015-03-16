@@ -97,7 +97,6 @@
 		77A4CD561A76166D00D26A25 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A4CD501A76166D00D26A25 /* SVProgressHUD.m */; };
 		77B2E6511AB17892006E465A /* OrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B2E6501AB17892006E465A /* OrderListCell.m */; };
 		77C265C019F4DB5E0087BF76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265BF19F4DB5E0087BF76 /* Foundation.framework */; };
-		77C265C219F4DB5E0087BF76 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C119F4DB5E0087BF76 /* CoreGraphics.framework */; };
 		77C265C419F4DB5E0087BF76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C319F4DB5E0087BF76 /* UIKit.framework */; };
 		77C265CA19F4DB5E0087BF76 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77C265C819F4DB5E0087BF76 /* InfoPlist.strings */; };
 		77C265CC19F4DB5E0087BF76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C265CB19F4DB5E0087BF76 /* main.m */; };
@@ -130,6 +129,11 @@
 		77EE093D1AAECA6C00988934 /* AgentLabelsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EE093C1AAECA6C00988934 /* AgentLabelsListViewController.m */; };
 		77EE09401AAEEAA500988934 /* SmallPigTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EE093F1AAEEAA500988934 /* SmallPigTool.m */; };
 		77F2BEDD1A761FA40030D162 /* SmallPigApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */; };
+		77F6E2201AB6B9F200138687 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F6E21F1AB6B9F200138687 /* CFNetwork.framework */; };
+		77F6E2221AB6B9FC00138687 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F6E2211AB6B9FC00138687 /* SystemConfiguration.framework */; };
+		77F6E2261AB6BA1A00138687 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F6E2251AB6BA1A00138687 /* libz.dylib */; };
+		77F6E22C1AB6BABA00138687 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F6E22B1AB6BABA00138687 /* MobileCoreServices.framework */; };
+		77F6E22E1AB6BACC00138687 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F6E22D1AB6BACC00138687 /* libxml2.dylib */; };
 		CE128CED1A0E5F8400DE07E5 /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */; };
 		CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE128CF41A0E69B600DE07E5 /* btm_wechat2@2x.png */; };
 		CE78DFE21A2467DB0093069A /* RequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78DFE11A2467DB0093069A /* RequestTool.m */; };
@@ -446,6 +450,14 @@
 		77EE093F1AAEEAA500988934 /* SmallPigTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallPigTool.m; sourceTree = "<group>"; };
 		77F2BEDB1A761FA40030D162 /* SmallPigApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallPigApplication.h; sourceTree = "<group>"; };
 		77F2BEDC1A761FA40030D162 /* SmallPigApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmallPigApplication.m; sourceTree = "<group>"; };
+		77F6E21F1AB6B9F200138687 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		77F6E2211AB6B9FC00138687 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		77F6E2231AB6BA0B00138687 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		77F6E2251AB6BA1A00138687 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		77F6E2271AB6BA3C00138687 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		77F6E2291AB6BA5500138687 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		77F6E22B1AB6BABA00138687 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		77F6E22D1AB6BACC00138687 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
 		CE128CF41A0E69B600DE07E5 /* btm_wechat2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btm_wechat2@2x.png"; sourceTree = "<group>"; };
 		CE2125A21A24285C000C9900 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -490,8 +502,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77F6E22E1AB6BACC00138687 /* libxml2.dylib in Frameworks */,
+				77F6E22C1AB6BABA00138687 /* MobileCoreServices.framework in Frameworks */,
+				77F6E2261AB6BA1A00138687 /* libz.dylib in Frameworks */,
+				77F6E2221AB6B9FC00138687 /* SystemConfiguration.framework in Frameworks */,
+				77F6E2201AB6B9F200138687 /* CFNetwork.framework in Frameworks */,
 				CE128CED1A0E5F8400DE07E5 /* libc++abi.dylib in Frameworks */,
-				77C265C219F4DB5E0087BF76 /* CoreGraphics.framework in Frameworks */,
 				776859A51A7A081D00F0C1F5 /* libbaidumapapi.a in Frameworks */,
 				77C265C419F4DB5E0087BF76 /* UIKit.framework in Frameworks */,
 				77C265C019F4DB5E0087BF76 /* Foundation.framework in Frameworks */,
@@ -1019,6 +1035,14 @@
 		77C265BE19F4DB5E0087BF76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77F6E22D1AB6BACC00138687 /* libxml2.dylib */,
+				77F6E22B1AB6BABA00138687 /* MobileCoreServices.framework */,
+				77F6E2291AB6BA5500138687 /* QuartzCore.framework */,
+				77F6E2271AB6BA3C00138687 /* CoreTelephony.framework */,
+				77F6E2251AB6BA1A00138687 /* libz.dylib */,
+				77F6E2231AB6BA0B00138687 /* CoreData.framework */,
+				77F6E2211AB6B9FC00138687 /* SystemConfiguration.framework */,
+				77F6E21F1AB6B9F200138687 /* CFNetwork.framework */,
 				CE2125A41A24286C000C9900 /* CoreLocation.framework */,
 				CE2125A21A24285C000C9900 /* MapKit.framework */,
 				CE128CEC1A0E5F8400DE07E5 /* libc++abi.dylib */,
@@ -1548,10 +1572,18 @@
 		77C265E919F4DB5E0087BF76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv6,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmallPig/SmallPig-Prefix.pch";
 				INFOPLIST_FILE = "SmallPig/SmallPig-Info.plist";
@@ -1560,9 +1592,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SmallPig/Common/BaiDuMap",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos8.1;
+				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1570,10 +1604,18 @@
 		77C265EA19F4DB5E0087BF76 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv6,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmallPig/SmallPig-Prefix.pch";
 				INFOPLIST_FILE = "SmallPig/SmallPig-Info.plist";
@@ -1585,6 +1627,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos8.1;
+				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
