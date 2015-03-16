@@ -334,6 +334,10 @@
     {
         [self changePersonalRequestWithNickname:@"" userSex:[NSString stringWithFormat:@"%d",(int)buttonIndex + 1]];
     }
+    if (buttonIndex == 2)
+    {
+        return;
+    }
     else
     {
         NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
