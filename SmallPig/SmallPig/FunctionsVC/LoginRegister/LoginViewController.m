@@ -153,7 +153,7 @@
 
 - (void)loginRequest
 {
-    [SVProgressHUD showErrorWithStatus:@"正在登录..."];
+    [SVProgressHUD showWithStatus:@"正在登录..."];
     RequestTool *request = [[RequestTool alloc] init];
     NSString *failureUrl= @"/mobile/login/failure.action";
     NSString *redirextUrl = @"/mobile/login/success.action";

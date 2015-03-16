@@ -12,7 +12,7 @@
 #import "InformAgainstViewController.h"
 #import "UpLoadPhotoTool.h"
 
-@interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>
+@interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UploadPhotoDelegate>
 {
     NSDictionary *userDic;
 }
@@ -120,9 +120,10 @@
         {
             UIImage *defaultImage = [UIImage imageNamed:@"user_default.png"];
             UIImageView *userIconImageView = [CreateViewTool createRoundImageViewWithFrame:CGRectMake(SCREEN_WIDTH - defaultImage.size.width/2 - right_width, (MINE_CENTER_ICON_HEIGHT - defaultImage.size.height/2)/2, defaultImage.size.width/2, defaultImage.size.height/2) placeholderImage:defaultImage borderColor:nil imageUrl:@""];
-            //userDic.url
-            NSString *imageUrl = @"http://112.95.225.12:8068/epg30/selfadaimg.do?path=/posticon/20140930/2846407/173142.jpg";
-            [userIconImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
+            ;
+            NSString *imageUrl = userDic[@"url"];
+            NSLog(@"imageUrl===%@",imageUrl);
+            [userIconImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:defaultImage];
             [cell.contentView addSubview:userIconImageView];
         }
         else
@@ -331,7 +332,7 @@
 {
     if (actionSheet.tag == 102 && buttonIndex != 2)
     {
-        [self changePersonalRequestWithNickname:@"" userSex:[NSString stringWithFormat:@"%d",buttonIndex + 1]];
+        [self changePersonalRequestWithNickname:@"" userSex:[NSString stringWithFormat:@"%d",(int)buttonIndex + 1]];
     }
     else
     {
@@ -350,11 +351,31 @@
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 {
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+     NSLog(@"info===%@",info);
     [picker dismissViewControllerAnimated:YES completion:Nil];
-    
+   
     UpLoadPhotoTool *upLoadTool = [[UpLoadPhotoTool alloc] initWithPhotoArray:@[image] upLoadUrl:UPLOAD_ICON_URL upLoadType:3];
-    NSLog(@"upLoadTool===%@",upLoadTool);
+    upLoadTool.delegate = self;
+}
+
+#pragma mark UpLoadPhotoDelegate
+- (void)uploadPhotoSucessed:(UpLoadPhotoTool *)upLoadPhotoTool
+{
+    NSDictionary *dic = upLoadPhotoTool.responseDic;
+    NSString *photoUrl = dic[@"model"][@"avatarPhoto"][@"photoUrl"];
+    NSString *photoSize = @"224x224";
+    NSString *photoType = dic[@"model"][@"avatarPhoto"][@"photoType"];
+    NSString *url = [SmallPigTool makePhotoUrlWithPhotoUrl:photoUrl photoSize:photoSize photoType:photoType];
+    NSLog(@"url===%@",url);
+    NSDictionary *newUserDic = [NSMutableDictionary dictionaryWithDictionary:[SmallPigApplication shareInstance].userInfoDic];
+    [newUserDic setValue:url forKey:@"url"];
+    [SmallPigApplication shareInstance].userInfoDic = newUserDic;
+    [self viewWillAppear:YES];
+}
+- (void)uploadPhotoFailed:(UpLoadPhotoTool *)upLoadPhotoTool
+{
+    
 }
 
 #pragma mark 修改个人信息请求

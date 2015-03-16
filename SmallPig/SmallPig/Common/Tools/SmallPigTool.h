@@ -16,4 +16,11 @@
  *  @param identification 方位标示
  */
 + (NSString *)getTowardsWithIdentification:(NSString *)identification;
+
+/*
+ *  拼接图片地址
+ *
+ *  @param identification 方位标示
+ */
++ (NSString *)makePhotoUrlWithPhotoUrl:(NSString *)url  photoSize:(NSString *)size photoType:(NSString *)type;
 @end

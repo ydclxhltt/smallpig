@@ -26,7 +26,7 @@
         }
         if ([@"n" isEqualToString:towards])
         {
-            towards = @"倍";
+            towards = @"北";
         }
         if ([@"s" isEqualToString:towards])
         {
@@ -35,5 +35,16 @@
     }
     return towards;
 }
+
+
++ (NSString *)makePhotoUrlWithPhotoUrl:(NSString *)url  photoSize:(NSString *)size photoType:(NSString *)type
+{
+    url = (url) ? url : @"";
+    type = (type) ? type : @"";
+    size = (size) ? size : @"";
+    return [NSString stringWithFormat:@"%@/%@.%@",url,size,type];
+}
+
+
 
 @end

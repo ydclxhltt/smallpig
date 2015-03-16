@@ -9,6 +9,7 @@
 #import "UpLoadPhotoTool.h"
 #import "AFNetworking.h"
 
+
 @interface UpLoadPhotoTool()
 {
     AFHTTPRequestOperation *requestOperation;
@@ -26,6 +27,7 @@
     
     if (self)
     {
+        self.currentIndex = 0;
         self.photoArray = array;
         url = (url) ? url : @"";
         self.upLoadUrl = url;
@@ -56,29 +58,48 @@
 - (void)upLoadPhotoWithImage:(UIImage *)image upLoadType:(int)type
 {
     //上传图片
+    __weak typeof(self) weakSelf = self;
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     manager.requestSerializer = [AFHTTPRequestSerializer  serializer];
     //manager.requestSerializer.timeoutInterval = TIMEOUT;
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];
-    NSLog(@"[NSHTTPCookieStorage sharedHTTPCookieStorage]===%@",[NSHTTPCookieStorage sharedHTTPCookieStorage].cookies);
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];
     requestOperation =  [manager POST:self.upLoadUrl parameters:@{@"category":@(type)}
     constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
-        if (!image)
+        if (image)
         {
-            NSData *data = UIImageJPEGRepresentation(image, 1.0);
-            [formData appendPartWithFormData:data name:@"file"];
+            NSData *data = UIImageJPEGRepresentation(image, .1);
+            [formData appendPartWithFileData:data name:@"file" fileName:@"temp.png" mimeType:@"image/png"];
         }
-
     }
     success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        //NSLog(@"responseObject===%@",responseObject);
+        weakSelf.responseDic = responseObject;
+        NSDictionary *dic = (NSDictionary *)responseObject;
+        int sucess = [dic[@"responseMessage"][@"success"] intValue];
+        if (sucess == 1)
+        {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(uploadPhotoSucessed:)])
+            {
+                [self.delegate uploadPhotoSucessed:self];
+            }
+        }
+        if (sucess == 0)
+        {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(uploadPhotoFailed:)])
+            {
+                [self.delegate uploadPhotoFailed:self];
+            }
+        }
         NSLog(@"operationresponseObject===%@",operation.responseString);
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(uploadPhotoFailed:)])
+        {
+            [self.delegate uploadPhotoFailed:self];
+        }
          NSLog(@"error===%@",error);
     }];
     //添加进度
