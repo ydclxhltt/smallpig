@@ -47,9 +47,19 @@
     NSDictionary *userInfoDic = [[SmallPigApplication shareInstance] userInfoDic];
     if (userInfoDic)
     {
-        NSString *imageUrl = @"http://112.95.225.12:8068/epg30/selfadaimg.do?path=/posticon/20140930/2846407/173142.jpg";
-        [personIconImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
-        
+        NSString *imageUrl = userInfoDic[@"url"];
+        imageUrl = (imageUrl) ? imageUrl : @"";
+        if ([@"" isEqualToString:imageUrl] || [imageUrl isKindOfClass:[NSNull class]])
+        {
+            NSString *userID = userInfoDic[@"id"];
+            userID = (userID) ? userID : @"";
+            [self getPersonInfoWithUserID:userID];
+        }
+        else
+        {
+            //@"http://112.95.225.12:8068/epg30/selfadaimg.do?path=/posticon/20140930/2846407/173142.jpg";
+            [personIconImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"person_icon_default"]];
+        }
         NSString *nickName = userInfoDic[@"nickName"];
         NSString *name = userInfoDic[@"name"];
         name = (name) ? name : @"";
@@ -120,6 +130,34 @@
     }
     return NO;
 }
+
+#pragma mark 获取个人信息
+- (void)getPersonInfoWithUserID:(NSString *)userID
+{
+    userID= (userID) ? userID : @"";
+    NSDictionary  *requestDic = @{@"id":userID};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:GET_PERSONAL_INFO_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^
+    (AFHTTPRequestOperation *operation, id responseDic)
+    {
+        NSLog(@"personInfo_operation.responseString%@",operation.responseString);
+        NSDictionary *dic = (NSDictionary *)responseDic;
+        NSString *photoUrl = dic[@"model"][@"avatarPhoto"][@"photoUrl"];
+        NSString *photoSize = @"0";
+        NSString *photoType = dic[@"model"][@"avatarPhoto"][@"photoType"];
+        NSString *url = [SmallPigTool makePhotoUrlWithPhotoUrl:photoUrl photoSize:photoSize photoType:photoType];
+        NSLog(@"url===%@",url);
+        NSDictionary *newUserDic = [NSMutableDictionary dictionaryWithDictionary:[SmallPigApplication shareInstance].userInfoDic];
+        [newUserDic setValue:url forKey:@"url"];
+        [SmallPigApplication shareInstance].userInfoDic = newUserDic;
+        [self viewWillAppear:YES];
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        
+    }];
+}
+
 
 #pragma mark  tableView委托方法
 

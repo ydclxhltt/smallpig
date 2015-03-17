@@ -64,16 +64,37 @@
 #pragma mark 设置数据
 - (void)setDataWithImageArray:(NSArray *)array
 {
-    self.dataArray = array;
+    if (!array || [array count] == 0)
+    {
+        return;
+    }
+    if (!self.dataArray)
+    {
+        self.dataArray = array;
+    }
+    else
+    {
+        NSMutableArray *newArray = [NSMutableArray arrayWithArray:self.dataArray];
+        [newArray addObjectsFromArray:array];
+        self.dataArray = newArray;
+    }
     if (self.dataArray)
     {
         addImageButton.frame = CGRectMake(self.dataArray.count * (PIC_WH + PIC_ADD_X), 0 , PIC_WH, PIC_WH);
+        if ([self.dataArray count] > self.maxPicCount)
+        {
+            [addImageButton setAlpha:.0];
+        }
     }
     
     if (self.dataArray && [self.dataArray count] > 0)
     {
         for (int i = 0; i < [self.dataArray count]; i++)
         {
+            if ([self.dataArray count] > self.maxPicCount)
+            {
+                return;
+            }
             UIImageView *imageView = (UIImageView *)[picScrollView viewWithTag:i + 1];
             if (!imageView)
             {

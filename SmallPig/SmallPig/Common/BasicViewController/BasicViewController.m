@@ -7,6 +7,7 @@
 //
 
 #import "BasicViewController.h"
+#import "SearchHouseViewController.h"
 
 @interface BasicViewController ()<UIGestureRecognizerDelegate>
 {
@@ -132,7 +133,8 @@
 
 - (void)searchButtonPressed:(UIButton *)sender
 {
-    
+    SearchHouseViewController *searchHouseViewController = [[SearchHouseViewController alloc]init];
+    [self.navigationController pushViewController:searchHouseViewController animated:NO];
 }
 
 

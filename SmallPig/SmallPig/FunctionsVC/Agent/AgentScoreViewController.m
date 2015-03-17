@@ -41,6 +41,13 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //设置不可侧滑
+    [self setMainSideCanSwipe:NO];
+}
+
 #pragma mark 初始化UI
 - (void)createUI
 {

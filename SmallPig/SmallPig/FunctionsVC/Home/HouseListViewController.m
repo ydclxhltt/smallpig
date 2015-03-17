@@ -81,7 +81,6 @@
     self.table .backgroundColor = [UIColor clearColor];
 }
 
-
 #pragma mark 获取数据
 - (void)getData
 {

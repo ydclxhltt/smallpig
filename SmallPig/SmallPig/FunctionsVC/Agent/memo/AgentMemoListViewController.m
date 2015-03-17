@@ -37,6 +37,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self setMainSideCanSwipe:YES];
     //获取数据
     [self getData];
 }

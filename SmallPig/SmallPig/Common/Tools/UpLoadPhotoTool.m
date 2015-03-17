@@ -58,13 +58,13 @@
 - (void)upLoadPhotoWithImage:(UIImage *)image upLoadType:(int)type
 {
     //上传图片
-    __weak typeof(self) weakSelf = self;
+    __block typeof(self) weakSelf = self;
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     manager.requestSerializer = [AFHTTPRequestSerializer  serializer];
     //manager.requestSerializer.timeoutInterval = TIMEOUT;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];
-    requestOperation =  [manager POST:self.upLoadUrl parameters:@{@"category":@(type)}
+    requestOperation =  [manager POST:weakSelf.upLoadUrl parameters:@{@"category":@(type)}
     constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
         if (image)
@@ -80,32 +80,35 @@
         int sucess = [dic[@"responseMessage"][@"success"] intValue];
         if (sucess == 1)
         {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(uploadPhotoSucessed:)])
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(uploadPhotoSucessed:)])
             {
-                [self.delegate uploadPhotoSucessed:self];
+                [weakSelf.delegate uploadPhotoSucessed:self];
             }
         }
         if (sucess == 0)
         {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(uploadPhotoFailed:)])
+            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(uploadPhotoFailed:)])
             {
-                [self.delegate uploadPhotoFailed:self];
+                [weakSelf.delegate uploadPhotoFailed:weakSelf];
             }
         }
         NSLog(@"operationresponseObject===%@",operation.responseString);
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(uploadPhotoFailed:)])
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(uploadPhotoFailed:)])
         {
-            [self.delegate uploadPhotoFailed:self];
+            [weakSelf.delegate uploadPhotoFailed:weakSelf];
         }
          NSLog(@"error===%@",error);
     }];
     //添加进度
     [requestOperation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
      {
-         
+         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(isUploadingPhotoWithProcess:)])
+         {
+             [weakSelf.delegate isUploadingPhotoWithProcess:1.0 - totalBytesExpectedToWrite/totalBytesWritten];
+         }
      }];
     
 }

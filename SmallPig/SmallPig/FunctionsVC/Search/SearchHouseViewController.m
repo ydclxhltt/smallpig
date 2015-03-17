@@ -8,7 +8,11 @@
 
 #import "SearchHouseViewController.h"
 
-@interface SearchHouseViewController ()<UISearchBarDelegate>
+#define SPACE_X          10.0
+#define SEARCHBAR_HEIGHT 30.0
+#define LEFTVIEW_WIDTH   50.0
+
+@interface SearchHouseViewController ()<UISearchBarDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UITableViewDataSource>
 {
     UISearchBar *searchHouseBar;
 }
@@ -19,27 +23,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self createUI];
+    [self setNavBarItemWithTitle:@"" navItemType:LeftItem selectorName:@""];
     // Do any additional setup after loading the view.
 }
 
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    if (!searchHouseBar)
+    {
+        [self createUI];
+    }
     [searchHouseBar becomeFirstResponder];
 }
 
 - (void)createUI
 {
     //添加搜索视图
-    UIImage *searchBgImage = [UIImage imageNamed:@"search_input.png"];
-    searchHouseBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, (44 - searchBgImage.size.height/2)/2,searchBgImage.size.width/2, searchBgImage.size.height/2)];
+    //UIImage *searchBgImage = [UIImage imageNamed:@"search_input.png"];
+    searchHouseBar = [[UISearchBar alloc]initWithFrame:CGRectMake(SPACE_X * CURRENT_SCALE, 0, SCREEN_WIDTH - 2 * SPACE_X * CURRENT_SCALE, SEARCHBAR_HEIGHT)];
     searchHouseBar.delegate = self;
     searchHouseBar.barStyle = UISearchBarStyleDefault;
     searchHouseBar.placeholder = @"搜索";
     searchHouseBar.showsCancelButton = YES;
     [self.navigationController.navigationBar addSubview:searchHouseBar];
     [self resetSearchBar:searchHouseBar];
+    
+    UISearchDisplayController *searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:searchHouseBar contentsController:self];
+    searchDisplayController.delegate = self;
+    searchDisplayController.searchResultsDataSource = self;
+    //searchDisplayController.searchResultsDelegate = self;
+    [searchDisplayController.searchResultsTableView reloadData];
 }
 
 
@@ -66,10 +80,13 @@
         }
         if ([view isKindOfClass:[UITextField class]])
         {
-            UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 40, 30)];
-            leftView.backgroundColor = [UIColor redColor];
+            UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, LEFTVIEW_WIDTH, SEARCHBAR_HEIGHT)];
+            leftView.backgroundColor = [UIColor clearColor];
             ((UITextField *)view).leftView = leftView;
-            [view setBackgroundColor:HOME_SEARCHBAR_BG_COLOR];
+            UILabel *lable = [CreateViewTool createLabelWithFrame:leftView.frame textString:@"二手房" textColor:APP_MAIN_COLOR textFont:FONT(14.0)];
+            lable.textAlignment = NSTextAlignmentCenter;
+            [leftView addSubview:lable];
+            //[view setBackgroundColor:HOME_SEARCHBAR_BG_COLOR];
         }
         if ([view isKindOfClass:[UIButton class]])
         {
@@ -82,14 +99,50 @@
 }
 
 
-
-
-
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    [searchBar resignFirstResponder];
-    [self.navigationController dismissViewControllerAnimated:YES completion:Nil];
+    [UIView animateWithDuration:.3 animations:^{[searchHouseBar removeFromSuperview];} completion:^(BOOL finish){}];
+    [self.navigationController popViewControllerAnimated:NO];
 }
+
+
+
+#pragma mark - tableView代理
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    //searchDisplayController自身有一个searchResultsTableView，所以在执行操作的时候首先要判断是否是搜索结果的tableView，如果是显示的就是搜索结果的数据，如果不是，则显示原始数据。
+    
+    return 3;
+
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"cell_identifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    
+    cell.textLabel.text = @"11111";
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //取消选中
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

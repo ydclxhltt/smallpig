@@ -40,6 +40,12 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setMainSideCanSwipe:YES];
+}
+
 #pragma mark 初始化UI
 - (void)createUI
 {

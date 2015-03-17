@@ -32,6 +32,7 @@
 
 - (void)uploadPhotoSucessed:(UpLoadPhotoTool *)upLoadPhotoTool;
 - (void)uploadPhotoFailed:(UpLoadPhotoTool *)upLoadPhotoTool;
+- (void)isUploadingPhotoWithProcess:(float)process;
 
 @end
 

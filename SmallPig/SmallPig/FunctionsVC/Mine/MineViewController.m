@@ -11,6 +11,7 @@
 #import "ChangePasswordViewController.h"
 #import "InformAgainstViewController.h"
 #import "UpLoadPhotoTool.h"
+#import "OrderListViewController.h"
 
 @interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UploadPhotoDelegate>
 {
@@ -42,7 +43,7 @@
     [self addPersonItem];
     //初始化数据
     userDic = [SmallPigApplication shareInstance].userInfoDic;
-    self.dataArray = (NSMutableArray *)@[@[@"头像",@"昵称",@"性别"],@[@"密码修改",@"绑定手机"],@[@"举报管理",@"升级为经纪人"],@[@"我的订单"],@[@"举报管理"]];
+    self.dataArray = (NSMutableArray *)@[@[@"头像",@"昵称",@"性别"],@[@"密码修改",@"绑定手机"],@[@"举报管理",@"升级为经纪人"],@[@"我的订单"]];
     //初始化UI
     [self createUI];
     // Do any additional setup after loading the view.
@@ -50,6 +51,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    [self setMainSideCanSwipe:YES];
     userDic = [SmallPigApplication shareInstance].userInfoDic;
     [self.table reloadData];
 }
@@ -122,6 +125,7 @@
             UIImageView *userIconImageView = [CreateViewTool createRoundImageViewWithFrame:CGRectMake(SCREEN_WIDTH - defaultImage.size.width/2 - right_width, (MINE_CENTER_ICON_HEIGHT - defaultImage.size.height/2)/2, defaultImage.size.width/2, defaultImage.size.height/2) placeholderImage:defaultImage borderColor:nil imageUrl:@""];
             ;
             NSString *imageUrl = userDic[@"url"];
+            imageUrl = ([imageUrl isKindOfClass:[NSNull class]] || !imageUrl) ? @"" : imageUrl;
             NSLog(@"imageUrl===%@",imageUrl);
             [userIconImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:defaultImage];
             [cell.contentView addSubview:userIconImageView];
@@ -260,6 +264,11 @@
             
         }
     }
+    else if (indexPath.section == 3)
+    {
+        OrderListViewController *orderListViewController = [[OrderListViewController alloc] init];
+        [self.navigationController pushViewController:orderListViewController animated:YES];
+    }
 }
 
 #pragma mark 修改头像
@@ -330,17 +339,17 @@
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.tag == 102 && buttonIndex != 2)
-    {
-        [self changePersonalRequestWithNickname:@"" userSex:[NSString stringWithFormat:@"%d",(int)buttonIndex + 1]];
-    }
-    if (buttonIndex == 2)
+    NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:@"取消"])
     {
         return;
     }
+    else if (actionSheet.tag == 102 && buttonIndex != 2)
+    {
+        [self changePersonalRequestWithNickname:@"" userSex:[NSString stringWithFormat:@"%d",(int)buttonIndex + 1]];
+    }
     else
     {
-        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.allowsEditing = YES;
         picker.delegate = self;
@@ -366,20 +375,45 @@
 #pragma mark UpLoadPhotoDelegate
 - (void)uploadPhotoSucessed:(UpLoadPhotoTool *)upLoadPhotoTool
 {
+    [SVProgressHUD showSuccessWithStatus:@"上传成功"];
     NSDictionary *dic = upLoadPhotoTool.responseDic;
     NSString *photoUrl = dic[@"model"][@"avatarPhoto"][@"photoUrl"];
-    NSString *photoSize = @"224x224";
+    NSString *photoSize = @"0";
     NSString *photoType = dic[@"model"][@"avatarPhoto"][@"photoType"];
+    NSString *iconID = dic[@"model"][@"avatarPhoto"][@"id"];
     NSString *url = [SmallPigTool makePhotoUrlWithPhotoUrl:photoUrl photoSize:photoSize photoType:photoType];
     NSLog(@"url===%@",url);
     NSDictionary *newUserDic = [NSMutableDictionary dictionaryWithDictionary:[SmallPigApplication shareInstance].userInfoDic];
     [newUserDic setValue:url forKey:@"url"];
     [SmallPigApplication shareInstance].userInfoDic = newUserDic;
+    [self updatePersonWithIconID:iconID];
     [self viewWillAppear:YES];
 }
 - (void)uploadPhotoFailed:(UpLoadPhotoTool *)upLoadPhotoTool
 {
-    
+    [SVProgressHUD showErrorWithStatus:@"上传失败"];
+}
+
+- (void)isUploadingPhotoWithProcess:(float)process
+{
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"已上传%.1f％",process * 100]];
+}
+
+#pragma mark 更新个人信息
+- (void)updatePersonWithIconID:(NSString *)iconID
+{
+    iconID = (iconID) ? iconID : @"";
+    NSDictionary  *requestDic = @{@"id":userDic[@"id"],@"avatarPhoto.id":iconID};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:UPDATE_ICON_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^
+     (AFHTTPRequestOperation *operation, id responseDic)
+     {
+         NSLog(@"UPDATE_ICON_URL.responseString%@",operation.responseString);
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         
+     }];
 }
 
 #pragma mark 修改个人信息请求

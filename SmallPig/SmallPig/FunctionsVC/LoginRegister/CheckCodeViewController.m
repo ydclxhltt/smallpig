@@ -62,6 +62,13 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //设置不可侧滑
+    [self setMainSideCanSwipe:NO];
+}
+
 #pragma mark 添加UI
 //初始化视图
 - (void)createUI

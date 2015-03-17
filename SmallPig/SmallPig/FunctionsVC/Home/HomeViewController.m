@@ -14,7 +14,7 @@
 #import "CityListViewController.h"
 #import "AgentRankListViewController.h"
 
-@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIView *greenView;
     DropDownView *dropDownView;
@@ -83,9 +83,9 @@
     
     //添加搜索视图
     UIImage *searchBgImage = [UIImage imageNamed:@"search_input.png"];
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - searchBgImage.size.width/2  * scale)/2, greenView.frame.size.height - searchBgImage.size.height/2 * scale - 15 * scale, searchBgImage.size.width/2 * scale, searchBgImage.size.height/2 * scale)];
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - searchBgImage.size.width/2  * scale)/2, greenView.frame.size.height - searchBgImage.size.height/2 * scale - 20.0 * scale, searchBgImage.size.width/2 * scale, searchBgImage.size.height/2 * scale)];
     searchBar.barStyle = UISearchBarStyleDefault;
-    //searchBar.tintColor = WHITE_COLOR;
+    searchBar.tintColor = WHITE_COLOR;
     searchBar.placeholder = @"搜索";
     [greenView addSubview:searchBar];
     [self resetSearchBar:searchBar];
@@ -118,9 +118,9 @@
         if ([view isKindOfClass:[UITextField class]])
         {
             UITextField *textField = (UITextField *)view;
-            textField.borderStyle = UITextBorderStyleNone;
-            //textField.backgroundColor = [UIColor whiteColor];
-            textField.background = [UIImage imageNamed:@"search_input.png"];
+            textField.borderStyle = UITextBorderStyleRoundedRect;
+            textField.backgroundColor = WHITE_COLOR;
+            //textField.background = [UIImage imageNamed:@"search_input.png"];
             //[view setBackgroundColor:;];
         }
         if ([view isKindOfClass:[UIButton class]])
@@ -146,9 +146,8 @@
 #pragma mark 点击搜索响应事件
 - (void)showSearchView:(UIButton *)sender
 {
-//    SearchHouseViewController *searchHouseViewController = [[SearchHouseViewController alloc]init];
-//    UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:searchHouseViewController];
-//    [self presentViewController:searchNav animated:NO completion:Nil];
+    SearchHouseViewController *searchHouseViewController = [[SearchHouseViewController alloc]init];
+    [self.navigationController pushViewController:searchHouseViewController animated:NO];
 }
 
 - (void)showCityList

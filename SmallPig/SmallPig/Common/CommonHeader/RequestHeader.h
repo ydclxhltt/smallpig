@@ -36,11 +36,17 @@
 //修改个人信息
 #define CHANGE_PERSONAL_URL     MAKE_REQUEST_URL(@"yjk/member/profile.action")
 
+//获取个人信息
+#define GET_PERSONAL_INFO_URL   MAKE_REQUEST_URL(@"yjk/member/find.action")
+
 //修改手机号
 #define CHANGE_MOBILE_URL       MAKE_REQUEST_URL(@"yjk/member/mobile.action")
 
 //上传图片
 #define UPLOAD_ICON_URL         MAKE_REQUEST_URL(@"yjk/member/uploadPhoto.action")
+
+//上传图片
+#define UPDATE_ICON_URL         MAKE_REQUEST_URL(@"yjk/member/update.action")
 
 //分类列表
 #define SORT_LIST_URL           MAKE_REQUEST_URL(@"param/list.action")
