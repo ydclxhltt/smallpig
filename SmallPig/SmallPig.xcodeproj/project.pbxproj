@@ -110,6 +110,8 @@
 		77C401E01A37EBB700A9D883 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401DF1A37EBB700A9D883 /* AboutUsViewController.m */; };
 		77C401E51A3838C000A9D883 /* user_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C401E41A3838C000A9D883 /* user_default.png */; };
 		77C401E81A38521200A9D883 /* MineSaveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C401E71A38521200A9D883 /* MineSaveListViewController.m */; };
+		77D0B58B1AB96DB3000BE0AE /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77D0B5881AB96DB3000BE0AE /* ZYQAssetPicker.Bundle */; };
+		77D0B58C1AB96DB3000BE0AE /* AssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D0B58A1AB96DB3000BE0AE /* AssetPickerController.m */; };
 		77DEA34A1A7798C0005E5348 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DEA3491A7798C0005E5348 /* ChangePasswordViewController.m */; };
 		77E0B11F1AB01879002F8429 /* Detail_add_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E0B11E1AB01879002F8429 /* Detail_add_pic.png */; };
 		77E0B12A1AB0388D002F8429 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0B1291AB0388D002F8429 /* OrderListViewController.m */; };
@@ -420,6 +422,9 @@
 		77C401E41A3838C000A9D883 /* user_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_default.png; sourceTree = "<group>"; };
 		77C401E61A38521200A9D883 /* MineSaveListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSaveListViewController.h; sourceTree = "<group>"; };
 		77C401E71A38521200A9D883 /* MineSaveListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineSaveListViewController.m; sourceTree = "<group>"; };
+		77D0B5881AB96DB3000BE0AE /* ZYQAssetPicker.Bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYQAssetPicker.Bundle; sourceTree = "<group>"; };
+		77D0B5891AB96DB3000BE0AE /* AssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetPickerController.h; sourceTree = "<group>"; };
+		77D0B58A1AB96DB3000BE0AE /* AssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetPickerController.m; sourceTree = "<group>"; };
 		77DEA3481A7798C0005E5348 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		77DEA3491A7798C0005E5348 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		77E0B11E1AB01879002F8429 /* Detail_add_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Detail_add_pic.png; sourceTree = "<group>"; };
@@ -813,6 +818,7 @@
 		77371BCA1A7B6779006D4253 /* house */ = {
 			isa = PBXGroup;
 			children = (
+				77D0B5871AB96DB3000BE0AE /* AssetPickerController */,
 				77371BCB1A7B6779006D4253 /* AgentHouseInfoViewController.h */,
 				77371BCC1A7B6779006D4253 /* AgentHouseInfoViewController.m */,
 				77371BCD1A7B6779006D4253 /* AgentHouseListViewController.h */,
@@ -1100,6 +1106,16 @@
 			path = mine_images;
 			sourceTree = "<group>";
 		};
+		77D0B5871AB96DB3000BE0AE /* AssetPickerController */ = {
+			isa = PBXGroup;
+			children = (
+				77D0B5881AB96DB3000BE0AE /* ZYQAssetPicker.Bundle */,
+				77D0B5891AB96DB3000BE0AE /* AssetPickerController.h */,
+				77D0B58A1AB96DB3000BE0AE /* AssetPickerController.m */,
+			);
+			path = AssetPickerController;
+			sourceTree = "<group>";
+		};
 		77E0B1271AB03739002F8429 /* Order */ = {
 			isa = PBXGroup;
 			children = (
@@ -1319,6 +1335,7 @@
 				CEDE25A11A2CB94400C331D4 /* nav_person_up.png in Resources */,
 				77E0B11F1AB01879002F8429 /* Detail_add_pic.png in Resources */,
 				77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */,
+				77D0B58B1AB96DB3000BE0AE /* ZYQAssetPicker.Bundle in Resources */,
 				CE936BD51A2F43DC003F2268 /* home_logo.png in Resources */,
 				CEDE25A91A2CB94E00C331D4 /* btm_home1@2x.png in Resources */,
 				77A4CD521A76166D00D26A25 /* error@2x.png in Resources */,
@@ -1405,6 +1422,7 @@
 				777E02A41A3707CE008B9E38 /* CityListViewController.m in Sources */,
 				771A29B81A0A2A4600F99B1D /* UIButton+AFNetworking.m in Sources */,
 				771A29C01A0A2AC400F99B1D /* CreateViewTool.m in Sources */,
+				77D0B58C1AB96DB3000BE0AE /* AssetPickerController.m in Sources */,
 				77C401E81A38521200A9D883 /* MineSaveListViewController.m in Sources */,
 				77C265CC19F4DB5E0087BF76 /* main.m in Sources */,
 				771A29B91A0A2A4600F99B1D /* UIImageView+AFNetworking.m in Sources */,
