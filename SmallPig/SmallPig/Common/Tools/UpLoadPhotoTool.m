@@ -48,6 +48,7 @@
         ^{
             for (int i = 0; i < [self.photoArray count]; i++)
             {
+                self.currentIndex = i;
                 [self upLoadPhotoWithImage:self.photoArray[i] upLoadType:self.type];
             }
         });
@@ -105,9 +106,13 @@
     //添加进度
     [requestOperation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
      {
-         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(isUploadingPhotoWithProcess:)])
+         NSLog(@"totalBytesWritten===%lld====totalBytesExpectedToWrite====%lld",totalBytesWritten,totalBytesExpectedToWrite);
+         if (totalBytesWritten <= totalBytesExpectedToWrite)
          {
-             [weakSelf.delegate isUploadingPhotoWithProcess:1.0 - totalBytesExpectedToWrite/totalBytesWritten];
+             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(isUploadingPhotoWithProcess:)])
+             {
+                 [weakSelf.delegate isUploadingPhotoWithProcess:totalBytesWritten * 1.0/totalBytesExpectedToWrite];
+             }
          }
      }];
     

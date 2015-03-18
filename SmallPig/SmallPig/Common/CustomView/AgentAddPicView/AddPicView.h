@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol  AddPicViewDelegate;
+
 @interface AddPicView : UIView
 @property (nonatomic, assign) int maxPicCount;
+@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, assign) id<AddPicViewDelegate> delegate;
+
+- (void)setDataWithImageArray:(NSArray *)array;
+@end
+
+@protocol AddPicViewDelegate <NSObject>
+
+@optional
+
+- (void)addPicButtonClicked:(AddPicView *)addPicView;
+- (void)addPicView:(AddPicView *)addPicView clickedImageViewIndex:(int)index;
+
 @end

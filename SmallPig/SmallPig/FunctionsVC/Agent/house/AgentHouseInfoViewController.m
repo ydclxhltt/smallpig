@@ -12,15 +12,16 @@
 #import "AgentLabelsListViewController.h"
 #import "AddPicView.h"
 #import "HouseLabelsView.h"
+#import "AssetPickerController.h"
 
 #define ROW_NORMAL_HEIGHT   44.0
 #define ROW_PIC_HEIGHT      85.0
 #define ROW_LABEL_HEIGHT    95.0
 #define ROW_TEXTVIEW_HEIGHT 60.0
-@interface AgentHouseInfoViewController ()<UIActionSheetDelegate>
+@interface AgentHouseInfoViewController ()<UIActionSheetDelegate,AddPicViewDelegate,AssetPickerControllerDelegate>
 {
     float sectionCount;
-    AddPicView *addPicView;
+    AddPicView *picView;
     HouseLabelsView *houseLabelsView;
     UITextField *titleTextField;
     UITextView *contentTextView;
@@ -162,11 +163,13 @@
         
         if (indexPath.section == 3)
         {
-            if (!addPicView)
+            if (!picView)
             {
-                addPicView = [[AddPicView alloc] initWithFrame:CGRectMake(15.0, 10.0, 290.0, 65.0)];
+                picView = [[AddPicView alloc] initWithFrame:CGRectMake(15.0, 10.0, 290.0, 65.0)];
+                picView.delegate = self;
+                picView.maxPicCount = 4;
             }
-            [cell.contentView addSubview:addPicView];
+            [cell.contentView addSubview:picView];
         }
         else if (indexPath.section == 4)
         {
@@ -417,6 +420,56 @@
     [self.dataArray replaceObjectAtIndex:section withObject:array];
     [self.table reloadData];
 }
+
+#pragma mark 点击添加按钮
+- (void)addPicButtonClicked:(AddPicView *)addPicView
+{
+    int maxCount = 4;
+    if (addPicView.dataArray)
+    {
+        maxCount -= [addPicView.dataArray count];
+    }
+    AssetPickerController *picker = [[AssetPickerController alloc] init];
+//    [picker.navigationController.navigationBar setBackgroundImage:[CommonTool imageWithColor:APP_MAIN_COLOR] forBarMetrics:UIBarMetricsDefault];
+    [picker.navigationBar setTintColor:WHITE_COLOR];
+    picker.maximumNumberOfSelection = maxCount;
+    picker.assetsFilter = [ALAssetsFilter allPhotos];
+    picker.showEmptyGroups=NO;
+    picker.delegate = self;
+    picker.selectionFilter = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings)
+                              {
+        if ([[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo])
+        {
+            NSTimeInterval duration = [[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyDuration] doubleValue];
+            return duration >= 5;
+        }
+        else
+        {
+            return YES;
+        }
+    }];
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+#pragma mark - AssetPickerController Delegate
+-(void)assetPickerController:(AssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+    ^{
+        NSMutableArray *array = [NSMutableArray array];
+        for (int i = 0; i < assets.count; i++)
+        {
+            ALAsset *asset=assets[i];
+            UIImage *tempImg=[UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage];
+            [array addObject:tempImg];
+        }
+        dispatch_async(dispatch_get_main_queue(),
+       ^{
+           [picView setDataWithImageArray:array];
+        });
+    });
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

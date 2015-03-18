@@ -7,17 +7,17 @@
 //
 
 #import "AddPicView.h"
+#import "UpLoadPhotoTool.h"
 
 #define PIC_WH          65.0
 #define PIC_ADD_X       10.0
 #define ADD_IMAGE_NAME  @"Detail_add_pic.png"
 
-@interface AddPicView()
+@interface AddPicView()<UploadPhotoDelegate>
 {
     UIScrollView *picScrollView;
     UIButton *addImageButton;
 }
-@property (nonatomic, strong) NSArray *dataArray;
 @end
 
 @implementation AddPicView
@@ -89,6 +89,7 @@
     
     if (self.dataArray && [self.dataArray count] > 0)
     {
+        NSMutableArray *uploadArray = [[NSMutableArray alloc] init];
         for (int i = 0; i < [self.dataArray count]; i++)
         {
             if ([self.dataArray count] > self.maxPicCount)
@@ -98,26 +99,52 @@
             UIImageView *imageView = (UIImageView *)[picScrollView viewWithTag:i + 1];
             if (!imageView)
             {
-                imageView = [CreateViewTool createImageViewWithFrame:CGRectMake(i * (PIC_WH + PIC_ADD_X), 0, PIC_WH, PIC_WH) placeholderImage:self.dataArray[i]];
+                imageView = [CreateViewTool createImageViewWithFrame:CGRectMake(i * (PIC_WH + PIC_ADD_X), 0, PIC_WH, PIC_WH) placeholderImage:nil];
+                imageView.contentMode = UIViewContentModeScaleToFill;
                 imageView.tag = i + 1;
                 UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewPressed:)];
                 [imageView addGestureRecognizer:tapGesture];
+                [picScrollView addSubview:imageView];
             }
             if (imageView.image != self.dataArray[i])
             {
-                //上传
+                [uploadArray addObject:self.dataArray[i]];
             }
             imageView.image = self.dataArray[i];
 
         }
+        //上传
+        UpLoadPhotoTool *upLoadTool = [[UpLoadPhotoTool alloc] initWithPhotoArray:uploadArray upLoadUrl:UPLOAD_ROOM_PIC_URL upLoadType:0];
+        upLoadTool.delegate = self;
     }
 }
+
+
+#pragma mark UpLoadPhotoDelegate
+- (void)uploadPhotoSucessed:(UpLoadPhotoTool *)upLoadPhotoTool
+{
+    //[SVProgressHUD showSuccessWithStatus:@"上传成功"];
+}
+- (void)uploadPhotoFailed:(UpLoadPhotoTool *)upLoadPhotoTool
+{
+    //[SVProgressHUD showErrorWithStatus:@"上传失败"];
+}
+
+- (void)isUploadingPhotoWithProcess:(float)process
+{
+    NSLog(@"=====%f",process * 100);
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"已上传%.1f％",process * 100]];
+}
+
 
 
 #pragma mark 添加图片
 - (void)addPicButtonPressed:(UIButton *)sender
 {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(addPicButtonClicked:)])
+    {
+        [self.delegate addPicButtonClicked:self];
+    }
 }
 
 
