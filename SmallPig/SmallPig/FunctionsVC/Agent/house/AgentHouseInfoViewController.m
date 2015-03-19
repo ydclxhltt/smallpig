@@ -16,15 +16,19 @@
 
 #define ROW_NORMAL_HEIGHT   44.0
 #define ROW_PIC_HEIGHT      85.0
-#define ROW_LABEL_HEIGHT    95.0
+#define ROW_LABEL_HEIGHT    75.0
 #define ROW_TEXTVIEW_HEIGHT 60.0
-@interface AgentHouseInfoViewController ()<UIActionSheetDelegate,AddPicViewDelegate,AssetPickerControllerDelegate>
+#define LABELS_HEIGHT       25.0
+@interface AgentHouseInfoViewController ()<UIActionSheetDelegate,AddPicViewDelegate,AssetPickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate>
 {
     float sectionCount;
     AddPicView *picView;
     HouseLabelsView *houseLabelsView;
+    HouseLabelsView *houseGoodLabelsView;
     UITextField *titleTextField;
     UITextView *contentTextView;
+    float labelsHeight;
+    float goodLabelsHeight;
 }
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) NSArray *titleArray;
@@ -32,6 +36,9 @@
 @property (nonatomic, strong) NSMutableDictionary *labelDic;
 //保存点过的ID
 @property (nonatomic, strong) NSMutableArray *paramArray;
+@property (nonatomic, strong) NSArray *houseLabelArray;
+@property (nonatomic, strong) NSArray *houseGoodLabelArray;
+@property (nonatomic, strong) NSString *roomID;
 @end
 
 @implementation AgentHouseInfoViewController
@@ -48,9 +55,33 @@
         [self setNavBarItemWithTitle:@"下一步" navItemType:rightItem selectorName:@"nextButtonPressed:"];
     }
     [self addBackItem];
+    //获取房屋标签
+    self.houseLabelArray = [[SmallPigApplication shareInstance] houseLabelsArray];
+    if (!self.houseLabelArray)
+    {
+        [APP_DELEGATE getHouseLabels];
+        labelsHeight = ROW_LABEL_HEIGHT;
+    }
+    else
+    {
+        int row = ceil([self.houseLabelArray count]/4);
+        labelsHeight = LABELS_HEIGHT * row + ADD_Y * (row - 1) + 2 * SPACE_Y  + LABEL_HEIGHT + ADD_Y;
+    }
+    self.houseGoodLabelArray = [[SmallPigApplication shareInstance] houseGoodLabelsArray];
+    if (!self.houseGoodLabelArray)
+    {
+        [APP_DELEGATE getGoodHouseLabels];
+        goodLabelsHeight = ROW_LABEL_HEIGHT;
+    }
+    else
+    {
+        int row = ceil([self.houseGoodLabelArray count]/4);
+        goodLabelsHeight = LABELS_HEIGHT * row + ADD_Y * (row - 1) + 2 * SPACE_Y  + LABEL_HEIGHT + ADD_Y;
+    }
     //初始化数据
-    sectionCount = 6;
-    self.titleArray = @[@[@" 方式"],@[@" 城市",@" 分区",@" 片区",@" 小区",@" 楼栋",@" 房间"],@[@" 价格",@" 面积",@" 搂层",@" 户型",@" 装修",@" 朝向"],@[@""],@[@" 房源亮点"],@[@" 标题:",@" 描述:"]];
+    sectionCount = 7;
+    
+    self.titleArray = @[@[@" 方式"],@[@" 城市",@" 分区",@" 片区",@" 小区",@" 楼栋",@" 房间"],@[@" 价格",@" 面积",@" 搂层",@" 户型",@" 装修",@" 朝向"],@[@""],@[@"房源标签"],@[@"房源亮点"],@[@" 标题:",@" 描述:"]];
     _labelDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"showName",@"",@"paramId",@"",@"paramCode",nil];
     _paramArray = [[NSMutableArray alloc] init];
     //初始化UI
@@ -109,11 +140,15 @@
     {
         return ROW_PIC_HEIGHT;
     }
+    if (indexPath.section == 5)
+    {
+        return labelsHeight;
+    }
     if (indexPath.section == 4)
     {
-        return ROW_LABEL_HEIGHT;
+        return goodLabelsHeight;
     }
-    else if (indexPath.section == 5)
+    else if (indexPath.section == 6)
     {
         if (indexPath.row == 1)
         {
@@ -165,7 +200,7 @@
         {
             if (!picView)
             {
-                picView = [[AddPicView alloc] initWithFrame:CGRectMake(15.0, 10.0, 290.0, 65.0)];
+                picView = [[AddPicView alloc] initWithFrame:CGRectMake(15.0, 10.0, cell.frame.size.width - 2 * 15.0, 65.0)];
                 picView.delegate = self;
                 picView.maxPicCount = 4;
             }
@@ -173,15 +208,28 @@
         }
         else if (indexPath.section == 4)
         {
+            if (!houseGoodLabelsView)
+            {
+                houseGoodLabelsView = [[HouseLabelsView alloc] initWithFrame:CGRectMake(SPACE_X,0,cell.frame.size.width - 2 * SPACE_X,goodLabelsHeight) LablesTitle:self.titleArray[indexPath.section][indexPath.row]];
+                houseGoodLabelsView.backgroundColor = [UIColor clearColor];
+            }
+            [houseGoodLabelsView setLabelsWithArray:self.houseGoodLabelArray];
+            [cell.contentView addSubview:houseGoodLabelsView];
+            
+        }
+
+        else if (indexPath.section == 5)
+        {
             if (!houseLabelsView)
             {
-                houseLabelsView = [[HouseLabelsView alloc] initWithFrame:CGRectMake(10,0,300,95)];
+                houseLabelsView = [[HouseLabelsView alloc] initWithFrame:CGRectMake(SPACE_X,0,cell.frame.size.width - 2 * SPACE_X,labelsHeight) LablesTitle:self.titleArray[indexPath.section][indexPath.row]];
                 houseLabelsView.backgroundColor = [UIColor clearColor];
             }
+            [houseLabelsView setLabelsWithArray:self.houseLabelArray];
             [cell.contentView addSubview:houseLabelsView];
-            [houseLabelsView setLabelsWithArray:@[@""]];
+            
         }
-        else if (indexPath.section == 5)
+        else if (indexPath.section == 6)
         {
             if (indexPath.row == 0)
             {
@@ -190,16 +238,19 @@
                 if (!titleTextField)
                 {
                     titleTextField = [CreateViewTool createTextFieldWithFrame:CGRectMake(60.0, 0, cell.frame.size.width - 65.0 - 10.0, cell.frame.size.height) textColor:HOUSE_LIST_TITLE_COLOR textFont:FONT(15.0) placeholderText:@"5-30个字,不能填写电话"];
+                    titleTextField.delegate = self;
                 }
                 [cell.contentView addSubview:titleTextField];
             }
             else if (indexPath.row == 1)
             {
+                cell.textLabel.text = @"";
                 UILabel *titleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(15.0, 5, 60.0, 20.0) textString:@" 描述:" textColor:[UIColor blackColor] textFont:FONT(15.0)];
                 [cell.contentView  addSubview:titleLabel];
                 if (!contentTextView)
                 {
-                    contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(60.0, 0, cell.frame.size.width - 65.0 - 10.0, cell.frame.size.height)];
+                    contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(60.0, 10.0, cell.frame.size.width - 65.0 - 10.0, ROW_TEXTVIEW_HEIGHT - 10.0)];
+                    contentTextView.delegate = self;
                 }
                 [cell.contentView addSubview:contentTextView];
             }
@@ -327,6 +378,7 @@
     if (self.selectedIndexPath.section == 1 && self.selectedIndexPath.row == 5)
     {
         showName = dic[@"model"][@"room"][@"showName"];
+        self.roomID = dic[@"model"][@"room"][@"id"];
     }
     showName = (showName) ? showName : @"";
     [self.labelDic setValue:showName forKey:@"showName"];
@@ -362,15 +414,17 @@
     //选完房间验证通过后 刷新表
     if (self.selectedIndexPath.section == 1 && self.selectedIndexPath.row == 5)
     {
-        NSString *price = [NSString stringWithFormat:@"%@",dic[@"model"][@"price"]];
-        price = (price) ? price : @"";
+        NSString *price = [NSString stringWithFormat:@"%.0f万",[dic[@"model"][@"price"] floatValue]/10000];
         NSString *square = [NSString stringWithFormat:@"%@",dic[@"model"][@"room"][@"square"]];
-        square = (square) ? square : @"";
+        square = (square) ? [square stringByAppendingString:@"平米"] : @"";
         NSString *floor= [NSString stringWithFormat:@"%@",dic[@"model"][@"room"][@"floor"]];
-        floor = (floor) ? floor : @"";
-        NSString *roomType = dic[@"model"][@"roomType"];
-        roomType = (roomType) ? roomType : @"";
-        NSString *roomFeature = dic[@"model"][@"roomFeature"];
+        floor = (floor) ? [floor stringByAppendingString:@"层"] : @"";
+        int bedroomCount = [dic[@"model"][@"room"][@"bedroomCount"] intValue];
+        int hallCount = [dic[@"model"][@"room"][@"hallCount"] intValue];
+        int kitchenCount = [dic[@"model"][@"room"][@"kitchenCount"] intValue];
+        int bathroomCount = [dic[@"model"][@"room"][@"bathroomCount"] intValue];
+        NSString *roomType = [NSString stringWithFormat:@"%d室%d厅%d厨%d卫",bedroomCount,hallCount,kitchenCount,bathroomCount];
+        NSString *roomFeature = [SmallPigTool getDecorateWithIndex:[dic[@"model"][@"room"][@"decorate"] intValue]];
         roomFeature = (roomFeature) ? roomFeature : @"";
         NSString *towards = dic[@"model"][@"room"][@"towards"];
         towards = (towards) ? towards : @"";
@@ -378,7 +432,7 @@
         
         NSArray *array = @[price,square,floor,roomType,roomFeature,towards];
         [self.dataArray replaceObjectAtIndex:self.selectedIndexPath.section + 1 withObject:array];
-        sectionCount = 6;
+        sectionCount = 7;
         [self.table reloadData];
     }
 }
@@ -470,6 +524,31 @@
     });
 }
 
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+//#pragma mark UITextViewDelegate
+//
+//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+//{
+//    [textView resignFirstResponder];
+//    return YES;
+//}
+//
+//- (void)textViewDidEndEditing:(UITextView *)textView
+//{
+//    [textView resignFirstResponder];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

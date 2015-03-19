@@ -75,6 +75,9 @@
     [self setRootView];
     self.window.rootViewController=_sideViewController;
     
+    //获取房屋标签
+    [self getHouseLabels];
+    [self getGoodHouseLabels];
     return YES;
 }
 
@@ -133,6 +136,44 @@
     }
 }
 */
+
+#pragma mark 获取房屋标签
+
+- (void)getGoodHouseLabels
+{
+    [self getHouseLabelsWithParma:@"PARAM.ROOMFEATURE"];
+}
+- (void)getHouseLabels
+{
+    [self getHouseLabelsWithParma:@"PARAM.ROOMLABEL"];
+}
+- (void)getHouseLabelsWithParma:(NSString *)parma
+{
+    NSDictionary *requestDic = @{@"paramCategory":parma};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:SORT_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+    {
+        NSLog(@"responseDic====%@",responseDic);
+        int sucess = [responseDic[@"responseMessage"][@"success"] intValue];
+        if (sucess == 1)
+        {
+            if ([parma isEqualToString:@"PARAM.ROOMFEATURE"])
+            {
+                [[SmallPigApplication shareInstance] setHouseGoodLabelsArray:responseDic[@"model"][@"paramList"]];
+            }
+            else
+            {
+                [[SmallPigApplication shareInstance] setHouseLabelsArray:responseDic[@"model"][@"paramList"]];
+            }
+            
+        }
+    }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        
+    }];
+}
+
 
 #pragma mark 百度SDK启动地图认证Delegate
 - (void)onGetNetworkState:(int)iError

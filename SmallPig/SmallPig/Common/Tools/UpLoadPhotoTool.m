@@ -60,18 +60,21 @@
 {
     //上传图片
     __block typeof(self) weakSelf = self;
+    NSDictionary *requestDic = @{@"category":@(type)};
+    requestDic = (type == 0) ? @{} : requestDic;
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     manager.requestSerializer = [AFHTTPRequestSerializer  serializer];
     //manager.requestSerializer.timeoutInterval = TIMEOUT;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];
-    requestOperation =  [manager POST:weakSelf.upLoadUrl parameters:@{@"category":@(type)}
+    requestOperation =  [manager POST:weakSelf.upLoadUrl parameters:requestDic
     constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
         if (image)
         {
             NSData *data = UIImageJPEGRepresentation(image, .1);
-            [formData appendPartWithFileData:data name:@"file" fileName:@"temp.png" mimeType:@"image/png"];
+            NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
+            [formData appendPartWithFileData:data name:@"file" fileName:[NSString stringWithFormat:@"%.0f%d.png",time,self.currentIndex] mimeType:@"image/png"];
         }
     }
     success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -109,12 +112,13 @@
          NSLog(@"totalBytesWritten===%lld====totalBytesExpectedToWrite====%lld",totalBytesWritten,totalBytesExpectedToWrite);
          if (totalBytesWritten <= totalBytesExpectedToWrite)
          {
-             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(isUploadingPhotoWithProcess:)])
+             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(uploadPhoto:isUploadedPhotoProcess:)])
              {
-                 [weakSelf.delegate isUploadingPhotoWithProcess:totalBytesWritten * 1.0/totalBytesExpectedToWrite];
+                 [weakSelf.delegate uploadPhoto:weakSelf isUploadedPhotoProcess:totalBytesWritten * 1.0/totalBytesExpectedToWrite];
              }
          }
      }];
+    [requestOperation waitUntilFinished];
     
 }
 

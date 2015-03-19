@@ -14,4 +14,9 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) MainSideViewController *sideViewController;
 
+/*
+ *  获取房屋亮点标签
+ */
+- (void)getHouseLabels;
+- (void)getGoodHouseLabels;
 @end

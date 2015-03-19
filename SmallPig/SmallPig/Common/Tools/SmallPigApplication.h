@@ -16,7 +16,8 @@
 
 @property (nonatomic, strong) NSDictionary *userInfoDic;
 @property (nonatomic, strong) NSArray *cityList;
-
+@property (nonatomic, strong) NSArray *houseLabelsArray;
+@property (nonatomic, strong) NSArray *houseGoodLabelsArray;
 /*
  *  构建单例
  */

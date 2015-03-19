@@ -23,4 +23,11 @@
  *  @param identification 方位标示
  */
 + (NSString *)makePhotoUrlWithPhotoUrl:(NSString *)url  photoSize:(NSString *)size photoType:(NSString *)type;
+
+/*
+ *  装修
+ *
+ *  @param index 装修表示
+ */
++ (NSString *)getDecorateWithIndex:(int)index;
 @end

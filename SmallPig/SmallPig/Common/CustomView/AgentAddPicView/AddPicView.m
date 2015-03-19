@@ -18,6 +18,7 @@
     UIScrollView *picScrollView;
     UIButton *addImageButton;
 }
+@property (nonatomic, strong) NSMutableArray *picListArray;
 @end
 
 @implementation AddPicView
@@ -111,7 +112,6 @@
                 [uploadArray addObject:self.dataArray[i]];
             }
             imageView.image = self.dataArray[i];
-
         }
         //上传
         UpLoadPhotoTool *upLoadTool = [[UpLoadPhotoTool alloc] initWithPhotoArray:uploadArray upLoadUrl:UPLOAD_ROOM_PIC_URL upLoadType:0];
@@ -124,16 +124,29 @@
 - (void)uploadPhotoSucessed:(UpLoadPhotoTool *)upLoadPhotoTool
 {
     //[SVProgressHUD showSuccessWithStatus:@"上传成功"];
+    //UIImageView *imageView = (UIImageView *)[picScrollView viewWithTag:upLoadPhotoTool.currentIndex + 1];
+    //imageView.alpha = 1.0;
+    NSDictionary *responseDic = (NSDictionary *)upLoadPhotoTool.responseDic;
+    NSDictionary *picDic = responseDic[@"model"][@"photoList"][0];
+    if (!self.picListArray)
+    {
+        self.picListArray = [NSMutableArray arrayWithCapacity:1];
+    }
+    [self.picListArray addObject:@([picDic[@"id"] intValue])];
 }
 - (void)uploadPhotoFailed:(UpLoadPhotoTool *)upLoadPhotoTool
 {
     //[SVProgressHUD showErrorWithStatus:@"上传失败"];
+    //UIImageView *imageView = (UIImageView *)[picScrollView viewWithTag:upLoadPhotoTool.currentIndex + 1];
+    //imageView.alpha = 0.5;
 }
 
-- (void)isUploadingPhotoWithProcess:(float)process
+- (void)uploadPhoto:(UpLoadPhotoTool *)upLoadPhotoTool isUploadedPhotoProcess:(float)process
 {
     NSLog(@"=====%f",process * 100);
-    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"已上传%.1f％",process * 100]];
+    //UIImageView *imageView = (UIImageView *)[picScrollView viewWithTag:upLoadPhotoTool.currentIndex + 1];
+    //imageView.alpha = 0.5 + 0.5 * process;
+    //[SVProgressHUD showWithStatus:[NSString stringWithFormat:@"已上传%.1f％",process * 100]];
 }
 
 
