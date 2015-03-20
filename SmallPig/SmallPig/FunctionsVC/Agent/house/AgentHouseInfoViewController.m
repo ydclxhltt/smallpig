@@ -19,6 +19,7 @@
 #define ROW_LABEL_HEIGHT    75.0
 #define ROW_TEXTVIEW_HEIGHT 60.0
 #define LABELS_HEIGHT       25.0
+#define KEYBOARD_HEIGHT     216.0
 @interface AgentHouseInfoViewController ()<UIActionSheetDelegate,AddPicViewDelegate,AssetPickerControllerDelegate,UITextFieldDelegate,UITextViewDelegate>
 {
     float sectionCount;
@@ -29,6 +30,7 @@
     UITextView *contentTextView;
     float labelsHeight;
     float goodLabelsHeight;
+    UIButton *dismissButton;
 }
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) NSArray *titleArray;
@@ -39,6 +41,10 @@
 @property (nonatomic, strong) NSArray *houseLabelArray;
 @property (nonatomic, strong) NSArray *houseGoodLabelArray;
 @property (nonatomic, strong) NSString *roomID;
+@property (nonatomic, strong) NSString *certificatePrice;
+@property (nonatomic, strong) NSString *price;
+@property (nonatomic, strong) NSString *period;
+@property (nonatomic, strong) NSString *roomType;
 @end
 
 @implementation AgentHouseInfoViewController
@@ -79,7 +85,7 @@
         goodLabelsHeight = LABELS_HEIGHT * row + ADD_Y * (row - 1) + 2 * SPACE_Y  + LABEL_HEIGHT + ADD_Y;
     }
     //初始化数据
-    sectionCount = 7;
+    sectionCount = 3;
     
     self.titleArray = @[@[@" 方式"],@[@" 城市",@" 分区",@" 片区",@" 小区",@" 楼栋",@" 房间"],@[@" 价格",@" 面积",@" 搂层",@" 户型",@" 装修",@" 朝向"],@[@""],@[@"房源标签"],@[@"房源亮点"],@[@" 标题:",@" 描述:"]];
     _labelDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"showName",@"",@"paramId",@"",@"paramCode",nil];
@@ -95,6 +101,7 @@
 - (void)createUI
 {
     [self addTableView];
+    [self addDismissButton];
 }
 
 - (void)addTableView
@@ -104,12 +111,85 @@
     //self.table.separatorInset = UIEdgeInsetsZero;
 }
 
+- (void)addDismissButton
+{
+    dismissButton = [CreateViewTool createButtonWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) buttonImage:@"" selectorName:@"dismissKeyboard" tagDelegate:self];
+    dismissButton.hidden = YES;
+    [self.view addSubview:dismissButton];
+}
+
 #pragma mark 下一步
 - (void)nextButtonPressed:(UIButton *)sender
 {
+    if (![self isCanNext])
+    {
+        return;
+    }
     AgentFormInfoViewController *formInfoViewController = [[AgentFormInfoViewController alloc] init];
+    formInfoViewController.roomType = self.roomType;
+    formInfoViewController.roomID = self.roomID;
+    formInfoViewController.price = self.price;
+    formInfoViewController.roomTitle = titleTextField.text;
+    formInfoViewController.roomDescription = contentTextView.text;
+    formInfoViewController.photoList = [SmallPigTool makeStringWithArray:nil selectedArray:picView.picListArray];
+    formInfoViewController.roomLabel = [SmallPigTool makeStringWithArray:self.houseLabelArray selectedArray:houseLabelsView.selectedLabelArray];
+    formInfoViewController.roomFeature = [SmallPigTool makeStringWithArray:self.houseGoodLabelArray selectedArray:houseGoodLabelsView.selectedLabelArray];
+    formInfoViewController.certificatePrice = self.certificatePrice;
+    formInfoViewController.peroid = self.period;
     [self.navigationController pushViewController:formInfoViewController animated:YES];
 }
+
+- (BOOL)isCanNext
+{
+    NSString *message= @"";
+    if (!self.roomType || [@"" isEqualToString:self.roomType])
+    {
+        message = @"请填选择方式";
+    }
+    else if ((!self.period || [@"" isEqualToString:self.period]) && [self.roomType intValue] == 1)
+    {
+        message = @"请填写租期";
+    }
+    else if (!self.roomID || [@"" isEqualToString:self.roomID])
+    {
+        message = @"请选择房间相关信息";
+    }
+    else if (!self.price || [@"" isEqualToString:self.price])
+    {
+        message = @"请填写价格";
+    }
+    else if (!houseLabelsView.selectedLabelArray || [houseLabelsView.selectedLabelArray count] == 0)
+    {
+        message = @"请选择房间标签";
+    }
+    else if (!houseGoodLabelsView.selectedLabelArray || [houseGoodLabelsView.selectedLabelArray count] == 0)
+    {
+        message = @"请选择房间亮点";
+    }
+    else if (titleTextField.text.length == 0)
+    {
+        message = @"请填写标题";
+    }
+    else if (titleTextField.text.length < 5 || titleTextField.text.length > 30)
+    {
+        message = @"标题为5-30个字";
+    }
+    else if (contentTextView.text.length == 0)
+    {
+        message = @"请填写房间描述";
+    }
+    
+    if ([@"" isEqualToString:message])
+    {
+        return YES;
+    }
+    else
+    {
+        [CommonTool  addAlertTipWithMessage:message];
+        return NO;
+    }
+}
+
 
 #pragma mark tableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -249,7 +329,7 @@
                 [cell.contentView  addSubview:titleLabel];
                 if (!contentTextView)
                 {
-                    contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(60.0, 10.0, cell.frame.size.width - 65.0 - 10.0, ROW_TEXTVIEW_HEIGHT - 10.0)];
+                    contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(60.0, 0.0, cell.frame.size.width - 65.0 - 10.0, ROW_TEXTVIEW_HEIGHT - 0.0)];
                     contentTextView.delegate = self;
                 }
                 [cell.contentView addSubview:contentTextView];
@@ -271,13 +351,23 @@
         
         if (section == 0)
         {
-            [self addActionSheetView];
+            if (row == 0)
+            {
+                [self addActionSheetView];
+            }
+            else if (row == 1)
+            {
+                [self addAlertWithTag:1];
+            }
         }
         else
         {
             if (section >= 2)
             {
-                return;
+                if (section == 2 && row != 0)
+                {
+                    return;
+                }
             }
             if (!self.dataArray)
             {
@@ -289,18 +379,32 @@
                 if ([array count] < indexPath.row)
                 {
                     NSString *tipString = [NSString stringWithFormat:@"请选择%@",self.titleArray[section][row - 1]];
+                    if (section == 2 && row == 0)
+                    {
+                        tipString = [NSString stringWithFormat:@"请填写%@",self.titleArray[section][row - 1]];
+                    }
                     [CommonTool addAlertTipWithMessage:tipString];
                 }
                 else
                 {
-                    self.selectedIndexPath = indexPath;
-                    //获取列表
-                    [self goToListView];
+                    if (section == 2 && row == 0)
+                    {
+                        [self addAlertWithTag:2];
+                    }
+                    else
+                    {
+                        self.selectedIndexPath = indexPath;
+                        //获取列表
+                        [self goToListView];
+                    }
+
                 }
             }
         }
     }
 }
+
+
 
 
 #pragma mark 方式
@@ -316,6 +420,69 @@
     {
         NSString *string = (buttonIndex == 0) ? @"二手房" : @"租房";
         [self setDataWithSection:0 row:0 value:string];
+        if (buttonIndex == 1)
+        {
+            NSMutableArray *array = [NSMutableArray arrayWithArray:self.titleArray];
+            NSMutableArray *sectionArray = [NSMutableArray arrayWithArray:array[0]];
+            [sectionArray addObject:@" 租期"];
+            [array replaceObjectAtIndex:0 withObject:sectionArray];
+            self.titleArray = array;
+            [self setDataWithSection:0 row:1 value:@"个月"];
+        }
+        else
+        {
+            if ([self.titleArray[0] count] == 2)
+            {
+                NSMutableArray *array = [NSMutableArray arrayWithArray:self.titleArray];
+                NSMutableArray *sectionArray = [NSMutableArray arrayWithArray:array[0]];
+                [sectionArray removeObjectAtIndex:1];
+                [array replaceObjectAtIndex:0 withObject:sectionArray];
+                self.titleArray = array;
+                [self setDataWithSection:0 row:1 value:@"个月"];
+            }
+        }
+        self.roomType = ([@"二手房" isEqualToString:string]) ? @"2" : @"1";
+    }
+}
+
+#pragma mark 租期/价格
+- (void)addAlertWithTag:(int)tag
+{
+    NSString *title = (tag == 1) ? @"租期" : @"价格";
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.tag = tag;
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField *textField = [alertView textFieldAtIndex:0];
+    textField.keyboardType = UIKeyboardTypeNumberPad;
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UITextField *textField = [alertView textFieldAtIndex:0];
+    NSString *text = textField.text;
+    text = (text) ? text : @"";
+    if (buttonIndex == 1)
+    {
+        if (text.length == 0)
+        {
+            NSString *message = (alertView.tag == 1) ? @"请填写租期" : @"请填写价格";
+            [CommonTool addAlertTipWithMessage:message];
+        }
+        else
+        {
+            if (alertView.tag == 1)
+            {
+                self.period = text;
+                [self setDataWithSection:0 row:1 value:[text stringByAppendingString:@"个月"]];
+            }
+            else if (alertView.tag == 2)
+            {
+                self.price = text;
+                NSString *string = ([self.roomType intValue] == 2) ? @"万" : @"元/月";
+                [self setDataWithSection:2 row:0 value:[text stringByAppendingString:string]];
+            }
+        }
     }
 }
 
@@ -379,6 +546,7 @@
     {
         showName = dic[@"model"][@"room"][@"showName"];
         self.roomID = dic[@"model"][@"room"][@"id"];
+        self.certificatePrice = dic[@"model"][@"certificatePrice"];
     }
     showName = (showName) ? showName : @"";
     [self.labelDic setValue:showName forKey:@"showName"];
@@ -414,16 +582,12 @@
     //选完房间验证通过后 刷新表
     if (self.selectedIndexPath.section == 1 && self.selectedIndexPath.row == 5)
     {
-        NSString *price = [NSString stringWithFormat:@"%.0f万",[dic[@"model"][@"price"] floatValue]/10000];
+        NSString *price = ([self.roomType intValue] == 2) ? @"万" : @"元/月";
         NSString *square = [NSString stringWithFormat:@"%@",dic[@"model"][@"room"][@"square"]];
         square = (square) ? [square stringByAppendingString:@"平米"] : @"";
         NSString *floor= [NSString stringWithFormat:@"%@",dic[@"model"][@"room"][@"floor"]];
         floor = (floor) ? [floor stringByAppendingString:@"层"] : @"";
-        int bedroomCount = [dic[@"model"][@"room"][@"bedroomCount"] intValue];
-        int hallCount = [dic[@"model"][@"room"][@"hallCount"] intValue];
-        int kitchenCount = [dic[@"model"][@"room"][@"kitchenCount"] intValue];
-        int bathroomCount = [dic[@"model"][@"room"][@"bathroomCount"] intValue];
-        NSString *roomType = [NSString stringWithFormat:@"%d室%d厅%d厨%d卫",bedroomCount,hallCount,kitchenCount,bathroomCount];
+        NSString *roomType = [SmallPigTool makeRoomStyleWithRoomDictionary:dic[@"model"]];
         NSString *roomFeature = [SmallPigTool getDecorateWithIndex:[dic[@"model"][@"room"][@"decorate"] intValue]];
         roomFeature = (roomFeature) ? roomFeature : @"";
         NSString *towards = dic[@"model"][@"room"][@"towards"];
@@ -524,31 +688,49 @@
     });
 }
 
+#pragma mark 消失按钮
+- (void)dismissKeyboard
+{
+    [titleTextField resignFirstResponder];
+    [contentTextView resignFirstResponder];
+    dismissButton.hidden = YES;
+    [self moveTableViewWithHeight:0];
+}
+
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    dismissButton.hidden = NO;
+    [self moveTableViewWithHeight:- KEYBOARD_HEIGHT];
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    dismissButton.hidden = YES;
+    [self moveTableViewWithHeight:0];
     [textField resignFirstResponder];
     return YES;
 }
 
-//#pragma mark UITextViewDelegate
-//
-//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-//{
-//    [textView resignFirstResponder];
-//    return YES;
-//}
-//
-//- (void)textViewDidEndEditing:(UITextView *)textView
-//{
-//    [textView resignFirstResponder];
-//}
+#pragma mark UITextViewDelegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    dismissButton.hidden = NO;
+    [self moveTableViewWithHeight:- KEYBOARD_HEIGHT - ROW_TEXTVIEW_HEIGHT];
+    return YES;
+}
+
+#pragma mark moveTableView
+- (void)moveTableViewWithHeight:(float)height
+{
+    [UIView animateWithDuration:.3 animations:^
+    {
+        self.table.transform = CGAffineTransformMakeTranslation(0, height);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

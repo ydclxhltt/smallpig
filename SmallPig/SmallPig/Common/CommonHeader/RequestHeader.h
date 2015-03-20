@@ -78,7 +78,16 @@
 //房源照片
 #define UPLOAD_ROOM_PIC_URL     MAKE_REQUEST_URL(@"yjk/publishroom/uploadPhoto.action")
 
+//已发布房源列表
+#define PUBLIC_ROOM_LIST_URL    MAKE_REQUEST_URL(@"yjk/publishroom/list.action?queryBean.params.in_checkStatus=0&queryBean.params.in_checkStatus=2")
+
 //查询房间是否发布过
 #define IS_CAN_PUBLIC_URL       MAKE_REQUEST_URL(@"yjk/publishroom/find.action")
+
+//发布房源
+#define PUBLIC_ROOM_URL         MAKE_REQUEST_URL(@"yjk/publishroom/add.action")
+
+//我的积分
+#define MY_SCORE_URL            MAKE_REQUEST_URL(@"/yjk/credits/list.action")
 
 #endif

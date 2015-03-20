@@ -17,4 +17,6 @@
 @property(nonatomic, strong) NSString *photoList;
 @property(nonatomic, strong) NSString *roomLabel;
 @property(nonatomic, strong) NSString *roomFeature;
+@property (nonatomic, strong) NSString *certificatePrice;
+@property (nonatomic, strong) NSString *peroid;
 @end

@@ -14,6 +14,7 @@
 @property (nonatomic, assign) int maxPicCount;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, assign) id<AddPicViewDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *picListArray;
 
 - (void)setDataWithImageArray:(NSArray *)array;
 @end

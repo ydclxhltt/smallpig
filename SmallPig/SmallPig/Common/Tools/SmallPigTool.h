@@ -30,4 +30,19 @@
  *  @param index 装修表示
  */
 + (NSString *)getDecorateWithIndex:(int)index;
+
+/*
+ *  选择ID数组转字符串
+ *
+ *  @param dataArray  真实数据
+ *  @param array      选择数据数组
+ */
++ (NSString *)makeStringWithArray:(NSArray *)dataArray selectedArray:(NSArray *)array;
+
+/*
+ *  几室几厅
+ *
+ *  @param dic  roomDic
+ */
++ (NSString *)makeRoomStyleWithRoomDictionary:(NSDictionary *)dic;
 @end

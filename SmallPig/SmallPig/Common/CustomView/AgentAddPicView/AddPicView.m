@@ -18,7 +18,7 @@
     UIScrollView *picScrollView;
     UIButton *addImageButton;
 }
-@property (nonatomic, strong) NSMutableArray *picListArray;
+
 @end
 
 @implementation AddPicView

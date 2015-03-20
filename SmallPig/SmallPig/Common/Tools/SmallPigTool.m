@@ -87,7 +87,7 @@
 }
 
 #pragma mark 获取选择ID
-- (NSString *)makeStringWithArray:(NSArray *)dataArray selectedArray:(NSArray *)array
++ (NSString *)makeStringWithArray:(NSArray *)dataArray selectedArray:(NSArray *)array
 {
     NSString *string = @"";
     if (!dataArray || [dataArray count] == 0)
@@ -106,11 +106,22 @@
         }
         for (int i = 0; i < [array count]; i++)
         {
-            string = [NSString stringWithFormat:@"%@%@,",string,dataArray[[array[i] intValue]]];
+            NSDictionary *dic = dataArray[[array[i] intValue]];
+            NSString *ID = dic[@"id"];
+            string = [NSString stringWithFormat:@"%@%@,",string,ID];
         }
     }
     return string;
 }
 
-
+#pragma mark 几室几厅
++ (NSString *)makeRoomStyleWithRoomDictionary:(NSDictionary *)dic
+{
+    int bedroomCount = [dic[@"room"][@"bedroomCount"] intValue];
+    int hallCount = [dic[@"room"][@"hallCount"] intValue];
+    int kitchenCount = [dic[@"room"][@"kitchenCount"] intValue];
+    int bathroomCount = [dic[@"room"][@"bathroomCount"] intValue];
+    NSString *roomType = [NSString stringWithFormat:@"%d室%d厅%d厨%d卫",bedroomCount,hallCount,kitchenCount,bathroomCount];
+    return roomType;
+}
 @end

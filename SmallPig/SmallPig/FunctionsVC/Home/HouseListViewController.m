@@ -33,7 +33,7 @@
     [self createUI];
     //初始化数据
     currentPage = 1;
-    self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    //self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     //获取房屋数据
     [self getData];
     // Do any additional setup after loading the view.
@@ -147,7 +147,7 @@
     static NSString *cellID1 = @"SecondHandListCellID";
     
     UITableViewCell *cell;
-    
+    NSDictionary *rowDic = self.dataArray[indexPath.row];
     if (HouseScourceFromSecondHand == self.houseSource)
     {
         cell = (SecondHandHouseListCell *)[tableView dequeueReusableCellWithIdentifier:cellID1];
@@ -161,8 +161,9 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
-        //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
-        [(SecondHandHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租业主直租急租" localText:@"宝安西乡" parkText:@"白金假日" priceText:@"125万" typeText:@"两房一厅" sizeText:@"43平米" advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
+        NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"0" photoType:rowDic[@"coverPhoto"][@"photoType"]];
+        NSLog(@"imageUrl===%@",imageUrl );
+        [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:rowDic[@"title"] localText:@"宝安西乡" parkText:@"白金假日" priceText:@"125万" typeText:@"两房一厅" sizeText:@"43平米" advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
 
     }
     else if (HouseScourceFromRental == self.houseSource)
