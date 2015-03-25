@@ -90,4 +90,7 @@
 //我的积分
 #define MY_SCORE_URL            MAKE_REQUEST_URL(@"/yjk/credits/list.action")
 
+//我的订单
+#define MY_ORDER_LIST_URL       MAKE_REQUEST_URL(@"yjk/order/list.action")
+
 #endif

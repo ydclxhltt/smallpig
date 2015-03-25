@@ -59,7 +59,10 @@
 // 1.设置导航条Item
 - (void)setNavBarItemWithTitle:(NSString *)title navItemType:(NavItemType)type selectorName:(NSString *)selName
 {
-
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                                   target:nil action:nil];
+    negativeSpacer.width = 20;
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 60, 30);
     button.showsTouchWhenHighlighted = YES;
@@ -72,19 +75,24 @@
     }
     UIBarButtonItem  *barItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     if(LeftItem == type)
-        self.navigationItem.leftBarButtonItem = barItem;
+        self.navigationItem.leftBarButtonItems = @[barItem,negativeSpacer];
     else if (rightItem == type)
-        self.navigationItem.rightBarButtonItem = barItem;
+        self.navigationItem.rightBarButtonItems = @[negativeSpacer,barItem];
 }
 
 
 // 2.设置导航条Item
 - (void)setNavBarItemWithImageName:(NSString *)imageName navItemType:(NavItemType)type selectorName:(NSString *)selName
 {
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                                   target:nil action:nil];
+    negativeSpacer.width = (LeftItem == type) ? -15 : 15;
+    float x = negativeSpacer.width;
+    
     UIImage *image_up = [UIImage imageNamed:[imageName stringByAppendingString:@"_up.png"]];
     UIImage *image_down = [UIImage imageNamed:[imageName stringByAppendingString:@"_down.png"]];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, image_up.size.width/2, image_up.size.height/2);
+    button.frame = CGRectMake(x, 0, image_up.size.width/2, image_up.size.height/2);
     [button setBackgroundImage:image_up forState:UIControlStateNormal];
     [button setBackgroundImage:image_down forState:UIControlStateHighlighted];
     [button setBackgroundImage:image_down forState:UIControlStateSelected];
@@ -93,10 +101,11 @@
         [button addTarget:self action:NSSelectorFromString(selName) forControlEvents:UIControlEventTouchUpInside];
     }
     UIBarButtonItem  *barItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+
     if(LeftItem == type)
-    self.navigationItem.leftBarButtonItem = barItem;
+        self.navigationItem.leftBarButtonItems = @[negativeSpacer,barItem];
     else if (rightItem == type)
-    self.navigationItem.rightBarButtonItem = barItem;
+        self.navigationItem.rightBarButtonItems = @[barItem];
 }
 
 #pragma mark 添加返回Item

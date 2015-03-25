@@ -32,7 +32,8 @@
     self.title = AGENT_CENTER_TITLE;
     //初始化数据
     self.dataArray = (NSMutableArray *)@[@[@"我的房源",@"我的订单"],@[@"会员充值",@"我的积分"],@[@"我的备忘"]];
-    self.tipArray = @[@"88套",@"8个",@"",@"3838分",@"3个待办事项"];
+    //self.tipArray = @[@"88套",@"8个",@"",@"3838分",@"3个待办事项"];
+    self.tipArray = @[@"",@"",@"",@"",@""];
     //添加侧滑item
     [self addPersonItem];
     //初始化UI
@@ -67,8 +68,10 @@
     NSString *imageUrl = @"";
     if (userInfoDic)
     {
-        imageUrl = @"http://112.95.225.12:8068/epg30/selfadaimg.do?path=/posticon/20140930/2846407/173142.jpg";
-
+        //imageUrl = @"http://112.95.225.12:8068/epg30/selfadaimg.do?path=/posticon/20140930/2846407/173142.jpg";
+        imageUrl = userInfoDic[@"url"];
+        imageUrl = ([imageUrl isKindOfClass:[NSNull class]] || !imageUrl) ? @"" : imageUrl;
+        NSLog(@"imageUrl===%@",imageUrl);
         NSString *nickName = userInfoDic[@"nickName"];
         NSString *name = userInfoDic[@"name"];
         name = (name) ? name : @"";

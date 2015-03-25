@@ -24,7 +24,7 @@
 {
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]init];
     manager.requestSerializer = [AFHTTPRequestSerializer  serializer];
-    //[manager.requestSerializer setValue:@"JSESSIONID=BF9C6E368CDF5012B85D60D42E921385" forHTTPHeaderField:@"cookie"];
+    [manager.requestSerializer setValue:@"IOS" forHTTPHeaderField:@"flatform"];
     manager.requestSerializer.timeoutInterval = TIMEOUT;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/json",@"application/json",@"text/plain",nil];

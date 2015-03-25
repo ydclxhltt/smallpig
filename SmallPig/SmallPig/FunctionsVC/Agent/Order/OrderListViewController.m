@@ -27,6 +27,8 @@
     [self setNavBarItemWithTitle:@"新建" navItemType:rightItem selectorName:@"createOrderButtonPressed:"];
     //初始化UI
     [self createUI];
+    //获取订单列表
+    [self getOrderListData];
     // Do any additional setup after loading the view.
 }
 
@@ -47,6 +49,34 @@
 {
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
 }
+
+
+#pragma mark 获取订单列表
+- (void)getOrderListData
+{
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    RequestTool *request = [[RequestTool alloc] init];
+    NSDictionary *requestDic = @{@"queryBean.params.buyer_id_long":[SmallPigApplication shareInstance].userInfoDic[@"id"]};
+    [request requestWithUrl:MY_ORDER_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+     {
+         NSLog(@"order_responseDic===%@",responseDic);
+         NSDictionary *dic = (NSDictionary *)responseDic;
+         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+         }
+         else
+         {
+             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+         }
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+        [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+         NSLog(@"login_error===%@",error);
+     }];
+}
+
 
 #pragma mark 创建订单
 - (void)createOrderButtonPressed:(UIButton *)sender

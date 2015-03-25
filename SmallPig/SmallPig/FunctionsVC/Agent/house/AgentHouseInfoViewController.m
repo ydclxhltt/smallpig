@@ -532,6 +532,7 @@
         }
     }
     [self.paramArray addObject:paramStr];
+    NSLog(@"paramStr====%@",paramStr);
     return paramStr;
 }
 
@@ -554,6 +555,10 @@
     [self setDataWithSection:(int)self.selectedIndexPath.section row:(int)self.selectedIndexPath.row value:self.labelDic[@"showName"]];
     
     //清掉更改选项后面的数据
+//    NSString *paramID = dic[@"paramId"];
+//    paramID = [NSString stringWithFormat:@"AREA@%@>COMMUNITY>BUILDING>ROOM",paramID];
+//    [self.paramArray replaceObjectAtIndex:self.selectedIndexPath.row withObject:paramID];
+    
     if ([self.paramArray count] > self.selectedIndexPath.row + 1)
     {
         NSString *oldParamID = self.paramArray[self.selectedIndexPath.row + 1];
@@ -572,7 +577,6 @@
                 paramID= [NSString stringWithFormat:@"AREA>COMMUNITY>BUILDING$%@>ROOM",paramID];
             }
         }
-        
         if (![oldParamID isEqualToString:paramID])
         {
             [self clearCacheData];

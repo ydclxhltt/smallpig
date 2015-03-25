@@ -27,11 +27,13 @@
     HouseDetailOneInfoView *mapInfoView;
     HouseDetailSeeInfoView *seeInfoView;
     UIImageView *mobileView;
+    UIButton *mobileButton;
     float lastPoint;
 }
 @property (nonatomic, strong) NSArray *titleArray;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) NSString *titleText;
+@property (nonatomic, strong) NSDictionary *detailDic;
 @end
 
 @implementation HouseDetailViewController
@@ -100,7 +102,6 @@
     float height = 240.0 * scale;
     headerView = [[HouseDetailHeader alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) delegate:self];
     headerView.delegate = self;
-    [headerView setImageScrollViewData:@[@"http://pic1.ajkimg.com/display/xinfang/511f5c20201f6e60241b4d250fac4835/800x600c.jpg",@"http://pic1.ajkimg.com/display/xinfang/4e65e9d08df87df05d1536dbb60ebd25/800x600c.jpg",@"http://pic1.ajkimg.com/display/xinfang/3c440a580dd0244d4b69d0a0dba8dc10/800x600c.jpg"]];
     [self.table setTableHeaderView:headerView];
 }
 
@@ -115,7 +116,7 @@
     mobileView.userInteractionEnabled = YES;
     [self.view addSubview:mobileView];
     
-    UIButton *mobileButton = [CreateViewTool createButtonWithFrame:CGRectMake(space_x, space_y, mobileView.frame.size.width - 2 * space_x, buttonHeight) buttonTitle:@"13893893838" titleColor:WHITE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"mobileButtonPressed:" tagDelegate:self];
+    mobileButton = [CreateViewTool createButtonWithFrame:CGRectMake(space_x, space_y, mobileView.frame.size.width - 2 * space_x, buttonHeight) buttonTitle:@"" titleColor:WHITE_COLOR normalBackgroundColor:APP_MAIN_COLOR highlightedBackgroundColor:LOGIN_BUTTON_PRESSED_COLOR selectorName:@"mobileButtonPressed:" tagDelegate:self];
     mobileButton.titleLabel.font = FONT(15.0);
     [CommonTool clipView:mobileButton withCornerRadius:5.0];
     [mobileView addSubview:mobileButton];
@@ -127,26 +128,83 @@
 - (void)getHouseDetail
 {
     //HOUSE_DETAIL_URL
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    __weak typeof(self) weakSelf = self;
     NSDictionary *requestDic = @{@"Id":@"1"};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:HOUSE_DETAIL_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
     {
-        NSLog(@"responseDic===%@",responseDic);
+        NSLog(@"responseDic===%@",operation.responseString);
+        NSDictionary *dic = (NSDictionary *)responseDic;
+        int sucess = [dic[@"responseMessage"][@"success"] intValue];
+        if (sucess == 1)
+        {
+            weakSelf.detailDic = dic;
+            [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+            [weakSelf setDataWithDictionary:dic];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+        }
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
-        
+        [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
     }];
 }
 
+#pragma mark 设置数据
+- (void)setDataWithDictionary:(NSDictionary *)dataDic
+{
+    //设置图片
+    NSArray *array = dataDic[@"model"][@"photoList"];
+    NSMutableArray *picListUrlArray = [NSMutableArray array];
+    if (array && [array count] > 0)
+    {
+        for (NSDictionary *dic in array)
+        {
+            NSString *picUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:dic[@"photoUrl"] photoSize:@"640x480" photoType:dic[@"photoType"]];
+            if (picUrl && ![@"" isEqualToString:picUrl])
+            {
+                NSLog(@"picUrl===%@",picUrl);
+                [picListUrlArray addObject:picUrl];
+            }
+        }
+    }
+    [headerView setImageScrollViewData:picListUrlArray];
+    
+    //设置title描述
+    self.titleText = dataDic[@"model"][@"title"];
+    
+    
+    //设置电话
+    NSString *mobile = dataDic[@"model"][@"publisher"][@"mobile"];
+    mobile = (mobile) ? mobile : @"";
+    [mobileButton setTitle:mobile forState:UIControlStateNormal];
 
+    
+    [self.table reloadData];
+}
 
 
 
 #pragma mark mobile
 - (void)mobileButtonPressed:(UIButton *)sender
 {
+    NSString *buttonTitle = [sender titleForState:UIControlStateNormal];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",buttonTitle]];
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"联系中介" message:buttonTitle delegate:self cancelButtonTitle:@"拨打" otherButtonTitles:@"取消", nil];
+        [alertView show];
+    }
+    else
+    {
+        //设备不支持
+        [CommonTool addAlertTipWithMessage:@"设备不支持"];
+    }
     
 }
 
@@ -331,7 +389,12 @@
         {
             agentView = [[HouseDetailAgentView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, HOUSE_DETAIL_AGENT_HEIGHT) delegate:self];
         }
-        [agentView setDataWithAgentName:@"林骚津" phoneNumber:@"13893893838" companyName:@"HooRay" houseScourceCount:@"38套"];
+        //设置中介信息
+        NSString *name = self.detailDic[@"model"][@"publisher"][@"name"];
+        name = (name) ? name : @"";
+        NSString *mobile = self.detailDic[@"model"][@"publisher"][@"mobile"];
+        mobile = (mobile) ? mobile : @"";
+        [agentView setDataWithAgentName:name phoneNumber:mobile companyName:@"HooRay" houseScourceCount:@"38套"];
         [cell.contentView addSubview:agentView];
     }
     
@@ -349,13 +412,30 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^
         {
+            //设置地图数据
+            float lat = [self.detailDic[@"model"][@"room"][@"building"][@"community"][@"lat"] floatValue];
+            float lng = [self.detailDic[@"model"][@"room"][@"building"][@"community"][@"lng"] floatValue];
+            NSString *parkName =  self.detailDic[@"model"][@"room"][@"building"][@"community"][@"name"];
+            parkName = (parkName) ? parkName : @"";
+            NSLog(@"lat===lng===parkName===%f===%f===%@",lat,lng,parkName);
             [mapInfoView setDataWithDetailText:self.dataArray[3]];
-            [mapInfoView setLocationCoordinate:CLLocationCoordinate2DMake(22.5389288, 113.95620107) locationText:@"蛇口中心位置"];
+            [mapInfoView setLocationCoordinate:CLLocationCoordinate2DMake(lat, lng) locationText:parkName];
             [cell.contentView addSubview:mapInfoView];
         });
     });
 
     
+}
+
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:@"拨打"])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",alertView.message]]];
+    }
 }
 
 

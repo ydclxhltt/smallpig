@@ -21,6 +21,8 @@
     //设置title
     //self.title = MINE_SAVE_TITLE;
     //设置item为nil
+    //添加侧滑item
+    [self addPersonItem];
     self.navigationItem.rightBarButtonItem = nil;
     //设置titleView
     [self setTitleViewWithArray:@[@"售房",@"租房"]];

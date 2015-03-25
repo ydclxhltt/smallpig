@@ -33,7 +33,10 @@
     [self createUI];
     //初始化数据
     currentPage = 1;
-    //self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    if (self.houseSource == HouseScourceFromRental)
+    {
+        self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    }
     //获取房屋数据
     [self getData];
     // Do any additional setup after loading the view.
@@ -92,18 +95,35 @@
     {
         return;
     }
-    //__weak typeof(self) weakSelf = self;
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    __weak typeof(self) weakSelf = self;
     NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:self.urlString requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
     {
         NSLog(@"responseObj====%@",responseObj);
-        //weakSelf.dataArray = [];
+        NSDictionary *dic = (NSDictionary *)responseObj;
+        int sucess = [dic[@"responseMessage"][@"success"] intValue];
+        if (sucess == 1)
+        {
+            [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+            weakSelf.dataArray = dic[@"pageBean"][@"data"];
+            if (weakSelf.dataArray && [weakSelf.dataArray count] == 0)
+            {
+                [CommonTool addAlertTipWithMessage:@"暂无数据"];
+            }
+            [weakSelf.table reloadData];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+        }
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         NSLog(@"error====%@",error);
+        [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
     }];
 }
 
@@ -161,9 +181,18 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
-        NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"0" photoType:rowDic[@"coverPhoto"][@"photoType"]];
+        NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:rowDic[@"coverPhoto"][@"photoType"]];
         NSLog(@"imageUrl===%@",imageUrl );
-        [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:rowDic[@"title"] localText:@"宝安西乡" parkText:@"白金假日" priceText:@"125万" typeText:@"两房一厅" sizeText:@"43平米" advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
+        NSString *local = rowDic[@"room"][@"community"][@"address"];
+        local = (local) ? local : @"";
+        NSLog(@"local===%@",local);
+        NSString *park = rowDic[@"room"][@"community"][@"name"];
+        park = (park) ? park : @"";
+        NSString *square = [NSString stringWithFormat:@"%@平米",rowDic[@"room"][@"square"]];
+        square = (square) ? square : @"";
+        float price = [rowDic[@"price"] floatValue]/10000.0;
+        NSString *roomPrice = [NSString stringWithFormat:@"%.0f万",price];
+        [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:rowDic[@"title"] localText:local parkText:park priceText:roomPrice typeText:@"两房一厅" sizeText:square advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
 
     }
     else if (HouseScourceFromRental == self.houseSource)
