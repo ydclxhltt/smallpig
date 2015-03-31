@@ -9,9 +9,10 @@
 #import "BasicViewController.h"
 #import "SearchHouseViewController.h"
 
-@interface BasicViewController ()<UIGestureRecognizerDelegate>
+@interface BasicViewController ()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
 {
     UIImageView *titleView;
+    UILabel *footLabel;
 }
 @end
 
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     startHeight = 0.0;
     scale = SCREEN_WIDTH/320.0;
+    isCanGetMore = YES;
     //设置页面背景
     self.view.backgroundColor = BASIC_VIEW_BG_COLOR;
     
@@ -200,11 +202,58 @@
 
 }
 
+#pragma mark 添加更多视图
+- (void)addGetMoreView
+{
+    if (!footLabel)
+    {
+        footLabel = [CreateViewTool createLabelWithFrame:CGRectMake(0, self.table.contentSize.height, SCREEN_WIDTH, 20.0) textString:@"更多数据加载中..." textColor:HOME_LIST_DETAIL_COLOR textFont:FONT(12.0)];
+        footLabel.backgroundColor = [UIColor whiteColor];
+        footLabel.textAlignment = NSTextAlignmentCenter;
+        [self.table addSubview:footLabel];
+    }
+    else
+    {
+        footLabel.frame = CGRectMake(0, self.table.contentSize.height, SCREEN_WIDTH, 20.0);
+    }
+    
+}
 
+- (void)removeGetMoreView
+{
+    [footLabel removeFromSuperview];
+    footLabel = nil;
+}
+
+
+#pragma mark 是否可以侧滑
 - (void)setMainSideCanSwipe:(BOOL)canSwipe
 {
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     app.sideViewController.needSwipeShowMenu = canSwipe;
+}
+
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    float offset_y = scrollView.contentOffset.y;
+    if ((int)offset_y == (int)self.table.contentSize.height - SCREEN_HEIGHT)
+    {
+        currentPage++;
+        [self getMoreData];
+    }
+}
+
+#pragma mark 加载更多
+- (void)getMoreData
+{
+    
+}
+
+- (void)dealloc
+{
+    self.table.delegate = nil;
+    self.table.dataSource = nil;
 }
 
 - (void)didReceiveMemoryWarning

@@ -33,6 +33,8 @@ typedef enum : NSUInteger
 {
     float startHeight;
     float scale;
+    int currentPage;
+    BOOL isCanGetMore;
 }
 @property(nonatomic,strong) NSMutableArray *dataArray;
 @property(nonatomic,strong) UITableView *table;
@@ -95,4 +97,14 @@ typedef enum : NSUInteger
  *  是否可侧滑
  */
 - (void)setMainSideCanSwipe:(BOOL)canSwipe;
+
+/*
+ *  加载更多视图
+ */
+- (void)addGetMoreView;
+
+/*
+ *  移除更多视图
+ */
+- (void)removeGetMoreView;
 @end

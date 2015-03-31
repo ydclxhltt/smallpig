@@ -54,8 +54,20 @@
 //二手房
 #define SECOND_LIST_URL         MAKE_REQUEST_URL(@"yjk/secondhandroom/list.action")
 
+//租房列表
+#define  RENTAL_LIST_URL        MAKE_REQUEST_URL(@"yjk/rentroom/list.action")
+
 //房子详情
 #define HOUSE_DETAIL_URL        MAKE_REQUEST_URL(@"yjk/secondhandroom/find.action")
+
+//租房详情
+#define RENTAL_DETAIL_URL       MAKE_REQUEST_URL(@"yjk/rentroom/find.action")
+
+//经纪人列表
+#define AGENT_LIST_URL          MAKE_REQUEST_URL(@"yjk/agent/list.action")
+
+//经纪人发布列表
+#define AGENT_PUBLICROOM_URL    MAKE_REQUEST_URL(@"yjk/agent/listPublishRoom.action")
 
 //备忘录列表
 #define MEMO_LIST_URL           MAKE_REQUEST_URL(@"yjk/remind/list.action")
@@ -92,5 +104,8 @@
 
 //我的订单
 #define MY_ORDER_LIST_URL       MAKE_REQUEST_URL(@"yjk/order/list.action")
+
+//新增举报
+#define ADD_INFORM_URL          MAKE_REQUEST_URL(@"yjk/complaint/add.action")
 
 #endif

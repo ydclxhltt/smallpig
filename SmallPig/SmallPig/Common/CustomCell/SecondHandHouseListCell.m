@@ -118,6 +118,7 @@
     {
         UILabel *label = (UILabel *)[self.contentView viewWithTag:i + 1];
         label.text = [array objectAtIndex:i];
+        label.hidden = [label.text isEqualToString:@""];
     }
 }
 

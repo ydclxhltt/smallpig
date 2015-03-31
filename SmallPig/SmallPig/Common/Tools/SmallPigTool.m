@@ -125,6 +125,14 @@
     return roomType;
 }
 
++ (NSString *)makeEasyRoomStyleWithRoomDictionary:(NSDictionary *)dic
+{
+    int bedroomCount = [dic[@"room"][@"bedroomCount"] intValue];
+    int hallCount = [dic[@"room"][@"hallCount"] intValue];
+    NSString *roomType = [NSString stringWithFormat:@"%d室%d厅",bedroomCount,hallCount];
+    return roomType;
+}
+
 #pragma mark 处理时间
 + (NSString *)formatTimeWithString:(NSString *)time
 {

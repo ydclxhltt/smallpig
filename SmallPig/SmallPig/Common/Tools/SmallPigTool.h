@@ -45,6 +45,7 @@
  *  @param dic  roomDic
  */
 + (NSString *)makeRoomStyleWithRoomDictionary:(NSDictionary *)dic;
++ (NSString *)makeEasyRoomStyleWithRoomDictionary:(NSDictionary *)dic;
 
 /*
  *  格式化时间
