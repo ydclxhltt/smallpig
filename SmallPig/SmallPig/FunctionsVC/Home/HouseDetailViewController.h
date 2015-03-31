@@ -10,4 +10,5 @@
 
 @interface HouseDetailViewController : BasicViewController
 @property (nonatomic, assign) HouseScource houseSource;
+@property (nonatomic, strong) NSString *roomID;
 @end

@@ -13,6 +13,7 @@
 #import "HouseDetailOneInfoView.h"
 #import "HouseDetailSeeInfoView.h"
 #import "AddInformViewController.h"
+#import "LoginViewController.h"
 
 #define HOUSE_DETAIL_NORMAL_HEIGHT  55.0
 #define HOUSE_DETAIL_INFO_HEIGHT    105.0
@@ -58,6 +59,7 @@
     lastPoint = 0.0;
     //初始化UI
     [self createUI];
+    [self addBackItem];
     //获取房屋详情
     [self getHouseDetail];
     // Do any additional setup after loading the view.
@@ -131,9 +133,10 @@
     //HOUSE_DETAIL_URL
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
-    NSDictionary *requestDic = @{@"Id":@"1"};
+    NSDictionary *requestDic = @{@"Id":self.roomID};
+    NSString *url = (self.houseSource == HouseScourceFromSecondHand) ? HOUSE_DETAIL_URL : RENTAL_DETAIL_URL;
     RequestTool *request = [[RequestTool alloc] init];
-    [request requestWithUrl:HOUSE_DETAIL_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+    [request requestWithUrl:url requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
     {
         NSLog(@"responseDic===%@",operation.responseString);
@@ -159,6 +162,7 @@
 #pragma mark 设置数据
 - (void)setDataWithDictionary:(NSDictionary *)dataDic
 {
+    self.roomID = [NSString stringWithFormat:@"%@",self.detailDic[@"model"][@"id"]];
     //设置图片
     NSArray *array = dataDic[@"model"][@"photoList"];
     NSMutableArray *picListUrlArray = [NSMutableArray array];
@@ -253,34 +257,71 @@
 - (void)saveButtonPressed:(UIButton *)sender
 {
     //ADD_SAVE_URL
-    sender.enabled = NO;
-    NSString *roomID = [NSString stringWithFormat:@"%@",self.detailDic[@"model"][@"id"]];
-    if (!roomID || [roomID isEqualToString:@""])
+    if ([self isNeedLogin])
     {
         return;
     }
-    NSDictionary *requestDic = (sender.selected) ? @{@"id":@"1"} : @{@"publishRoom.id":@"1"};
+    sender.enabled = NO;
+    
+    if (!self.roomID || [self.roomID isEqualToString:@""])
+    {
+        return;
+    }
+    NSDictionary *requestDic = (sender.selected) ? @{@"id":self.roomID} : @{@"publishRoom.id":self.roomID};
     NSString *url = (sender.selected) ? DELETE_SAVE_URL : ADD_SAVE_URL;
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:url requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:
     ^(AFHTTPRequestOperation *operation, id responseDic)
     {
-        sender.selected = !sender.selected;
+        
         sender.enabled = YES;
+        NSDictionary *dic = (NSDictionary *)responseDic;
+        int sucess = [dic[@"responseMessage"][@"success"] intValue];
+        if (sucess == 1)
+        {
+            sender.selected = !sender.selected;
+            [SVProgressHUD showSuccessWithStatus:@"收藏成功" duration:1.0];
+        }
+        else
+        {
+            NSString *message = dic[@"responseMessage"][@"message"];
+            message = (message) ? message : @"";
+            [SVProgressHUD showErrorWithStatus:@"收藏失败" duration:.3];
+            [CommonTool addAlertTipWithMessage:message];
+        }
         NSLog(@"saveresponseDic===%@",operation.responseString);
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         NSLog(@"error====%@",error);
         sender.enabled = YES;
+        [SVProgressHUD showErrorWithStatus:@"收藏失败" duration:1.0];
     }];
 }
 
 #pragma mark report
 - (void)reportButtonPressed:(UIButton *)sender
 {
+    if ([self isNeedLogin])
+    {
+        return;
+    }
     AddInformViewController *informViewController = [[AddInformViewController alloc] init];
+    informViewController.roomID = self.roomID;
     [self.navigationController pushViewController:informViewController animated:YES];
+}
+
+#pragma mark 是否需要登录
+- (BOOL)isNeedLogin
+{
+    if (![SmallPigApplication shareInstance].userInfoDic)
+    {
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:Nil];
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark UIScrollViewDelegate
@@ -431,7 +472,7 @@
         
         NSString *floor1 = self.detailDic[@"model"][@"room"][@"floor"];
         floor1 = (floor1) ? floor1 : @"";
-        NSString *floor2 = self.detailDic[@"model"][@"room"][@"floorHeight"];
+        NSString *floor2 = self.detailDic[@"model"][@"room"][@"building"][@"floor2"];
         floor2 = (floor2) ? floor2 : @"";
         NSString *floor= [NSString stringWithFormat:@" %@/%@",floor1,floor2];
         

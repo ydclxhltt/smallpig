@@ -9,5 +9,5 @@
 #import "BasicViewController.h"
 
 @interface AddInformViewController : BasicViewController
-
+@property (nonatomic, strong) NSString *roomID;
 @end

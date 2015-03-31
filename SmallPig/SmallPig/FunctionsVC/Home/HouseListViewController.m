@@ -12,9 +12,6 @@
 #import "HouseDetailViewController.h"
 
 @interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
-{
-    int currentPage;
-}
 @property (nonatomic, strong) NSString *urlString;
 @end
 
@@ -33,10 +30,6 @@
     [self createUI];
     //初始化数据
     currentPage = 1;
-    if (self.houseSource == HouseScourceFromRental)
-    {
-        self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-    }
     //获取房屋数据
     [self getData];
     // Do any additional setup after loading the view.
@@ -93,7 +86,7 @@
     }
     else if (HouseScourceFromRental == self.houseSource)
     {
-        return;
+        self.urlString = RENTAL_LIST_URL;
     }
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
@@ -103,28 +96,80 @@
     requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
     {
         NSLog(@"responseObj====%@",responseObj);
+        isCanGetMore = YES;
         NSDictionary *dic = (NSDictionary *)responseObj;
         int sucess = [dic[@"responseMessage"][@"success"] intValue];
         if (sucess == 1)
         {
             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
-            weakSelf.dataArray = dic[@"pageBean"][@"data"];
-            if (weakSelf.dataArray && [weakSelf.dataArray count] == 0)
-            {
-                [CommonTool addAlertTipWithMessage:@"暂无数据"];
-            }
-            [weakSelf.table reloadData];
+            [weakSelf setHouseDataWithDictionary:dic];
         }
         else
         {
+            if (currentPage > 1)
+            {
+                currentPage--;
+            }
             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
         }
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         NSLog(@"error====%@",error);
+        if (currentPage > 1)
+        {
+            currentPage--;
+        }
+        isCanGetMore = YES;
         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
     }];
+}
+
+#pragma mark 加载更多
+- (void)getMoreData
+{
+    if (!isCanGetMore)
+    {
+        currentPage--;
+        return;
+    }
+    isCanGetMore = NO;
+    [self getData];
+}
+
+#pragma mark 设置数据
+- (void)setHouseDataWithDictionary:(NSDictionary *)dic
+{
+    NSArray *array = dic[@"pageBean"][@"data"];
+    int pageCount = [dic[@"pageBean"][@"totalPages"] intValue];
+
+    if (!self.dataArray)
+    {
+        if (!array || [array count] == 0)
+        {
+            [CommonTool addAlertTipWithMessage:@"暂无数据"];
+        }
+        else
+        {
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+        }
+    }
+    else
+    {
+        if (array && [array count] > 0)
+            [self.dataArray addObjectsFromArray:array];
+    }
+    [self.table reloadData];
+    
+    if (pageCount > currentPage)
+    {
+        [self addGetMoreView];
+    }
+    else
+    {
+        [self removeGetMoreView];
+        isCanGetMore = NO;
+    }
 }
 
 #pragma marl ScrollViewDeleagte
@@ -168,6 +213,21 @@
     
     UITableViewCell *cell;
     NSDictionary *rowDic = self.dataArray[indexPath.row];
+    NSString *title = rowDic[@"title"];
+    title = (title) ? title : @"";
+    NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:rowDic[@"coverPhoto"][@"photoType"]];
+    NSLog(@"imageUrl===%@",imageUrl );
+    NSString *local = rowDic[@"room"][@"community"][@"address"];
+    local = (local) ? local : @"";
+    NSLog(@"local===%@",local);
+    NSString *park = rowDic[@"room"][@"community"][@"name"];
+    park = (park) ? park : @"";
+    NSString *square = [NSString stringWithFormat:@"%@平米",rowDic[@"room"][@"square"]];
+    square = (square) ? square : @"";
+    float price = [rowDic[@"price"] floatValue]/10000.0;
+    NSString *roomPrice = [NSString stringWithFormat:@"%.0f万",price];
+    NSString *roomStyle = [SmallPigTool makeEasyRoomStyleWithRoomDictionary:rowDic];
+    
     if (HouseScourceFromSecondHand == self.houseSource)
     {
         cell = (SecondHandHouseListCell *)[tableView dequeueReusableCellWithIdentifier:cellID1];
@@ -181,19 +241,24 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
-        NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:rowDic[@"coverPhoto"][@"photoType"]];
-        NSLog(@"imageUrl===%@",imageUrl );
-        NSString *local = rowDic[@"room"][@"community"][@"address"];
-        local = (local) ? local : @"";
-        NSLog(@"local===%@",local);
-        NSString *park = rowDic[@"room"][@"community"][@"name"];
-        park = (park) ? park : @"";
-        NSString *square = [NSString stringWithFormat:@"%@平米",rowDic[@"room"][@"square"]];
-        square = (square) ? square : @"";
-        float price = [rowDic[@"price"] floatValue]/10000.0;
-        NSString *roomPrice = [NSString stringWithFormat:@"%.0f万",price];
-        [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:rowDic[@"title"] localText:local parkText:park priceText:roomPrice typeText:@"两房一厅" sizeText:square advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
-
+        NSString *feature = [SmallPigTool makeHouseFeature:rowDic[@"roomFeature"] type:1];
+        NSArray *array = [feature componentsSeparatedByString:@", "];
+        NSString *string1 = @"";
+        NSString *string2 = @"";
+        NSString *string3 = @"";
+        if (array && [array count] > 0)
+        {
+            string1 = array[0];
+            if ([array count] > 1)
+            {
+                string2 = array[1];
+            }
+            if ([array count] > 2)
+            {
+                string3 = array[2];
+            }
+        }
+        [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:roomPrice typeText:roomStyle sizeText:square advantage1Text:string1 advantage2Text:string2 advantage3Text:string3];
     }
     else if (HouseScourceFromRental == self.houseSource)
     {
@@ -209,7 +274,7 @@
             }
         }
         //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
-        [(RentalHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
+        [(RentalHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park timeText:@"" typeText:roomStyle sizeText:square priceText:[NSString stringWithFormat:@"%.0f元",[rowDic[@"price"] floatValue]]];
     }
     
     
@@ -219,9 +284,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    NSString *roomID = dic[@"id"];
+    roomID = (roomID) ? roomID : @"";
     HouseDetailViewController *houseDetailViewController = [[HouseDetailViewController alloc] init];
     houseDetailViewController.houseSource = self.houseSource;
+    houseDetailViewController.roomID = roomID;
     [self.navigationController pushViewController:houseDetailViewController animated:YES];
 }
 
