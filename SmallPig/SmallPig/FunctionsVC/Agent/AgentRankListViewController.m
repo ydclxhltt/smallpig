@@ -11,7 +11,6 @@
 #import "AgentDetailViewController.h"
 
 @interface AgentRankListViewController ()
-
 @end
 
 @implementation AgentRankListViewController
@@ -25,8 +24,10 @@
     [self addBackItem];
     //初始化视图
     [self createUI];
-    //test
-    self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    //初始化数据
+    currentPage = 1;
+    //获取数据
+    [self getAgentListData];
     // Do any additional setup after loading the view.
 }
 
@@ -44,9 +45,44 @@
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
 }
 
+#pragma mark 获取经纪人列表
+- (void)getAgentListData
+{
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    __weak typeof(self) weakSelf = self;
+    NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:AGENT_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+    requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
+     {
+         NSLog(@"responseObj====%@",responseObj);
+         NSDictionary *dic = (NSDictionary *)responseObj;
+         int sucess = [dic[@"responseMessage"][@"success"] intValue];
+         if (sucess == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+             weakSelf.dataArray = dic[@"pageBean"][@"data"];
+             if (weakSelf.dataArray && [weakSelf.dataArray count] == 0)
+             {
+                 [CommonTool addAlertTipWithMessage:@"暂无数据"];
+             }
+             [weakSelf.table reloadData];
+         }
+         else
+         {
+             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+         }
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"error====%@",error);
+         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+     }];
+
+}
+
 
 #pragma mark - tableView代理
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -69,7 +105,11 @@
         cell.backgroundColor = WHITE_COLOR;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:@"" agentName:@"易居客" agentScore:@"1111"];
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    NSString *name = dic[@"bankAcctName"];
+    name = (name) ? name : @"";
+    NSString *point = [NSString stringWithFormat:@"%@",dic[@"point"]];
+    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:@"" agentName:name agentScore:point];
     return cell;
 }
 
@@ -77,7 +117,20 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    NSString *name = dic[@"bankAcctName"];
+    name = (name) ? name : @"";
+    NSString *point = [NSString stringWithFormat:@"%.0f",[dic[@"point"] floatValue]];
+    NSString *mobile = dic[@"mobile"];
+    mobile = (mobile) ? mobile : @"";
+    NSString *agentID = dic[@"id"];
+    agentID = (agentID) ? agentID : @"";
     AgentDetailViewController *agentDetailViewController = [[AgentDetailViewController alloc] init];
+    agentDetailViewController.name = name;
+    agentDetailViewController.score = point;
+    agentDetailViewController.mobile = mobile;
+    agentDetailViewController.agentID = agentID;
+    agentDetailViewController.imageUrl = @"";
     [self.navigationController pushViewController:agentDetailViewController animated:YES];
 }
 

@@ -37,9 +37,11 @@
     [self createUI];
     //初始化数据
     buttonSelectedIndex = 1;
+    currentPage = 1;
     self.houseScource = HouseScourceFromSecondHand;
-    self.imagesArray = @[@"telephone_icon.png",@"message_icon.png"];
-    self.dataArray = (NSMutableArray *)@[@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    self.imagesArray = @[@"telephone_icon.png"];
+    //获取发布房源数据
+    [self getPublicRoomList];
     // Do any additional setup after loading the view.
 }
 
@@ -70,7 +72,7 @@
         
         for (int i = 0; i < 2; i++)
         {
-            UIButton *button = [CreateViewTool createButtonWithFrame:CGRectMake(i * SCREEN_WIDTH/2, -5, SCREEN_WIDTH/2, headerImageView.frame.size.height) buttonImage:nil selectorName:@"houseTypeButtonPressed:" tagDelegate:self];
+            UIButton *button = [CreateViewTool createButtonWithFrame:CGRectMake(i * SCREEN_WIDTH/2, -2.5, SCREEN_WIDTH/2, headerImageView.frame.size.height) buttonImage:nil selectorName:@"houseTypeButtonPressed:" tagDelegate:self];
             button.tag = 1 + i;
             [button setTitle:[array objectAtIndex:i] forState:UIControlStateNormal];
             [button setTitleColor:AGENT_DETAIL_TYPE_COLOR forState:UIControlStateNormal];
@@ -92,6 +94,94 @@
 }
 
 
+#pragma mark 获取发布房源数据
+- (void)getPublicRoomList
+{
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    __weak typeof(self) weakSelf = self;
+    NSDictionary *requestDic = @{@"queryBean.params.publisher_id_long":self.agentID,@"queryBean.pageNo":@(currentPage),@"queryBean.pageSize":@(3)};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:AGENT_PUBLICROOM_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+              requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
+     {
+         NSLog(@"responseObj====%@",responseObj);
+         isCanGetMore = YES;
+         NSDictionary *dic = (NSDictionary *)responseObj;
+         int sucess = [dic[@"responseMessage"][@"success"] intValue];
+         if (sucess == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+             [weakSelf setHouseDataWithDictionary:dic];
+         }
+         else
+         {
+             if (currentPage > 1)
+             {
+                 currentPage--;
+             }
+             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+         }
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"error====%@",error);
+         isCanGetMore = YES;
+         if (currentPage > 1)
+         {
+             currentPage--;
+         }
+         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+     }];
+}
+
+#pragma mark 加载更多
+- (void)getMoreData
+{
+    if (!isCanGetMore)
+    {
+        currentPage--;
+        return;
+    }
+    isCanGetMore = NO;
+    [self getPublicRoomList];
+}
+
+#pragma mark 设置数据
+- (void)setHouseDataWithDictionary:(NSDictionary *)dic
+{
+    NSArray *array = dic[@"pageBean"][@"data"];
+    int pageCount = [dic[@"pageBean"][@"totalPages"] intValue];
+    
+    if (!self.dataArray)
+    {
+        if (!array || [array count] == 0)
+        {
+            [CommonTool addAlertTipWithMessage:@"暂无数据"];
+        }
+        else
+        {
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+        }
+    }
+    else
+    {
+        if (array && [array count] > 0)
+            [self.dataArray addObjectsFromArray:array];
+    }
+    [self.table reloadData];
+    
+    if (pageCount > currentPage)
+    {
+        [self addGetMoreView];
+    }
+    else
+    {
+        [self removeGetMoreView];
+        isCanGetMore = NO;
+    }
+}
+
+
 #pragma mark 切换房源响应事件
 
 - (void)houseTypeButtonPressed:(UIButton *)sender
@@ -105,6 +195,15 @@
 }
 
 #pragma mark - tableView代理
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == 1)
+    {
+        return .1;
+    }
+    return 5.0;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -134,7 +233,7 @@
 {
     if (section == 0)
     {
-        return 3;
+        return 2;
     }
     else if (section == 1)
     {
@@ -185,8 +284,8 @@
         NSString *detailTextString = @"";
         if (indexPath.row == 0)
         {
-            textString = @"易居客";
-            detailTextString = @"积分 1234";
+            textString = self.name;
+            detailTextString = [NSString stringWithFormat:@"积分 %@",self.score];
             cell.textLabel.textColor = AGENT_DETAIL_NAME_COLOR;
             cell.detailTextLabel.textColor = AGENT_DETAIL_SCORE_COLOR;
             [cell.imageView setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"agent_icon_default.png"]];
@@ -194,7 +293,7 @@
         else
         {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            textString = (indexPath.row == 1) ? @"电话: 18888888888" : @"累计评论(88)";
+            textString =  [NSString stringWithFormat:@"电话: %@",self.mobile];
             detailTextString = @"";
             cell.textLabel.font = AGENT_DETAIL_FONT;
             cell.textLabel.textColor = AGENT_DETAIL_FONT_COLOR;
@@ -207,6 +306,22 @@
     }
     else if (indexPath.section == 1)
     {
+        NSDictionary *rowDic = self.dataArray[indexPath.row];
+        NSString *title = rowDic[@"title"];
+        title = (title) ? title : @"";
+        NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:rowDic[@"coverPhoto"][@"photoType"]];
+        NSLog(@"imageUrl===%@",imageUrl );
+        NSString *local = rowDic[@"room"][@"community"][@"address"];
+        local = (local) ? local : @"";
+        NSLog(@"local===%@",local);
+        NSString *park = rowDic[@"room"][@"community"][@"name"];
+        park = (park) ? park : @"";
+        NSString *square = [NSString stringWithFormat:@"%@平米",rowDic[@"room"][@"square"]];
+        square = (square) ? square : @"";
+        float price = [rowDic[@"price"] floatValue]/10000.0;
+        NSString *roomPrice = [NSString stringWithFormat:@"%.0f万",price];
+        NSString *roomStyle = [SmallPigTool makeEasyRoomStyleWithRoomDictionary:rowDic];
+        
         if (HouseScourceFromSecondHand == self.houseScource)
         {
             cell = (SecondHandHouseListCell *)[tableView dequeueReusableCellWithIdentifier:secondHouseCellID];
@@ -220,9 +335,24 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }
             }
-            //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
-            [(SecondHandHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"白金假日" priceText:@"125万" typeText:@"两房一厅" sizeText:@"43平米" advantage1Text:@"学位房" advantage2Text:@"朝南" advantage3Text:@"南北通风"];
-            
+            NSString *feature = [SmallPigTool makeHouseFeature:rowDic[@"roomFeature"] type:1];
+            NSArray *array = [feature componentsSeparatedByString:@", "];
+            NSString *string1 = @"";
+            NSString *string2 = @"";
+            NSString *string3 = @"";
+            if (array && [array count] > 0)
+            {
+                string1 = array[0];
+                if ([array count] > 1)
+                {
+                    string2 = array[1];
+                }
+                if ([array count] > 2)
+                {
+                    string3 = array[2];
+                }
+            }
+            [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:roomPrice typeText:roomStyle sizeText:square advantage1Text:string1 advantage2Text:string2 advantage3Text:string3];
         }
         else if (HouseScourceFromRental == self.houseScource)
         {
@@ -238,8 +368,9 @@
                 }
             }
             //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
-            [(RentalHouseListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
+            [(RentalHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park timeText:@"" typeText:roomStyle sizeText:square priceText:[NSString stringWithFormat:@"%.0f元",[rowDic[@"price"] floatValue]]];
         }
+
     }
     
     return cell;
@@ -249,7 +380,10 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    if (indexPath.section == 0)
+    {
+        
+    }
 }
 
 

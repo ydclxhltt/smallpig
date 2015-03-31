@@ -9,5 +9,9 @@
 #import "HouseListViewController.h"
 
 @interface AgentDetailViewController : BasicViewController
-
+@property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *score;
+@property (nonatomic, strong) NSString *mobile;
+@property (nonatomic, strong) NSString *agentID;
 @end
