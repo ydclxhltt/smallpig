@@ -13,9 +13,6 @@
 #define PAGE_COUNT 10.0
 
 @interface AgentMemoListViewController ()
-{
-    int currentPage;
-}
 @end
 
 @implementation AgentMemoListViewController
