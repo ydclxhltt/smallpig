@@ -21,6 +21,14 @@
 //平台
 #define APPLICATION_PLATFORM    @"IOS"
 
+//支付宝APPID
+#define ALIPAY_APP_ID           @"2015020400030222"
+//#define ALIPAY_APP_ID           @"102015020400030222"
 
+//支付宝授权登录
+#define ALIPAY_LOGIN_URL        @"https://openauth.alipay.com/oauth2/authorize.htm?client_id=2015020400030222"
+
+//商户ID
+#define ALIPAY_PID              @"2088811200911265"
 
 #endif

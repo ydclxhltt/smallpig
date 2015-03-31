@@ -100,6 +100,14 @@
 #pragma mark 设置数据
 - (void)setDataWithHousePrice:(NSString *)housePrice HousePriceInfo:(NSString *)priceInfo houseSize:(NSString *)size houseSource:(NSString *)scource houseType:(NSString *)type houseThings:(NSString *)things houseFloor:(NSString *)floor housePosition:(NSString *)position
 {
+    housePrice = (housePrice) ? housePrice : @"";
+    size = (size) ? size : @"";
+    priceInfo = (priceInfo) ? priceInfo : @"";
+    scource = (scource) ? scource : @"";
+    type = (type) ? type : @"";
+    things = (things) ? things : @"";
+    floor = (floor) ? floor : @"";
+    position = (position) ? position : @"";
     if(self.houseType == HouseScourceFromRental)
     {
         self.dataArray = @[[housePrice stringByAppendingString:priceInfo],size,scource,type,things,floor,position];

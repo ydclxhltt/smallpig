@@ -124,4 +124,78 @@
     NSString *roomType = [NSString stringWithFormat:@"%d室%d厅%d厨%d卫",bedroomCount,hallCount,kitchenCount,bathroomCount];
     return roomType;
 }
+
+#pragma mark 处理时间
++ (NSString *)formatTimeWithString:(NSString *)time
+{
+    NSLog(@"time===%@",time);
+    if (!time)
+    {
+        return @"";
+    }
+    NSString *timeStr = @"";
+    NSArray *array = [time componentsSeparatedByString:@" "];
+    if (array && [array count] > 0)
+    {
+        timeStr = array[0];
+    }
+//    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+//    formatter1.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+//    NSDate *date = [formatter1 dateFromString:time];
+//    NSLog(@"date===%@",date);
+//    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+//    formatter2.dateFormat = @"yyyy-MM-dd";
+//    timeStr = [formatter2 stringFromDate:date];
+//    NSLog(@"timeStr====%@",timeStr);
+    timeStr = (timeStr) ? timeStr : @"";
+    return timeStr;
+}
+
+#pragma mark 售价
++ (NSString *)getHousePrice:(NSString *)price
+{
+    price = (price) ? price : @"";
+    NSString *housePrice = @"";
+    housePrice = [NSString stringWithFormat:@" %.0f万",[price floatValue]/10000.0];
+    return housePrice;
+}
+
+#pragma mark 房源标签和亮点转换字符串
+//type 1:标签 2:优势
++ (NSString *)makeHouseFeature:(NSString *)feature type:(int)type
+{
+    feature = (feature) ? feature : @"";
+    NSString *houseFeature = @"";
+    NSArray *roomFeatureArray = (type == 1) ? [[SmallPigApplication shareInstance] houseLabelsArray] : [[SmallPigApplication shareInstance] houseGoodLabelsArray];
+    if (roomFeatureArray && [roomFeatureArray count] > 0)
+    {
+        NSArray *featureArray = [feature componentsSeparatedByString:@","];
+        if (featureArray && [featureArray count] > 0)
+        {
+            NSMutableArray *featureNameArray = [NSMutableArray array];
+            for (int i = 0; i < [featureArray count]; i++)
+            {
+                NSString *featureID = featureArray[i];
+                for (int j = 0; j < [roomFeatureArray count]; j++)
+                {
+                    NSDictionary *dic = roomFeatureArray[j];
+                    NSString *roomFeatureID = [NSString stringWithFormat:@"%@",dic[@"paramCode"]];
+                    roomFeatureID = (roomFeatureID) ? roomFeatureID : @"";
+                    if ([roomFeatureID isEqualToString:featureID])
+                    {
+                        NSString *featureName = dic[@"showName"];
+                        if (featureName && ![featureName isEqualToString:@""])
+                        {
+                             [featureNameArray addObject:featureName];
+                        }
+                    }
+                }
+            }
+            houseFeature = ([featureNameArray count] > 0) ? [featureNameArray componentsJoinedByString:@", "] : @"无";
+        }
+       
+    }
+    return houseFeature;
+}
+
 @end

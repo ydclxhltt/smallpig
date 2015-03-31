@@ -69,7 +69,7 @@
         cell.backgroundColor = WHITE_COLOR;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:@"" agentName:@"你妹你大爷" agentScore:@"1111"];
+    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:@"" agentName:@"易居客" agentScore:@"1111"];
     return cell;
 }
 

@@ -12,10 +12,11 @@
 #import "HouseDetailAgentView.h"
 #import "HouseDetailOneInfoView.h"
 #import "HouseDetailSeeInfoView.h"
+#import "AddInformViewController.h"
 
 #define HOUSE_DETAIL_NORMAL_HEIGHT  55.0
 #define HOUSE_DETAIL_INFO_HEIGHT    105.0
-#define HOUSE_DETAIL_AGENT_HEIGHT   135.0
+#define HOUSE_DETAIL_AGENT_HEIGHT   145.0
 #define HOUSE_DETAIL_MAP_HEIGHT     175.0
 #define HOUSE_DETAIL_SEE_HEIGHT     55.0
 
@@ -46,14 +47,14 @@
     if (self.houseSource == HouseScourceFromRental)
     {
         self.titleArray = @[@"房间描述",@"房间配置",@"小区信息",@"位置与周边"];
-        self.dataArray = @[@"房东急租,房间宽敞,压二付一,不可错过",@"床 空调 宽带 热水器 衣柜 洗衣机 阳台 独立卫生间",@"蛇口中心区",@"蛇口中心位置，四海公园旁，育才学校旁边，生活便利环境优雅."];
+        self.dataArray = @[@"",@"",@"",@""];
     }
     else if (self.houseSource == HouseScourceFromSecondHand)
     {
         self.titleArray = @[@"房间描述",@"房间优势",@"小区信息",@"位置与周边"];
-        self.dataArray = @[@"房东急租,房间宽敞,压二付一,不可错过",@"学位房 经济实惠 朝南",@"蛇口中心区",@"蛇口中心位置，四海公园旁，育才学校旁边，生活便利环境优雅."];
+        self.dataArray = @[@"",@"",@"",@""];
     }
-    self.titleText = @"蛇口中心位置，四海公园旁，育才学校旁边，生活便利环境优雅.房东急租,房间宽敞,压二付一,不可错过";
+    self.titleText = @"";
     lastPoint = 0.0;
     //初始化UI
     [self createUI];
@@ -94,7 +95,7 @@
 - (void)addtableView
 {
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
-    //self.table.bounces = NO;
+    self.table.bounces = NO;
 }
 
 - (void)addTableHeaderView
@@ -176,14 +177,42 @@
     [headerView setImageScrollViewData:picListUrlArray];
     
     //设置title描述
-    self.titleText = dataDic[@"model"][@"title"];
-    
+    self.titleText = dataDic[@"model"][@"description"];
+//   self.titleText = [self.titleText stringByReplacingOccurrencesOfString:@"\r" withString:@" "];
+//    self.titleText = [self.titleText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     
     //设置电话
     NSString *mobile = dataDic[@"model"][@"publisher"][@"mobile"];
     mobile = (mobile) ? mobile : @"";
     [mobileButton setTitle:mobile forState:UIControlStateNormal];
 
+    NSMutableArray *featureArray = [NSMutableArray array];
+    //房间描述（标签）
+    NSString *roomLabelString = dataDic[@"model"][@"roomLabel"];
+    roomLabelString = (roomLabelString) ? roomLabelString : @"";
+    roomLabelString = [SmallPigTool makeHouseFeature:roomLabelString type:1];
+    [featureArray addObject:roomLabelString];
+    
+    //房子亮点
+    NSString *roomFeatureString = dataDic[@"model"][@"roomFeature"];
+    roomFeatureString = (roomFeatureString) ? roomFeatureString : @"";
+    roomFeatureString = [SmallPigTool makeHouseFeature:roomFeatureString type:2];
+    [featureArray addObject:roomFeatureString];
+    
+    //小区信息
+    NSString *parkInfoString = dataDic[@"model"][@"room"][@"building"][@"community"][@"description"];
+    parkInfoString = (parkInfoString) ? parkInfoString : @"";
+    [featureArray addObject:parkInfoString];
+    
+    //位置与周边
+    NSString *addressString1 = dataDic[@"model"][@"room"][@"building"][@"community"][@"address"];
+    addressString1 = (addressString1) ? addressString1 : @"";
+    NSString *addressString2 = dataDic[@"model"][@"room"][@"building"][@"community"][@"showName"];
+    addressString2 = (addressString2) ? addressString2 : @"";
+    NSString *addressString = [NSString stringWithFormat:@"%@ %@",addressString1,addressString2];
+    [featureArray addObject:addressString];
+    
+    self.dataArray = featureArray;
     
     [self.table reloadData];
 }
@@ -225,6 +254,11 @@
 {
     //ADD_SAVE_URL
     sender.enabled = NO;
+    NSString *roomID = [NSString stringWithFormat:@"%@",self.detailDic[@"model"][@"id"]];
+    if (!roomID || [roomID isEqualToString:@""])
+    {
+        return;
+    }
     NSDictionary *requestDic = (sender.selected) ? @{@"id":@"1"} : @{@"publishRoom.id":@"1"};
     NSString *url = (sender.selected) ? DELETE_SAVE_URL : ADD_SAVE_URL;
     RequestTool *request = [[RequestTool alloc] init];
@@ -237,6 +271,7 @@
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
     {
+        NSLog(@"error====%@",error);
         sender.enabled = YES;
     }];
 }
@@ -244,7 +279,8 @@
 #pragma mark report
 - (void)reportButtonPressed:(UIButton *)sender
 {
-    
+    AddInformViewController *informViewController = [[AddInformViewController alloc] init];
+    [self.navigationController pushViewController:informViewController animated:YES];
 }
 
 #pragma mark UIScrollViewDelegate
@@ -260,7 +296,10 @@
     {
         [self moveMobileViewIsShow:YES];
     }
-
+    if ((int)offset_y == (int)self.table.contentSize.height - SCREEN_HEIGHT)
+    {
+        [self moveMobileViewIsShow:YES];
+    }
  
 }
 
@@ -310,7 +349,7 @@
     {
         if (self.dataArray)
         {
-            int index = indexPath.row - 2;
+            int index = (int)indexPath.row - 2;
             if (index > [self.dataArray count] - 1)
             return HOUSE_DETAIL_NORMAL_HEIGHT;
             float textHeight = [CommonTool labelHeightWithText:self.dataArray[indexPath.row - 2] textFont:FONT(14.0) labelWidth:SCREEN_WIDTH - 2 * SPACE_X];
@@ -351,7 +390,10 @@
         {
             seeInfoView = [[HouseDetailSeeInfoView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, HOUSE_DETAIL_SEE_HEIGHT)];
         }
-        [seeInfoView setDataWithTitle:self.titleText publicTime:@"2015-1-29" seeCount:@"2345次"];
+        NSString *time = self.detailDic[@"model"][@"publisher"][@"createDate"];
+        time = [SmallPigTool formatTimeWithString:time];
+        NSLog(@"self.titleText===%@",self.titleText);
+        [seeInfoView setDataWithTitle:self.titleText publicTime:time seeCount:@"2345次"];
         [cell.contentView addSubview:seeInfoView];
     }
     if (indexPath.row == 1)
@@ -360,14 +402,47 @@
         {
             detailInfoView = [[HouseDetailInfoView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, HOUSE_DETAIL_INFO_HEIGHT) houseType:self.houseSource];
         }
-        if (self.houseSource == HouseScourceFromRental)
-        {
-            [detailInfoView setDataWithHousePrice:@" 5200/月" HousePriceInfo:@" (押二付一)" houseSize:@" 160平米" houseSource:@" 现有房源" houseType:@" 三室一厅" houseThings:@" 精装修" houseFloor:@" 12/32" housePosition:@" 朝南"];
-        }
-        if (self.houseSource == HouseScourceFromSecondHand)
-        {
-            [detailInfoView setDataWithHousePrice:@" 480万" HousePriceInfo:@" 30000/平米" houseSize:@" 160平米" houseSource:@" 现有房源" houseType:@" 三室一厅" houseThings:@" 精装修" houseFloor:@" 12/32" housePosition:@" 朝南"];
-        }
+        
+        NSString *price = [SmallPigTool getHousePrice:self.detailDic[@"model"][@"price"]];
+        NSString *otherPrice = self.detailDic[@"model"][@"price"];
+        otherPrice = (otherPrice) ? otherPrice : @"";
+        otherPrice = [NSString stringWithFormat:@" %@元/月",otherPrice];
+        price = (self.houseSource == HouseScourceFromSecondHand) ? price : otherPrice;
+        
+        NSString *perPrice = self.detailDic[@"model"][@"room"][@"building"][@"community"][@"price"];
+        perPrice = (perPrice) ? perPrice : @"";
+        perPrice = [NSString stringWithFormat:@" %@/平米",perPrice];
+        perPrice = (self.houseSource == HouseScourceFromSecondHand) ? perPrice : @"";
+        
+        NSString *size = self.detailDic[@"model"][@"room"][@"square"];
+        size = (size) ? size : @"";
+        size = [NSString stringWithFormat:@" %@平米",size];
+        
+        NSString *type = [SmallPigTool makeRoomStyleWithRoomDictionary:self.detailDic[@"model"]];
+        type = [@" " stringByAppendingString:type];
+        
+        NSString *things = [SmallPigTool getDecorateWithIndex:[self.detailDic[@"model"][@"room"][@"decorate"] intValue]];
+        things = [@" " stringByAppendingString:things];
+        
+        NSString *towards = self.detailDic[@"model"][@"room"][@"towards"];
+        towards = (towards) ? towards : @"";
+        towards = [SmallPigTool getTowardsWithIdentification:towards];
+        towards = [NSString stringWithFormat:@" %@",towards];
+        
+        NSString *floor1 = self.detailDic[@"model"][@"room"][@"floor"];
+        floor1 = (floor1) ? floor1 : @"";
+        NSString *floor2 = self.detailDic[@"model"][@"room"][@"floorHeight"];
+        floor2 = (floor2) ? floor2 : @"";
+        NSString *floor= [NSString stringWithFormat:@" %@/%@",floor1,floor2];
+        
+        [detailInfoView setDataWithHousePrice:price
+                               HousePriceInfo:perPrice
+                                    houseSize:size
+                                  houseSource:@" 现有房源"
+                                    houseType:type
+                                  houseThings:things
+                                   houseFloor:floor
+                                housePosition:towards];
         [cell.contentView addSubview:detailInfoView];
     }
     if (indexPath.row > 1 && indexPath.row < 6)
@@ -394,7 +469,9 @@
         name = (name) ? name : @"";
         NSString *mobile = self.detailDic[@"model"][@"publisher"][@"mobile"];
         mobile = (mobile) ? mobile : @"";
-        [agentView setDataWithAgentName:name phoneNumber:mobile companyName:@"HooRay" houseScourceCount:@"38套"];
+        //NSString *iconUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:self.detailDic[@"model"][@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:self.detailDic[@"model"][@"coverPhoto"][@"photoType"]];
+        NSString *iconUrl = @"";
+        [agentView setDataWithAgentIcon:iconUrl  agentName:name phoneNumber:mobile companyName:@"" houseScourceCount:@""];
         [cell.contentView addSubview:agentView];
     }
     

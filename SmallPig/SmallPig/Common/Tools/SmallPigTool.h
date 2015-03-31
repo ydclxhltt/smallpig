@@ -45,4 +45,28 @@
  *  @param dic  roomDic
  */
 + (NSString *)makeRoomStyleWithRoomDictionary:(NSDictionary *)dic;
+
+/*
+ *  格式化时间
+ *
+ *  @param time  时间字符串
+ */
++ (NSString *)formatTimeWithString:(NSString *)time;
+
+/*
+ *  售价换算成W
+ *
+ *  @param price  售价单位元
+ */
++ (NSString *)getHousePrice:(NSString *)price;
+
+
+/*
+ *  ID转showName
+ *
+ *  @param feature  ID
+ *  @param type     type 1:标签 2:优势
+ */
++ (NSString *)makeHouseFeature:(NSString *)feature type:(int)type;
+
 @end

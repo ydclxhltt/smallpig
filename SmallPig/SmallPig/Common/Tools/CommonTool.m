@@ -86,7 +86,7 @@
     CGSize titleBrandSizeForLines = [textLabel.text boundingRectWithSize:CGSizeMake(textLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributeDic context:nil].size;
     //---
     int number= ceil(titleBrandSizeForLines.height/titleBrandSizeForHeight.height);
-    textLabel.numberOfLines = number;
+    //textLabel.numberOfLines = 0;
     float theHeigth=0.0;
     if (number <= 1)
     {
@@ -95,7 +95,7 @@
     else
     {
         theHeigth = number*titleBrandSizeForHeight.height;
-        textLabel.numberOfLines = number + 1;
+        //textLabel.numberOfLines = number + 1;
     }
     return theHeigth;
 }

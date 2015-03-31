@@ -185,7 +185,7 @@
         NSString *detailTextString = @"";
         if (indexPath.row == 0)
         {
-            textString = @"你大爷";
+            textString = @"易居客";
             detailTextString = @"积分 1234";
             cell.textLabel.textColor = AGENT_DETAIL_NAME_COLOR;
             cell.detailTextLabel.textColor = AGENT_DETAIL_SCORE_COLOR;

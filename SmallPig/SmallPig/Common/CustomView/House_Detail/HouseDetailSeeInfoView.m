@@ -55,12 +55,13 @@
     float labelWidth = (self.frame.size.width - 3 * SEE_SPACE_X)/2;
     timeLabel = [CreateViewTool createLabelWithFrame:CGRectMake(SEE_SPACE_X, titleLabel.frame.size.height + titleLabel.frame.origin.y + SEE_SPACE_Y, labelWidth, SEE_LABEL_HEIGHT) textString:self.titleArray[1] textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(14.0)];
     timeLabel.tag = 2;
+
     [self addSubview:timeLabel];
     
     float start_x = timeLabel.frame.size.width + titleLabel.frame.origin.x + SEE_SPACE_X;
     seeCountLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, timeLabel.frame.origin.y, labelWidth, SEE_LABEL_HEIGHT) textString:self.titleArray[1] textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(14.0)];
     seeCountLabel.tag = 3;
-    seeCountLabel.textAlignment =NSTextAlignmentRight;
+    seeCountLabel.textAlignment = NSTextAlignmentRight;
     [self addSubview:seeCountLabel];
 }
 
@@ -83,6 +84,7 @@
 - (void)resetFrame
 {
     float height = [CommonTool labelHeightWithTextLabel:titleLabel textFont:titleLabel.font];
+    titleLabel.numberOfLines = 0;
     CGRect frame = titleLabel.frame;
     frame.size.height = height;
     titleLabel.frame = frame;

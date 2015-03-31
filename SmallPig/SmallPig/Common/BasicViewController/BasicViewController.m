@@ -61,10 +61,12 @@
 {
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                                                                    target:nil action:nil];
-    negativeSpacer.width = 20;
+     negativeSpacer.width = (LeftItem == type) ? -15 : 15;
+    //float x = negativeSpacer.width;
+    float x = (LeftItem == type) ? negativeSpacer.width : 0;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 60, 30);
+    button.frame = CGRectMake(x, 0, 60, 30);
     button.showsTouchWhenHighlighted = YES;
     button.titleLabel.font = FONT(17.0);
     [button setTitleColor:WHITE_COLOR forState:UIControlStateNormal];
@@ -75,9 +77,9 @@
     }
     UIBarButtonItem  *barItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     if(LeftItem == type)
-        self.navigationItem.leftBarButtonItems = @[barItem,negativeSpacer];
+        self.navigationItem.leftBarButtonItems = @[negativeSpacer,barItem];
     else if (rightItem == type)
-        self.navigationItem.rightBarButtonItems = @[negativeSpacer,barItem];
+        self.navigationItem.rightBarButtonItems = @[barItem];
 }
 
 
@@ -87,7 +89,8 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
                                                                                    target:nil action:nil];
     negativeSpacer.width = (LeftItem == type) ? -15 : 15;
-    float x = negativeSpacer.width;
+    float x = (LeftItem == type) ? negativeSpacer.width : 0;
+    //float x = negativeSpacer.width;
     
     UIImage *image_up = [UIImage imageNamed:[imageName stringByAppendingString:@"_up.png"]];
     UIImage *image_down = [UIImage imageNamed:[imageName stringByAppendingString:@"_down.png"]];

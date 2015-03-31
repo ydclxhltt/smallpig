@@ -20,7 +20,8 @@
     self.houseSource = HouseScourceFromSecondHand;
     [super viewDidLoad];
     [self setTitleViewWithArray:@[@"售房",@"租房"]];
-    [self setNavBarItemWithTitle:@"  发布" navItemType:rightItem selectorName:@"publicHouseButtonPressed:"];
+    self.navigationItem.rightBarButtonItems = nil;
+    [self setNavBarItemWithTitle:@"发布" navItemType:rightItem selectorName:@"publicHouseButtonPressed:"];
     [self getHouseList];
     // Do any additional setup after loading the view.
 }

@@ -92,12 +92,12 @@
     [self addSubview:backButton];
     
     UIImage *saveImage = [UIImage imageNamed:@"detail_save_up.png"];
-    UIButton *saveButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.frame.size.width - saveImage.size.width/2 , backButton.frame.origin.y, saveImage.size.width/2,  saveImage.size.height/2) buttonImage:@"detail_save" selectorName:@"saveButtonPressed:" tagDelegate:self.delegate];
+    UIButton *saveButton = [CreateViewTool createButtonWithFrame:CGRectMake(self.frame.size.width - saveImage.size.width/2 - space_x, backButton.frame.origin.y, saveImage.size.width/2,  saveImage.size.height/2) buttonImage:@"detail_save" selectorName:@"saveButtonPressed:" tagDelegate:self.delegate];
     [self addSubview:saveButton];
     
-    UIImage *shareImage = [UIImage imageNamed:@"detail_share_up.png"];
-    UIButton *shareButton = [CreateViewTool createButtonWithFrame:CGRectMake(saveButton.frame.origin.x - shareImage.size.width/2, backButton.frame.origin.y, shareImage.size.width/2,  shareImage.size.height/2) buttonImage:@"detail_share" selectorName:@"shareButtonPressed:" tagDelegate:self.delegate];
-    [self addSubview:shareButton];
+//    UIImage *shareImage = [UIImage imageNamed:@"detail_share_up.png"];
+//    UIButton *shareButton = [CreateViewTool createButtonWithFrame:CGRectMake(saveButton.frame.origin.x - shareImage.size.width/2, backButton.frame.origin.y, shareImage.size.width/2,  shareImage.size.height/2) buttonImage:@"detail_share" selectorName:@"shareButtonPressed:" tagDelegate:self.delegate];
+//    [self addSubview:shareButton];
 }
 
 - (void)addLabel

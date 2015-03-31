@@ -91,6 +91,7 @@
 - (void)resetFrame
 {
     float height = [CommonTool labelHeightWithTextLabel:detailLabel textFont:detailLabel.font];
+    detailLabel.numberOfLines = 0;
     CGRect frame = detailLabel.frame;
     frame.size.height = height;
     detailLabel.frame = frame;

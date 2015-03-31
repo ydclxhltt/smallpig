@@ -51,8 +51,8 @@
     float space_y = 5.0;
     float start_y = space_y;
     float labelHeight = 20.0;
-    float icon_Height = 80.0;
-    float icon_Width = 60.0;
+    float icon_Height = 60.0;
+    float icon_Width = 80.0;
     
     UILabel *titleLable = [CreateViewTool createLabelWithFrame:CGRectMake(space_x, start_y, self.frame.size.width, labelHeight) textString:@"中介信息" textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(14.0)];
     [self addSubview:titleLable];
@@ -74,9 +74,10 @@
     [self addSubview:reportButton];
 
     float start_x = iconImageView.frame.origin.x + iconImageView.frame.size.width + space_x;
+    start_y = iconImageView.frame.origin.y + (iconImageView.frame.size.height - labelHeight * 2 -  space_y)/2;
     float labelWidth = self.frame.size.width - start_x - space_x;
     
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 2; i++)
     {
         UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, labelWidth, labelHeight) textString:self.titleArray[i] textColor:HOUSE_DETAIL_TEXT_COLOR textFont:FONT(14.0)];
         if (i == 0)
@@ -86,15 +87,15 @@
         label.tag = i + 1;
         [self addSubview:label];
         
-        start_y +=  label.frame.size.height;
+        start_y +=  label.frame.size.height + space_y;
     }
     
-    tipLabel = [CreateViewTool createLabelWithFrame:CGRectMake(space_x, start_y, self.frame.size.width - 2 * space_x, labelHeight) textString:@"房源信息由  提供,详情请致电." textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(13.0)];
-    [self addSubview:tipLabel];
+    tipLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, start_y, self.frame.size.width - 2 * space_x, labelHeight) textString:@"房源信息由  提供,详情请致电." textColor:HOUSE_DETAIL_TITLE_COLOR textFont:FONT(13.0)];
+    //[self addSubview:tipLabel];
 }
 
 #pragma mark 设置数据
-- (void)setDataWithAgentName:(NSString *)name phoneNumber:(NSString *)mobile companyName:(NSString *)company  houseScourceCount:(NSString *)count
+- (void)setDataWithAgentIcon:(NSString *)agentIcon agentName:(NSString *)name phoneNumber:(NSString *)mobile companyName:(NSString *)company  houseScourceCount:(NSString *)count
 {
     self.dataArray = @[name,mobile,company,count];
     for (int i = 0; i < 4; i++)
@@ -103,6 +104,8 @@
         label.text = [NSString stringWithFormat:@"%@%@",self.titleArray[i],self.dataArray[i]];
     }
     tipLabel.text = [NSString stringWithFormat:@"房源信息由%@提供,详情请致电.",name];
+    agentIcon = (agentIcon) ? agentIcon : @"";
+    [iconImageView setImageWithURL:[NSURL URLWithString:agentIcon] placeholderImage:iconImageView.image];
 }
 
 @end

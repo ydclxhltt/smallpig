@@ -13,6 +13,7 @@
 #import "MineViewController.h"
 #import "AFNetworking.h"
 #import "BMapKit.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 @interface AppDelegate()<BMKGeneralDelegate>
 {
@@ -225,6 +226,26 @@
     NSLog(@"error====%@",error);
 }
 
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    
+    if ([url.host isEqualToString:@"safepay"]) {
+        
+        [[AlipaySDK defaultService] processAuth_V2Result:url
+                                         standbyCallback:^(NSDictionary *resultDic) {
+                                             
+                                             NSString *resultStr = resultDic[@"result"];
+                                             NSLog(@"result = %@ resultStr == %@",resultDic,resultStr);
+                                         }];
+        
+    }
+    
+    return YES;
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -23,10 +23,11 @@
 /*
  *  设置数据
  *
+ *  @param agentIcon 头像
  *  @param name      中介名字
  *  @param mobile    手机号
  *  @param company   所属公司
  *  @param count     拥有房源
  */
-- (void)setDataWithAgentName:(NSString *)name phoneNumber:(NSString *)mobile companyName:(NSString *)company  houseScourceCount:(NSString *)count;
+- (void)setDataWithAgentIcon:(NSString *)agentIcon agentName:(NSString *)name phoneNumber:(NSString *)mobile companyName:(NSString *)company  houseScourceCount:(NSString *)count;
 @end
