@@ -118,7 +118,9 @@
     NSDictionary *rowDic = self.dataArray[indexPath.row];
     if (rowDic)
     {
-        [cell setDataWithLeftText:rowDic[@"content"] rightText:rowDic[@"createDate"]];
+        NSString *time = rowDic[@"createDate"];
+        time = [SmallPigTool formatTimeWithString:time];
+        [cell setDataWithLeftText:rowDic[@"content"] rightText:time];
     }
     
     return cell;

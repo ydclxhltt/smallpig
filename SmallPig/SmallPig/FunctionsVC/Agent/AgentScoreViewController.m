@@ -32,12 +32,12 @@
     // Do any additional setup after loading the view.
     //设置title
     self.title = AGENT_SCORE_TITLE;
-    //初始化数据
-    self.dataArray = (NSMutableArray *)@[@[@"完成房租预定",@"积分+50"],@[@"完成房租预定",@"积分+50"],@[@"完成房租预定",@"积分+50"],@[@"完成房租预定",@"积分+50"],@[@"完成房租预定",@"积分+50"],@[@"完成房租预定",@"积分+50"]];
     //添加侧滑item
     [self addBackItem];
     //初始化UI
     [self createUI];
+    //获取数据
+    [self getScoreList];
     // Do any additional setup after loading the view.
 }
 
@@ -74,12 +74,12 @@
     scoreLabel = [CreateViewTool  createLabelWithFrame:CGRectMake(tipLable.frame.origin.x + tipLable.frame.size.width + ADD_SPACE_X * scale, tipLable.frame.origin.y - (height - tipLable.frame.size.height), width, height) textString:@"" textColor:WHITE_COLOR textFont:FONT(60.0)];
     scoreLabel.textAlignment = NSTextAlignmentCenter;
     scoreLabel.contentMode = UIViewContentModeBottom;
-    scoreLabel.attributedText = [self makeAttributedString:@"1234"];
+    scoreLabel.attributedText = [self makeAttributedString:[NSString stringWithFormat:@"%d",[SmallPigApplication shareInstance].point]];
     [greenView addSubview:scoreLabel];
     
-    infoLabel = [CreateViewTool createLabelWithFrame:CGRectMake(0, scoreLabel.frame.size.height + scoreLabel.frame.origin.y + ADD_SPACE_Y * scale, SCREEN_WIDTH, 20.0) textString:@"根据您本月积分,可兑现888元" textColor:WHITE_COLOR textFont:FONT(14.0)];
-    infoLabel.textAlignment = NSTextAlignmentCenter;
-    [greenView addSubview:infoLabel];
+//    infoLabel = [CreateViewTool createLabelWithFrame:CGRectMake(0, scoreLabel.frame.size.height + scoreLabel.frame.origin.y + ADD_SPACE_Y * scale, SCREEN_WIDTH, 20.0) textString:@"根据您本月积分,可兑现888元" textColor:WHITE_COLOR textFont:FONT(14.0)];
+//    infoLabel.textAlignment = NSTextAlignmentCenter;
+//    [greenView addSubview:infoLabel];
     
     startHeight = greenView.frame.origin.y + greenView.frame.size.height;
 }
@@ -95,7 +95,7 @@
 
 - (NSMutableAttributedString *)makeAttributedString:(NSString *)string
 {
-    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:@"1234"];
+    NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:string];
     NSShadow *shodow = [[NSShadow alloc] init];
     shodow.shadowOffset = CGSizeMake(0, 5.0);
     shodow.shadowBlurRadius = 0.0;
@@ -105,16 +105,110 @@
 }
 
 
+#pragma mark 获取数据
+- (void)getScoreList
+{
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    __weak typeof(self) weakSelf = self;
+    NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:MY_SCORE_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+              requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
+     {
+         NSLog(@"responseObj====%@",responseObj);
+         isCanGetMore = YES;
+         NSDictionary *dic = (NSDictionary *)responseObj;
+         int sucess = [dic[@"responseMessage"][@"success"] intValue];
+         if (sucess == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+             [weakSelf setHouseDataWithDictionary:dic];
+         }
+         else
+         {
+             if (currentPage > 1)
+             {
+                 currentPage--;
+             }
+             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+             [weakSelf.table reloadData];
+         }
+     }
+     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"error====%@",error);
+         if (currentPage > 1)
+         {
+             currentPage--;
+         }
+         isCanGetMore = YES;
+         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+         [weakSelf.table reloadData];
+     }];
+}
+
+#pragma mark 加载更多
+- (void)getMoreData
+{
+    if (!isCanGetMore)
+    {
+        currentPage--;
+        return;
+    }
+    isCanGetMore = NO;
+    [self getScoreList];
+}
+
+#pragma mark 设置数据
+- (void)setHouseDataWithDictionary:(NSDictionary *)dic
+{
+    NSArray *array = dic[@"pageBean"][@"data"];
+    int pageCount = [dic[@"pageBean"][@"totalPages"] intValue];
+    
+    if (!self.dataArray)
+    {
+        if (!array || [array count] == 0)
+        {
+            [CommonTool addAlertTipWithMessage:@"暂无数据"];
+        }
+        else
+        {
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+        }
+    }
+    else
+    {
+        if (array && [array count] > 0)
+            [self.dataArray addObjectsFromArray:array];
+    }
+    [self.table reloadData];
+    
+    if (pageCount > currentPage)
+    {
+        [self addGetMoreView];
+    }
+    else
+    {
+        [self removeGetMoreView];
+        isCanGetMore = NO;
+    }
+}
+
+
 #pragma mark tableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return AGENTCSCORE_HEADER_HEIGHT * scale;
+    return AGENTCSCORE_HEADER_HEIGHT ;
 }
 
 - (NSString *)tableView:(UITableView *)tableView  titleForHeaderInSection:(NSInteger)section
 {
-    return @"2015-02-02";
+    NSDictionary *rowDic = self.dataArray[section];
+    NSString *time = rowDic[@"createDate"];
+    time = (time) ? time : @"";
+    time = [SmallPigTool formatTimeWithString:time];
+    return time;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -135,7 +229,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return AGENTCSCORE_LIST_HEIGHT * scale;
+    return AGENTCSCORE_LIST_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,7 +241,12 @@
         cell = [[LeftRightLableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    [cell setDataWithLeftText:self.dataArray[indexPath.section][0] rightText:self.dataArray[indexPath.section][1]];
+    NSDictionary *rowDic = self.dataArray[indexPath.section];
+    NSString *channel = rowDic[@"channel"];
+    channel = (channel) ? channel : @"";
+    NSString *point = [NSString stringWithFormat:@"%@",rowDic[@"point"]];
+    point = (point) ? point : @"";
+    [cell setDataWithLeftText:channel rightText:point];
     [cell setLeftColor:nil rightColor:APP_MAIN_COLOR];
     return cell;
 }

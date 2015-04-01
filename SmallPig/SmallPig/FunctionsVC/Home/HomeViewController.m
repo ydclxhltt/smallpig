@@ -223,6 +223,11 @@
 #pragma mark 点击行视图跳转方法
 - (void)pushViewControllerWithIndex:(int)index
 {
+    if (index == 2)
+    {
+        [CommonTool addAlertTipWithMessage:@"该功能正在建设中,敬请期待..."];
+        return;
+    }
     UIViewController *viewController = nil;
     switch (index)
     {

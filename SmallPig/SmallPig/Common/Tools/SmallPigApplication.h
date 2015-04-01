@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSArray *houseGoodLabelsArray;
 @property (nonatomic, assign) int memberType;
 @property (nonatomic, strong) NSString *userID;
+@property (nonatomic, assign) int point;
 /*
  *  构建单例
  */

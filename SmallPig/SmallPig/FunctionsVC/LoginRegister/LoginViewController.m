@@ -167,9 +167,11 @@
         {
             [SmallPigApplication shareInstance].userInfoDic = dic[@"member"];
             int memberType = [dic[@"member"][@"memberType"] intValue];
+            int point = [dic[@"member"][@"point"] intValue];
             //memberType = 1;
             [SmallPigApplication shareInstance].userID = dic[@"member"][@"id"];
             [SmallPigApplication shareInstance].memberType = memberType;
+            [SmallPigApplication shareInstance].point = point;
             if (memberType != 0)
             {
                 

@@ -175,6 +175,7 @@
     NSDictionary *rowDic = self.dataArray[section];
     NSString *time = rowDic[@"createDate"];
     time = (time) ? time : @"";
+    time = [SmallPigTool formatTimeWithString:time];
     return time;
 }
 
