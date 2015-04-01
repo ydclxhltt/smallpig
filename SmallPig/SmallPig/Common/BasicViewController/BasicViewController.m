@@ -240,7 +240,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     float offset_y = scrollView.contentOffset.y;
-    if ((int)offset_y == (int)self.table.contentSize.height - SCREEN_HEIGHT)
+    if ((int)offset_y == (int)self.table.contentSize.height - self.table.frame.size.height)
     {
         currentPage++;
         [self getMoreData];

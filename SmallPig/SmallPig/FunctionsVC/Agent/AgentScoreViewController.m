@@ -9,7 +9,7 @@
 #import "AgentScoreViewController.h"
 #import "LeftRightLableCell.h"
 
-#define AGENTCSCORE_LIST_HEIGHT   50.0
+#define AGENTCSCORE_LIST_HEIGHT   44.0
 #define AGENTCSCORE_HEADER_HEIGHT 15.0
 #define SPACE_Y                   110.0
 #define ADD_SPACE_X               0.0
