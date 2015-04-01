@@ -99,7 +99,7 @@
 {
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
-    NSDictionary *requestDic = @{@"queryBean.params.publisher_id_long":self.agentID,@"queryBean.pageNo":@(currentPage),@"queryBean.pageSize":@(3)};
+    NSDictionary *requestDic = @{@"queryBean.params.publisher_id_long":self.agentID,@"queryBean.pageNo":@(currentPage),@"queryBean.pageSize":@(10)};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:AGENT_PUBLICROOM_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
               requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
