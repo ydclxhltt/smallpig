@@ -16,27 +16,27 @@
 
 - (void)viewDidLoad
 {
-    self.houseSource = HouseScourceFromSecondHand;
+    self.houseSource = HouseScourceFromSave;
     [super viewDidLoad];
     //设置title
-    //self.title = MINE_SAVE_TITLE;
+    self.title = MINE_SAVE_TITLE;
     //设置item为nil
     //添加侧滑item
     [self addPersonItem];
     self.navigationItem.rightBarButtonItem = nil;
     //设置titleView
-    [self setTitleViewWithArray:@[@"售房",@"租房"]];
+    //[self setTitleViewWithArray:@[@"售房",@"租房"]];
     // Do any additional setup after loading the view.
 }
 
 
-#pragma  mark 选项卡按钮事件
-- (void)buttonPressed:(UIButton *)sender
-{
-    [super buttonPressed:sender];
-    self.houseSource = (sender.tag == 1) ? HouseScourceFromSecondHand : HouseScourceFromRental;
-    [self.table reloadData];
-}
+//#pragma  mark 选项卡按钮事件
+//- (void)buttonPressed:(UIButton *)sender
+//{
+//    [super buttonPressed:sender];
+//    self.houseSource = (sender.tag == 1) ? HouseScourceFromSecondHand : HouseScourceFromRental;
+//    [self.table reloadData];
+//}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -49,6 +49,8 @@
     [super viewDidDisappear:YES];
     [self setMainSideCanSwipe:YES];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -27,6 +27,8 @@
 #define LEFT_SIDE_LIST_HEIGHT   60.0
 //租房，二手房列表高度
 #define HOUSE_LIST_HEIGHT       100.0
+//收藏，发布列表高度
+#define SAVE_LIST_HEIGHT        85.0
 //经纪人排行列表高度
 #define AGENT_LIST_HEIGHT       90.0
 //个人中心头像行高

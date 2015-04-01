@@ -382,10 +382,40 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0)
     {
-        
+        if (indexPath.row == 1)
+        {
+            [self makeCall];
+        }
     }
 }
 
+
+#pragma mark 打电话
+- (void)makeCall
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.mobile]];
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"联系中介" message:self.mobile delegate:self cancelButtonTitle:@"拨打" otherButtonTitles:@"取消", nil];
+        [alertView show];
+    }
+    else
+    {
+        //设备不支持
+        [CommonTool addAlertTipWithMessage:@"设备不支持"];
+    }
+}
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([@"拨打" isEqualToString:title])
+    {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",alertView.message]];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

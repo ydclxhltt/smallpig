@@ -56,30 +56,83 @@
     requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
      {
          NSLog(@"responseObj====%@",responseObj);
+         isCanGetMore = YES;
          NSDictionary *dic = (NSDictionary *)responseObj;
          int sucess = [dic[@"responseMessage"][@"success"] intValue];
          if (sucess == 1)
          {
              [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
-             weakSelf.dataArray = dic[@"pageBean"][@"data"];
-             if (weakSelf.dataArray && [weakSelf.dataArray count] == 0)
-             {
-                 [CommonTool addAlertTipWithMessage:@"暂无数据"];
-             }
-             [weakSelf.table reloadData];
+             [weakSelf setHouseDataWithDictionary:dic];
          }
          else
          {
+             if (currentPage > 1)
+             {
+                 currentPage--;
+             }
              [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
          }
      }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
+    {
          NSLog(@"error====%@",error);
+         if (currentPage > 1)
+         {
+             currentPage--;
+         }
+         isCanGetMore = YES;
          [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
      }];
 
 }
+
+#pragma mark 加载更多
+- (void)getMoreData
+{
+    if (!isCanGetMore)
+    {
+        currentPage--;
+        return;
+    }
+    isCanGetMore = NO;
+    [self getAgentListData];
+}
+
+#pragma mark 设置数据
+- (void)setHouseDataWithDictionary:(NSDictionary *)dic
+{
+    NSArray *array = dic[@"pageBean"][@"data"];
+    int pageCount = [dic[@"pageBean"][@"totalPages"] intValue];
+    
+    if (!self.dataArray)
+    {
+        if (!array || [array count] == 0)
+        {
+            [CommonTool addAlertTipWithMessage:@"暂无数据"];
+        }
+        else
+        {
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+        }
+    }
+    else
+    {
+        if (array && [array count] > 0)
+            [self.dataArray addObjectsFromArray:array];
+    }
+    [self.table reloadData];
+    
+    if (pageCount > currentPage)
+    {
+        [self addGetMoreView];
+    }
+    else
+    {
+        [self removeGetMoreView];
+        isCanGetMore = NO;
+    }
+}
+
 
 
 #pragma mark - tableView代理

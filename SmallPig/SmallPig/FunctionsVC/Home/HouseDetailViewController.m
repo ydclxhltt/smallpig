@@ -162,6 +162,10 @@
 #pragma mark 设置数据
 - (void)setDataWithDictionary:(NSDictionary *)dataDic
 {
+    if (!self.detailDic[@"model"])
+    {
+        return;
+    }
     self.roomID = [NSString stringWithFormat:@"%@",self.detailDic[@"model"][@"id"]];
     //设置图片
     NSArray *array = dataDic[@"model"][@"photoList"];
@@ -239,6 +243,17 @@
         [CommonTool addAlertTipWithMessage:@"设备不支持"];
     }
     
+}
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([@"拨打" isEqualToString:title])
+    {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",alertView.message]];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 #pragma mark back
@@ -545,16 +560,6 @@
     
 }
 
-
-#pragma mark UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([title isEqualToString:@"拨打"])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",alertView.message]]];
-    }
-}
 
 
 - (void)didReceiveMemoryWarning {

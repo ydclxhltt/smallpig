@@ -87,6 +87,9 @@
 //删除收藏
 #define DELETE_SAVE_URL         MAKE_REQUEST_URL(@"yjk/favorites/delete.action")
 
+//收藏列表
+#define SAVE_LIST_URL           MAKE_REQUEST_URL(@"yjk/favorites/list.action")
+
 //房源照片
 #define UPLOAD_ROOM_PIC_URL     MAKE_REQUEST_URL(@"yjk/publishroom/uploadPhoto.action")
 

@@ -169,8 +169,9 @@
             if (weakSelf.pushType == PushTypeRegister)
             {
                 message = @"注册成功";
-                [SmallPigApplication  shareInstance].userInfoDic = dic[@"model"];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RegisterSucess" object:@{@"userName":self.phoneNumber,@"password":self.password}];
+                //[self dismissViewControllerAnimated:YES completion:nil];
             }
             else if (weakSelf.pushType == PushTypeFindPassWord)
             {

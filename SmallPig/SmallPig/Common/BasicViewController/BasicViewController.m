@@ -158,7 +158,7 @@
     if (!array || [array count] == 0)
         return;
     
-    float width = 150.0 * scale;
+    float width = 180.0 * scale;
     float height = 30.0;
     titleView = [CreateViewTool createImageViewWithFrame:CGRectMake(0, 0, width, height) placeholderImage:nil];
     titleView.clipsToBounds = YES;
@@ -170,7 +170,7 @@
     
     for (int i = 0; i<[array count]; i++)
     {
-        UIButton *button = [CreateViewTool  createButtonWithFrame:CGRectMake(i * width/2, 0, width/2, titleView.frame.size.height) buttonTitle:array[i] titleColor:[UIColor whiteColor] normalBackgroundColor:[UIColor clearColor] highlightedBackgroundColor:[UIColor clearColor] selectorName:@"buttonPressed:" tagDelegate:self];
+        UIButton *button = [CreateViewTool  createButtonWithFrame:CGRectMake(i * width/[array count], 0, width/[array count], titleView.frame.size.height) buttonTitle:array[i] titleColor:[UIColor whiteColor] normalBackgroundColor:[UIColor clearColor] highlightedBackgroundColor:[UIColor clearColor] selectorName:@"buttonPressed:" tagDelegate:self];
         button.tag = i + 1;
         button.titleLabel.font = FONT(15.0);
         [button setBackgroundImage:[CommonTool imageWithColor:[UIColor whiteColor]] forState:UIControlStateSelected];
@@ -254,6 +254,7 @@
 {
     self.table.delegate = nil;
     self.table.dataSource = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning

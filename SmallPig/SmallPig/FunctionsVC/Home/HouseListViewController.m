@@ -9,6 +9,7 @@
 #import "HouseListViewController.h"
 #import "RentalHouseListCell.h"
 #import "SecondHandHouseListCell.h"
+#import "SavePublicCell.h"
 #import "HouseDetailViewController.h"
 
 @interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
@@ -87,6 +88,14 @@
     else if (HouseScourceFromRental == self.houseSource)
     {
         self.urlString = RENTAL_LIST_URL;
+    }
+    else if (HouseScourceFromSave == self.houseSource)
+    {
+        self.urlString = SAVE_LIST_URL;
+    }
+    else if (HouseScourceFromPublic == self.houseSource)
+    {
+        self.urlString = PUBLIC_ROOM_LIST_URL;
     }
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
@@ -198,6 +207,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.houseSource == HouseScourceFromSave || self.houseSource == HouseScourceFromPublic)
+    {
+        return SAVE_LIST_HEIGHT;
+    }
     return  HOUSE_LIST_HEIGHT;
 }
 
@@ -273,11 +286,23 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
-        //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
         [(RentalHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park timeText:@"" typeText:roomStyle sizeText:square priceText:[NSString stringWithFormat:@"%.0f元",[rowDic[@"price"] floatValue]]];
     }
-    
-    
+    else if (HouseScourceFromSave == self.houseSource || HouseScourceFromPublic == self.houseSource )
+    {
+        cell = (SavePublicCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell)
+        {
+            cell = [[SavePublicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            if (SCREEN_WIDTH > 320.0)
+            {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+        }
+        [(SavePublicCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:[NSString stringWithFormat:@"%.0f元",[rowDic[@"price"] floatValue]] typeText:roomStyle sizeText:square];
+    }
     return cell;
 }
 

@@ -10,8 +10,7 @@
 #import "CheckCodeViewController.h"
 
 @interface LoginViewController ()
-@property (nonatomic, strong) NSString *userName;
-@property (nonatomic, strong) NSString *password;
+
 @end
 
 @implementation LoginViewController
@@ -27,6 +26,7 @@
     [self createUI];
     //关闭ScrollView默认偏移量
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSucess:) name:@"RegisterSucess" object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -166,6 +166,12 @@
         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
         {
             [SmallPigApplication shareInstance].userInfoDic = dic[@"member"];
+            int memberType = [dic[@"member"][@"memberType"] intValue];
+            //memberType = 1;
+            if (memberType != 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeMemberType" object:nil];
+            }
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
         }
@@ -207,6 +213,16 @@
     [self.navigationController pushViewController:registerVC animated:YES];
 }
 
+#pragma mark 注册成功通知
+- (void)registerSucess:(NSNotification *)nitification
+{
+    NSDictionary *dic = (NSDictionary *)nitification.object;
+    self.userName = dic[@"username"];
+    self.password = dic[@"password"];
+    [self.table reloadData];
+    [self loginRequest];
+}
+
 
 
 #pragma mark  tableView委托方法
@@ -246,14 +262,14 @@
     if (indexPath.row == 0)
     {
         textField.keyboardType = UIKeyboardTypeNumberPad;
-        textField.text = @"15820790320";
+        textField.text = (self.userName) ? self.userName : @"15820790320";
         label.text = @"用户名:";
     }
     else
     {
         textField.secureTextEntry = YES;
         textField.keyboardType = UIKeyboardTypeNamePhonePad;
-        textField.text = @"12344321";
+        textField.text = (self.password) ? self.password : @"12344321";
         textField.placeholder = @"请输入密码";
         label.text = @"密码:";
     }

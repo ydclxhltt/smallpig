@@ -39,6 +39,8 @@
     [self createUI];
     //初始化数据
     self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
+    //self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMemberType) name:@"ChangeMemberType" object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -156,6 +158,13 @@
     {
         
     }];
+}
+
+#pragma mark 登录成功后修改权限显示
+- (void)changeMemberType
+{
+    self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
+    [self.table reloadData];
 }
 
 
