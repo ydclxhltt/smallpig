@@ -46,7 +46,15 @@
     [self addPersonItem];
     //初始化数据
     userDic = [SmallPigApplication shareInstance].userInfoDic;
-    self.dataArray = (NSMutableArray *)@[@[@"头像",@"昵称",@"性别"],@[@"密码修改",@"绑定手机"],@[@"举报管理",@"升级为经纪人"],@[@"我的订单"]];
+    if ([SmallPigApplication shareInstance].memberType == 0)
+    {
+        self.dataArray = (NSMutableArray *)@[@[@"头像",@"昵称",@"性别"],@[@"密码修改",@"绑定手机"],@[@"举报管理",@"升级为经纪人"],@[@"我的订单"]];
+    }
+    else
+    {
+        self.dataArray = (NSMutableArray *)@[@[@"头像",@"昵称",@"性别"],@[@"密码修改",@"绑定手机"],@[@"举报管理"],@[@"我的订单"]];
+    }
+
     //初始化UI
     [self createUI];
     // Do any additional setup after loading the view.
@@ -163,12 +171,12 @@
                     }
                     else
                     {
-                        label.text = @"不男不女";
+                        label.text = @"未设置";
                     }
                 }
                 else
                 {
-                    label.text = @"不男不女";
+                    label.text = @"未设置";
                 }
             }
             [cell.contentView addSubview:label];

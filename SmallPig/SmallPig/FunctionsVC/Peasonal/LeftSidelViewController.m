@@ -38,8 +38,8 @@
     //初始化UI
     [self createUI];
     //初始化数据
-    self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
-    //self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"]];
+    //self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
+    self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMemberType) name:@"ChangeMemberType" object:nil];
     // Do any additional setup after loading the view.
 }
