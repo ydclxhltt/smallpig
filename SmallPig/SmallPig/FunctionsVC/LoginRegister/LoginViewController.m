@@ -168,8 +168,11 @@
             [SmallPigApplication shareInstance].userInfoDic = dic[@"member"];
             int memberType = [dic[@"member"][@"memberType"] intValue];
             //memberType = 1;
+            [SmallPigApplication shareInstance].userID = dic[@"member"][@"id"];
+            [SmallPigApplication shareInstance].memberType = memberType;
             if (memberType != 0)
             {
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeMemberType" object:nil];
             }
             [self dismissViewControllerAnimated:YES completion:nil];

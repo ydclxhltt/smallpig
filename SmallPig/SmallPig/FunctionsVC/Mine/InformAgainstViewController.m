@@ -9,7 +9,9 @@
 #import "InformAgainstViewController.h"
 
 @interface InformAgainstViewController()<UITableViewDataSource,UITableViewDelegate>
-
+{
+    int type;
+}
 @property (nonatomic, strong) NSArray *titleArray;
 @end
 
@@ -18,16 +20,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    type = 1;
     //设置title
-    [self setTitleViewWithArray:@[@"我的举报",@"举报我的"]];
+    if ([SmallPigApplication shareInstance].memberType == 0)
+    {
+        self.title = @"我的举报";
+    }
+    else
+    {
+        [self setTitleViewWithArray:@[@"我的举报",@"举报我的"]];
+    }
     //添加返回item
     [self addBackItem];
     //初始化数据
-    self.dataArray = (NSMutableArray *)@[@[@"湖畔百货小区两房一厅",@"虚假房屋信息!",@"1"],@[@"白金假日小区两房一厅",@"虚假房屋信息",@"0"]];
     self.titleArray = @[@"标题:",@"举报理由:",@"处理结果:"];
     //初始化UI
     [self createUI];
-
+    //获取数据
+    [self getInformListWithType:type];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,14 +63,119 @@
 - (void)buttonPressed:(UIButton *)sender
 {
     [super buttonPressed:sender];
+    if (type == (int)sender.tag)
+    {
+        return;
+    }
+    currentPage = 1;
+    type = (int)sender.tag;
+    self.dataArray = nil;
+    [self getInformListWithType:type];
+}
+
+
+#pragma mark 获取数据
+- (void)getInformListWithType:(int)requestType
+{
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    NSString *userID = [[SmallPigApplication shareInstance] userID];
+    __weak typeof(self) weakSelf = self;
+    NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage),@"queryBean.params.publishRoom_publisher_id_long":userID};
+    if (requestType == 1)
+    {
+        requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
+    }
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:INFORMED_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+              requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
+     {
+         NSLog(@"responseObj====%@",responseObj);
+         isCanGetMore = YES;
+         NSDictionary *dic = (NSDictionary *)responseObj;
+         int sucess = [dic[@"responseMessage"][@"success"] intValue];
+         if (sucess == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+             [weakSelf setHouseDataWithDictionary:dic];
+         }
+         else
+         {
+             if (currentPage > 1)
+             {
+                 currentPage--;
+             }
+             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+             [weakSelf.table reloadData];
+         }
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"error====%@",error);
+         if (currentPage > 1)
+         {
+             currentPage--;
+         }
+         isCanGetMore = YES;
+         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+         [weakSelf.table reloadData];
+     }];
+}
+
+#pragma mark 加载更多
+- (void)getMoreData
+{
+    if (!isCanGetMore)
+    {
+        currentPage--;
+        return;
+    }
+    isCanGetMore = NO;
+    [self getInformListWithType:type];
+}
+
+#pragma mark 设置数据
+- (void)setHouseDataWithDictionary:(NSDictionary *)dic
+{
+    NSArray *array = dic[@"pageBean"][@"data"];
+    int pageCount = [dic[@"pageBean"][@"totalPages"] intValue];
+    
+    if (!self.dataArray)
+    {
+        if (!array || [array count] == 0)
+        {
+            [CommonTool addAlertTipWithMessage:@"暂无数据"];
+        }
+        else
+        {
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+        }
+    }
+    else
+    {
+        if (array && [array count] > 0)
+            [self.dataArray addObjectsFromArray:array];
+    }
     [self.table reloadData];
+    
+    if (pageCount > currentPage)
+    {
+        [self addGetMoreView];
+    }
+    else
+    {
+        [self removeGetMoreView];
+        isCanGetMore = NO;
+    }
 }
 
 #pragma mark tableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"2015-01-27";
+    NSDictionary *rowDic = self.dataArray[section];
+    NSString *time = rowDic[@"createDate"];
+    time = (time) ? time : @"";
+    return time;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,7 +185,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataArray[section] count];
+    return [self.titleArray count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -99,13 +214,45 @@
         contentLable.tag = 101;
         [cell.contentView addSubview:contentLable];
     }
-    
+    NSDictionary *rowDic = self.dataArray[indexPath.section];
+    NSString *title = rowDic[@"publishRoom"][@"title"];
+    title = (title) ? title : @"";
+    NSString *content = rowDic[@"content"];
+    content = (content) ? content : @"";
+    int status = [rowDic[@"complaintStatus"] intValue];
     titleLabel.text = self.titleArray[indexPath.row];
-    contentLable.text = self.dataArray[indexPath.section][indexPath.row];
+
+    if (indexPath.row == 0)
+    {
+        contentLable.text = title;
+        contentLable.textColor = [UIColor grayColor];
+    }
+    if (indexPath.row == 1)
+    {
+        contentLable.text = content;
+        contentLable.textColor = [UIColor grayColor];
+    }
     if (indexPath.row == 2)
     {
-        contentLable.text = ([contentLable.text intValue] == 1) ? @"已处理" : @"等待处理";
-        contentLable.textColor = ([contentLable.text intValue] == 1) ? [UIColor grayColor] : RGB(245.0, 0.0, 8.0);
+        NSString *statusStr = @"";
+        if (status == 0)
+        {
+            statusStr = @"已撤销";
+        }
+        if (status == 1)
+        {
+            statusStr = @"未处理";
+        }
+        if (status == 2)
+        {
+            statusStr = @"处理中";
+        }
+        if (status == 3)
+        {
+            statusStr = @"已处理";
+        }
+        contentLable.text = statusStr;
+        contentLable.textColor = (status == 3) ? [UIColor grayColor] : RGB(245.0, 0.0, 8.0);
     }
     
     

@@ -94,7 +94,7 @@
 #define UPLOAD_ROOM_PIC_URL     MAKE_REQUEST_URL(@"yjk/publishroom/uploadPhoto.action")
 
 //已发布房源列表
-#define PUBLIC_ROOM_LIST_URL    MAKE_REQUEST_URL(@"yjk/publishroom/list.action?queryBean.params.in_checkStatus=0&queryBean.params.in_checkStatus=2")
+#define PUBLIC_ROOM_LIST_URL    MAKE_REQUEST_URL(@"yjk/publishroom/list.action?")
 
 //查询房间是否发布过
 #define IS_CAN_PUBLIC_URL       MAKE_REQUEST_URL(@"yjk/publishroom/find.action")
@@ -110,5 +110,8 @@
 
 //新增举报
 #define ADD_INFORM_URL          MAKE_REQUEST_URL(@"yjk/complaint/add.action")
+
+//我的举报
+#define INFORMED_LIST_URL       MAKE_REQUEST_URL(@"yjk/complaint/list.action")
 
 #endif

@@ -9,5 +9,7 @@
 #import "BasicViewController.h"
 
 @interface HouseListViewController : BasicViewController
-@property(nonatomic, assign) HouseScource houseSource;
+@property (nonatomic, assign) HouseScource houseSource;
+@property (nonatomic, strong) NSString *publicParma;
+- (void)getData;
 @end

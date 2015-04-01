@@ -24,6 +24,7 @@
     startHeight = 0.0;
     scale = SCREEN_WIDTH/320.0;
     isCanGetMore = YES;
+    currentPage = 1;
     //设置页面背景
     self.view.backgroundColor = BASIC_VIEW_BG_COLOR;
     
@@ -210,6 +211,8 @@
         footLabel = [CreateViewTool createLabelWithFrame:CGRectMake(0, self.table.contentSize.height, SCREEN_WIDTH, 20.0) textString:@"更多数据加载中..." textColor:HOME_LIST_DETAIL_COLOR textFont:FONT(12.0)];
         footLabel.backgroundColor = [UIColor whiteColor];
         footLabel.textAlignment = NSTextAlignmentCenter;
+        //暂时不显示 屏蔽
+        footLabel.alpha = 0.0;
         [self.table addSubview:footLabel];
     }
     else

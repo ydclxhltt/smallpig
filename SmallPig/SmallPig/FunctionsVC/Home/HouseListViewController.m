@@ -95,7 +95,7 @@
     }
     else if (HouseScourceFromPublic == self.houseSource)
     {
-        self.urlString = PUBLIC_ROOM_LIST_URL;
+        self.urlString = [PUBLIC_ROOM_LIST_URL stringByAppendingString:self.publicParma];
     }
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
@@ -120,6 +120,7 @@
                 currentPage--;
             }
             [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+            [weakSelf.table reloadData];
         }
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
@@ -131,6 +132,7 @@
         }
         isCanGetMore = YES;
         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+        [weakSelf.table reloadData];
     }];
 }
 

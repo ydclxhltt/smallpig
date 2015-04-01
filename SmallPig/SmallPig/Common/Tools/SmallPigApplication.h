@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSArray *cityList;
 @property (nonatomic, strong) NSArray *houseLabelsArray;
 @property (nonatomic, strong) NSArray *houseGoodLabelsArray;
+@property (nonatomic, assign) int memberType;
+@property (nonatomic, strong) NSString *userID;
 /*
  *  构建单例
  */

@@ -10,7 +10,8 @@
 #import "AgentHouseInfoViewController.h"
 
 @interface AgentHouseListViewController ()
-@property (nonatomic, strong) NSArray *totleArray;
+//@property (nonatomic, strong) NSArray *totleArray;
+@property (nonatomic, strong) NSArray *parmaArray;
 @end
 
 @implementation AgentHouseListViewController
@@ -18,22 +19,28 @@
 - (void)viewDidLoad
 {
     self.houseSource = HouseScourceFromPublic;
+    self.parmaArray = @[@"queryBean.params.checkStatus=1",@"queryBean.params.in_checkStatus=0&queryBean.params.in_checkStatus=2",@"queryBean.params.status_int=-1"];
+    self.publicParma = self.parmaArray[0];
     [super viewDidLoad];
-    self.title = @"我的发布房源";
     [self setTitleViewWithArray:@[@"显示中",@"审核中",@"已关闭"]];
     self.navigationItem.rightBarButtonItems = nil;
     [self setNavBarItemWithTitle:@"发布" navItemType:rightItem selectorName:@"publicHouseButtonPressed:"];
-    //[self getHouseList];
     // Do any additional setup after loading the view.
 }
 
-//#pragma  mark 选项卡按钮事件
-//- (void)buttonPressed:(UIButton *)sender
-//{
-//    [super buttonPressed:sender];
-//    self.houseSource = (sender.tag == 1) ? HouseScourceFromSecondHand : HouseScourceFromRental;
-//    [self.table reloadData];
-//}
+#pragma  mark 选项卡按钮事件
+- (void)buttonPressed:(UIButton *)sender
+{
+    [super buttonPressed:sender];
+    if ([self.publicParma isEqualToString:self.parmaArray[sender.tag - 1]])
+    {
+        return;
+    }
+    currentPage = 1;
+    self.publicParma = self.parmaArray[sender.tag - 1];
+    self.dataArray = nil;
+    [self getData];
+}
 
 
 #pragma mark 发布房源
