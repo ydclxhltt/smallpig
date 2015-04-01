@@ -44,6 +44,7 @@
     self.title = MINE_CENTER_TITLE;
     //添加侧滑item
     [self addPersonItem];
+    [self setNavBarItemWithTitle:@" 注销" navItemType:rightItem selectorName:@"exitButtonPressed:"];
     //初始化数据
     userDic = [SmallPigApplication shareInstance].userInfoDic;
     if ([SmallPigApplication shareInstance].memberType == 0)
@@ -73,6 +74,12 @@
 - (void)createUI
 {
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
+}
+
+#pragma mark 注销
+- (void)exitButtonPressed:(UIButton *)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ExitLogin" object:nil];
 }
 
 

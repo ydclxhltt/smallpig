@@ -41,6 +41,8 @@
     //self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
     self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMemberType) name:@"ChangeMemberType" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitLogin) name:@"ExitLogin" object:nil];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -68,6 +70,11 @@
         nickName = (nickName) ? nickName : @"";
         NSString *userName = (nickName && ![@"" isEqualToString:nickName]) ? nickName : name;
         personNameLabel.text = userName;
+    }
+    else
+    {
+        personIconImageView.image = [UIImage imageNamed:@"person_icon_default"];
+        personNameLabel.text = @"";
     }
 }
 
@@ -165,6 +172,15 @@
 {
     self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"],@[@"经纪人平台"]];
     [self.table reloadData];
+}
+
+#pragma mark 注销
+- (void)exitLogin
+{
+    [SmallPigApplication shareInstance].userInfoDic = nil;
+    self.titleArray = @[@[@"房源信息",@"个人中心",@"我的收藏",@"设置"]];
+    [self.table reloadData];
+    [self tableView:self.table didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 
