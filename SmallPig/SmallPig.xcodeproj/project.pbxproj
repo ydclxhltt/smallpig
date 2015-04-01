@@ -1854,8 +1854,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 磊 陈 (47PU6N76KB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 磊 陈 (47PU6N76KB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1878,7 +1878,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96ca17cc-6d8b-454d-8284-8dcb6fc645a2";
+				PROVISIONING_PROFILE = "42d2dcec-e60d-42e2-b23c-a24e4a67a5a5";
 				SDKROOT = iphoneos8.1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 				WRAPPER_EXTENSION = app;
@@ -1894,8 +1894,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 磊 陈 (47PU6N76KB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 磊 陈 (47PU6N76KB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1917,7 +1917,7 @@
 					"$(PROJECT_DIR)/SmallPig/Common/AliPaySDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "96ca17cc-6d8b-454d-8284-8dcb6fc645a2";
+				PROVISIONING_PROFILE = "42d2dcec-e60d-42e2-b23c-a24e4a67a5a5";
 				SDKROOT = iphoneos8.1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 				WRAPPER_EXTENSION = app;
