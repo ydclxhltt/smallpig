@@ -58,6 +58,7 @@
 		77371BD41A7B67A3006D4253 /* AgentMemoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BD31A7B67A3006D4253 /* AgentMemoListViewController.m */; };
 		77371BD71A7B8765006D4253 /* CookiesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BD61A7B8765006D4253 /* CookiesTool.m */; };
 		773AA81C1AA69E850031A6F7 /* UpLoadPhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 773AA81B1AA69E850031A6F7 /* UpLoadPhotoTool.m */; };
+		7754A3981ACBD6FF00454C35 /* SavePublicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7754A3971ACBD6FF00454C35 /* SavePublicCell.m */; };
 		7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEEF1A3182D70012E775 /* newhouse_logo.png */; };
 		7767CEF31A318B140012E775 /* HouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767CEF21A318B140012E775 /* HouseListViewController.m */; };
 		7767CEF51A31AB700012E775 /* house_image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEF41A31AB700012E775 /* house_image_default.png */; };
@@ -293,6 +294,8 @@
 		77371BD61A7B8765006D4253 /* CookiesTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookiesTool.m; sourceTree = "<group>"; };
 		773AA81A1AA69E850031A6F7 /* UpLoadPhotoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpLoadPhotoTool.h; sourceTree = "<group>"; };
 		773AA81B1AA69E850031A6F7 /* UpLoadPhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLoadPhotoTool.m; sourceTree = "<group>"; };
+		7754A3961ACBD6FF00454C35 /* SavePublicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePublicCell.h; sourceTree = "<group>"; };
+		7754A3971ACBD6FF00454C35 /* SavePublicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePublicCell.m; sourceTree = "<group>"; };
 		7767CEEF1A3182D70012E775 /* newhouse_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newhouse_logo.png; sourceTree = "<group>"; };
 		7767CEF11A318B140012E775 /* HouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseListViewController.h; sourceTree = "<group>"; };
 		7767CEF21A318B140012E775 /* HouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListViewController.m; sourceTree = "<group>"; };
@@ -1483,6 +1486,8 @@
 				77371BC81A7B62AA006D4253 /* LeftRightLableCell.m */,
 				77B2E64F1AB17892006E465A /* OrderListCell.h */,
 				77B2E6501AB17892006E465A /* OrderListCell.m */,
+				7754A3961ACBD6FF00454C35 /* SavePublicCell.h */,
+				7754A3971ACBD6FF00454C35 /* SavePublicCell.m */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -1706,6 +1711,7 @@
 				771A29B31A0A2A4600F99B1D /* AFURLResponseSerialization.m in Sources */,
 				77371BD71A7B8765006D4253 /* CookiesTool.m in Sources */,
 				77C401D61A37DE5600A9D883 /* AgentCenterViewController.m in Sources */,
+				7754A3981ACBD6FF00454C35 /* SavePublicCell.m in Sources */,
 				771A29BB1A0A2A4600F99B1D /* UIRefreshControl+AFNetworking.m in Sources */,
 				776859631A7A04F600F0C1F5 /* HouseDetailOneInfoView.m in Sources */,
 				77371BD01A7B6779006D4253 /* AgentHouseInfoViewController.m in Sources */,
