@@ -9,5 +9,5 @@
 #import "HouseListViewController.h"
 
 @interface AgentHouseListViewController : HouseListViewController
-
+@property (nonatomic, assign) BOOL isOnlyList;
 @end

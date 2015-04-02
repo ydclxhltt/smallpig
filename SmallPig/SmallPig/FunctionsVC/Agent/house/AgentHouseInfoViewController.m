@@ -127,6 +127,7 @@
     }
     AgentFormInfoViewController *formInfoViewController = [[AgentFormInfoViewController alloc] init];
     formInfoViewController.roomType = self.roomType;
+    NSLog(@"formInfoViewController.roomType ===%@",formInfoViewController.roomType);
     formInfoViewController.roomID = self.roomID;
     formInfoViewController.price = self.price;
     formInfoViewController.roomTitle = titleTextField.text;
@@ -146,7 +147,7 @@
     {
         message = @"请填选择方式";
     }
-    else if ((!self.period || [@"" isEqualToString:self.period]) && [self.roomType intValue] == 1)
+    else if ((!self.period || [@"" isEqualToString:self.period]) && [self.roomType intValue] == 3)
     {
         message = @"请填写租期";
     }
@@ -441,7 +442,7 @@
                 [self setDataWithSection:0 row:1 value:@"个月"];
             }
         }
-        self.roomType = ([@"二手房" isEqualToString:string]) ? @"2" : @"1";
+        self.roomType = ([@"二手房" isEqualToString:string]) ? @"2" : @"3";
     }
 }
 
@@ -548,6 +549,7 @@
         showName = dic[@"model"][@"room"][@"showName"];
         self.roomID = dic[@"model"][@"room"][@"id"];
         self.certificatePrice = dic[@"model"][@"certificatePrice"];
+        self.certificatePrice = (self.certificatePrice) ? self.certificatePrice : @"";
     }
     showName = (showName) ? showName : @"";
     [self.labelDic setValue:showName forKey:@"showName"];

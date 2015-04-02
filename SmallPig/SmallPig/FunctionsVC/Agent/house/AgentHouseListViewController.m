@@ -21,11 +21,41 @@
     self.houseSource = HouseScourceFromPublic;
     self.parmaArray = @[@"queryBean.params.checkStatus=1",@"queryBean.params.in_checkStatus=0&queryBean.params.in_checkStatus=2",@"queryBean.params.status_int=-1"];
     self.publicParma = self.parmaArray[0];
+    
+    if (self.isOnlyList)
+    {
+        self.publicParma = @"";
+    }
+    
     [super viewDidLoad];
+    
     [self setTitleViewWithArray:@[@"显示中",@"审核中",@"已关闭"]];
     self.navigationItem.rightBarButtonItems = nil;
-    [self setNavBarItemWithTitle:@"发布" navItemType:rightItem selectorName:@"publicHouseButtonPressed:"];
+    if (self.isOnlyList)
+    {
+        self.title = @"房源列表";
+    }
+    else
+    {
+        [self setNavBarItemWithTitle:@"发布" navItemType:rightItem selectorName:@"publicHouseButtonPressed:"];
+    }
+    
+    
     // Do any additional setup after loading the view.
+}
+
+
+- (void)backButtonPressed:(UIButton *)sender
+{
+    if (self.isOnlyList)
+    {
+        [self dismissViewControllerAnimated:YES completion:Nil];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 #pragma  mark 选项卡按钮事件
@@ -113,7 +143,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView  deselectRowAtIndexPath:indexPath animated:YES];
-    [self pushHouseInfoViewWithType:HouseInfoTypeDetail];
+    if (self.isOnlyList)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"HouseDetail" object:self.dataArray[indexPath.row]];
+        [self dismissViewControllerAnimated:YES completion:Nil];
+    }
+    else
+    {
+        [self pushHouseInfoViewWithType:HouseInfoTypeDetail];
+    }
+    
 }
 
 
