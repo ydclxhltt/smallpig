@@ -114,4 +114,13 @@
 //我的举报
 #define INFORMED_LIST_URL       MAKE_REQUEST_URL(@"yjk/complaint/list.action")
 
+//查找用户
+#define FIND_USER_URL           MAKE_REQUEST_URL(@"yjk/order/lookupMemberByMobile.action")
+
+//客服列表
+#define SERVICE_LIST_URL        MAKE_REQUEST_URL(@"yjk/order/lookupPeopleByPublishRoomId.action")
+
+//发送订单
+#define SEND_ORDER_URL          MAKE_REQUEST_URL(@"yjk/order/add.action")
+
 #endif
