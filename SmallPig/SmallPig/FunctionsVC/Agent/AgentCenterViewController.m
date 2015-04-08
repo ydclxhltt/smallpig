@@ -165,6 +165,7 @@
     {
         case 0:
             viewController = [[AgentHouseListViewController alloc] init];
+            ((AgentHouseListViewController *)viewController).isOnlyList = NO;
             break;
         case 1:
             viewController = [[OrderListViewController alloc] init];

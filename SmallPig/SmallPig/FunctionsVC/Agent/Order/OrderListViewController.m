@@ -9,7 +9,7 @@
 #import "OrderListViewController.h"
 #import "OrderListCell.h"
 #import "OrderDetailViewController.h"
-
+#import "SendOrderViewController.h"
 
 @interface OrderListViewController ()
 
@@ -81,7 +81,8 @@
 #pragma mark 创建订单
 - (void)createOrderButtonPressed:(UIButton *)sender
 {
-    
+    SendOrderViewController *sendOrderViewController = [[SendOrderViewController alloc] init];
+    [self.navigationController pushViewController:sendOrderViewController animated:YES];
 }
 
 

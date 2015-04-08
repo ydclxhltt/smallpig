@@ -303,7 +303,11 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
-        [(SavePublicCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:[NSString stringWithFormat:@"%.0f元",[rowDic[@"price"] floatValue]] typeText:roomStyle sizeText:square];
+        int roomType = [rowDic[@"roomType"] intValue];
+        float price = (roomType == 3) ? [rowDic[@"price"] floatValue] : [rowDic[@"price"] floatValue]/10000.0;
+        NSString *roomPrice = (roomType == 3) ? [NSString stringWithFormat:@"%.0f元",price] : [NSString stringWithFormat:@"%.0f万",price];
+        
+        [(SavePublicCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:roomPrice typeText:roomStyle sizeText:square];
     }
     return cell;
 }
