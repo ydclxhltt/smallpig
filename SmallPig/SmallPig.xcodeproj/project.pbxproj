@@ -59,6 +59,8 @@
 		77371BD71A7B8765006D4253 /* CookiesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 77371BD61A7B8765006D4253 /* CookiesTool.m */; };
 		773AA81C1AA69E850031A6F7 /* UpLoadPhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 773AA81B1AA69E850031A6F7 /* UpLoadPhotoTool.m */; };
 		7754A3981ACBD6FF00454C35 /* SavePublicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7754A3971ACBD6FF00454C35 /* SavePublicCell.m */; };
+		775DF1351ACD0B78004B1DF3 /* FindUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 775DF1341ACD0B78004B1DF3 /* FindUserViewController.m */; };
+		775DF1381ACD32C4004B1DF3 /* ServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 775DF1371ACD32C4004B1DF3 /* ServiceListViewController.m */; };
 		7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEEF1A3182D70012E775 /* newhouse_logo.png */; };
 		7767CEF31A318B140012E775 /* HouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767CEF21A318B140012E775 /* HouseListViewController.m */; };
 		7767CEF51A31AB700012E775 /* house_image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7767CEF41A31AB700012E775 /* house_image_default.png */; };
@@ -296,6 +298,10 @@
 		773AA81B1AA69E850031A6F7 /* UpLoadPhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLoadPhotoTool.m; sourceTree = "<group>"; };
 		7754A3961ACBD6FF00454C35 /* SavePublicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePublicCell.h; sourceTree = "<group>"; };
 		7754A3971ACBD6FF00454C35 /* SavePublicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePublicCell.m; sourceTree = "<group>"; };
+		775DF1331ACD0B78004B1DF3 /* FindUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindUserViewController.h; sourceTree = "<group>"; };
+		775DF1341ACD0B78004B1DF3 /* FindUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindUserViewController.m; sourceTree = "<group>"; };
+		775DF1361ACD32C4004B1DF3 /* ServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListViewController.h; sourceTree = "<group>"; };
+		775DF1371ACD32C4004B1DF3 /* ServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListViewController.m; sourceTree = "<group>"; };
 		7767CEEF1A3182D70012E775 /* newhouse_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newhouse_logo.png; sourceTree = "<group>"; };
 		7767CEF11A318B140012E775 /* HouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseListViewController.h; sourceTree = "<group>"; };
 		7767CEF21A318B140012E775 /* HouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseListViewController.m; sourceTree = "<group>"; };
@@ -1248,6 +1254,10 @@
 				77E0B12C1AB0389F002F8429 /* OrderDetailViewController.m */,
 				77E0B12E1AB038B3002F8429 /* SendOrderViewController.h */,
 				77E0B12F1AB038B3002F8429 /* SendOrderViewController.m */,
+				775DF1331ACD0B78004B1DF3 /* FindUserViewController.h */,
+				775DF1341ACD0B78004B1DF3 /* FindUserViewController.m */,
+				775DF1361ACD32C4004B1DF3 /* ServiceListViewController.h */,
+				775DF1371ACD32C4004B1DF3 /* ServiceListViewController.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1642,6 +1652,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				775DF1351ACD0B78004B1DF3 /* FindUserViewController.m in Sources */,
 				77371BD41A7B67A3006D4253 /* AgentMemoListViewController.m in Sources */,
 				7792FF951A78E245007DFBF5 /* HouseDetailViewController.m in Sources */,
 				777E02981A36F3E1008B9E38 /* AgentRankListViewController.m in Sources */,
@@ -1663,6 +1674,7 @@
 				771A29A01A0A2A4600F99B1D /* SDWebImageDownloader.m in Sources */,
 				7792FF981A78E317007DFBF5 /* HouseDetailInfoView.m in Sources */,
 				77F055EA1AC8FA0E00C069CC /* MD5DataSigner.m in Sources */,
+				775DF1381ACD32C4004B1DF3 /* ServiceListViewController.m in Sources */,
 				CEDF46BF1A25C98600246531 /* CheckCodeViewController.m in Sources */,
 				77F055E81AC8FA0E00C069CC /* DataSigner.m in Sources */,
 				771A29AA1A0A2A4600F99B1D /* THProgressView.m in Sources */,
@@ -1854,8 +1866,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 磊 陈 (47PU6N76KB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 磊 陈 (47PU6N76KB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1878,7 +1890,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "42d2dcec-e60d-42e2-b23c-a24e4a67a5a5";
+				PROVISIONING_PROFILE = "96ca17cc-6d8b-454d-8284-8dcb6fc645a2";
 				SDKROOT = iphoneos8.1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 				WRAPPER_EXTENSION = app;
@@ -1894,8 +1906,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 磊 陈 (47PU6N76KB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 磊 陈 (47PU6N76KB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TIANHUI HE (MN4GAE5E29)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1917,7 +1929,7 @@
 					"$(PROJECT_DIR)/SmallPig/Common/AliPaySDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "42d2dcec-e60d-42e2-b23c-a24e4a67a5a5";
+				PROVISIONING_PROFILE = "96ca17cc-6d8b-454d-8284-8dcb6fc645a2";
 				SDKROOT = iphoneos8.1;
 				VALID_ARCHS = "arm64 armv7 armv7s armv6";
 				WRAPPER_EXTENSION = app;
