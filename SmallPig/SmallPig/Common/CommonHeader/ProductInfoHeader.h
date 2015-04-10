@@ -31,4 +31,13 @@
 //商户ID
 #define ALIPAY_PID              @"2088811200911265"
 
+//房屋列表图片Size 240 * 180
+#define HOUSE_LIST_ICON_SIZE    @"s3"
+
+//经纪人图片Size s2 130 * 130
+#define AGENT_LIST_ICON_SIZE    @"s2"
+
+//房屋详情房源图片Size l1 640 * 480
+#define HOUSE_DETAIL_PIC_SIZE   @"l1"
+
 #endif

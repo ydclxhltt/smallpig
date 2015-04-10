@@ -60,6 +60,7 @@
     start_y += titleLable.frame.size.height + space_y;
     
     iconImageView = [CreateViewTool createImageViewWithFrame:CGRectMake(titleLable.frame.origin.x, start_y, icon_Width, icon_Height) placeholderImage:[UIImage imageNamed:@"agent_icon_default.png"]];
+    [CommonTool clipView:iconImageView withCornerRadius:5.0];
     iconImageView.clipsToBounds = YES;
     iconImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:iconImageView];

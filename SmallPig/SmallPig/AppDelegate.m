@@ -77,8 +77,10 @@
     self.window.rootViewController=_sideViewController;
     
     //获取房屋标签
-    [self getHouseLabels];
-    [self getGoodHouseLabels];
+    [self getSecondHandGoodHouseLabels];
+    [self getSecondHandHouseLabels];
+    [self getRentalGoodHouseLabels];
+    [self getRentalHouseLabels];
     return YES;
 }
 
@@ -140,14 +142,25 @@
 
 #pragma mark 获取房屋标签
 
-- (void)getGoodHouseLabels
+- (void)getSecondHandGoodHouseLabels
 {
-    [self getHouseLabelsWithParma:@"PARAM.ROOMFEATURE"];
+    [self getHouseLabelsWithParma:@"PARAM.SECONDHANDROOMFEATURE"];
 }
-- (void)getHouseLabels
+- (void)getSecondHandHouseLabels
 {
-    [self getHouseLabelsWithParma:@"PARAM.ROOMLABEL"];
+    [self getHouseLabelsWithParma:@"PARAM.SECONDHANDROOMLABEL"];
 }
+
+- (void)getRentalGoodHouseLabels
+{
+    [self getHouseLabelsWithParma:@"PARAM.RENTROOMFEATURE"];
+}
+- (void)getRentalHouseLabels
+{
+    [self getHouseLabelsWithParma:@"PARAM.RENTROOMLABEL"];
+}
+
+
 - (void)getHouseLabelsWithParma:(NSString *)parma
 {
     NSDictionary *requestDic = @{@"paramCategory":parma};
@@ -158,13 +171,21 @@
         int sucess = [responseDic[@"responseMessage"][@"success"] intValue];
         if (sucess == 1)
         {
-            if ([parma isEqualToString:@"PARAM.ROOMFEATURE"])
+            if ([parma isEqualToString:@"PARAM.SECONDHANDROOMFEATURE"])
             {
                 [[SmallPigApplication shareInstance] setHouseGoodLabelsArray:responseDic[@"model"][@"paramList"]];
             }
-            else
+            else if ([parma isEqualToString:@"PARAM.SECONDHANDROOMLABEL"])
             {
                 [[SmallPigApplication shareInstance] setHouseLabelsArray:responseDic[@"model"][@"paramList"]];
+            }
+            else if ([parma isEqualToString:@"PARAM.RENTROOMFEATURE"])
+            {
+                [[SmallPigApplication shareInstance] setRentalHouseGoodLabelsArray:responseDic[@"model"][@"paramList"]];
+            }
+            else if ([parma isEqualToString:@"PARAM.RENTROOMLABEL"])
+            {
+                [[SmallPigApplication shareInstance] setRentalHouseLabelsArray:responseDic[@"model"][@"paramList"]];
             }
             
         }

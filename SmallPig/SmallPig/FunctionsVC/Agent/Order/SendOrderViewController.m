@@ -197,7 +197,7 @@
             NSDictionary *rowDic = self.houseDic;
             NSString *title = rowDic[@"title"];
             title = (title) ? title : @"";
-            NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:rowDic[@"coverPhoto"][@"photoType"]];
+            NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:HOUSE_LIST_ICON_SIZE photoType:rowDic[@"coverPhoto"][@"photoType"]];
             NSLog(@"imageUrl===%@",imageUrl );
             NSString *local = rowDic[@"room"][@"community"][@"address"];
             local = (local) ? local : @"";

@@ -9,6 +9,7 @@
 #import "CommonTool.h"
 #import <CommonCrypto/CommonDigest.h>
 
+
 @implementation CommonTool
 
 
@@ -211,6 +212,11 @@
                              value:textColor
                              range:[textString rangeOfString:string]];
 }
+
+
+
+
+
 
 
 @end

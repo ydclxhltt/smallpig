@@ -25,4 +25,12 @@
  * @param array 图片数组
  */
 - (void)setImageScrollViewData:(NSArray *)array;
+
+/*
+ * 初始化收藏按钮状态
+ *
+ * @param isSelected 是否为选中状态
+ */
+- (void)setSaveButtonState:(BOOL)isSelected;
+
 @end

@@ -162,7 +162,8 @@
     NSString *name = dic[@"bankAcctName"];
     name = (name) ? name : @"";
     NSString *point = [NSString stringWithFormat:@"%@",dic[@"point"]];
-    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:@"" agentName:name agentScore:point];
+    NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:dic[@"avatarPhoto"][@"photoUrl"] photoSize:AGENT_LIST_ICON_SIZE photoType:dic[@"avatarPhoto"][@"photoType"]];
+    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:imageUrl agentName:name agentScore:point];
     return cell;
 }
 
@@ -178,12 +179,13 @@
     mobile = (mobile) ? mobile : @"";
     NSString *agentID = dic[@"id"];
     agentID = (agentID) ? agentID : @"";
+    NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:dic[@"avatarPhoto"][@"photoUrl"] photoSize:AGENT_LIST_ICON_SIZE photoType:dic[@"avatarPhoto"][@"photoType"]];
     AgentDetailViewController *agentDetailViewController = [[AgentDetailViewController alloc] init];
     agentDetailViewController.name = name;
     agentDetailViewController.score = point;
     agentDetailViewController.mobile = mobile;
     agentDetailViewController.agentID = agentID;
-    agentDetailViewController.imageUrl = @"";
+    agentDetailViewController.imageUrl = imageUrl;
     [self.navigationController pushViewController:agentDetailViewController animated:YES];
 }
 

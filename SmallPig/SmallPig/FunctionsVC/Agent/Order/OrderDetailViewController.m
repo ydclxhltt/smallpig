@@ -27,17 +27,9 @@
     [self addBackItem];
     //初始化UI
     [self createUI];
-    
-    
-    [self test];
-    
     // Do any additional setup after loading the view.
 }
 
-- (void)test
-{
-    
-}
 
 
 #pragma mark 初始化UI

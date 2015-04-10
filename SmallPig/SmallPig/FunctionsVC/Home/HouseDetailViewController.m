@@ -98,7 +98,7 @@
 {
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
     self.table.bounces = NO;
-}
+}   
 
 - (void)addTableHeaderView
 {
@@ -166,6 +166,14 @@
     {
         return;
     }
+    
+    BOOL isSelected = [self.detailDic[@"model"][@"isFavorite"] intValue];
+    if (headerView)
+    {
+        [headerView setSaveButtonState:isSelected];
+    }
+    
+    
     self.roomID = [NSString stringWithFormat:@"%@",self.detailDic[@"model"][@"id"]];
     //设置图片
     NSArray *array = dataDic[@"model"][@"photoList"];
@@ -174,7 +182,7 @@
     {
         for (NSDictionary *dic in array)
         {
-            NSString *picUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:dic[@"photoUrl"] photoSize:@"640x480" photoType:dic[@"photoType"]];
+            NSString *picUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:dic[@"photoUrl"] photoSize:HOUSE_DETAIL_PIC_SIZE photoType:dic[@"photoType"]];
             if (picUrl && ![@"" isEqualToString:picUrl])
             {
                 NSLog(@"picUrl===%@",picUrl);
@@ -198,22 +206,22 @@
     //房间描述（标签）
     NSString *roomLabelString = dataDic[@"model"][@"roomLabel"];
     roomLabelString = (roomLabelString) ? roomLabelString : @"";
-    roomLabelString = [SmallPigTool makeHouseFeature:roomLabelString type:1];
+    roomLabelString = (self.houseSource == HouseScourceFromSecondHand) ? [SmallPigTool makeHouseFeature:roomLabelString type:2] : [SmallPigTool makeHouseFeature:roomLabelString type:4];
     [featureArray addObject:roomLabelString];
     
     //房子亮点
     NSString *roomFeatureString = dataDic[@"model"][@"roomFeature"];
     roomFeatureString = (roomFeatureString) ? roomFeatureString : @"";
-    roomFeatureString = [SmallPigTool makeHouseFeature:roomFeatureString type:2];
+    roomFeatureString = (self.houseSource == HouseScourceFromSecondHand) ? [SmallPigTool makeHouseFeature:roomFeatureString type:1] : [SmallPigTool makeHouseFeature:roomFeatureString type:3];
     [featureArray addObject:roomFeatureString];
     
     //小区信息
-    NSString *parkInfoString = dataDic[@"model"][@"room"][@"building"][@"community"][@"description"];
+    NSString *parkInfoString = dataDic[@"model"][@"room"][@"community"][@"description"];
     parkInfoString = (parkInfoString) ? parkInfoString : @"";
     [featureArray addObject:parkInfoString];
     
     //位置与周边
-    NSString *addressString1 = dataDic[@"model"][@"room"][@"building"][@"community"][@"address"];
+    NSString *addressString1 = dataDic[@"model"][@"room"][@"community"][@"address"];
     addressString1 = (addressString1) ? addressString1 : @"";
     NSString *addressString2 = dataDic[@"model"][@"room"][@"building"][@"community"][@"showName"];
     addressString2 = (addressString2) ? addressString2 : @"";
@@ -271,11 +279,18 @@
 #pragma mark save
 - (void)saveButtonPressed:(UIButton *)sender
 {
+
     //ADD_SAVE_URL
     if ([self isNeedLogin])
     {
         return;
     }
+    
+    if (!self.detailDic)
+    {
+        return;
+    }
+    
     sender.enabled = NO;
     
     if (!self.roomID || [self.roomID isEqualToString:@""])
@@ -447,9 +462,11 @@
             seeInfoView = [[HouseDetailSeeInfoView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, HOUSE_DETAIL_SEE_HEIGHT)];
         }
         NSString *time = self.detailDic[@"model"][@"publisher"][@"createDate"];
+        NSString *browseCount = [NSString stringWithFormat:@"%@",self.detailDic[@"model"][@"browseCount"]];
+        browseCount = (browseCount)  ? [browseCount stringByAppendingString:@"次"]: @"";
         time = [SmallPigTool formatTimeWithString:time];
         NSLog(@"self.titleText===%@",self.titleText);
-        [seeInfoView setDataWithTitle:self.titleText publicTime:time seeCount:@"2345次"];
+        [seeInfoView setDataWithTitle:self.titleText publicTime:time seeCount:browseCount];
         [cell.contentView addSubview:seeInfoView];
     }
     if (indexPath.row == 1)
@@ -521,12 +538,12 @@
             agentView = [[HouseDetailAgentView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, HOUSE_DETAIL_AGENT_HEIGHT) delegate:self];
         }
         //设置中介信息
+        NSLog(@"self.detailDic[@\"model\"][@\"publisher\"]===%@",self.detailDic[@"model"][@"publisher"]);
         NSString *name = self.detailDic[@"model"][@"publisher"][@"name"];
         name = (name) ? name : @"";
         NSString *mobile = self.detailDic[@"model"][@"publisher"][@"mobile"];
         mobile = (mobile) ? mobile : @"";
-        //NSString *iconUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:self.detailDic[@"model"][@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:self.detailDic[@"model"][@"coverPhoto"][@"photoType"]];
-        NSString *iconUrl = @"";
+        NSString *iconUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:self.detailDic[@"model"][@"publisher"][@"avatarPhoto"][@"photoUrl"] photoSize:AGENT_LIST_ICON_SIZE photoType:self.detailDic[@"model"][@"publisher"][@"avatarPhoto"][@"photoType"]];
         [agentView setDataWithAgentIcon:iconUrl  agentName:name phoneNumber:mobile companyName:@"" houseScourceCount:@""];
         [cell.contentView addSubview:agentView];
     }
@@ -546,8 +563,8 @@
         dispatch_async(dispatch_get_main_queue(), ^
         {
             //设置地图数据
-            float lat = [self.detailDic[@"model"][@"room"][@"building"][@"community"][@"lat"] floatValue];
-            float lng = [self.detailDic[@"model"][@"room"][@"building"][@"community"][@"lng"] floatValue];
+            float lat = [self.detailDic[@"model"][@"room"][@"community"][@"lat"] floatValue];
+            float lng = [self.detailDic[@"model"][@"room"][@"community"][@"lng"] floatValue];
             NSString *parkName =  self.detailDic[@"model"][@"room"][@"building"][@"community"][@"name"];
             parkName = (parkName) ? parkName : @"";
             NSLog(@"lat===lng===parkName===%f===%f===%@",lat,lng,parkName);

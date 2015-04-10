@@ -65,7 +65,7 @@
     self.houseLabelArray = [[SmallPigApplication shareInstance] houseLabelsArray];
     if (!self.houseLabelArray)
     {
-        [APP_DELEGATE getHouseLabels];
+        //[APP_DELEGATE getHouseLabels];
         labelsHeight = ROW_LABEL_HEIGHT;
     }
     else
@@ -76,7 +76,7 @@
     self.houseGoodLabelArray = [[SmallPigApplication shareInstance] houseGoodLabelsArray];
     if (!self.houseGoodLabelArray)
     {
-        [APP_DELEGATE getGoodHouseLabels];
+        //[APP_DELEGATE getGoodHouseLabels];
         goodLabelsHeight = ROW_LABEL_HEIGHT;
     }
     else

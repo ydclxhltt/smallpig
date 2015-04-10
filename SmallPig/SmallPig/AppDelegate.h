@@ -17,6 +17,8 @@
 /*
  *  获取房屋亮点标签
  */
-- (void)getHouseLabels;
-- (void)getGoodHouseLabels;
+- (void)getSecondHandGoodHouseLabels;
+- (void)getSecondHandHouseLabels;
+- (void)getRentalGoodHouseLabels;
+- (void)getRentalHouseLabels;
 @end

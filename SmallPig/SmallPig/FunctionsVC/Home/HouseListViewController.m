@@ -228,9 +228,15 @@
     
     UITableViewCell *cell;
     NSDictionary *rowDic = self.dataArray[indexPath.row];
+    if (self.houseSource == HouseScourceFromSave)
+    {
+        rowDic = rowDic[@"publishRoom"];
+    }
     NSString *title = rowDic[@"title"];
+
     title = (title) ? title : @"";
-    NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:@"240x180" photoType:rowDic[@"coverPhoto"][@"photoType"]];
+    
+    NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:HOUSE_LIST_ICON_SIZE photoType:rowDic[@"coverPhoto"][@"photoType"]];
     NSLog(@"imageUrl===%@",imageUrl );
     NSString *local = rowDic[@"room"][@"community"][@"address"];
     local = (local) ? local : @"";
@@ -290,7 +296,7 @@
         }
         [(RentalHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park timeText:@"" typeText:roomStyle sizeText:square priceText:[NSString stringWithFormat:@"%.0f元",[rowDic[@"price"] floatValue]]];
     }
-    else if (HouseScourceFromSave == self.houseSource || HouseScourceFromPublic == self.houseSource )
+    else if (HouseScourceFromSave == self.houseSource || HouseScourceFromPublic == self.houseSource)
     {
         cell = (SavePublicCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell)
@@ -316,10 +322,16 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = self.dataArray[indexPath.row];
+    if (self.houseSource == HouseScourceFromSave)
+    {
+        dic = dic[@"publishRoom"];
+    }
     NSString *roomID = dic[@"id"];
     roomID = (roomID) ? roomID : @"";
+
+    int roomType = [dic[@"roomType"] intValue];
     HouseDetailViewController *houseDetailViewController = [[HouseDetailViewController alloc] init];
-    houseDetailViewController.houseSource = self.houseSource;
+    houseDetailViewController.houseSource = (roomType == 3) ? HouseScourceFromRental : HouseScourceFromSecondHand;
     houseDetailViewController.roomID = roomID;
     [self.navigationController pushViewController:houseDetailViewController animated:YES];
 }

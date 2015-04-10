@@ -169,12 +169,24 @@
 }
 
 #pragma mark 房源标签和亮点转换字符串
-//type 1:标签 2:优势
+//type 1:标签 2:优势 1-2 二手 3-4 租房
 + (NSString *)makeHouseFeature:(NSString *)feature type:(int)type
 {
     feature = (feature) ? feature : @"";
     NSString *houseFeature = @"";
-    NSArray *roomFeatureArray = (type == 1) ? [[SmallPigApplication shareInstance] houseLabelsArray] : [[SmallPigApplication shareInstance] houseGoodLabelsArray];
+    NSArray *roomFeatureArray = [[SmallPigApplication shareInstance] houseGoodLabelsArray];
+    if (type == 2)
+    {
+        roomFeatureArray = [[SmallPigApplication shareInstance] houseLabelsArray];
+    }
+    if (type == 3)
+    {
+        roomFeatureArray = [[SmallPigApplication shareInstance] rentalHouseGoodLabelsArray];
+    }
+    if (type == 4)
+    {
+        roomFeatureArray = [[SmallPigApplication shareInstance] rentalHouseLabelsArray];
+    }
     if (roomFeatureArray && [roomFeatureArray count] > 0)
     {
         NSArray *featureArray = [feature componentsSeparatedByString:@","];

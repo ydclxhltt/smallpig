@@ -45,6 +45,7 @@
     
     UIImage *agentDefaultImage = [UIImage imageNamed:@"agent_icon_default.png"];
     _iconImageView = [CreateViewTool createImageViewWithFrame:CGRectMake(start_x, (AGENT_LIST_HEIGHT - agentDefaultImage.size.height/2)/2 , agentDefaultImage.size.width/2, agentDefaultImage.size.height/2) placeholderImage:agentDefaultImage];
+    [CommonTool clipView:_iconImageView withCornerRadius:10.0];
     [self.contentView addSubview:_iconImageView];
     
     start_x += 15.0 + _iconImageView.frame.size.width;
