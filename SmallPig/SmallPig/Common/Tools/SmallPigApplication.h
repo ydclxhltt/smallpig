@@ -20,6 +20,10 @@
 @property (nonatomic, strong) NSArray *houseGoodLabelsArray;
 @property (nonatomic, strong) NSArray *rentalHouseLabelsArray;
 @property (nonatomic, strong) NSArray *rentalHouseGoodLabelsArray;
+@property (nonatomic, strong) NSArray *sortHouseAreaParmaArray;
+@property (nonatomic, strong) NSArray *sortHousePriceParmaArray;
+@property (nonatomic, strong) NSArray *sortRentalHousePriceParmaArray;
+@property (nonatomic, strong) NSArray *sortHouseBedroomParmaArray;
 @property (nonatomic, assign) int memberType;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, assign) int point;

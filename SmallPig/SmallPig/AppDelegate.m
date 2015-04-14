@@ -31,7 +31,10 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+    int a = 5;
+    int b = a;
+    a = a - 1;
+    NSLog(@"b===%d===a==%d",b,a);
     /*
      *  设置tabbar选中和默认字体颜色
      *
@@ -81,6 +84,10 @@
     [self getSecondHandHouseLabels];
     [self getRentalGoodHouseLabels];
     [self getRentalHouseLabels];
+    //获取筛选
+    [self getSortHouseParmaWithCityCode:@"sz"];
+    [self getHousePriceParmaList];
+    [self getHouseBedroomParmaList];
     return YES;
 }
 
@@ -140,28 +147,66 @@
 }
 */
 
+
+#pragma mark 获取筛选参数
+- (void)getSortHouseParmaWithCityCode:(NSString *)cityCode
+{
+    cityCode = (cityCode) ? cityCode : @"";
+    cityCode = [@"AREA@" stringByAppendingString:cityCode];
+    
+    NSDictionary *requestDic = @{@"paramCategory":cityCode};
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:SORT_TREE_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+    requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+     {
+         NSLog(@"responseDic====%@",responseDic);
+         int sucess = [responseDic[@"responseMessage"][@"success"] intValue];
+         if (sucess == 1)
+         {
+             [[SmallPigApplication shareInstance] setSortHouseAreaParmaArray:responseDic[@"model"][@"paramList"]];
+         }
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         
+     }];
+}
+
+#pragma mark 获取价格区域
+- (void)getHousePriceParmaList
+{
+    [self getHouseSortParmaWithParmaCode:@"PARAM.SECONDHANDROOMPRICE"];
+    [self getHouseSortParmaWithParmaCode:@"PARAM.RENTROOMPRICE"];
+}
+
+#pragma mark 获取房屋类型
+- (void)getHouseBedroomParmaList
+{
+    [self getHouseSortParmaWithParmaCode:@"PARAM.BEDROOM"];
+}
+
 #pragma mark 获取房屋标签
 
 - (void)getSecondHandGoodHouseLabels
 {
-    [self getHouseLabelsWithParma:@"PARAM.SECONDHANDROOMFEATURE"];
+    [self getHouseSortParmaWithParmaCode:@"PARAM.SECONDHANDROOMFEATURE"];
 }
 - (void)getSecondHandHouseLabels
 {
-    [self getHouseLabelsWithParma:@"PARAM.SECONDHANDROOMLABEL"];
+    [self getHouseSortParmaWithParmaCode:@"PARAM.SECONDHANDROOMLABEL"];
 }
 
 - (void)getRentalGoodHouseLabels
 {
-    [self getHouseLabelsWithParma:@"PARAM.RENTROOMFEATURE"];
+    [self getHouseSortParmaWithParmaCode:@"PARAM.RENTROOMFEATURE"];
 }
 - (void)getRentalHouseLabels
 {
-    [self getHouseLabelsWithParma:@"PARAM.RENTROOMLABEL"];
+    [self getHouseSortParmaWithParmaCode:@"PARAM.RENTROOMLABEL"];
 }
 
-
-- (void)getHouseLabelsWithParma:(NSString *)parma
+#pragma mark 获取参数
+- (void)getHouseSortParmaWithParmaCode:(NSString *)parma
 {
     NSDictionary *requestDic = @{@"paramCategory":parma};
     RequestTool *request = [[RequestTool alloc] init];
@@ -187,7 +232,18 @@
             {
                 [[SmallPigApplication shareInstance] setRentalHouseLabelsArray:responseDic[@"model"][@"paramList"]];
             }
-            
+            else if ([parma isEqualToString:@"PARAM.SECONDHANDROOMPRICE"])
+            {
+                [[SmallPigApplication shareInstance] setSortHousePriceParmaArray:responseDic[@"model"][@"paramList"]];
+            }
+            else if ([parma isEqualToString:@"PARAM.RENTROOMLABEL"])
+            {
+                [[SmallPigApplication shareInstance] setSortRentalHousePriceParmaArray:responseDic[@"model"][@"paramList"]];
+            }
+            else if ([parma isEqualToString:@"PARAM.BEDROOM"])
+            {
+                [[SmallPigApplication shareInstance] setSortHouseBedroomParmaArray:responseDic[@"model"][@"paramList"]];
+            }
         }
     }
     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)

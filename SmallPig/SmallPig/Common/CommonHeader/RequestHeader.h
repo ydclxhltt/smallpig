@@ -51,6 +51,9 @@
 //分类列表
 #define SORT_LIST_URL           MAKE_REQUEST_URL(@"param/list.action")
 
+//筛选参数列表
+#define SORT_TREE_LIST_URL      MAKE_REQUEST_URL(@"param/tree.action")
+
 //二手房
 #define SECOND_LIST_URL         MAKE_REQUEST_URL(@"yjk/secondhandroom/list.action")
 

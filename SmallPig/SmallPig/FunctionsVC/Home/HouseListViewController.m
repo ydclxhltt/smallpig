@@ -12,6 +12,8 @@
 #import "SavePublicCell.h"
 #import "HouseDetailViewController.h"
 
+#define SORTVIEW_HEIGHT 44.0
+
 @interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) NSString *urlString;
 @end
@@ -67,6 +69,14 @@
 //添加UI
 - (void)createUI
 {
+    if (self.houseSource == HouseScourceFromSecondHand || self.houseSource == HouseScourceFromRental)
+    {
+        startHeight = SORTVIEW_HEIGHT;
+    }
+    else
+    {
+        startHeight = 0.0;
+    }
     [self addTableView];
 }
 
