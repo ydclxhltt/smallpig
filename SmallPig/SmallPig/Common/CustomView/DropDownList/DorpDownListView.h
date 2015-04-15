@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^dorpDownListViewSelectedItem)(int column,int row);
+typedef void (^DorpDownListViewSelectedItem)(int column,int row);
 
 @interface DorpDownListView : UIView <UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic, retain) NSArray *columnArray;
 @property(nonatomic, retain) NSArray *columnListArray;
-@property(nonatomic, weak)   void (^dorpDownListViewSelectedItem)(int column,int row);
+@property(nonatomic, weak)   DorpDownListViewSelectedItem selectedItem;
 
+- (void)setListViewWithColumnArray:(NSArray *)array;
+- (void)reloadTableViewDataWithIndex:(int)index;
 @end
