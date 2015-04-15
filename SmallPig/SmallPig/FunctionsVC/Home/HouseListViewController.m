@@ -11,6 +11,7 @@
 #import "SecondHandHouseListCell.h"
 #import "SavePublicCell.h"
 #import "HouseDetailViewController.h"
+#import "DorpDownListView.h"
 
 #define SORTVIEW_HEIGHT 44.0
 
@@ -78,6 +79,9 @@
         startHeight = 0.0;
     }
     [self addTableView];
+    [self addSortView];
+    
+    
 }
 
 //添加表
@@ -87,6 +91,15 @@
     self.table.separatorColor = HOUSE_LIST_SEPLINE_COLOR;
     self.table .backgroundColor = [UIColor clearColor];
 }
+
+//添加sort试图
+- (void)addSortView
+{
+    DorpDownListView *dorpView = [[DorpDownListView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAV_HEIGHT)];
+    [dorpView setListViewWithColumnArray:[SmallPigApplication shareInstance].sortHouseAreaParmaArray];
+    [self.view addSubview:dorpView];
+}
+
 
 #pragma mark 获取数据
 - (void)getData

@@ -31,10 +31,6 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    int a = 5;
-    int b = a;
-    a = a - 1;
-    NSLog(@"b===%d===a==%d",b,a);
     /*
      *  设置tabbar选中和默认字体颜色
      *
