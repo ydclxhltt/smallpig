@@ -99,6 +99,7 @@
 		77A4CD551A76166D00D26A25 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4E1A76166D00D26A25 /* SVProgressHUD.bundle */; };
 		77A4CD561A76166D00D26A25 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A4CD501A76166D00D26A25 /* SVProgressHUD.m */; };
 		77A5276B1ACA6B4400C0700D /* AddInformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A5276A1ACA6B4400C0700D /* AddInformViewController.m */; };
+		77B1B9D41ADE7381006F9215 /* CLSortView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B1B9D31ADE7381006F9215 /* CLSortView.m */; };
 		77B2E6511AB17892006E465A /* OrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B2E6501AB17892006E465A /* OrderListCell.m */; };
 		77C265C019F4DB5E0087BF76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265BF19F4DB5E0087BF76 /* Foundation.framework */; };
 		77C265C419F4DB5E0087BF76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C265C319F4DB5E0087BF76 /* UIKit.framework */; };
@@ -422,6 +423,8 @@
 		77A4CD501A76166D00D26A25 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		77A527691ACA6B4400C0700D /* AddInformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddInformViewController.h; sourceTree = "<group>"; };
 		77A5276A1ACA6B4400C0700D /* AddInformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInformViewController.m; sourceTree = "<group>"; };
+		77B1B9D21ADE7381006F9215 /* CLSortView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSortView.h; sourceTree = "<group>"; };
+		77B1B9D31ADE7381006F9215 /* CLSortView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSortView.m; sourceTree = "<group>"; };
 		77B2E64F1AB17892006E465A /* OrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCell.h; sourceTree = "<group>"; };
 		77B2E6501AB17892006E465A /* OrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCell.m; sourceTree = "<group>"; };
 		77C265BC19F4DB5E0087BF76 /* SmallPig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmallPig.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1090,6 +1093,8 @@
 			children = (
 				7785CBAB1A303F790053FD09 /* DorpDownListView.h */,
 				7785CBAC1A303F790053FD09 /* DorpDownListView.m */,
+				77B1B9D21ADE7381006F9215 /* CLSortView.h */,
+				77B1B9D31ADE7381006F9215 /* CLSortView.m */,
 			);
 			path = DropDownList;
 			sourceTree = "<group>";
@@ -1669,6 +1674,7 @@
 				77E0B12A1AB0388D002F8429 /* OrderListViewController.m in Sources */,
 				777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */,
 				771A29AC1A0A2A4600F99B1D /* AFHTTPRequestOperation.m in Sources */,
+				77B1B9D41ADE7381006F9215 /* CLSortView.m in Sources */,
 				7729C00B1A39479800FA8398 /* AgentDetailViewController.m in Sources */,
 				77C401DA1A37EB1F00A9D883 /* SettingViewController.m in Sources */,
 				771A29A01A0A2A4600F99B1D /* SDWebImageDownloader.m in Sources */,
