@@ -13,8 +13,8 @@
     float start_x;
     float start_y;
 }
-@property(nonatomic, retain) UIImageView *houseImageView;
-@property(nonatomic, retain) UILabel *titleLabel;
+@property(nonatomic, strong) UIImageView *houseImageView;
+@property(nonatomic, strong) UILabel *titleLabel;
 @end
 
 @implementation SavePublicCell

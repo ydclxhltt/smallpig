@@ -11,10 +11,10 @@
 #import "CommonHeader.h"
 
 @interface AgentRankListCell()
-@property(nonatomic, retain) UILabel *rankLabel;
-@property(nonatomic, retain) UIImageView *iconImageView;
-@property(nonatomic, retain) UILabel *namelabel;
-@property(nonatomic, retain) UILabel *scoreLabel;
+@property(nonatomic, strong) UILabel *rankLabel;
+@property(nonatomic, strong) UIImageView *iconImageView;
+@property(nonatomic, strong) UILabel *namelabel;
+@property(nonatomic, strong) UILabel *scoreLabel;
 @end
 
 @implementation AgentRankListCell

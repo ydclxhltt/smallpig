@@ -20,11 +20,11 @@
 {
     self.houseSource = HouseScourceFromPublic;
     self.parmaArray = @[@"queryBean.params.checkStatus=1",@"queryBean.params.in_checkStatus=0&queryBean.params.in_checkStatus=2",@"queryBean.params.status_int=-1"];
-    self.publicParma = self.parmaArray[0];
+    self.searchParma = self.parmaArray[0];
     
     if (self.isOnlyList)
     {
-        self.publicParma = @"";
+        self.searchParma = @"";
     }
     
     [super viewDidLoad];
@@ -62,12 +62,12 @@
 - (void)buttonPressed:(UIButton *)sender
 {
     [super buttonPressed:sender];
-    if ([self.publicParma isEqualToString:self.parmaArray[sender.tag - 1]])
+    if ([self.searchParma isEqualToString:self.parmaArray[sender.tag - 1]])
     {
         return;
     }
     currentPage = 1;
-    self.publicParma = self.parmaArray[sender.tag - 1];
+    self.searchParma = self.parmaArray[sender.tag - 1];
     self.dataArray = nil;
     [self getData];
 }

@@ -112,7 +112,7 @@
 
 @interface ZYQTapAssetView ()
 
-@property(nonatomic,retain)UIImageView *selectView;
+@property(nonatomic,strong)UIImageView *selectView;
 
 @end
 
@@ -199,9 +199,9 @@ static UIColor *disabledColor;
 
 @property (nonatomic, weak) id<ZYQAssetViewDelegate> delegate;
 
-@property (nonatomic, retain) UIImageView *imageView;
-@property (nonatomic, retain) ZYQVideoTitleView *videoTitle;
-@property (nonatomic, retain) ZYQTapAssetView *tapAssetView;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) ZYQVideoTitleView *videoTitle;
+@property (nonatomic, strong) ZYQTapAssetView *tapAssetView;
 
 @end
 

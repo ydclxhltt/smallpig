@@ -11,12 +11,15 @@
 #import "SecondHandHouseListCell.h"
 #import "SavePublicCell.h"
 #import "HouseDetailViewController.h"
-#import "DorpDownListView.h"
+#import "CLSortView.h"
+#import "LoginViewController.h"
 
-#define SORTVIEW_HEIGHT 44.0
+#define SORTVIEW_HEIGHT 40.0
 
-@interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface HouseListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SortViewDelegate>
 @property (nonatomic, strong) NSString *urlString;
+@property (nonatomic, strong) CLSortView *sortView;
+@property (nonatomic, strong) NSMutableDictionary *searchDic;
 @end
 
 @implementation HouseListViewController
@@ -70,47 +73,40 @@
 //添加UI
 - (void)createUI
 {
-    if (self.houseSource == HouseScourceFromSecondHand || self.houseSource == HouseScourceFromRental)
-    {
-        startHeight = SORTVIEW_HEIGHT;
-    }
-    else
-    {
-        startHeight = 0.0;
-    }
+    startHeight = (self.houseSource == HouseScourceFromSecondHand || self.houseSource == HouseScourceFromRental) ? SORTVIEW_HEIGHT : 0.0;
     [self addTableView];
-    [self addSortView];
-    
-    
+    if (self.houseSource == HouseScourceFromSecondHand || self.houseSource == HouseScourceFromRental)
+        [self addSortView];
 }
 
 //添加表
 - (void)addTableView
 {
-    [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
+    [self addTableViewWithFrame:CGRectMake(0, startHeight, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
     self.table.separatorColor = HOUSE_LIST_SEPLINE_COLOR;
     self.table .backgroundColor = [UIColor clearColor];
 }
 
-//添加sort试图
 - (void)addSortView
 {
-    DorpDownListView *dorpView = [[DorpDownListView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAV_HEIGHT)];
-    [dorpView setListViewWithColumnArray:[SmallPigApplication shareInstance].sortHouseAreaParmaArray];
-    [self.view addSubview:dorpView];
+    _sortView  = [[CLSortView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT, SCREEN_WIDTH, SORTVIEW_HEIGHT) titleArray:(NSMutableArray *)@[@"区域",@"价格",@"户型"]];
+    _sortView.delegate = self;
+    [self.view addSubview:_sortView];
 }
-
 
 #pragma mark 获取数据
 - (void)getData
 {
+   
     if (HouseScourceFromSecondHand == self.houseSource)
     {
         self.urlString = SECOND_LIST_URL;
+        self.urlString = [self makeSearchUrl:self.urlString];
     }
     else if (HouseScourceFromRental == self.houseSource)
     {
         self.urlString = RENTAL_LIST_URL;
+        self.urlString = [self makeSearchUrl:self.urlString];
     }
     else if (HouseScourceFromSave == self.houseSource)
     {
@@ -118,11 +114,11 @@
     }
     else if (HouseScourceFromPublic == self.houseSource)
     {
-        self.urlString = [PUBLIC_ROOM_LIST_URL stringByAppendingString:self.publicParma];
+        self.urlString = [PUBLIC_ROOM_LIST_URL stringByAppendingString:self.searchParma];
     }
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
-    NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
+     NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:self.urlString requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
@@ -157,6 +153,30 @@
         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
         [weakSelf.table reloadData];
     }];
+}
+
+- (NSString *)makeSearchUrl:(NSString *)url
+{
+    if (!url || [@"" isEqualToString:url])
+    {
+        return @"";
+    }
+    if (!self.searchDic)
+    {
+        return url;
+    }
+    else
+    {
+        NSString *areaCode = self.searchDic[@"1"];
+        areaCode = (areaCode) ? areaCode : @"";
+        NSString *priceCode = self.searchDic[@"2"];
+        priceCode = (priceCode) ? priceCode : @"";
+        NSString *typeCode = self.searchDic[@"3"];
+        typeCode = (typeCode) ? typeCode : @"";
+        url = [NSString stringWithFormat:@"%@?queryBean.params.room_community_areaCode=%@&queryBean.params.between_price_bigdecimal=%@&queryBean.params.between_room_hallCount_int=%@",url,areaCode,priceCode,typeCode];
+    }
+    NSLog(@"url===%@",url);
+    return url;
 }
 
 #pragma mark 加载更多
@@ -344,6 +364,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (![SmallPigApplication shareInstance].userInfoDic)
+    {
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+        UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:Nil];
+        return;
+    }
+    
     NSDictionary *dic = self.dataArray[indexPath.row];
     if (self.houseSource == HouseScourceFromSave)
     {
@@ -360,7 +389,69 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
+#pragma mark SortViewDelegate
+- (void)sortView:(CLSortView *)sortView buttonBarPressedIndex:(int)index
+{
+    switch (index)
+    {
+        case 0:
+            sortView.dataArray = [SmallPigApplication shareInstance].sortHouseAreaParmaArray;
+            break;
+        case 1:
+            sortView.dataArray = [SmallPigApplication shareInstance].sortHousePriceParmaArray;
+            break;
+        case 2:
+            sortView.dataArray = [SmallPigApplication shareInstance].sortHouseBedroomParmaArray;
+            break;
+        case 3:
+            sortView.dataArray = nil;
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)sortView:(CLSortView *)sortView sortViewListItemPressedColumn:(int)index sortViewListItemPressedRow:(int)row
+{
+    if (!self.searchDic)
+    {
+        self.searchDic = [NSMutableDictionary dictionary];
+    }
+    NSString *parmaCode = @"";
+    NSArray *array = sortView.dataArray;
+    if (index == 0)
+    {
+        //不限
+        NSLog(@"===不限===不限");
+        parmaCode = @"";
+        
+    }
+    else
+    {
+        NSDictionary *dic = array[index - 1];
+        if (row == 0)
+        {
+            //不限
+            NSLog(@"==%@===不限",dic[@"showName"]);
+            parmaCode = dic[@"paramCode"];
+        }
+        else
+        {
+            NSDictionary *childrenDic = dic[@"children"][row - 1];
+            NSLog(@"==%@===%@",dic[@"showName"],childrenDic[@"showName"]);
+            parmaCode = childrenDic[@"paramCode"];
+        }
+    }
+    parmaCode = (parmaCode) ? parmaCode : @"";
+    [self.searchDic setObject:parmaCode forKey:[NSString stringWithFormat:@"%d",sortView.selectedIndex]];
+    currentPage = 1;
+    self.dataArray = nil;
+    [self getData];
+}
+
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

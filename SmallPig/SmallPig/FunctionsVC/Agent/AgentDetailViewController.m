@@ -19,7 +19,7 @@
     int buttonSelectedIndex;
 }
 
-@property(nonatomic, retain) NSArray *imagesArray;
+@property(nonatomic, strong) NSArray *imagesArray;
 @property(nonatomic, assign) HouseScource houseScource;
 
 @end

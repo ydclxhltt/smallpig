@@ -23,7 +23,7 @@
     int selectdeIndex;
 }
 //列表title数组
-@property(nonatomic, retain)NSArray *titleArray;
+@property(nonatomic, strong)NSArray *titleArray;
 @end
 
 @implementation LeftSidelViewController

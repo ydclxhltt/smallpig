@@ -10,6 +10,6 @@
 
 @interface HouseListViewController : BasicViewController
 @property (nonatomic, assign) HouseScource houseSource;
-@property (nonatomic, strong) NSString *publicParma;
+@property (nonatomic, strong) NSString *searchParma;
 - (void)getData;
 @end

@@ -19,9 +19,9 @@ typedef void(^RootViewMoveBlock)(UIView *rootView,CGRect orginFrame,CGFloat xoff
 }
 @property (assign,nonatomic) BOOL needSwipeShowMenu;//是否开启手势滑动出菜单
 
-@property (retain,nonatomic) UIViewController *rootViewController;
-@property (retain,nonatomic) UIViewController *leftViewController NS_AVAILABLE_IOS(5_0);
-@property (retain,nonatomic) UIViewController *rightViewController NS_AVAILABLE_IOS(5_0);
+@property (strong,nonatomic) UIViewController *rootViewController;
+@property (strong,nonatomic) UIViewController *leftViewController NS_AVAILABLE_IOS(5_0);
+@property (strong,nonatomic) UIViewController *rightViewController NS_AVAILABLE_IOS(5_0);
 
 @property (assign,nonatomic) CGFloat leftViewShowWidth;//左侧栏的展示大小
 @property (assign,nonatomic) CGFloat rightViewShowWidth;//右侧栏的展示大小

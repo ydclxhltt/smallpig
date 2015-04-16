@@ -560,7 +560,7 @@
         {
             mapInfoView = [[HouseDetailOneInfoView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, HOUSE_DETAIL_INFO_HEIGHT) viewType:InfoViewTypeMap viewTitle:self.titleArray[3]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^
+        dispatch_sync(dispatch_get_main_queue(), ^
         {
             //设置地图数据
             float lat = [self.detailDic[@"model"][@"room"][@"community"][@"lat"] floatValue];

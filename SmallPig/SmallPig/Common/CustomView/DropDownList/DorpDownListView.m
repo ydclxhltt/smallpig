@@ -8,12 +8,13 @@
 
 
 //行高
-#define ROW_HEIGHT          44.0
+#define ROW_HEIGHT                  44.0
 //下方空白区域
-#define BOTTOM_Height       44.0
-//#define LEFT_TABLE_WIDTH    120.0
-#define LEFT_TABLE_COLOR    RGB(38.0, 38.0, 38.0)
-#define RIGHT_TABLE_COLOR   RGB(31.0, 31.0, 31.0)
+#define BOTTOM_Height               44.0
+//#define LEFT_TABLE_WIDTH          120.0
+#define LEFT_TABLE_COLOR            RGB(38.0, 38.0, 38.0)
+#define RIGHT_TABLE_COLOR           RGB(31.0, 31.0, 31.0)
+#define RIGHT_TABLE_SELECTED_COLOR  RGB(29.0, 29.0, 29.0)
 
 #import "DorpDownListView.h"
 
@@ -23,6 +24,8 @@
     int leftSelectindex;
     int rightSelectindex;
 }
+@property (nonatomic, strong) NSString *showName1;
+@property (nonatomic, strong) NSString *showName2;
 @end
 
 @implementation DorpDownListView
@@ -46,6 +49,7 @@
         [self addSubview:bgView];
         leftSelectindex = 0;
         rightSelectindex = 0;
+        self.showName = @"";
     }
     return self;
 }
@@ -116,8 +120,18 @@
         table2.hidden = YES;
         table2.hidden = YES;
         width = self.frame.size.width;
+        leftSelectindex = 0;
+        rightSelectindex = 0;
+        self.showName1 = nil;
+        self.showName2 = nil;
+        self.showName = nil;
     }
     table1.frame = CGRectMake(0, 0, width, table1.frame.size.height);
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dorpDownListView:selectedColunmItem:selectedRowItem:)] && !self.columnListArray && index != 0)
+    {
+        [self.delegate dorpDownListView:self selectedColunmItem:leftSelectindex selectedRowItem:rightSelectindex];
+    }
     [table1 reloadData];
     [table2 reloadData];
 }
@@ -133,7 +147,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     long count = (tableView.tag == 1) ? ([self.columnArray count] + 1) : ([self.columnListArray count] + 1);
-    NSLog(@"count=====%d",count);
     return count;
 }
 
@@ -151,21 +164,15 @@
     cellBgView.backgroundColor = LEFT_TABLE_COLOR;
     UIImageView *cellSelectedBgView = [CreateViewTool createImageViewWithFrame:cell.frame placeholderImage:nil];
     cellSelectedBgView.backgroundColor = RIGHT_TABLE_COLOR;
+    UIImageView *rightCellSelectedBgView = [CreateViewTool createImageViewWithFrame:cell.frame placeholderImage:nil];
+    rightCellSelectedBgView.backgroundColor = RIGHT_TABLE_SELECTED_COLOR;
     
-    if (tableView.tag == 1)
-    {
-        cell.backgroundView = cellBgView;
-        cell.selectedBackgroundView =  cellSelectedBgView;
-    }
-    else
-    {
-        cell.backgroundView = cellSelectedBgView;
-        cell.selectedBackgroundView =  cellBgView;
-    }
+    cell.backgroundView = (tableView.tag == 1) ? cellBgView : cellSelectedBgView;
+    cell.selectedBackgroundView =  (tableView.tag == 1) ? cellSelectedBgView : rightCellSelectedBgView;
     
     int selectIndex = (tableView.tag == 1) ? leftSelectindex : rightSelectindex;
     NSArray *dataArray = (tableView.tag == 1) ? self.columnArray : self.columnListArray;
-    if (selectIndex == indexPath.row && tableView.tag == 1)
+    if (selectIndex == indexPath.row)
     {
         [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
@@ -191,35 +198,42 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    if (tableView.tag == 2)
+//    {
+//        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    }
     if (tableView.tag == 2)
     {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
-    if (tableView.tag == 2)
-    {
+        if (rightSelectindex == (int)indexPath.row && rightSelectindex != 0)
+        {
+            return;
+        }
         rightSelectindex = (int)indexPath.row;
         if (indexPath.row == 0)
         {
             //return;
+            self.showName2 = nil;
         }
         else
         {
-            //选择结束
             NSDictionary *rowDic = self.columnListArray[indexPath.row - 1];
             NSLog(@"self.columnListArray====%@",rowDic[@"showName"]);
-        }
-        if (self.selectedItem)
-        {
-            self.selectedItem(leftSelectindex,rightSelectindex);
+            self.showName2 = rowDic[@"showName"];
         }
     }
     else if (tableView.tag == 1)
     {
+        if (leftSelectindex == (int)indexPath.row && leftSelectindex != 0)
+        {
+            return;
+        }
         leftSelectindex = (int)indexPath.row;
         rightSelectindex = 0;
         if (indexPath.row == 0)
         {
             self.columnListArray = nil;
+            self.showName1 = nil;
+            self.showName2 = nil;
         }
         else
         {
@@ -229,9 +243,33 @@
             {
                 self.columnListArray = nil;
             }
+            self.showName1 = rowDic[@"showName"];
         }
     }
+    
+    if (!self.showName1)
+    {
+        self.showName = nil;
+    }
+    else if(self.showName2)
+    {
+        self.showName = self.showName2;
+    }
+    else
+    {
+        self.showName = self.showName1;
+    }
+    
     [self reloadTableViewDataWithIndex:1];
+    
+    if (tableView.tag == 2)
+    {
+        //选择结束
+        if (self.delegate && [self.delegate respondsToSelector:@selector(dorpDownListView:selectedColunmItem:selectedRowItem:)])
+        {
+            [self.delegate dorpDownListView:self selectedColunmItem:leftSelectindex selectedRowItem:rightSelectindex];
+        }
+    }
 }
 
 @end
