@@ -12,9 +12,7 @@
 #import "InformAgainstViewController.h"
 #import "UpLoadPhotoTool.h"
 #import "OrderListViewController.h"
-#import <AlipaySDK/AlipaySDK.h>
-#import "APAuthV2Info.h"
-#import "DataSigner.h"
+#import "UpLevelToAgentViewController.h"
 
 @interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UploadPhotoDelegate>
 {
@@ -280,7 +278,7 @@
         {
             //升级经纪人
             //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:ALIPAY_LOGIN_URL]];
-            [self aliPayLogin];
+            [self upLevelToAgent];
         }
     }
     else if (indexPath.section == 3)
@@ -477,21 +475,11 @@
     }];
 }
 
-#pragma mark 支付宝登录
-- (void)aliPayLogin
+#pragma mark 升级经纪人
+- (void)upLevelToAgent
 {
-    APAuthV2Info *info = [[APAuthV2Info alloc] init];
-    info.appID = ALIPAY_APP_ID;
-    info.pid = ALIPAY_PID;
-    NSString *authStr = [info description];
-    NSLog(@"authStr====%@",authStr);
-    id<DataSigner> signer = CreateRSADataSigner(@"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAMiAec6fsssguUoRN3oEVEnQaqBLZjeafXAxCbKH3MTJaXPmnXOtqFFqFtcB8J9KqyFI1+o6YBDNIdFWMKqOwDDWPKqtdo90oGav3QMikjGYjIpe/gYYCQ/In/oVMVj326GmKrSpp0P+5LNCx59ajRpO8//rnOLd6h/tNxnfahanAgMBAAECgYEAusouMFfJGsIWvLEDbPIhkE7RNxpnVP/hQqb8sM0v2EkHrAk5wG4VNBvQwWe2QsAuY6jYNgdCPgTNL5fLaOnqkyy8IobrddtT/t3vDX96NNjHP4xfhnMbpGjkKZuljWKduK2FAh83eegrSH48TuWS87LjeZNHhr5x4C0KHeBTYekCQQD5cyrFuKua6GNG0dTj5gA67R9jcmtcDWgSsuIXS0lzUeGxZC4y/y/76l6S7jBYuGkz/x2mJaZ/b3MxxcGQ01YNAkEAzcRGLTXgTMg33UOR13oqXiV9cQbraHR/aPmS8kZxkJNYows3K3umNVjLhFGusstmLIY2pIpPNUOho1YYatPGgwJBANq8vnj64p/Hv6ZOQZxGB1WksK2Hm9TwfJ5I9jDu982Ds6DV9B0L4IvKjHvTGdnye234+4rB4SpGFIFEo+PXLdECQBiOPMW2cT8YgboxDx2E4bt8g9zSM5Oym2Xeqs+o4nKbcu96LipNRkeFgjwXN1708QuNNMYsD0nO+WIxqxZMkZsCQHtS+Jj/LCnQZgLKxXZAllxqSTlBln2YnBgk6HqHLp8Eknx2rUXhoxE1vD9tNmom6PiaZlQyukrQkp5GOMWDMkU=");
-    NSString *signStr = [signer signString:authStr];
-    signStr = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",authStr,signStr,@"RSA"];
-    [[AlipaySDK defaultService] auth_V2WithInfo:signStr fromScheme:@"AliPay" callback:^(NSDictionary *dic)
-    {
-        NSLog(@"dic===%@",dic);
-    }];
+    UpLevelToAgentViewController *upLevelToAgentViewController = [[UpLevelToAgentViewController alloc] init];
+    [self.navigationController pushViewController:upLevelToAgentViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
