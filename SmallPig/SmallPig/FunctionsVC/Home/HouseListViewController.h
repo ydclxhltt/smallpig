@@ -12,4 +12,5 @@
 @property (nonatomic, assign) HouseScource houseSource;
 @property (nonatomic, strong) NSString *searchParma;
 - (void)getData;
+- (void)createUI;
 @end

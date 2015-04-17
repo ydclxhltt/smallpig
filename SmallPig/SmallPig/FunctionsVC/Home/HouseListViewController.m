@@ -116,6 +116,14 @@
     {
         self.urlString = [PUBLIC_ROOM_LIST_URL stringByAppendingString:self.searchParma];
     }
+    else if (HouseScourceFromSecondHandSearch == self.houseSource)
+    {
+        self.urlString = [SEARCH_SECONDHOUSE_URL stringByAppendingString:self.searchParma];
+    }
+    else if (HouseScourceFromRentalSearch == self.houseSource)
+    {
+        self.urlString = [SEARCH_RENTALHOUSE_URL stringByAppendingString:self.searchParma];
+    }
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
      NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
@@ -292,7 +300,7 @@
     NSString *roomPrice = [NSString stringWithFormat:@"%.0f万",price];
     NSString *roomStyle = [SmallPigTool makeEasyRoomStyleWithRoomDictionary:rowDic];
     
-    if (HouseScourceFromSecondHand == self.houseSource)
+    if (HouseScourceFromSecondHand == self.houseSource || HouseScourceFromSecondHandSearch == self.houseSource)
     {
         cell = (SecondHandHouseListCell *)[tableView dequeueReusableCellWithIdentifier:cellID1];
         if (!cell)
@@ -324,7 +332,7 @@
         }
         [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:roomPrice typeText:roomStyle sizeText:square advantage1Text:string1 advantage2Text:string2 advantage3Text:string3];
     }
-    else if (HouseScourceFromRental == self.houseSource)
+    else if (HouseScourceFromRental == self.houseSource || HouseScourceFromRentalSearch == self.houseSource)
     {
         cell = (RentalHouseListCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell)
@@ -398,7 +406,14 @@
             sortView.dataArray = [SmallPigApplication shareInstance].sortHouseAreaParmaArray;
             break;
         case 1:
-            sortView.dataArray = [SmallPigApplication shareInstance].sortHousePriceParmaArray;
+            if (self.houseSource == HouseScourceFromSecondHand)
+            {
+               sortView.dataArray = [SmallPigApplication shareInstance].sortHousePriceParmaArray;
+            }
+            else if (self.houseSource == HouseScourceFromRental)
+            {
+                sortView.dataArray = [SmallPigApplication shareInstance].sortRentalHousePriceParmaArray;
+            }
             break;
         case 2:
             sortView.dataArray = [SmallPigApplication shareInstance].sortHouseBedroomParmaArray;

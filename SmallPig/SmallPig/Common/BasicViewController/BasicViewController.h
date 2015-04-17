@@ -26,6 +26,8 @@ typedef enum : NSUInteger
     HouseScourceFromSecondHand,
     HouseScourceFromSave,
     HouseScourceFromPublic,
+    HouseScourceFromRentalSearch,
+    HouseScourceFromSecondHandSearch,
 } HouseScource;
 
 #import <UIKit/UIKit.h>

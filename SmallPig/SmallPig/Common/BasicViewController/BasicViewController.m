@@ -143,13 +143,14 @@
 //点击搜索按钮
 - (void)addSearchItem
 {
-    [self setNavBarItemWithImageName:@"nav_search" navItemType:rightItem selectorName:@""];
+    [self setNavBarItemWithImageName:@"nav_search" navItemType:rightItem selectorName:@"searchButtonPressed:"];
 }
 
 - (void)searchButtonPressed:(UIButton *)sender
 {
     SearchHouseViewController *searchHouseViewController = [[SearchHouseViewController alloc]init];
-    [self.navigationController pushViewController:searchHouseViewController animated:NO];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:searchHouseViewController];
+    [self presentViewController:nav animated:NO completion:Nil];
 }
 
 
