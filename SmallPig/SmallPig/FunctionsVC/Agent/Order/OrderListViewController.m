@@ -24,7 +24,8 @@
     self.title = @"订单管理";
     //设置item
     [self addBackItem];
-    [self setNavBarItemWithTitle:@"新建" navItemType:rightItem selectorName:@"createOrderButtonPressed:"];
+    if ([SmallPigApplication shareInstance].memberType != 0)
+        [self setNavBarItemWithTitle:@"新建" navItemType:rightItem selectorName:@"createOrderButtonPressed:"];
     //初始化UI
     [self createUI];
     //获取订单列表
