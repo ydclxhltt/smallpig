@@ -16,10 +16,10 @@ typedef enum : NSUInteger {
 
 @interface CLPickerView : UIView
 
-@property(nonatomic, retain) NSArray *dataArray;
+@property(nonatomic, strong) NSArray *dataArray;
 
 - (instancetype)initWithFrame:(CGRect)frame pickerViewType:(PickerViewType)type sureBlock:(void (^)(UIDatePicker *datePicker,NSDate *date))sure cancelBlock:(void (^)())cancel;
-- (instancetype)initWithFrame:(CGRect)frame pickerViewType:(PickerViewType)type customSureBlock:(void (^)(UIPickerView *pickView, int index))customSure cancelBlock:(void (^)())customCancel pickerData:(NSArray *)array;
+- (instancetype)initWithFrame:(CGRect)frame pickerViewType:(PickerViewType)type customSureBlock:(void (^)(CLPickerView *pickerView, int index))customSure cancelBlock:(void (^)())customCancel pickerData:(NSArray *)array;
 - (void)setPickViewMaxDate;
 - (void)setPickViewMinDate;
 @end

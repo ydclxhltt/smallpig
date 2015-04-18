@@ -48,6 +48,9 @@
 //上传图片
 #define UPDATE_ICON_URL         MAKE_REQUEST_URL(@"yjk/member/update.action")
 
+//上传身份证
+#define UPLOAD_NID_PIC_URL      MAKE_REQUEST_URL(@"/yjk/mappr/uploadPhoto.action")
+
 //分类列表
 #define SORT_LIST_URL           MAKE_REQUEST_URL(@"param/list.action")
 
@@ -106,7 +109,7 @@
 #define PUBLIC_ROOM_URL         MAKE_REQUEST_URL(@"yjk/publishroom/add.action")
 
 //我的积分
-#define MY_SCORE_URL            MAKE_REQUEST_URL(@"/yjk/credits/list.action")
+#define MY_SCORE_URL            MAKE_REQUEST_URL(@"yjk/credits/list.action")
 
 //我的订单
 #define MY_ORDER_LIST_URL       MAKE_REQUEST_URL(@"yjk/order/list.action")
@@ -116,6 +119,12 @@
 
 //我的举报
 #define INFORMED_LIST_URL       MAKE_REQUEST_URL(@"yjk/complaint/list.action")
+
+//身份升级审核
+#define UPLEVEL_URL             MAKE_REQUEST_URL(@"yjk/mappr/apply.action")
+
+//审核状态查询
+#define UPLEVEL_STATUS_URL      MAKE_REQUEST_URL(@"yjk/mappr/findOwnerAppr.action")
 
 //查找用户
 #define FIND_USER_URL           MAKE_REQUEST_URL(@"yjk/order/lookupMemberByMobile.action")
@@ -131,5 +140,6 @@
 
 //搜索租房
 #define SEARCH_RENTALHOUSE_URL  MAKE_REQUEST_URL(@"yjk/rentroom/list.action?queryBean.params.like_keyword=")
+
 
 #endif

@@ -24,6 +24,9 @@
 @property (nonatomic, strong) NSArray *sortHousePriceParmaArray;
 @property (nonatomic, strong) NSArray *sortRentalHousePriceParmaArray;
 @property (nonatomic, strong) NSArray *sortHouseBedroomParmaArray;
+@property (nonatomic, strong) NSArray *citysArray;
+@property (nonatomic, strong) NSArray *nidTypeArray;
+@property (nonatomic, strong) NSArray *openBankArray;
 @property (nonatomic, assign) int memberType;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, assign) int point;

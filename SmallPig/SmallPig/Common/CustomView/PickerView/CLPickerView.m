@@ -8,8 +8,10 @@
 
 #import "CLPickerView.h"
 
+#define TOOLBAR_HEIGHT 40.0
+
 typedef void (^SureBlock) (UIDatePicker *datePicker, NSDate *date);
-typedef void (^CustomSureBlock) (UIPickerView *datePicker, int index);
+typedef void (^CustomSureBlock) (CLPickerView *pickerView, int index);
 typedef void (^CancelBlock) ();
 
 @interface CLPickerView()<UIPickerViewDataSource,UIPickerViewDelegate>
@@ -18,9 +20,9 @@ typedef void (^CancelBlock) ();
     UIPickerView *pickerView;
 }
 @property(nonatomic, assign) PickerViewType pickerType;
-@property(nonatomic, copy) SureBlock sureBlock;
-@property(nonatomic, copy) CancelBlock cancelBlock;
-@property(nonatomic, copy) CustomSureBlock custonSureBlock;
+@property(nonatomic, strong) SureBlock sureBlock;
+@property(nonatomic, strong) CancelBlock cancelBlock;
+@property(nonatomic, strong) CustomSureBlock customSureBlock;
 @end
 
 @implementation CLPickerView
@@ -49,7 +51,7 @@ typedef void (^CancelBlock) ();
 }
 
 
-- (instancetype)initWithFrame:(CGRect)frame pickerViewType:(PickerViewType)type customSureBlock:(void (^)(UIPickerView *pickView, int index))customSure cancelBlock:(void (^)())customCancel pickerData:(NSArray *)array
+- (instancetype)initWithFrame:(CGRect)frame pickerViewType:(PickerViewType)type customSureBlock:(void (^)(CLPickerView *pickerView, int index))customSure cancelBlock:(void (^)())customCancel pickerData:(NSArray *)array
 {
     self = [self initWithFrame:frame];
     if (self)
@@ -57,7 +59,7 @@ typedef void (^CancelBlock) ();
         self.backgroundColor = [UIColor whiteColor];
         self.pickerType = type;
         self.cancelBlock = customCancel;
-        self.custonSureBlock = customSure;
+        self.customSureBlock = customSure;
         self.dataArray = array;
         [self createUIWithPickerViewType:type];
     }
@@ -77,7 +79,7 @@ typedef void (^CancelBlock) ();
 #pragma mark 初始化UI
 - (void)createUIWithPickerViewType:(PickerViewType)type
 {
-    UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 40)];
+    UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, TOOLBAR_HEIGHT)];
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:Nil];
     UIBarButtonItem *sureItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(sure)];
@@ -115,6 +117,15 @@ typedef void (^CancelBlock) ();
     datePicker.minimumDate = [NSDate date];
 }
 
+- (void)setDataArray:(NSArray *)dataArray
+{
+    if (dataArray)
+    {
+        _dataArray = dataArray;
+        [pickerView reloadAllComponents];
+    }
+}
+
 #pragma mark pickerViewDelegate
 // returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -131,7 +142,7 @@ typedef void (^CancelBlock) ();
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return self.dataArray[row];
+    return self.dataArray[row][@"showName"];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -160,9 +171,9 @@ typedef void (^CancelBlock) ();
     }
     if (PickerViewTypeCustom == self.pickerType)
     {
-        if (self.custonSureBlock)
+        if (self.customSureBlock)
         {
-            self.custonSureBlock(pickerView,(int)[pickerView selectedRowInComponent:0]);
+            self.customSureBlock(self,(int)[pickerView selectedRowInComponent:0]);
         }
     }
 }
@@ -171,7 +182,7 @@ typedef void (^CancelBlock) ();
 {
     self.sureBlock = nil;
     self.cancelBlock = nil;
-    self.custonSureBlock = nil;
+    self.customSureBlock = nil;
 }
 
 

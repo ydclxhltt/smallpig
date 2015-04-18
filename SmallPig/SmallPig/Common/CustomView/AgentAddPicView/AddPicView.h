@@ -16,7 +16,7 @@
 @property (nonatomic, assign) id<AddPicViewDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *picListArray;
 
-- (void)setDataWithImageArray:(NSArray *)array;
+- (void)setDataWithImageArray:(NSArray *)array upLoadType:(int)type;
 @end
 
 @protocol AddPicViewDelegate <NSObject>

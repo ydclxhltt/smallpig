@@ -689,7 +689,7 @@
         }
         dispatch_async(dispatch_get_main_queue(),
        ^{
-           [picView setDataWithImageArray:array];
+           [picView setDataWithImageArray:array upLoadType:0];
         });
     });
 }

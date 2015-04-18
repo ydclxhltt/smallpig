@@ -83,6 +83,10 @@
     [self getSortHouseParmaWithCityCode:@"sz"];
     [self getHousePriceParmaList];
     [self getHouseBedroomParmaList];
+    //获取身份升级参数
+    [self getCityList];
+    [self getNIDTypeList];
+    [self getOpenBankList];
     return YES;
 }
 
@@ -170,38 +174,54 @@
 #pragma mark 获取价格区域
 - (void)getHousePriceParmaList
 {
-    [self getHouseSortParmaWithParmaCode:@"PARAM.SECONDHANDROOMPRICE"];
-    [self getHouseSortParmaWithParmaCode:@"PARAM.RENTROOMPRICE"];
+    [self getParmaWithParmaCode:@"PARAM.SECONDHANDROOMPRICE"];
+    [self getParmaWithParmaCode:@"PARAM.RENTROOMPRICE"];
 }
 
 #pragma mark 获取房屋类型
 - (void)getHouseBedroomParmaList
 {
-    [self getHouseSortParmaWithParmaCode:@"PARAM.BEDROOM"];
+    [self getParmaWithParmaCode:@"PARAM.BEDROOM"];
 }
 
 #pragma mark 获取房屋标签
 
 - (void)getSecondHandGoodHouseLabels
 {
-    [self getHouseSortParmaWithParmaCode:@"PARAM.SECONDHANDROOMFEATURE"];
+    [self getParmaWithParmaCode:@"PARAM.SECONDHANDROOMFEATURE"];
 }
 - (void)getSecondHandHouseLabels
 {
-    [self getHouseSortParmaWithParmaCode:@"PARAM.SECONDHANDROOMLABEL"];
+    [self getParmaWithParmaCode:@"PARAM.SECONDHANDROOMLABEL"];
 }
 
 - (void)getRentalGoodHouseLabels
 {
-    [self getHouseSortParmaWithParmaCode:@"PARAM.RENTROOMFEATURE"];
+    [self getParmaWithParmaCode:@"PARAM.RENTROOMFEATURE"];
 }
 - (void)getRentalHouseLabels
 {
-    [self getHouseSortParmaWithParmaCode:@"PARAM.RENTROOMLABEL"];
+    [self getParmaWithParmaCode:@"PARAM.RENTROOMLABEL"];
+}
+
+//身份升级参数
+- (void)getNIDTypeList
+{
+    [self getParmaWithParmaCode:@"PARAM.NIDTYPE"];
+}
+
+- (void)getOpenBankList
+{
+    [self getParmaWithParmaCode:@"PARAM.OPENBANK"];
+}
+
+- (void)getCityList
+{
+    [self getParmaWithParmaCode:@"PARAM.CITY"];
 }
 
 #pragma mark 获取参数
-- (void)getHouseSortParmaWithParmaCode:(NSString *)parma
+- (void)getParmaWithParmaCode:(NSString *)parma
 {
     NSDictionary *requestDic = @{@"paramCategory":parma};
     RequestTool *request = [[RequestTool alloc] init];
@@ -238,6 +258,18 @@
             else if ([parma isEqualToString:@"PARAM.BEDROOM"])
             {
                 [[SmallPigApplication shareInstance] setSortHouseBedroomParmaArray:responseDic[@"model"][@"paramList"]];
+            }
+            else if ([parma isEqualToString:@"PARAM.NIDTYPE"])
+            {
+                [[SmallPigApplication shareInstance] setNidTypeArray:responseDic[@"model"][@"paramList"]];
+            }
+            else if ([parma isEqualToString:@"PARAM.CITY"])
+            {
+                [[SmallPigApplication shareInstance] setCitysArray:responseDic[@"model"][@"paramList"]];
+            }
+            else if ([parma isEqualToString:@"PARAM.OPENBANK"])
+            {
+                [[SmallPigApplication shareInstance] setOpenBankArray:responseDic[@"model"][@"paramList"]];
             }
         }
     }

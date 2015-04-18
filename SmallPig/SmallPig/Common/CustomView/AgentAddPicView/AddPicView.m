@@ -55,7 +55,8 @@
         [self addSubview:picScrollView];
         
         addImageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        addImageButton.frame = CGRectMake(0, 0, PIC_WH, PIC_WH);
+        //addImageButton.frame = CGRectMake(0, 0, PIC_WH, PIC_WH);
+        addImageButton.frame = CGRectMake(self.frame.size.width - PIC_WH, 0, PIC_WH, PIC_WH);
         [addImageButton setImage:[UIImage imageNamed:ADD_IMAGE_NAME] forState:UIControlStateNormal];
         [addImageButton addTarget:self action:@selector(addPicButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [picScrollView addSubview:addImageButton];
@@ -63,7 +64,7 @@
 }
 
 #pragma mark 设置数据
-- (void)setDataWithImageArray:(NSArray *)array
+- (void)setDataWithImageArray:(NSArray *)array upLoadType:(int)type
 {
     if (!array || [array count] == 0)
     {
@@ -81,8 +82,9 @@
     }
     if (self.dataArray)
     {
-        addImageButton.frame = CGRectMake(self.dataArray.count * (PIC_WH + PIC_ADD_X), 0 , PIC_WH, PIC_WH);
-        if ([self.dataArray count] > self.maxPicCount)
+        //addImageButton.frame = CGRectMake(self.dataArray.count * (PIC_WH + PIC_ADD_X), 0 , PIC_WH, PIC_WH);
+        NSLog(@"131231===%@====%@",NSStringFromCGRect(addImageButton.frame),NSStringFromCGRect(self.frame));
+        if ([self.dataArray count] >= self.maxPicCount)
         {
             [addImageButton setAlpha:.0];
         }
@@ -114,7 +116,8 @@
             imageView.image = self.dataArray[i];
         }
         //上传
-        UpLoadPhotoTool *upLoadTool = [[UpLoadPhotoTool alloc] initWithPhotoArray:uploadArray upLoadUrl:UPLOAD_ROOM_PIC_URL upLoadType:0];
+        NSString *url = (type != 0) ? UPLOAD_ROOM_PIC_URL : UPLOAD_NID_PIC_URL;
+        UpLoadPhotoTool *upLoadTool = [[UpLoadPhotoTool alloc] initWithPhotoArray:uploadArray upLoadUrl:url upLoadType:type];
         upLoadTool.delegate = self;
     }
 }

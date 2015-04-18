@@ -19,6 +19,7 @@
     NSDictionary *userDic;
 }
 @property(nonatomic,strong) NSString *userName;
+@property(nonatomic,strong) NSString *statusString;
 @end
 
 @implementation MineViewController
@@ -56,6 +57,7 @@
 
     //初始化UI
     [self createUI];
+    //[self loadData];
     // Do any additional setup after loading the view.
 }
 
@@ -80,6 +82,53 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ExitLogin" object:nil];
 }
 
+- (void)loadData
+{
+    [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    __block typeof(self) weakSelf = self;
+    RequestTool *request = [[RequestTool alloc] init];
+    [request requestWithUrl:UPLEVEL_STATUS_URL requestParamas:nil requestType:RequestTypeSynchronous
+              requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+     {
+         NSLog(@"responseDic===%@",responseDic);
+         NSDictionary *dic = (NSDictionary *)responseDic;
+         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+         {
+             NSString *status = [NSString stringWithFormat:@"%@",responseDic[@"model"][@"apprStatus"]];
+             status = (status) ? status : @"-1";
+             weakSelf.statusString = status;
+             [weakSelf.table reloadData];
+             NSString *message = @"";
+             if ([weakSelf.statusString intValue] == 2)
+             {
+                 message = responseDic[@"model"][@"apprmemo"];
+                 message = (message) ? message : @"审核不通过,请重新提交资料审核...";
+             }
+             if ([weakSelf.statusString intValue] == 1)
+             {
+                 NSString *message = @"审核中,请耐心等待...";
+             }
+             if (message.length != 0)
+             {
+                 [CommonTool addAlertTipWithMessage:message];
+             }
+             [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
+         }
+         else
+         {
+             NSString *message = dic[@"responseMessage"][@"message"];
+             message = (message) ? message : LOADING_FAILURE;
+             [SVProgressHUD showErrorWithStatus:message];
+         }
+         
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"error===%@",error);
+         [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
+     }];
+
+}
 
 #pragma mark - tableView代理
 
@@ -210,7 +259,27 @@
     {
         if (indexPath.row == 1)
         {
-            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 80 - right_width, 0 , 80, cell.frame.size.height) textString:@"审核中" textColor:MINE_CENTER_LIST_TIP_COLOR textFont:MINE_CENTER_LIST_TIP_FONT];
+            NSString *status = @"";
+            if (self.statusString)
+            {
+                if ([self.statusString intValue] == -1)
+                {
+                    status = @"未升级";
+                }
+                else if ([self.statusString intValue] == 0)
+                {
+                    status = @"审核中";
+                }
+                else if ([self.statusString intValue] == 1)
+                {
+                    status = @"审核通过";
+                }
+                else if ([self.statusString intValue] == 2)
+                {
+                    status = @"审核不通过";
+                }
+            }
+            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 80 - right_width, 0 , 80, cell.frame.size.height) textString:status textColor:MINE_CENTER_LIST_TIP_COLOR textFont:MINE_CENTER_LIST_TIP_FONT];
             label.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:label];
         }
@@ -478,8 +547,16 @@
 #pragma mark 升级经纪人
 - (void)upLevelToAgent
 {
-    UpLevelToAgentViewController *upLevelToAgentViewController = [[UpLevelToAgentViewController alloc] init];
-    [self.navigationController pushViewController:upLevelToAgentViewController animated:YES];
+    if (!self.statusString)
+    {
+        [self loadData];
+    }
+    if ([self.statusString intValue] == -1 || [self.statusString intValue] == 2)
+    {
+        UpLevelToAgentViewController *upLevelToAgentViewController = [[UpLevelToAgentViewController alloc] init];
+        [self.navigationController pushViewController:upLevelToAgentViewController animated:YES];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
