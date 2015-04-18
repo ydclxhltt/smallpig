@@ -26,6 +26,8 @@
     self.houseSource = HouseScourceFromSecondHandSearch;
     [super viewDidLoad];
     isShow = NO;
+    self.navigationItem.leftItemsSupplementBackButton = NO;
+    self.navigationItem.leftBarButtonItems = nil;
     self.navigationItem.rightBarButtonItem = nil;
     // Do any additional setup after loading the view.
 }

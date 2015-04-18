@@ -251,7 +251,7 @@
             {
                 [[SmallPigApplication shareInstance] setSortHousePriceParmaArray:responseDic[@"model"][@"paramList"]];
             }
-            else if ([parma isEqualToString:@"PARAM.RENTROOMLABEL"])
+            else if ([parma isEqualToString:@"PARAM.RENTROOMPRICE"])
             {
                 [[SmallPigApplication shareInstance] setSortRentalHousePriceParmaArray:responseDic[@"model"][@"paramList"]];
             }

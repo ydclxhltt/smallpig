@@ -54,6 +54,7 @@
 #pragma mark 获取订单列表
 - (void)getOrderListData
 {
+    __block typeof(self) weakSelf = self;
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     RequestTool *request = [[RequestTool alloc] init];
     NSDictionary *requestDic = @{@"queryBean.params.buyer_id_long":[SmallPigApplication shareInstance].userInfoDic[@"id"]};
@@ -63,6 +64,8 @@
          NSDictionary *dic = (NSDictionary *)responseDic;
          if ([dic[@"responseMessage"][@"success"] intValue] == 1)
          {
+             weakSelf.dataArray = dic[@"pageBean"][@"data"];
+             [weakSelf.table reloadData];
              [SVProgressHUD showSuccessWithStatus:LOADING_SUCESS];
          }
          else
@@ -109,7 +112,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return [self.dataArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -126,15 +129,37 @@
     {
         cell = [[OrderListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    [(OrderListCell *)cell setCellImageWithUrl:@"" titleText:@"业主直租核心地段超值两房急租" localText:@"宝安西乡" parkText:@"财富港" timeText:@"20分钟前" typeText:@"2室1厅" sizeText:@"75平米" priceText:@"2900元"];
+    NSDictionary *rowDic = self.dataArray[indexPath.section];
+    int status = [rowDic[@"orderStatus"] intValue];
+    rowDic = rowDic[@"publishRoom"];
+    NSString *title = rowDic[@"title"];
+    title = (title) ? title : @"";
+    
+    NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:HOUSE_LIST_ICON_SIZE photoType:rowDic[@"coverPhoto"][@"photoType"]];
+    NSLog(@"imageUrl===%@",imageUrl );
+    NSString *local = rowDic[@"room"][@"community"][@"address"];
+    local = (local) ? local : @"";
+    NSLog(@"local===%@",local);
+    NSString *park = rowDic[@"room"][@"community"][@"name"];
+    park = (park) ? park : @"";
+    NSString *square = [NSString stringWithFormat:@"%@平米",rowDic[@"room"][@"square"]];
+    square = (square) ? square : @"";
+    NSString *roomStyle = [SmallPigTool makeEasyRoomStyleWithRoomDictionary:rowDic];
+    int roomType = [rowDic[@"roomType"] intValue];
+    float price = (roomType == 3) ? [rowDic[@"price"] floatValue] : [rowDic[@"price"] floatValue]/10000.0;
+    NSString *roomPrice = (roomType == 3) ? [NSString stringWithFormat:@"%.0f元",price] : [NSString stringWithFormat:@"%.0f万",price];
+    
+    [(OrderListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park timeText:@"" typeText:roomStyle sizeText:square priceText:roomPrice];
+    [(OrderListCell *)cell setStatusLabelTextWithStatus:status];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    OrderDetailViewController *orderDetailViewController = [[OrderDetailViewController alloc] init];
-    [self.navigationController pushViewController:orderDetailViewController animated:YES];
+//    OrderDetailViewController *orderDetailViewController = [[OrderDetailViewController alloc] init];
+//    [self.navigationController pushViewController:orderDetailViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

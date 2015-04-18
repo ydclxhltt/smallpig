@@ -15,6 +15,7 @@
 
 @interface OrderListCell : UITableViewCell
 
+
 /*
  *  设置图片地址和各个字段的值
  *
@@ -28,4 +29,5 @@
  *  @param price     房间价格
  */
 - (void)setCellImageWithUrl:(NSString *)imageUrl titleText:(NSString *)title localText:(NSString *)local parkText:(NSString *)park timeText:(NSString *)time typeText:(NSString *)type sizeText:(NSString *)size priceText:(NSString *)price;
+- (void)setStatusLabelTextWithStatus:(int)status;
 @end

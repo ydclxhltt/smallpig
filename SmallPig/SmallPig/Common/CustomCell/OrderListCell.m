@@ -8,7 +8,7 @@
 
 #import "OrderListCell.h"
 
-
+#define ORDERLABLE_WIDTH    100.0
 
 
 @interface OrderListCell()
@@ -17,8 +17,9 @@
     float start_y;
 }
 
-@property(nonatomic, retain) UIImageView *houseImageView;
-@property(nonatomic, retain) UILabel *titleLabel;
+@property(nonatomic, strong) UIImageView *houseImageView;
+@property(nonatomic, strong) UILabel *titleLabel;
+@property(nonatomic, strong) UILabel *statusLabel;
 
 @end
 
@@ -52,8 +53,12 @@
 //订单状态
 - (void)addOrderStatuesLabels
 {
-    UILabel *orderLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, (ORDER_STATUES_HEIGHT - TITLE_LABEL_HEIGHT)/3, self.frame.size.width, TITLE_LABEL_HEIGHT) textString:@"订单状态" textColor:RGB(138.0, 138.0, 138.0) textFont:FONT(15.0)];
+    UILabel *orderLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x, (ORDER_STATUES_HEIGHT - TITLE_LABEL_HEIGHT)/3, ORDERLABLE_WIDTH, TITLE_LABEL_HEIGHT) textString:@"订单状态" textColor:RGB(138.0, 138.0, 138.0) textFont:FONT(15.0)];
     [self.contentView addSubview:orderLabel];
+    
+    self.statusLabel = [CreateViewTool createLabelWithFrame:CGRectMake(self.frame.size.width - ORDERLABLE_WIDTH - 20.0, (ORDER_STATUES_HEIGHT - TITLE_LABEL_HEIGHT)/3, ORDERLABLE_WIDTH, TITLE_LABEL_HEIGHT) textString:@"" textColor:RGB(138.0, 138.0, 138.0) textFont:FONT(15.0)];
+    self.statusLabel.textAlignment = NSTextAlignmentRight;
+    [self.contentView addSubview:self.statusLabel];
     
     UIImageView *lineImageView = [CreateViewTool createImageViewWithFrame:CGRectMake(start_x, TITLE_LABEL_HEIGHT + (ORDER_STATUES_HEIGHT - TITLE_LABEL_HEIGHT)/3 * 2, self.frame.size.width - start_x,.5) placeholderImage:nil];
     lineImageView.backgroundColor = RGB(207.0, 207.0, 207.0);
@@ -129,6 +134,34 @@
     }
 }
 
+- (void)setStatusLabelTextWithStatus:(int)status
+{
+    NSString *text = @"";
+    UIColor *color = nil;
+    switch (status)
+    {
+        case 0:
+            text = @"订单取消";
+            color = RGB(138.0, 138.0, 138.0);
+            break;
+        case 1:
+            text = @"等待客户确认";
+            color = HOUSE_LIST_PRICE_COLOR;
+            break;
+        case 2:
+            text = @"客户已确认";
+            color = HOUSE_LIST_PRICE_COLOR;
+            break;
+        case 3:
+            text = @"订单完成";
+            color = APP_MAIN_COLOR;
+            break;
+        default:
+            break;
+    }
+    self.statusLabel.text = text;
+    self.statusLabel.textColor = color;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

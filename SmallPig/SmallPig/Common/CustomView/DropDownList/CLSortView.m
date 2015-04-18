@@ -53,7 +53,7 @@
     for (int i = 0; i < [self.titleArray count]; i ++)
     {
         UIButton *button = [CreateViewTool createButtonWithFrame:CGRectMake(i * width, 0, width, BUTTONBAR_HEIGHT) buttonTitle:self.titleArray[i] titleColor:WHITE_COLOR normalBackgroundColor:BUTTONBAR_COLOR highlightedBackgroundColor:BUTTONBAR_COLOR selectorName:@"buttonBarPressed:" tagDelegate:self];
-        button.titleLabel.font = FONT(13.0);
+        button.titleLabel.font = FONT(14.0);
         [button setTitleColor:APP_MAIN_COLOR forState:UIControlStateSelected];
         button.tag = i + 1;
         [self addSubview:button];
