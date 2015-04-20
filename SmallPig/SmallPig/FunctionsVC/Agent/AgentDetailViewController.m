@@ -11,6 +11,8 @@
 #import "AgentDetailViewController.h"
 #import "RentalHouseListCell.h"
 #import "SecondHandHouseListCell.h"
+#import "HouseDetailViewController.h"
+#import "LoginViewController.h"
 
 
 @interface AgentDetailViewController ()
@@ -21,6 +23,8 @@
 
 @property(nonatomic, strong) NSArray *imagesArray;
 @property(nonatomic, assign) HouseScource houseScource;
+@property(nonatomic, strong) NSMutableArray *rentalArray;
+@property(nonatomic, strong) NSMutableArray *secondHandArray;
 
 @end
 
@@ -152,21 +156,33 @@
     NSArray *array = dic[@"pageBean"][@"data"];
     int pageCount = [dic[@"pageBean"][@"totalPages"] intValue];
     
-    if (!self.dataArray)
+    self.dataArray = [NSMutableArray arrayWithArray:array];
+    if (!array || [array count] == 0)
     {
-        if (!array || [array count] == 0)
-        {
-            [CommonTool addAlertTipWithMessage:@"暂无数据"];
-        }
-        else
-        {
-            self.dataArray = [NSMutableArray arrayWithArray:array];
-        }
+        [CommonTool addAlertTipWithMessage:@"暂无数据"];
     }
     else
     {
-        if (array && [array count] > 0)
-            [self.dataArray addObjectsFromArray:array];
+        if (!self.rentalArray)
+        {
+            self.rentalArray = [NSMutableArray arrayWithCapacity:1];
+        }
+        if (!self.secondHandArray)
+        {
+            self.secondHandArray = [NSMutableArray arrayWithCapacity:1];
+        }
+        for (NSDictionary *dic in self.dataArray)
+        {
+            int roomType = [dic[@"roomType"] intValue];
+            if (roomType == 3)
+            {
+                [self.rentalArray addObject:dic];
+            }
+            else if (roomType == 2)
+            {
+                [self.secondHandArray addObject:dic];
+            }
+        }
     }
     [self.table reloadData];
     
@@ -237,7 +253,7 @@
     }
     else if (section == 1)
     {
-        return [self.dataArray count];
+        return (self.houseScource == HouseScourceFromRental) ? self.rentalArray.count : self.secondHandArray.count;
     }
     return 0;
 }
@@ -307,7 +323,8 @@
     }
     else if (indexPath.section == 1)
     {
-        NSDictionary *rowDic = self.dataArray[indexPath.row];
+        NSArray *array = (self.houseScource == HouseScourceFromRental) ? self.rentalArray : self.secondHandArray;
+        NSDictionary *rowDic = array[indexPath.row];
         NSString *title = rowDic[@"title"];
         title = (title) ? title : @"";
         NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:rowDic[@"coverPhoto"][@"photoUrl"] photoSize:HOUSE_LIST_ICON_SIZE photoType:rowDic[@"coverPhoto"][@"photoType"]];
@@ -387,6 +404,25 @@
         {
             [self makeCall];
         }
+    }
+    if (indexPath.section == 1)
+    {
+        if (![SmallPigApplication shareInstance].userInfoDic)
+        {
+            LoginViewController *loginVC = [[LoginViewController alloc]init];
+            UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:Nil];
+            return;
+        }
+        NSArray *array = (self.houseScource == HouseScourceFromRental) ? self.rentalArray : self.secondHandArray;
+        NSDictionary *dic = array[indexPath.row];
+        int roomType = [dic[@"roomType"] intValue];
+        NSString *roomID = dic[@"id"];
+        roomID = (roomID) ? roomID : @"";
+        HouseDetailViewController *houseDetailViewController = [[HouseDetailViewController alloc] init];
+        houseDetailViewController.houseSource = (roomType == 3) ? HouseScourceFromRental : HouseScourceFromSecondHand;
+        houseDetailViewController.roomID = roomID;
+        [self.navigationController pushViewController:houseDetailViewController animated:YES];
     }
 }
 
