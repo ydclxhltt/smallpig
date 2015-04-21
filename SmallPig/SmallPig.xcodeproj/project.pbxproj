@@ -131,6 +131,7 @@
 		77E12FE91A3056CA00D4B0AF /* menu_icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FE21A3056CA00D4B0AF /* menu_icon4.png */; };
 		77E12FEA1A3056CA00D4B0AF /* menu_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E12FE31A3056CA00D4B0AF /* menu_icon5.png */; };
 		77E12FED1A30663500D4B0AF /* NewHouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */; };
+		77E2A66C1AE6432E00B88E6A /* MineOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E2A66B1AE6432E00B88E6A /* MineOrderListViewController.m */; };
 		77E318FA1A7F437D0003A557 /* AgentScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E318F91A7F437D0003A557 /* AgentScoreViewController.m */; };
 		77EE093D1AAECA6C00988934 /* AgentLabelsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EE093C1AAECA6C00988934 /* AgentLabelsListViewController.m */; };
 		77EE09401AAEEAA500988934 /* SmallPigTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EE093F1AAEEAA500988934 /* SmallPigTool.m */; };
@@ -462,6 +463,8 @@
 		77E12FE31A3056CA00D4B0AF /* menu_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon5.png; sourceTree = "<group>"; };
 		77E12FEB1A30663500D4B0AF /* NewHouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHouseListViewController.h; sourceTree = "<group>"; };
 		77E12FEC1A30663500D4B0AF /* NewHouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHouseListViewController.m; sourceTree = "<group>"; };
+		77E2A66A1AE6432E00B88E6A /* MineOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineOrderListViewController.h; sourceTree = "<group>"; };
+		77E2A66B1AE6432E00B88E6A /* MineOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineOrderListViewController.m; sourceTree = "<group>"; };
 		77E318F81A7F437D0003A557 /* AgentScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentScoreViewController.h; sourceTree = "<group>"; };
 		77E318F91A7F437D0003A557 /* AgentScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentScoreViewController.m; sourceTree = "<group>"; };
 		77EE093B1AAECA6C00988934 /* AgentLabelsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentLabelsListViewController.h; sourceTree = "<group>"; };
@@ -611,6 +614,8 @@
 				CEECB17A1A77D5F900BE406B /* InformAgainstViewController.m */,
 				CECDDA9F1AE15B5200342EB6 /* UpLevelToAgentViewController.h */,
 				CECDDAA01AE15B5200342EB6 /* UpLevelToAgentViewController.m */,
+				77E2A66A1AE6432E00B88E6A /* MineOrderListViewController.h */,
+				77E2A66B1AE6432E00B88E6A /* MineOrderListViewController.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1451,6 +1456,7 @@
 				771A29AD1A0A2A4600F99B1D /* AFHTTPRequestOperationManager.m in Sources */,
 				7792FF811A78C357007DFBF5 /* HouseDetailHeader.m in Sources */,
 				77E0B12A1AB0388D002F8429 /* OrderListViewController.m in Sources */,
+				77E2A66C1AE6432E00B88E6A /* MineOrderListViewController.m in Sources */,
 				777E029B1A36F54D008B9E38 /* AgentRankListCell.m in Sources */,
 				771A29AC1A0A2A4600F99B1D /* AFHTTPRequestOperation.m in Sources */,
 				77B1B9D41ADE7381006F9215 /* CLSortView.m in Sources */,
