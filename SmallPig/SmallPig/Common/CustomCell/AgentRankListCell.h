@@ -10,6 +10,9 @@
 
 @interface AgentRankListCell : UITableViewCell
 
+@property(nonatomic, strong) UILabel *namelabel;
+
+
 /*
  *  设置图片地址和各个字段的值
  *

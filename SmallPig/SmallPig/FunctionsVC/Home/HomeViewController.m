@@ -29,7 +29,7 @@
     if(self) {
         // Custom initialization
         //self.title=@"首页";
-        self.dataArray = (NSMutableArray *)@[@[@"租房",@"真实小区物业资讯"],@[@"二手房",@"二手房买卖真实房源"],@[@"新房",@"第一时间获取新房资讯"],@[@"经纪人",@"每周评出积分最高的经纪人"]];
+        self.dataArray = (NSMutableArray *)@[@[@"租房",@"真实小区物业资讯"],@[@"二手房",@"二手房买卖真实房源"],@[@"新房",@"第一时间获取新房资讯"],@[@"经纪人",@"每周评出积分最高的经纪人"],@[@"积分排行",@"每周积分排行"]];
     }
     return self;
 }
@@ -181,7 +181,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return [self.dataArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -245,6 +245,11 @@
             break;
         case 3:
             viewController = [[AgentRankListViewController alloc] init];
+            ((AgentRankListViewController *)viewController).agentType = AgentTypeList;
+            break;
+        case 4:
+            viewController = [[AgentRankListViewController alloc] init];
+            ((AgentRankListViewController *)viewController).agentType = AgentTypeRank;
             break;
         default:
             break;

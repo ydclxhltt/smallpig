@@ -22,7 +22,7 @@
 //状态栏高度
 #define STATUS_HEIGHT           20.0
 //首页icon列表高度
-#define HOME_ICON_ROWHEIGHT     80.0
+#define HOME_ICON_ROWHEIGHT     65.0
 //左侧列表高度
 #define LEFT_SIDE_LIST_HEIGHT   60.0
 //租房，二手房列表高度

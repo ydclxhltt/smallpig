@@ -385,7 +385,6 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }
             }
-            //@"http://b.pic1.ajkimg.com/display/xinfang/51255643cbafacad2f37506a86e1ccae/245x184c.jpg"
             [(RentalHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park timeText:@"" typeText:roomStyle sizeText:square priceText:[NSString stringWithFormat:@"%.0f元",[rowDic[@"price"] floatValue]]];
         }
 
@@ -407,13 +406,13 @@
     }
     if (indexPath.section == 1)
     {
-        if (![SmallPigApplication shareInstance].userInfoDic)
-        {
-            LoginViewController *loginVC = [[LoginViewController alloc]init];
-            UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
-            [self presentViewController:nav animated:YES completion:Nil];
-            return;
-        }
+//        if (![SmallPigApplication shareInstance].userInfoDic)
+//        {
+//            LoginViewController *loginVC = [[LoginViewController alloc]init];
+//            UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+//            [self presentViewController:nav animated:YES completion:Nil];
+//            return;
+//        }
         NSArray *array = (self.houseScource == HouseScourceFromRental) ? self.rentalArray : self.secondHandArray;
         NSDictionary *dic = array[indexPath.row];
         int roomType = [dic[@"roomType"] intValue];

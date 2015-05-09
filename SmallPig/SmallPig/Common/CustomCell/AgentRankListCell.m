@@ -11,10 +11,14 @@
 #import "CommonHeader.h"
 
 @interface AgentRankListCell()
+{
+    UILabel *scoreTitleLabel;
+}
 @property(nonatomic, strong) UILabel *rankLabel;
 @property(nonatomic, strong) UIImageView *iconImageView;
-@property(nonatomic, strong) UILabel *namelabel;
 @property(nonatomic, strong) UILabel *scoreLabel;
+
+
 @end
 
 @implementation AgentRankListCell
@@ -55,7 +59,7 @@
     
     start_y += _namelabel.frame.size.height;
     
-    UILabel *scoreTitleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x,start_y, 30, 20) textString:@"" textColor:AGENT_SCORE_COLOR textFont:AGENT_SCORE_FONT];
+    scoreTitleLabel = [CreateViewTool createLabelWithFrame:CGRectMake(start_x,start_y, 30, 20) textString:@"" textColor:AGENT_SCORE_COLOR textFont:AGENT_SCORE_FONT];
     scoreTitleLabel.text = @"积分: ";
     [self.contentView addSubview:scoreTitleLabel];
     
@@ -84,6 +88,11 @@
     {
         NSAttributedString *textString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",score] attributes:@{NSFontAttributeName:AGENT_SCORE_FONT,NSForegroundColorAttributeName:[UIColor redColor]}];
         self.scoreLabel.text = textString.string;
+        if (score.length == 0)
+        {
+            scoreTitleLabel.hidden = YES;
+            self.namelabel.frame = CGRectMake(self.namelabel.frame.origin.x, 0, self.frame.size.width - self.namelabel.frame.origin.x, AGENT_LIST_HEIGHT);
+        }
     }
 }
 

@@ -43,6 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getHouseDetail) name:@"RerequestInfo" object:nil];
     self.automaticallyAdjustsScrollViewInsets = NO;
     //初始化数据
     if (self.houseSource == HouseScourceFromRental)
@@ -201,6 +202,11 @@
     NSString *mobile = dataDic[@"model"][@"publisher"][@"mobile"];
     mobile = (mobile) ? mobile : @"";
     [mobileButton setTitle:mobile forState:UIControlStateNormal];
+    
+    if (![SmallPigApplication shareInstance].userInfoDic)
+    {
+        [mobileButton setTitle:@"登录查看经纪人信息" forState:UIControlStateNormal];
+    }
 
     NSMutableArray *featureArray = [NSMutableArray array];
     //房间描述（标签）
@@ -238,6 +244,10 @@
 #pragma mark mobile
 - (void)mobileButtonPressed:(UIButton *)sender
 {
+    if ([self isNeedLogin])
+    {
+        return;
+    }
     NSString *buttonTitle = [sender titleForState:UIControlStateNormal];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",buttonTitle]];
     if ([[UIApplication sharedApplication] canOpenURL:url])

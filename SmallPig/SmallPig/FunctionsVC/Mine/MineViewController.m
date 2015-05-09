@@ -13,6 +13,7 @@
 #import "UpLoadPhotoTool.h"
 #import "OrderListViewController.h"
 #import "UpLevelToAgentViewController.h"
+#import "MineOrderListViewController.h"
 
 @interface MineViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UploadPhotoDelegate>
 {
@@ -106,7 +107,7 @@
              }
              if ([weakSelf.statusString intValue] == 1)
              {
-                 NSString *message = @"审核中,请耐心等待...";
+                 message = @"审核中,请耐心等待...";
              }
              if (message.length != 0)
              {
@@ -352,7 +353,8 @@
     }
     else if (indexPath.section == 3)
     {
-        OrderListViewController *orderListViewController = [[OrderListViewController alloc] init];
+        //OrderListViewController *orderListViewController = [[OrderListViewController alloc] init];
+        MineOrderListViewController *orderListViewController = [[MineOrderListViewController alloc] init];
         [self.navigationController pushViewController:orderListViewController animated:YES];
     }
 }

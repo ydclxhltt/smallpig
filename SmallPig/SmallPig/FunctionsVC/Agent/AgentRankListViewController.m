@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
     //设置title
-    self.title = AGENT_LIST_TITLE;
+    self.title = (self.agentType == AgentTypeList) ? AGENT_LIST_TITLE : @"积分排行";
     //添加班会item
     [self addBackItem];
     //初始化视图
@@ -163,7 +163,17 @@
     name = (name) ? name : @"";
     NSString *point = [NSString stringWithFormat:@"%@",dic[@"point"]];
     NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:dic[@"avatarPhoto"][@"photoUrl"] photoSize:AGENT_LIST_ICON_SIZE photoType:dic[@"avatarPhoto"][@"photoType"]];
-    [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:imageUrl agentName:name agentScore:point];
+    if (self.agentType == AgentTypeList)
+    {
+        [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:imageUrl agentName:name agentScore:@""];
+    }
+    else
+    {
+        NSString *name = dic[@"nid"];
+        name = (name) ? name : @"";
+        [cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:imageUrl agentName:name agentScore:point];
+    }
+    //[cell setCellDataWithRank:(int)indexPath.row + 1 agentImageUrl:imageUrl agentName:name agentScore:point];
     return cell;
 }
 
@@ -171,6 +181,10 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.agentType == AgentTypeRank)
+    {
+        return;
+    }
     NSDictionary *dic = self.dataArray[indexPath.row];
     NSString *name = dic[@"bankAcctName"];
     name = (name) ? name : @"";

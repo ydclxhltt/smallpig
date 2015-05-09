@@ -373,14 +373,6 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (![SmallPigApplication shareInstance].userInfoDic)
-    {
-        LoginViewController *loginVC = [[LoginViewController alloc]init];
-        UINavigationController  *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
-        [self presentViewController:nav animated:YES completion:Nil];
-        return;
-    }
-    
     NSDictionary *dic = self.dataArray[indexPath.row];
     if (self.houseSource == HouseScourceFromSave)
     {

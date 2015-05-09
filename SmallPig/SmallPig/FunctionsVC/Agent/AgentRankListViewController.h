@@ -8,6 +8,11 @@
 
 #import "BasicViewController.h"
 
-@interface AgentRankListViewController : BasicViewController
+typedef enum : NSUInteger {
+    AgentTypeList,
+    AgentTypeRank,
+} AgentType;
 
+@interface AgentRankListViewController : BasicViewController
+@property (nonatomic, assign) AgentType agentType;
 @end

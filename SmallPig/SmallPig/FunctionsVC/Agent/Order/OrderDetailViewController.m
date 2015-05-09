@@ -27,6 +27,8 @@
     [self addBackItem];
     //初始化UI
     [self createUI];
+    //获取订单详情
+    [self getOrderDetail];
     // Do any additional setup after loading the view.
 }
 
@@ -42,6 +44,15 @@
 {
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
 }
+
+
+#pragma mark 获取订单详情
+- (void)getOrderDetail
+{
+    
+}
+
+
 
 #pragma mark - tableView代理
 

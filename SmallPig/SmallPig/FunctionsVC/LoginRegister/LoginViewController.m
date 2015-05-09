@@ -177,6 +177,7 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeMemberType" object:nil];
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RerequestInfo" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
         }

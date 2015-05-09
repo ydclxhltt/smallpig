@@ -114,6 +114,9 @@
 //我的订单
 #define MY_ORDER_LIST_URL       MAKE_REQUEST_URL(@"yjk/order/list.action")
 
+//订单详情
+#define MY_ORDER_DETAIL_URL     MAKE_REQUEST_URL(@"yjk/order/find.action")
+
 //新增举报
 #define ADD_INFORM_URL          MAKE_REQUEST_URL(@"yjk/complaint/add.action")
 
