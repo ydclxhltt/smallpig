@@ -151,6 +151,7 @@
 		CE936BDE1A2F6FA2003F2268 /* home_icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE936BDA1A2F6FA2003F2268 /* home_icon3.png */; };
 		CE936BDF1A2F6FA2003F2268 /* home_icon4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE936BDB1A2F6FA2003F2268 /* home_icon4.png */; };
 		CEA900B61A0A517C00C41507 /* LeftSidelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA900B51A0A517C00C41507 /* LeftSidelViewController.m */; };
+		CEA945BB1AEFD44B00503EA6 /* home_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA945BA1AEFD44B00503EA6 /* home_icon5.png */; };
 		CECDDA9E1AE1548E00342EB6 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CECDDA9D1AE1548E00342EB6 /* libbaidumapapi.a */; };
 		CECDDAA11AE15B5200342EB6 /* UpLevelToAgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CECDDAA01AE15B5200342EB6 /* UpLevelToAgentViewController.m */; };
 		CECDDAA71AE166A700342EB6 /* CLPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECDDAA61AE166A700342EB6 /* CLPickerView.m */; };
@@ -496,6 +497,7 @@
 		CEA900B31A0A49BE00C41507 /* DeviceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceHeader.h; sourceTree = "<group>"; };
 		CEA900B41A0A517C00C41507 /* LeftSidelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSidelViewController.h; sourceTree = "<group>"; };
 		CEA900B51A0A517C00C41507 /* LeftSidelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSidelViewController.m; sourceTree = "<group>"; };
+		CEA945BA1AEFD44B00503EA6 /* home_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon5.png; sourceTree = "<group>"; };
 		CECDDA9D1AE1548E00342EB6 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		CECDDA9F1AE15B5200342EB6 /* UpLevelToAgentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpLevelToAgentViewController.h; sourceTree = "<group>"; };
 		CECDDAA01AE15B5200342EB6 /* UpLevelToAgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLevelToAgentViewController.m; sourceTree = "<group>"; };
@@ -1251,6 +1253,7 @@
 		CE936BD31A2F43DC003F2268 /* home_images */ = {
 			isa = PBXGroup;
 			children = (
+				CEA945BA1AEFD44B00503EA6 /* home_icon5.png */,
 				7767CEF41A31AB700012E775 /* house_image_default.png */,
 				7767CEEF1A3182D70012E775 /* newhouse_logo.png */,
 				77E12FDB1A3044DF00D4B0AF /* home_arrow.png */,
@@ -1421,6 +1424,7 @@
 				CE128CFA1A0E69B600DE07E5 /* btm_wechat2@2x.png in Resources */,
 				7792FF8B1A78C9D3007DFBF5 /* detail_save_down.png in Resources */,
 				7767CEF01A3182D70012E775 /* newhouse_logo.png in Resources */,
+				CEA945BB1AEFD44B00503EA6 /* home_icon5.png in Resources */,
 				77E12FE81A3056CA00D4B0AF /* menu_icon3.png in Resources */,
 				77371BBE1A7B1EC6006D4253 /* agent_icon3.png in Resources */,
 				77371BC01A7B1EC6006D4253 /* agent_icon5.png in Resources */,
