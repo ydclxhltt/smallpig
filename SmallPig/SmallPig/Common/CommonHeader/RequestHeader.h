@@ -138,11 +138,16 @@
 //发送订单
 #define SEND_ORDER_URL          MAKE_REQUEST_URL(@"yjk/order/add.action")
 
+//确认订单
+#define COMMIT_ORDER_URL        MAKE_REQUEST_URL(@"yjk/order/confirm.action")
+
 //搜索二手房借口
 #define SEARCH_SECONDHOUSE_URL  MAKE_REQUEST_URL(@"yjk/secondhandroom/list.action?queryBean.params.like_keyword=")
 
 //搜索租房
 #define SEARCH_RENTALHOUSE_URL  MAKE_REQUEST_URL(@"yjk/rentroom/list.action?queryBean.params.like_keyword=")
 
+//关于我们
+#define ABOUT_US_URL            MAKE_REQUEST_URL(@"yjk/static/m/aboutus.jsp")
 
 #endif

@@ -9,6 +9,7 @@
 #define ROW_HEIGHT  90.0
 
 #import "MineOrderListViewController.h"
+#import "OrderDetailViewController.h"
 
 
 @interface MineOrderListViewController ()
@@ -172,6 +173,17 @@
     int status = [rowDic[@"orderStatus"] intValue];
     [self setOrderStatus:status forLabel:statusLabel];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *rowDic = self.dataArray[indexPath.row];
+    OrderDetailViewController *orderDetailViewController = [[OrderDetailViewController alloc] init];
+    orderDetailViewController.orderID = rowDic[@"id"];
+    orderDetailViewController.roomType = [rowDic[@"publishRoom"][@"roomType"] intValue];
+    orderDetailViewController.detailDic = rowDic;
+    [self.navigationController pushViewController:orderDetailViewController animated:YES];
 }
 
 

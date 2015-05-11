@@ -21,6 +21,8 @@
     self.title = ABOUT_US_TITLE;
     //添加返回item
     [self addBackItem];
+    //初始化UI
+    [self createUI];
     // Do any additional setup after loading the view.
 }
 
@@ -34,6 +36,21 @@
 {
     [super viewDidDisappear:YES];
     [self setMainSideCanSwipe:YES];
+}
+
+#pragma mark 初始化UI
+- (void)createUI
+{
+    [self addWebView];
+}
+
+- (void)addWebView
+{
+    NSURLRequest *request  = [NSURLRequest requestWithURL:[NSURL URLWithString:ABOUT_US_URL]];
+    UIWebView  *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    webView.scalesPageToFit = YES;
+    [webView loadRequest:request];
+    [self.view addSubview:webView];
 }
 
 - (void)didReceiveMemoryWarning {

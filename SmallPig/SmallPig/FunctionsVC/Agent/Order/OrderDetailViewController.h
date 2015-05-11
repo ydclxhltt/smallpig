@@ -11,4 +11,7 @@
 
 @interface OrderDetailViewController : BasicViewController
 
+@property (nonatomic, strong) NSString *orderID;
+@property (nonatomic, assign) int roomType;
+@property (nonatomic, strong) NSDictionary *detailDic;
 @end

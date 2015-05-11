@@ -28,8 +28,7 @@
         [self setNavBarItemWithTitle:@"新建" navItemType:rightItem selectorName:@"createOrderButtonPressed:"];
     //初始化UI
     [self createUI];
-    //获取订单列表
-    [self getOrderListData];
+
     // Do any additional setup after loading the view.
 }
 
@@ -38,6 +37,8 @@
     [super viewWillAppear:animated];
     //设置不可侧滑
     [self setMainSideCanSwipe:NO];
+    //获取订单列表
+    [self getOrderListData];
 }
 
 #pragma mark 初始化UI
@@ -159,8 +160,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    OrderDetailViewController *orderDetailViewController = [[OrderDetailViewController alloc] init];
-//    [self.navigationController pushViewController:orderDetailViewController animated:YES];
+    NSDictionary *rowDic = self.dataArray[indexPath.section];
+    OrderDetailViewController *orderDetailViewController = [[OrderDetailViewController alloc] init];
+    orderDetailViewController.orderID = rowDic[@"id"];
+    orderDetailViewController.roomType = [rowDic[@"publishRoom"][@"roomType"] intValue];
+    orderDetailViewController.detailDic = rowDic;
+    [self.navigationController pushViewController:orderDetailViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
