@@ -50,7 +50,7 @@
     if (self.type == 1)
     {
         [textView becomeFirstResponder];
-    }   
+    }
     [self.view addSubview:textView];
 }
 
