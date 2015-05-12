@@ -31,6 +31,7 @@
     float labelsHeight;
     float goodLabelsHeight;
     UIButton *dismissButton;
+    BOOL isReplace;
 }
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) NSArray *titleArray;
@@ -90,6 +91,7 @@
     self.titleArray = @[@[@" 方式"],@[@" 城市",@" 分区",@" 片区",@" 小区",@" 楼栋",@" 房间"],@[@" 价格",@" 面积",@" 搂层",@" 户型",@" 装修",@" 朝向"],@[@""],@[@"房源标签"],@[@"房源亮点"],@[@" 标题:",@" 描述:"]];
     _labelDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"",@"showName",@"",@"paramId",@"",@"paramCode",nil];
     _paramArray = [[NSMutableArray alloc] init];
+    isReplace = NO;
     //初始化UI
     [self createUI];
     //添加通知
@@ -507,8 +509,12 @@
     
     if ([self.paramArray count] > row)
     {
-        paramStr = self.paramArray[row];
-        return paramStr;
+        if (!isReplace)
+        {
+            paramStr = self.paramArray[row];
+            NSLog(@"paramStr==%@",paramStr);
+            return paramStr;
+        }
     }
     
     if (row < 3)
@@ -532,7 +538,16 @@
             paramStr= [NSString stringWithFormat:@"AREA>COMMUNITY>BUILDING>ROOM$%@",paramStr];
         }
     }
-    [self.paramArray addObject:paramStr];
+    if ([self.paramArray count] > row)
+    {
+        [self.paramArray replaceObjectAtIndex:row withObject:paramStr];
+        isReplace = NO;
+    }
+    else
+    {
+        [self.paramArray addObject:paramStr];
+    }
+    
     NSLog(@"paramStr====%@",paramStr);
     return paramStr;
 }
@@ -609,6 +624,7 @@
 
 - (void)clearCacheData
 {
+    isReplace = YES;
     int index = (int)self.selectedIndexPath.row;
     int section = (int)self.selectedIndexPath.section;
     NSMutableArray *array = [NSMutableArray array];
