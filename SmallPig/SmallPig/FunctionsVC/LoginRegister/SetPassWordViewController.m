@@ -10,6 +10,7 @@
 
 @interface SetPassWordViewController ()
 @property(nonatomic, strong) NSString *password;
+@property(nonatomic, strong) NSString *publicMobile;
 @end
 
 @implementation SetPassWordViewController
@@ -87,11 +88,14 @@
 
 - (void)dismissKeyBoard
 {
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
         UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         UITextField *textField = (UITextField *)[cell.contentView viewWithTag:i + 1];
-        [textField resignFirstResponder];
+        if (textField)
+        {
+            [textField resignFirstResponder];
+        }
     }
 }
 
@@ -129,6 +133,24 @@
         message = @"密码不一致";
     }
     
+    UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    UITextField *mobileTextField = (UITextField *)[cell.contentView viewWithTag:2 + 1];
+    if (mobileTextField)
+    {
+        if (mobileTextField.text.length > 0)
+        {
+            if (![CommonTool isEmailOrPhoneNumber:mobileTextField.text])
+            {
+                message = @"请输入正确的手机号";
+                self.publicMobile = @"";
+            }
+            else
+            {
+                self.publicMobile = mobileTextField.text;
+            }
+        }
+    }
+    
     if ([@"" isEqualToString:message])
     {
         self.password = newPassword;
@@ -142,20 +164,26 @@
 {
     NSString *urlString = @"";
     NSString *passwordKey = @"";
+    NSString *tipString = @"";
+    NSDictionary *requestDic = @{@"mobile":self.phoneNumber,@"signText":self.signText,passwordKey:self.password};
+    
     if (self.pushType == PushTypeRegister)
     {
         urlString = REGISTER_URL;
         passwordKey = @"password";
+        tipString = @"正在注册...";
+        requestDic = @{@"mobile":self.phoneNumber,@"signText":self.signText,passwordKey:self.password,@"referrerMobile":self.publicMobile};
     }
     else if (self.pushType == PushTypeFindPassWord)
     {
         urlString = FIND_PWD_URL;
         passwordKey = @"newPassword";
+        tipString = @"正在保存...";
     }
     
-    [SVProgressHUD showWithStatus:@"正在保存..."];
+    [SVProgressHUD showWithStatus:tipString];
     __weak typeof(self) weakSelf = self;
-    NSDictionary *requestDic = @{@"mobile":self.phoneNumber,@"signText":self.signText,passwordKey:self.password};
+    
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:urlString requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
@@ -220,7 +248,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return (self.pushType == PushTypeRegister) ? 3 : 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -240,6 +268,7 @@
     
     UITextField *textField = [CreateViewTool createTextFieldWithFrame:CGRectMake(85, 0, self.table.frame.size.width - 85 - 10, cell.frame.size.height) textColor:[UIColor blackColor] textFont:LOGIN_REG_FONT placeholderText:@"请输入密码"];
     textField.tag = indexPath.row + 1;
+    textField.text = @"";
     textField.secureTextEntry = YES;
     textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     textField.keyboardType = UIKeyboardTypeNamePhonePad;
@@ -257,7 +286,11 @@
     {
         label.text = @"确认密码:";
     }
-    
+    if (indexPath.row == 2)
+    {
+        label.text = @"推荐人";
+        textField.placeholder = @"请输入推荐人手机号";
+    }
     return cell;
 }
 

@@ -46,6 +46,7 @@
 {
     textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     textView.text = @"";
+    textView.font = FONT(15.0);
     if (self.type == 1)
     {
         [textView becomeFirstResponder];

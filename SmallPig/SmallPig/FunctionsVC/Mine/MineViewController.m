@@ -353,9 +353,19 @@
     }
     else if (indexPath.section == 3)
     {
-        //OrderListViewController *orderListViewController = [[OrderListViewController alloc] init];
-        MineOrderListViewController *orderListViewController = [[MineOrderListViewController alloc] init];
-        [self.navigationController pushViewController:orderListViewController animated:YES];
+        UIViewController *viewController = nil;
+        if ([SmallPigApplication shareInstance].memberType != 0)
+        {
+            OrderListViewController *orderListViewController = [[OrderListViewController alloc] init];
+            viewController = orderListViewController;
+        }
+        else
+        {
+             MineOrderListViewController *orderListViewController = [[MineOrderListViewController alloc] init];
+            viewController = orderListViewController;
+        }
+       
+        [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 

@@ -108,7 +108,7 @@
         }
         else
         {
-            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 120 - right_width, 0 , 120, SETTING_LIST_HEIGHT) textString:@"88.8M" textColor:MINE_CENTER_LIST_COLOR textFont:MINE_CENTER_LIST_FONT];
+            UILabel *label = [CreateViewTool createLabelWithFrame:CGRectMake(SCREEN_WIDTH - 120 - right_width, 0 , 120, SETTING_LIST_HEIGHT) textString:@"" textColor:MINE_CENTER_LIST_COLOR textFont:MINE_CENTER_LIST_FONT];
             label.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:label];
         }
@@ -125,6 +125,14 @@
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.section == 0)
+    {
+        if (indexPath.row == 1)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"清楚所有的缓存数据" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [alertView show];
+        }
+    }
     if (indexPath.section == 1)
     {
         if (indexPath.row == 0)

@@ -150,4 +150,7 @@
 //关于我们
 #define ABOUT_US_URL            MAKE_REQUEST_URL(@"yjk/static/m/aboutus.jsp")
 
+//意见反馈
+#define FACEBACK_URL            MAKE_REQUEST_URL(@"yjk/feedback/add.action")
+
 #endif

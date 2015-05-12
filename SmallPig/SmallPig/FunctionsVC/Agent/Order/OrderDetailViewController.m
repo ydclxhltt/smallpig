@@ -12,6 +12,7 @@
 #define ROW_AGENT_HEIGHT    60.0
 #define ROW_HOUSE_HEIGHT    105.0
 #define ROW_TIME_HEIGHT     44.0
+#define TABLEVIEW_HEIGHT    300.0
 
 
 @interface OrderDetailViewController ()
@@ -52,6 +53,7 @@
 - (void)addTableView
 {
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
+    self.table.scrollEnabled = NO;
 }
 
 
@@ -245,6 +247,7 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.imageView.transform = CGAffineTransformMakeScale(.5, .5);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     for (UIView *view in cell.contentView.subviews)
