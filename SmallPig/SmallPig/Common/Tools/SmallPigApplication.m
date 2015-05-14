@@ -19,7 +19,7 @@ static SmallPigApplication *_shareInstace = nil;
     
     if (self)
     {
-        
+       
     }
     return self;
 }
@@ -35,6 +35,7 @@ static SmallPigApplication *_shareInstace = nil;
         if (_shareInstace == nil)
         {
             _shareInstace = [[self alloc] init];
+            _shareInstace.cityID = @"sz";
         }
     }
     return _shareInstace;

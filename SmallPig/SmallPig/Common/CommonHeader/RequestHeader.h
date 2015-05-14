@@ -87,6 +87,9 @@
 //更新备忘录
 #define MEMO_UPDATE_URL         MAKE_REQUEST_URL(@"yjk/remind/update.action")
 
+//删除备忘
+#define MEMO_DELETE_URL         MAKE_REQUEST_URL(@"yjk/remind/delete.action")
+
 //添加收藏
 #define ADD_SAVE_URL            MAKE_REQUEST_URL(@"yjk/favorites/add.action")
 
@@ -146,6 +149,12 @@
 
 //搜索租房
 #define SEARCH_RENTALHOUSE_URL  MAKE_REQUEST_URL(@"yjk/rentroom/list.action?queryBean.params.like_keyword=")
+
+//删除发布
+#define PUBLIC_HOUSE_DELETE     MAKE_REQUEST_URL(@"yjk/publishroom/delete.action")
+
+//修改发布
+#define PUBLIC_HOUSE_CHANGE     MAKE_REQUEST_URL(@"yjk/publishroom/update.action"）
 
 //关于我们
 #define ABOUT_US_URL            MAKE_REQUEST_URL(@"yjk/static/m/aboutus.jsp")

@@ -13,6 +13,7 @@
 #define ARROW_WIDTH      30.0
 #define SELF_HEIGHT      44.0
 #define TIME_LABEL_WIDTH 120.0
+#define LABEL_HEIGHT     20.0
 
 
 @interface LeftRightLableCell()
@@ -47,12 +48,12 @@
 
 - (void)addLabels
 {
-    rightLabel = [CreateViewTool createLabelWithFrame:CGRectMake(self.frame.size.width - ARROW_WIDTH - TIME_LABEL_WIDTH * CURRENT_SCALE, 0, TIME_LABEL_WIDTH * CURRENT_SCALE, SELF_HEIGHT) textString:@"" textColor:RGB(138.0, 138.0, 138.0) textFont:FONT(14.0)];
+    rightLabel = [CreateViewTool createLabelWithFrame:CGRectMake(self.frame.size.width - ARROW_WIDTH - TIME_LABEL_WIDTH * CURRENT_SCALE, (SELF_HEIGHT - LABEL_HEIGHT)/2, TIME_LABEL_WIDTH * CURRENT_SCALE, LABEL_HEIGHT) textString:@"" textColor:RGB(138.0, 138.0, 138.0) textFont:FONT(14.0)];
     //rightLabel.backgroundColor = [UIColor redColor];
     rightLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:rightLabel];
     
-    leftLabel = [CreateViewTool createLabelWithFrame:CGRectMake(SPACE_X, 0, rightLabel.frame.origin.x - ADD_SPACE_X * CURRENT_SCALE, SELF_HEIGHT) textString:@"" textColor:HOUSE_DETAIL_TEXT_COLOR textFont:FONT(15.0)];
+    leftLabel = [CreateViewTool createLabelWithFrame:CGRectMake(SPACE_X, (SELF_HEIGHT - LABEL_HEIGHT)/2, rightLabel.frame.origin.x - ADD_SPACE_X * CURRENT_SCALE, LABEL_HEIGHT) textString:@"" textColor:HOUSE_DETAIL_TEXT_COLOR textFont:FONT(15.0)];
     [self.contentView addSubview:leftLabel];
 }
 

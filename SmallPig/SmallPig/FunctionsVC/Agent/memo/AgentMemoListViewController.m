@@ -34,7 +34,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self setMainSideCanSwipe:YES];
+    [self setMainSideCanSwipe:NO];
     //获取数据
     [self getData];
 }
@@ -137,7 +137,52 @@
 }
 
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *rowDic = self.dataArray[indexPath.row];
+    [self deleteMemoWithID:rowDic[@"id"]];
+}
+
+#pragma mark 删除备忘
+- (void)deleteMemoWithID:(NSString *)memoID
+{
+    //PUBLIC_HOUSE_DELETE
+    typeof(self) weakSelf = self;
+    [SVProgressHUD showWithStatus:@"正在删除..."];
+    RequestTool *request = [[RequestTool alloc] init];
+    NSDictionary *requestDic = @{@"ids":memoID};
+    [request requestWithUrl:MEMO_DELETE_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+     {
+         NSLog(@"PUBLIC_HOUSE_DELETE_responseDic===%@",responseDic);
+         NSDictionary *dic = (NSDictionary *)responseDic;
+         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+             currentPage = 1;
+             weakSelf.dataArray = nil;
+             [weakSelf getData];
+         }
+         else
+         {
+             [SVProgressHUD showErrorWithStatus:@"删除失败"];
+         }
+     }
+     requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [SVProgressHUD showErrorWithStatus:@"删除失败"];
+         NSLog(@"login_error===%@",error);
+     }];
+}
 
 - (void)didReceiveMemoryWarning
 {

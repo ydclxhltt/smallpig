@@ -30,6 +30,7 @@
 @property (nonatomic, assign) int memberType;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, assign) int point;
+@property (nonatomic, strong) NSString *cityID;
 /*
  *  构建单例
  */

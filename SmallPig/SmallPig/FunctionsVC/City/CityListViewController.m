@@ -191,10 +191,11 @@
 {
     //取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+     NSDictionary *rowDic = self.dataArray[1][indexPath.row];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (![@"正在定位" isEqualToString:cell.textLabel.text])
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectedCity" object:cell.textLabel.text];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectedCity" object:rowDic];
         [self dismissViewControllerAnimated:YES completion:Nil];
     }
     

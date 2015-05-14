@@ -10,6 +10,9 @@
 #import "AgentHouseInfoViewController.h"
 
 @interface AgentHouseListViewController ()
+{
+    int selectedIndex;
+}
 //@property (nonatomic, strong) NSArray *totleArray;
 @property (nonatomic, strong) NSArray *parmaArray;
 @end
@@ -26,6 +29,8 @@
     {
         self.searchParma = @"";
     }
+    
+    selectedIndex = 1;
     
     [super viewDidLoad];
     
@@ -66,6 +71,7 @@
     {
         return;
     }
+    selectedIndex = (int)sender.tag;
     currentPage = 1;
     self.searchParma = self.parmaArray[sender.tag - 1];
     self.dataArray = nil;
@@ -98,11 +104,68 @@
 }
 
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (selectedIndex == 1 || selectedIndex == 2)
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"关闭";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        //关闭房源
+        NSDictionary *rowDic = self.dataArray[indexPath.row];
+        //关闭房源请求
+        [self closePublicHouseWithID:rowDic[@"id"]];
+    }
+}
+
+#pragma mark 点击行
 - (void)pushHouseInfoViewWithType:(HouseInfoType)type
 {
     AgentHouseInfoViewController  *houseInfoViewController = [[AgentHouseInfoViewController alloc] init];
     houseInfoViewController.houseInfoType = type;
     [self.navigationController pushViewController:houseInfoViewController animated:YES];
+}
+
+
+#pragma mark 关闭房源
+- (void)closePublicHouseWithID:(NSString *)houseID
+{
+    //PUBLIC_HOUSE_DELETE
+    typeof(self) weakSelf = self;
+    [SVProgressHUD showWithStatus:@"正在关闭..."];
+    RequestTool *request = [[RequestTool alloc] init];
+    NSDictionary *requestDic = @{@"id":houseID};
+    [request requestWithUrl:PUBLIC_HOUSE_DELETE requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^(AFHTTPRequestOperation *operation, id responseDic)
+     {
+         NSLog(@"PUBLIC_HOUSE_DELETE_responseDic===%@",responseDic);
+         NSDictionary *dic = (NSDictionary *)responseDic;
+         if ([dic[@"responseMessage"][@"success"] intValue] == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:@"关闭成功"];
+             currentPage = 1;
+             weakSelf.dataArray = nil;
+             [weakSelf getData];
+         }
+         else
+         {
+             [SVProgressHUD showErrorWithStatus:@"关闭失败"];
+         }
+     }
+    requestFail:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [SVProgressHUD showErrorWithStatus:@"关闭失败"];
+         NSLog(@"login_error===%@",error);
+     }];
 }
 
 

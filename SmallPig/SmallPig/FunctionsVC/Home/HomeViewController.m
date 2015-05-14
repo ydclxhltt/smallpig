@@ -161,7 +161,10 @@
 
 - (void)selectedCity:(NSNotification *)notification
 {
-    NSString *city = (NSString *)notification.object;
+    NSDictionary *dic = (NSDictionary *)notification.object;
+    NSString *city = @"";
+    city = dic[@"fullName"];
+    city = (city) ? city : @"";
     [dropDownView setTitleLabelText:city];
 }
 

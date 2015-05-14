@@ -11,6 +11,7 @@
 #import "AgentDetailViewController.h"
 
 @interface AgentRankListViewController ()
+@property (nonatomic, strong) NSString *cityCode;
 @end
 
 @implementation AgentRankListViewController
@@ -25,6 +26,8 @@
     //初始化视图
     [self createUI];
     //初始化数据
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedCity:) name:@"SelectedCity" object:nil];
+    self.cityCode = [[SmallPigApplication shareInstance] cityID];
     currentPage = 1;
     //获取数据
     [self getAgentListData];
@@ -45,12 +48,24 @@
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
 }
 
+#pragma mark 切换城市
+- (void)selectedCity:(NSNotification *)notification
+{
+    NSDictionary *dic = (NSDictionary *)notification.object;
+    NSString *cityCode = dic[@"areaCode"];
+    cityCode = (cityCode) ? cityCode : @"sz";
+    self.cityCode = cityCode;
+    currentPage = 1;
+    self.dataArray = nil;
+    [self getAgentListData];
+}
+
 #pragma mark 获取经纪人列表
 - (void)getAgentListData
 {
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
     __weak typeof(self) weakSelf = self;
-    NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage)};
+    NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage),@"queryBean.params.city":weakSelf.cityCode};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:AGENT_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
@@ -83,7 +98,6 @@
          isCanGetMore = YES;
          [SVProgressHUD showErrorWithStatus:LOADING_FAILURE];
      }];
-
 }
 
 #pragma mark 加载更多
