@@ -358,18 +358,23 @@
             NSString *string1 = @"";
             NSString *string2 = @"";
             NSString *string3 = @"";
-            if (array && [array count] > 0)
+            if (![@"无" isEqualToString:feature])
             {
-                string1 = array[0];
-                if ([array count] > 1)
+                if (array && [array count] > 0)
                 {
-                    string2 = array[1];
-                }
-                if ([array count] > 2)
-                {
-                    string3 = array[2];
+                    string1 = array[0];
+                    if ([array count] > 1)
+                    {
+                        string2 = array[1];
+                    }
+                    if ([array count] > 2)
+                    {
+                        string3 = array[2];
+                    }
                 }
             }
+
+
             [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:roomPrice typeText:roomStyle sizeText:square advantage1Text:string1 advantage2Text:string2 advantage3Text:string3];
         }
         else if (HouseScourceFromRental == self.houseScource)

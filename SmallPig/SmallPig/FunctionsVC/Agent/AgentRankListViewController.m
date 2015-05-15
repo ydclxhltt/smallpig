@@ -9,6 +9,7 @@
 #import "AgentRankListViewController.h"
 #import "AgentRankListCell.h"
 #import "AgentDetailViewController.h"
+#import "AgentLabelsListViewController.h"
 
 @interface AgentRankListViewController ()
 @property (nonatomic, strong) NSString *cityCode;
@@ -23,10 +24,11 @@
     self.title = (self.agentType == AgentTypeList) ? AGENT_LIST_TITLE : @"积分排行";
     //添加班会item
     [self addBackItem];
+    [self setNavBarItemWithTitle:@"深圳" navItemType:rightItem selectorName:@"showCityList"];
     //初始化视图
     [self createUI];
     //初始化数据
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedCity:) name:@"SelectedCity" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedCity:) name:@"SelectedLabel" object:nil];
     self.cityCode = [[SmallPigApplication shareInstance] cityID];
     currentPage = 1;
     //获取数据
@@ -48,6 +50,19 @@
     [self addTableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) tableType:UITableViewStylePlain tableDelegate:self];
 }
 
+
+#pragma mark 城市列表
+- (void)showCityList
+{
+    
+    AgentLabelsListViewController *cityListController = [[AgentLabelsListViewController alloc] init];
+    cityListController.title = @"选择城市";
+    cityListController.isRoomList = NO;
+    cityListController.paramStr = @"AREA>COMMUNITY>BUILDING>ROOM";
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cityListController];
+    [self presentViewController:nav animated:YES completion:Nil];
+}
+
 #pragma mark 切换城市
 - (void)selectedCity:(NSNotification *)notification
 {
@@ -55,6 +70,11 @@
     NSString *cityCode = dic[@"areaCode"];
     cityCode = (cityCode) ? cityCode : @"sz";
     self.cityCode = cityCode;
+    
+    NSString *name = dic[@"showName"];
+    name = (name) ? name : @"";
+    
+    [self setNavBarItemWithTitle:name navItemType:rightItem selectorName:@"showCityList"];
     currentPage = 1;
     self.dataArray = nil;
     [self getAgentListData];
