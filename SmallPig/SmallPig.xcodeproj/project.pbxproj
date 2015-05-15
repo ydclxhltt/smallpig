@@ -91,6 +91,7 @@
 		7792FF8E1A78C9D3007DFBF5 /* detail_share_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7792FF881A78C9D3007DFBF5 /* detail_share_up.png */; };
 		7792FF951A78E245007DFBF5 /* HouseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792FF941A78E245007DFBF5 /* HouseDetailViewController.m */; };
 		7792FF981A78E317007DFBF5 /* HouseDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792FF971A78E317007DFBF5 /* HouseDetailInfoView.m */; };
+		779CB8B21B05EABA00120D05 /* PayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779CB8B11B05EABA00120D05 /* PayListViewController.m */; };
 		77A4CD511A76166D00D26A25 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4A1A76166D00D26A25 /* error.png */; };
 		77A4CD521A76166D00D26A25 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4B1A76166D00D26A25 /* error@2x.png */; };
 		77A4CD531A76166D00D26A25 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A4CD4C1A76166D00D26A25 /* success.png */; };
@@ -403,6 +404,8 @@
 		7792FF941A78E245007DFBF5 /* HouseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDetailViewController.m; sourceTree = "<group>"; };
 		7792FF961A78E317007DFBF5 /* HouseDetailInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseDetailInfoView.h; sourceTree = "<group>"; };
 		7792FF971A78E317007DFBF5 /* HouseDetailInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDetailInfoView.m; sourceTree = "<group>"; };
+		779CB8B01B05EABA00120D05 /* PayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayListViewController.h; sourceTree = "<group>"; };
+		779CB8B11B05EABA00120D05 /* PayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayListViewController.m; sourceTree = "<group>"; };
 		77A4CD4A1A76166D00D26A25 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
 		77A4CD4B1A76166D00D26A25 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
 		77A4CD4C1A76166D00D26A25 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
@@ -953,6 +956,7 @@
 		777E02951A36F3B6008B9E38 /* Agent */ = {
 			isa = PBXGroup;
 			children = (
+				779CB8AF1B05EAA700120D05 /* pay */,
 				77E0B1271AB03739002F8429 /* Order */,
 				77371BCA1A7B6779006D4253 /* house */,
 				77371BCF1A7B6779006D4253 /* memo */,
@@ -1036,6 +1040,15 @@
 				7792FF881A78C9D3007DFBF5 /* detail_share_up.png */,
 			);
 			path = house_images;
+			sourceTree = "<group>";
+		};
+		779CB8AF1B05EAA700120D05 /* pay */ = {
+			isa = PBXGroup;
+			children = (
+				779CB8B01B05EABA00120D05 /* PayListViewController.h */,
+				779CB8B11B05EABA00120D05 /* PayListViewController.m */,
+			);
+			path = pay;
 			sourceTree = "<group>";
 		};
 		77A4CD491A76166D00D26A25 /* LoadingView */ = {
@@ -1524,6 +1537,7 @@
 				77875F201AAD74FD00A87EF2 /* AgentFormInfoViewController.m in Sources */,
 				771A29B61A0A2A4600F99B1D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				771A29A41A0A2A4600F99B1D /* UIButton+WebCache.m in Sources */,
+				779CB8B21B05EABA00120D05 /* PayListViewController.m in Sources */,
 				771A29B71A0A2A4600F99B1D /* UIAlertView+AFNetworking.m in Sources */,
 				7729C0081A392D1400FA8398 /* SecondHandHouseListCell.m in Sources */,
 				CEA900B61A0A517C00C41507 /* LeftSidelViewController.m in Sources */,
