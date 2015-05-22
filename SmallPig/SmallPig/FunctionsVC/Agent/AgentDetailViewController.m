@@ -373,8 +373,6 @@
                     }
                 }
             }
-
-
             [(SecondHandHouseListCell *)cell setCellImageWithUrl:imageUrl titleText:title localText:local parkText:park priceText:roomPrice typeText:roomStyle sizeText:square advantage1Text:string1 advantage2Text:string2 advantage3Text:string3];
         }
         else if (HouseScourceFromRental == self.houseScource)

@@ -72,6 +72,9 @@
 //经纪人列表
 #define AGENT_LIST_URL          MAKE_REQUEST_URL(@"yjk/agent/list.action")
 
+//经纪人积分列表
+#define AGENT_LISTC_URL         MAKE_REQUEST_URL(@"yjk/agent/listc.action")
+
 //经纪人发布列表
 #define AGENT_PUBLICROOM_URL    MAKE_REQUEST_URL(@"yjk/agent/listPublishRoom.action")
 
@@ -161,5 +164,8 @@
 
 //意见反馈
 #define FACEBACK_URL            MAKE_REQUEST_URL(@"yjk/feedback/add.action")
+
+//
+#define PAYFEE_LIST_URL         MAKE_REQUEST_URL(@"yjk/systemfee/list.action")
 
 #endif

@@ -84,10 +84,11 @@
 - (void)getAgentListData
 {
     [SVProgressHUD showWithStatus:LOADING_DEFAULT];
+    NSString *url = (self.agentType == AgentTypeList) ? AGENT_LIST_URL : AGENT_LISTC_URL;
     __weak typeof(self) weakSelf = self;
     NSDictionary *requestDic = @{@"queryBean.pageSize":@(10),@"queryBean.pageNo":@(currentPage),@"queryBean.params.city":weakSelf.cityCode};
     RequestTool *request = [[RequestTool alloc] init];
-    [request requestWithUrl:AGENT_LIST_URL requestParamas:requestDic requestType:RequestTypeAsynchronous
+    [request requestWithUrl:url requestParamas:requestDic requestType:RequestTypeAsynchronous
     requestSucess:^(AFHTTPRequestOperation *operation, id responseObj)
      {
          NSLog(@"responseObj====%@",responseObj);
@@ -168,7 +169,6 @@
 }
 
 
-
 #pragma mark - tableView代理
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -228,8 +228,7 @@
     NSString *agentID = dic[@"id"];
     agentID = (agentID) ? agentID : @"";
     NSString *imageUrl = [SmallPigTool makePhotoUrlWithPhotoUrl:dic[@"avatarPhoto"][@"photoUrl"] photoSize:AGENT_LIST_ICON_SIZE photoType:dic[@"avatarPhoto"][@"photoType"]];
-    AgentDetailViewController *agentDetailViewController = [[AgentDetailViewController alloc] init];
-    agentDetailViewController.name = name;
+    AgentDetailViewController *agentDetailViewController = [[AgentDetailViewController alloc] init];        agentDetailViewController.name = name;
     agentDetailViewController.score = point;
     agentDetailViewController.mobile = mobile;
     agentDetailViewController.agentID = agentID;
