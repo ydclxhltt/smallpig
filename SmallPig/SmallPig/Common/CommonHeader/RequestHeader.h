@@ -9,8 +9,8 @@
 #ifndef SmallPig_RequestHeader_h
 #define SmallPig_RequestHeader_h
 
-//服务器地址
-#define WEB_SERVER_URL          @"http://120.24.63.175:8080/horse-web/"
+//服务器地址 120.24.63.175
+#define WEB_SERVER_URL          @"http://120.24.79.110:8080/horse-web/"
 
 //拼接请求地址
 #define MAKE_REQUEST_URL(inf)   [NSString stringWithFormat:@"%@%@",WEB_SERVER_URL,inf]

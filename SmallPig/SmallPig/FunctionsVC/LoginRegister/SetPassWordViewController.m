@@ -26,6 +26,7 @@
     [self createUI];
     //关闭ScrollView默认偏移量
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.publicMobile = @"";
     // Do any additional setup after loading the view.
 }
 
@@ -56,6 +57,11 @@
     [self addTableViewWithFrame:CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 88) tableType:UITableViewStylePlain tableDelegate:self];
     self.table .backgroundColor = [UIColor whiteColor];
     self.table.scrollEnabled = NO;
+    
+    if (self.pushType == PushTypeRegister)
+    {
+        self.table.frame = CGRectMake(15, NAV_HEIGHT + 20, SCREEN_WIDTH - 15 * 2, 132);
+    }
 }
 
 //添加完成按钮
@@ -132,7 +138,6 @@
     {
         message = @"密码不一致";
     }
-    
     UITableViewCell *cell = [self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     UITextField *mobileTextField = (UITextField *)[cell.contentView viewWithTag:2 + 1];
     if (mobileTextField)
@@ -282,7 +287,7 @@
             label.text = @"新密码:";
         }
     }
-    else
+    else if (indexPath.row == 1)
     {
         label.text = @"确认密码:";
     }

@@ -27,4 +27,4 @@
     #import "SmallPigTool.h"
 #endif
 
-//#define NSLog(...) {}
+#define NSLog(...) {}
