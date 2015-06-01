@@ -46,6 +46,7 @@
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *period;
 @property (nonatomic, strong) NSString *roomType;
+@property (nonatomic, strong) NSString *roomSquare;
 @end
 
 @implementation AgentHouseInfoViewController
@@ -139,6 +140,7 @@
     formInfoViewController.roomFeature = [SmallPigTool makeStringWithArray:self.houseGoodLabelArray selectedArray:houseGoodLabelsView.selectedLabelArray];
     formInfoViewController.certificatePrice = self.certificatePrice;
     formInfoViewController.peroid = self.period;
+    formInfoViewController.roomSquare = self.roomSquare;
     [self.navigationController pushViewController:formInfoViewController animated:YES];
 }
 
@@ -367,7 +369,7 @@
         {
             if (section >= 2)
             {
-                if (section == 2 && row != 0)
+                if (section == 2 && row != 0 && row != 1)
                 {
                     return;
                 }
@@ -393,6 +395,10 @@
                     if (section == 2 && row == 0)
                     {
                         [self addAlertWithTag:2];
+                    }
+                    else if (section == 2 && row == 1)
+                    {
+                        [self addAlertWithTag:3];
                     }
                     else
                     {
@@ -452,6 +458,10 @@
 - (void)addAlertWithTag:(int)tag
 {
     NSString *title = (tag == 1) ? @"租期" : @"价格";
+    if (tag == 2)
+    {
+        title = @"面积";
+    }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alertView.tag = tag;
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -469,7 +479,8 @@
     {
         if (text.length == 0)
         {
-            NSString *message = (alertView.tag == 1) ? @"请填写租期" : @"请填写价格";
+            NSArray *array = @[@"请填写租期",@"请填写价格",@"请输入房间面积"];
+            NSString *message = array[alertView.tag - 1];
             [CommonTool addAlertTipWithMessage:message];
         }
         else
@@ -484,6 +495,12 @@
                 self.price = text;
                 NSString *string = ([self.roomType intValue] == 2) ? @"万" : @"元/月";
                 [self setDataWithSection:2 row:0 value:[text stringByAppendingString:string]];
+            }
+            else if (alertView.tag == 3)
+            {
+                self.roomSquare = text;
+                NSString *string = @"平米";
+                [self setDataWithSection:2 row:1 value:[text stringByAppendingString:string]];
             }
         }
     }
@@ -561,7 +578,7 @@
     NSString *showName = dic[@"showName"];
     if (self.selectedIndexPath.section == 1 && self.selectedIndexPath.row == 5)
     {
-        showName = dic[@"model"][@"room"][@"showName"];
+        showName = dic[@"model"][@"room"][@"roomNo"];
         self.roomID = dic[@"model"][@"room"][@"id"];
         self.certificatePrice = dic[@"model"][@"certificatePrice"];
         self.certificatePrice = (self.certificatePrice) ? self.certificatePrice : @"";
@@ -614,7 +631,7 @@
         NSString *towards = dic[@"model"][@"room"][@"towards"];
         towards = (towards) ? towards : @"";
         towards = [SmallPigTool getTowardsWithIdentification:towards];
-        
+        self.roomSquare = square;
         NSArray *array = @[price,square,floor,roomType,roomFeature,towards];
         [self.dataArray replaceObjectAtIndex:self.selectedIndexPath.section + 1 withObject:array];
         sectionCount = 7;

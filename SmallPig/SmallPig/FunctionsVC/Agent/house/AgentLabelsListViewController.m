@@ -111,7 +111,7 @@
 - (void)isRoomCanSelected
 {
     [SVProgressHUD showWithStatus:@"正在验证..."];
-    NSDictionary *requestDic = @{@"room.id":self.dataArray[selectedIndex][@"id"]};
+    NSDictionary *requestDic = @{@"room.id":self.dataArray[selectedIndex][@"paramCode"]};
     RequestTool *request = [[RequestTool alloc] init];
     [request requestWithUrl:IS_CAN_PUBLIC_URL requestParamas:requestDic requestType:RequestTypeAsynchronous requestSucess:^(AFHTTPRequestOperation *operation, id reponseDic)
      {

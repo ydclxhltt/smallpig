@@ -19,4 +19,5 @@
 @property(nonatomic, strong) NSString *roomFeature;
 @property (nonatomic, strong) NSString *certificatePrice;
 @property (nonatomic, strong) NSString *peroid;
+@property (nonatomic, strong) NSString *roomSquare;
 @end

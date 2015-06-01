@@ -95,7 +95,8 @@
 {
     [SVProgressHUD showWithStatus:@"发布中..."];
     self.peroid = (!self.peroid) ? @"" : self.peroid;
-    NSMutableDictionary *rquestDic = [NSMutableDictionary dictionaryWithDictionary:@{@"room.id":self.roomID,@"price":self.price,@"title":self.roomTitle,@"description":self.roomDescription,@"certificateNo":self.houseID,@"certificatePrice":self.certificatePrice,@"contact":self.houseOwner,@"mobile":self.mobile,@"phone":self.mobile,@"roomType":self.roomType,@"roomLabel":self.roomLabel,@"roomFeature":self.roomFeature,@"peroid":self.peroid}];
+    self.roomSquare = (!self.roomSquare) ? @"" : self.roomSquare;
+    NSMutableDictionary *rquestDic = [NSMutableDictionary dictionaryWithDictionary:@{@"room.id":self.roomID,@"price":self.price,@"title":self.roomTitle,@"description":self.roomDescription,@"certificateNo":self.houseID,@"certificatePrice":self.certificatePrice,@"contact":self.houseOwner,@"mobile":self.mobile,@"phone":self.mobile,@"roomType":self.roomType,@"roomLabel":self.roomLabel,@"roomFeature":self.roomFeature,@"peroid":self.peroid,@"model.room.square":self.roomSquare}];
     NSString *url = PUBLIC_ROOM_URL;
     url = [url stringByAppendingString:@"?"];
     NSArray *array = [self.photoList componentsSeparatedByString:@","];
