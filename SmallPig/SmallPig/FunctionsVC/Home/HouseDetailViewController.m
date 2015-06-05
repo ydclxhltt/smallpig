@@ -564,25 +564,31 @@
 
 - (void)addMapInfoViewToCell:(UITableViewCell *)cell
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
     {
         if (!mapInfoView)
         {
             mapInfoView = [[HouseDetailOneInfoView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, HOUSE_DETAIL_INFO_HEIGHT) viewType:InfoViewTypeMap viewTitle:self.titleArray[3]];
         }
-        dispatch_sync(dispatch_get_main_queue(), ^
+        //else
         {
-            //设置地图数据
-            float lat = [self.detailDic[@"model"][@"room"][@"community"][@"lat"] floatValue];
-            float lng = [self.detailDic[@"model"][@"room"][@"community"][@"lng"] floatValue];
-            NSString *parkName =  self.detailDic[@"model"][@"room"][@"building"][@"community"][@"name"];
-            parkName = (parkName) ? parkName : @"";
-            NSLog(@"lat===lng===parkName===%f===%f===%@",lat,lng,parkName);
-            [mapInfoView setDataWithDetailText:self.dataArray[3]];
-            [mapInfoView setLocationCoordinate:CLLocationCoordinate2DMake(lat, lng) locationText:parkName];
-            [cell.contentView addSubview:mapInfoView];
-        });
-    });
+            //dispatch_sync(dispatch_get_main_queue(), ^
+                          {
+                              //设置地图数据
+                              float lat = [self.detailDic[@"model"][@"room"][@"community"][@"lat"] floatValue];
+                              float lng = [self.detailDic[@"model"][@"room"][@"community"][@"lng"] floatValue];
+                              NSString *parkName =  self.detailDic[@"model"][@"room"][@"building"][@"community"][@"name"];
+                              parkName = (parkName) ? parkName : @"";
+                              NSLog(@"lat===lng===parkName===%f===%f===%@",lat,lng,parkName);
+                              [mapInfoView setDataWithDetailText:self.dataArray[3]];
+                              [mapInfoView setLocationCoordinate:CLLocationCoordinate2DMake(lat, lng) locationText:parkName];
+                              [cell.contentView addSubview:mapInfoView];
+                          }
+            //);
+        }
+
+    }
+    //);
 
     
 }
